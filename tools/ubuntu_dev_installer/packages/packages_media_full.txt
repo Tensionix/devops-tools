@@ -1,0 +1,12 @@
+# Media Full
+handbrake
+handbrake-cli
+mkvtoolnix
+mkvtoolnix-gui
+imagemagick
+sox
+flac
+vorbis-tools
+opus-tools
+picard
+easytag

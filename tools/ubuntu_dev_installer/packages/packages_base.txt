@@ -1,0 +1,14 @@
+# Base / storage / recovery
+btrfs-progs
+cryptsetup
+cryptsetup-initramfs
+dosfstools
+gdisk
+parted
+efibootmgr
+zstd
+timeshift
+rsync
+curl
+wget
+ca-certificates

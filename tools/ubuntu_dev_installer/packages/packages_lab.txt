@@ -1,0 +1,6 @@
+# Lab / containers / AI / experiments
+podman
+distrobox
+fuse-overlayfs
+slirp4netns
+ollama

@@ -1,0 +1,8 @@
+# Manual / Flatpak / AppImage / upstream candidates
+Shutter Encoder
+LosslessCut
+fre:ac
+QWinFF
+VidCutter
+ocenaudio
+DisplayCAL

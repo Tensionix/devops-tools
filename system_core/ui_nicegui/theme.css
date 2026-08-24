@@ -1,0 +1,2809 @@
+/* Audion GUI stylesheet.
+ *
+ * Order here is load-bearing: of two equally specific rules the later one wins.
+ * Themes therefore recur instead of being grouped — a rule sits where the cascade
+ * needs it, not next to its relatives. The banners mark each run so the sequence
+ * can be read. Do not sort them.
+ *
+ * Move a rule only after checking that nothing it crosses sets the same property
+ * at the same specificity on the same element.
+ */
+:root {
+            --audion-background: var(--color-background-tertiary);
+            --audion-header-background: var(--color-background-primary);
+            --audion-header-text: var(--color-text-primary);
+            --audion-panel-background: var(--color-background-secondary);
+            --audion-block-background: color-mix(in srgb, var(--color-background-secondary) 72%, var(--color-background-tertiary) 28%);
+            --audion-terminal-background: var(--color-background-tertiary);
+            --audion-text: var(--color-text-primary);
+            --audion-secondary-text: var(--color-text-secondary);
+            --audion-muted-text: var(--color-text-tertiary);
+            --audion-button-text: var(--color-accent-primary);
+            --audion-primary-text: var(--color-text-primary);
+            --audion-active-button-text: var(--color-active-button-text, var(--color-text-secondary));
+            --audion-mode-accent: #378ADD;
+            --audion-mode-border: color-mix(in srgb, var(--audion-mode-accent) 58%, var(--audion-panel-border) 42%);
+            --audion-mode-bg: color-mix(in srgb, var(--audion-mode-accent) 16%, var(--audion-terminal-background) 84%);
+            --audion-mode-bg-hover: color-mix(in srgb, var(--audion-mode-accent) 24%, var(--audion-terminal-background) 76%);
+            --audion-button-background: color-mix(in srgb, var(--color-accent-secondary) 8%, var(--audion-terminal-background) 92%);
+            --audion-button-hover-background: var(--color-background-primary);
+            --audion-tooltip-background: #17212B;
+            --audion-panel-border: color-mix(in srgb, var(--color-border-tertiary) 62%, transparent 38%);
+            --audion-divider: color-mix(in srgb, var(--color-border-tertiary) 48%, transparent 52%);
+            --audion-input-border: color-mix(in srgb, var(--color-border-secondary) 54%, transparent 46%);
+            --audion-input-border-hover: color-mix(in srgb, var(--color-border-secondary) 72%, transparent 28%);
+            --audion-input-border-focus: color-mix(in srgb, var(--color-accent-primary) 78%, var(--color-border-secondary) 22%);
+            --audion-terminal-border: color-mix(in srgb, var(--color-border-tertiary) 34%, transparent 66%);
+            --audion-terminal-divider: color-mix(in srgb, var(--color-border-tertiary) 34%, transparent 66%);
+            --audion-terminal-input-border: color-mix(in srgb, var(--color-border-secondary) 17%, transparent 83%);
+            --audion-terminal-input-border-hover: color-mix(in srgb, var(--color-border-secondary) 28%, transparent 72%);
+            --audion-terminal-input-border-focus: color-mix(in srgb, var(--color-accent-primary) 32%, transparent 68%);
+            --audion-button-hover-border: var(--audion-input-border-hover);
+            --audion-run-background: color-mix(in srgb, var(--color-accent-secondary) 10%, var(--audion-terminal-background) 90%);
+            --audion-run-hover-background: color-mix(in srgb, var(--color-accent-secondary) 16%, var(--audion-terminal-background) 84%);
+            --audion-run-border: var(--audion-divider);
+            --audion-action-amber: #B7791F;
+            --audion-action-amber-border: color-mix(in srgb, var(--audion-action-amber) 58%, var(--audion-panel-border) 42%);
+            --audion-action-amber-bg: color-mix(in srgb, var(--audion-action-amber) 20%, var(--audion-terminal-background) 80%);
+            --audion-action-amber-bg-hover: color-mix(in srgb, var(--audion-action-amber) 28%, var(--audion-terminal-background) 72%);
+            --audion-action-neutral-text: color-mix(in srgb, var(--audion-secondary-text) 52%, var(--audion-muted-text) 48%);
+            --audion-action-neutral-text-hover: color-mix(in srgb, var(--audion-secondary-text) 64%, var(--audion-muted-text) 36%);
+            --audion-action-friendly-text: color-mix(in srgb, var(--audion-secondary-text) 58%, var(--audion-muted-text) 42%);
+            --audion-action-friendly-text-hover: color-mix(in srgb, var(--audion-secondary-text) 70%, var(--audion-muted-text) 30%);
+            --audion-action-medium-text: color-mix(in srgb, #f1d9aa 78%, var(--audion-text) 22%);
+            --audion-action-medium-text-hover: color-mix(in srgb, #ffe9bd 82%, var(--audion-text) 18%);
+            --audion-action-danger-text: color-mix(in srgb, #ffbb78 82%, var(--audion-text) 18%);
+            --audion-action-danger-text-hover: color-mix(in srgb, #ffd09a 86%, var(--audion-text) 14%);
+            --audion-border: var(--audion-panel-border);
+            --audion-strong-border: var(--audion-input-border-hover);
+            --audion-safety-friendly-bg: var(--audion-block-background);
+            --audion-safety-friendly-border: var(--audion-panel-border);
+            --audion-safety-friendly-soft: var(--audion-terminal-background);
+            --audion-action-friendly-bg: transparent;
+            --audion-action-friendly-hover-bg: var(--audion-button-hover-background);
+            --audion-action-border-width: 2px;
+            --audion-action-friendly-border: color-mix(in srgb, var(--color-green-400) 18%, var(--audion-run-border) 82%);
+            --audion-safety-medium-bg: var(--audion-block-background);
+            --audion-safety-medium-border: var(--audion-panel-border);
+            --audion-safety-medium-soft: var(--audion-terminal-background);
+            --audion-action-medium-bg: transparent;
+            --audion-action-medium-hover-bg: var(--audion-button-hover-background);
+            --audion-action-medium-border: color-mix(in srgb, var(--color-teal-400) 19%, var(--audion-run-border) 81%);
+            --audion-safety-danger-bg: var(--audion-block-background);
+            --audion-safety-danger-border: var(--audion-panel-border);
+            --audion-safety-danger-soft: var(--audion-terminal-background);
+            --audion-action-danger-bg: transparent;
+            --audion-action-danger-hover-bg: var(--audion-button-hover-background);
+            --audion-action-danger-border: color-mix(in srgb, var(--color-amber-400) 22%, var(--audion-run-border) 78%);
+}
+
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          body {
+            background: var(--audion-background);
+            color: var(--audion-text);
+            font-family: var(--font-sans);
+            overflow: hidden;
+          }
+          .nicegui-content { padding: 0; height: 100vh; overflow: hidden; }
+          .q-layout,
+          .q-page,
+          .nicegui-content {
+            background: var(--audion-background) !important;
+            color: var(--audion-text) !important;
+          }
+          .q-textarea textarea { min-height: 0 !important; }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-header {
+            background: var(--audion-header-background) !important;
+            border-bottom: 1px solid var(--audion-divider);
+            color: var(--audion-header-text) !important;
+          }
+          .audion-header-brand,
+          .audion-header-controls {
+            transform: translateY(-11px);
+          }
+          .audion-header-brand {
+            min-width: 0;
+            align-items: baseline !important;
+          }
+          .audion-header-title {
+            min-width: 0;
+            white-space: nowrap;
+          }
+          .audion-header-controls {
+            align-items: center !important;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-theme-select {
+            width: 168px;
+            min-height: 32px !important;
+            height: 32px !important;
+          }
+          .audion-theme-select.q-field,
+          .audion-theme-select .q-field__inner {
+            min-height: 32px !important;
+            height: 32px !important;
+            padding-bottom: 0 !important;
+          }
+          .audion-theme-select .q-field__control {
+            min-height: 32px !important;
+            height: 32px !important;
+            background: transparent !important;
+            padding: 0 8px 0 14px !important;
+            border-radius: var(--border-radius-md) !important;
+          }
+          .audion-theme-select .q-field__marginal,
+          .audion-theme-select .q-field__native,
+          .audion-theme-select .q-field__append {
+            min-height: 32px !important;
+            height: 32px !important;
+            color: var(--audion-button-text) !important;
+            font-size: 13px !important;
+          }
+          .audion-theme-select .q-field__native {
+            align-items: center !important;
+            line-height: 32px !important;
+            padding: 0 0 1px 0 !important;
+          }
+          .audion-theme-select .q-field__control::before {
+            border-color: var(--audion-input-border) !important;
+          }
+          .audion-theme-select .q-field__bottom {
+            display: none !important;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-shell .text-gray-300,
+          .audion-shell .text-gray-400,
+          .audion-shell .text-gray-500,
+          .audion-dialog .text-gray-300,
+          .audion-dialog .text-gray-400,
+          .audion-dialog .text-gray-500 {
+            color: var(--audion-secondary-text) !important;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .q-field__native,
+          .q-field__input,
+          .q-field input,
+          .q-checkbox__label,
+          .q-radio__label {
+            color: var(--audion-text) !important;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-action {
+            box-sizing: border-box !important;
+            min-height: 28px !important;
+            height: 28px !important;
+            padding-left: 8px !important;
+            padding-right: 8px !important;
+            color: var(--audion-button-text) !important;
+            background: transparent !important;
+            border: 1px solid transparent !important;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          /* Quasar paints .q-btn labels with var(--q-primary) from its own
+             cascade layer, which outranks a plain `color` rule of ours no
+             matter how specific. Overriding the variable is what actually
+             works: these buttons are chrome, so they read light grey, and only
+             the active one takes the amber accent. */
+          html body .audion-shell .q-btn.audion-switcher-button,
+          html body .audion-shell .q-btn.audion-checkbox-preset-button,
+          html body .audion-shell .q-btn.audion-operation-button,
+          html body .audion-shell .q-btn.audion-browser-mode-button,
+          html body .audion-shell .q-btn.audion-command-run-button {
+            --q-primary: color-mix(in srgb, var(--audion-primary-text) 84%, var(--audion-muted-text) 16%);
+          }
+          html body .audion-shell .q-btn.audion-switcher-button:hover,
+          html body .audion-shell .q-btn.audion-checkbox-preset-button:hover,
+          html body .audion-shell .q-btn.audion-operation-button:hover,
+          html body .audion-shell .q-btn.audion-browser-mode-button:hover,
+          html body .audion-shell .q-btn.audion-command-run-button:hover {
+            --q-primary: var(--audion-primary-text);
+          }
+          /* Section tabs keep one text colour in every state - the amber frame
+             and fill already say which one is open. */
+          html body .audion-shell .q-btn.audion-browser-mode-button-active,
+          html body .audion-shell .q-btn.audion-checkbox-preset-button:active {
+            --q-primary: #fbbf24;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-action:hover {
+            background: var(--audion-button-hover-background) !important;
+            border-color: var(--audion-button-hover-border) !important;
+          }
+          .audion-action .q-btn__content {
+            width: 100%;
+            justify-content: center;
+            flex-wrap: nowrap !important;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 12px;
+            line-height: 1;
+          }
+          .audion-operation-row {
+            display: grid;
+            grid-template-columns: minmax(232px, 31%) minmax(0, 1fr);
+            gap: 7px;
+            align-items: start;
+            width: 100%;
+            min-width: 0;
+            border-bottom: 1px solid var(--audion-divider);
+            padding: 3px 0;
+            overflow: visible;
+          }
+          .audion-operation-row-branch {
+            grid-template-columns: minmax(232px, 31%) minmax(0, 1fr);
+          }
+          /* Кнопки с вложенными разделами (children) — слабое синее свечение Quasar */
+          .audion-operation-row-branch .audion-operation-button {
+            border-color: rgba(88, 166, 255, 0.34) !important;
+            box-shadow: 0 0 8px rgba(88, 166, 255, 0.14) !important;
+          }
+          .audion-operation-row-branch .audion-operation-button:hover {
+            border-color: rgba(88, 166, 255, 0.55) !important;
+            box-shadow: 0 0 12px rgba(88, 166, 255, 0.24) !important;
+          }
+          .audion-command-section-device_diagnostics .audion-operation-row-form .audion-operation-button {
+            border-color: rgba(88, 166, 255, 0.34) !important;
+            box-shadow: 0 0 8px rgba(88, 166, 255, 0.14) !important;
+          }
+          .audion-command-section-device_diagnostics .audion-operation-row-form .audion-operation-button:hover {
+            border-color: rgba(88, 166, 255, 0.55) !important;
+            box-shadow: 0 0 12px rgba(88, 166, 255, 0.24) !important;
+          }
+          .audion-operation-row-leaf {
+            grid-template-columns: minmax(232px, 31%) minmax(0, 1fr);
+          }
+          .audion-command-surface-toggle {
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 6px !important;
+            width: 100%;
+            padding: 2px;
+            border: 1px solid var(--audion-panel-border);
+            border-radius: var(--border-radius-md);
+            background: var(--audion-terminal-background);
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-surface-button {
+            min-width: 0 !important;
+            width: 100% !important;
+            min-height: 30px !important;
+            padding: 4px 10px !important;
+            color: var(--audion-secondary-text) !important;
+            background: transparent !important;
+            border: 1px solid transparent !important;
+          }
+          .audion-surface-button .q-btn__content {
+            min-width: 0 !important;
+            width: 100%;
+            justify-content: center !important;
+            white-space: normal !important;
+            line-height: 1.15 !important;
+          }
+          .audion-surface-button-active,
+          .audion-surface-button-active:hover {
+            color: var(--audion-button-text) !important;
+            border-color: var(--audion-input-border-hover) !important;
+            background: var(--audion-button-background) !important;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-command-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            min-width: 0;
+          }
+          .audion-command-section {
+            width: 100%;
+            min-width: 0;
+            border: 1px solid var(--audion-panel-border);
+            border-radius: var(--border-radius-md);
+            background: var(--audion-block-background);
+            padding: 7px 9px 5px;
+          }
+          .audion-command-section-title {
+            color: var(--audion-muted-text);
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 5px;
+            opacity: 0.86;
+            text-transform: uppercase;
+          }
+          .audion-command-section-list .audion-operation-row:last-child {
+            border-bottom: 0;
+          }
+          .audion-command-list {
+            border-top: 1px solid var(--audion-divider);
+          }
+          .audion-command-list .audion-operation-row {
+            padding: 2px 0;
+          }
+          .audion-action-group-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            width: 100%;
+            min-width: 0;
+          }
+          .audion-action-group {
+            min-width: 0;
+            width: 100%;
+            border: 1px solid var(--audion-panel-border);
+            border-radius: var(--border-radius-md);
+            background: var(--audion-block-background);
+            padding: 7px 9px 5px;
+          }
+          .audion-action-group-neutral {
+            border-color: var(--audion-panel-border);
+            background: var(--audion-block-background);
+          }
+          .audion-action-group-friendly {
+            border-color: var(--audion-safety-friendly-border);
+            background: var(--audion-safety-friendly-bg);
+          }
+          .audion-action-group-medium {
+            border-color: var(--audion-safety-medium-border);
+            background: var(--audion-safety-medium-bg);
+          }
+          .audion-action-group-danger {
+            border-color: var(--audion-safety-danger-border);
+            background: var(--audion-safety-danger-bg);
+          }
+          .audion-action-group-title {
+            color: var(--audion-muted-text);
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 5px;
+            opacity: 0.92;
+            text-transform: uppercase;
+          }
+          .audion-action-group-list .audion-operation-row:last-child {
+            border-bottom: 0;
+          }
+          .audion-command-switcher {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 4px !important;
+            align-items: stretch;
+            border-bottom: 1px solid var(--audion-divider);
+            padding: 4px 0 0 0;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-switcher-button {
+            flex: 1 1 auto;
+            min-width: 0 !important;
+            height: auto !important;
+            min-height: 36px !important;
+            padding: 6px 12px !important;
+            border: 1px solid transparent !important;
+            border-bottom: 2px solid var(--audion-divider) !important;
+            border-radius: 6px 6px 0 0 !important;
+            color: var(--audion-secondary-text) !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.05em !important;
+            text-transform: uppercase !important;
+          }
+          .audion-switcher-button:hover {
+            color: var(--audion-primary-text) !important;
+            border-bottom-color: color-mix(in srgb, #22d3ee 40%, var(--audion-divider) 60%) !important;
+            background: color-mix(in srgb, var(--audion-panel-background) 88%, var(--audion-primary-text) 12%) !important;
+          }
+          .audion-switcher-button .q-btn__content {
+            min-width: 0 !important;
+            width: 100%;
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center !important;
+            white-space: normal !important;
+            overflow: visible !important;
+            overflow-wrap: normal;
+            word-break: normal;
+            line-height: 1.18 !important;
+          }
+          .audion-switcher-button .q-btn__content > span,
+          .audion-switcher-button .q-btn__content > div {
+            display: block !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: visible !important;
+            white-space: normal !important;
+            overflow-wrap: normal !important;
+            word-break: normal !important;
+            line-height: 1.18 !important;
+          }
+          .audion-switcher-button-active,
+          .audion-switcher-button-active:hover {
+            color: #f3fbfd !important;
+            border-color: transparent !important;
+            border-bottom: 2px solid color-mix(in srgb, #22d3ee 78%, var(--audion-panel-border) 22%) !important;
+            background: color-mix(in srgb, #155e75 26%, var(--audion-panel-background) 74%) !important;
+            box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.16) !important;
+          }
+          .audion-browser-toggle-safe {
+            --audion-current-action-text: var(--audion-action-friendly-text);
+            color: var(--audion-action-friendly-text) !important;
+            background: var(--audion-action-friendly-bg) !important;
+            border-color: var(--audion-action-friendly-border) !important;
+            border-width: var(--audion-action-border-width) !important;
+          }
+          .audion-browser-toggle-safe:hover,
+          .audion-browser-toggle-safe.audion-switcher-button-active,
+          .audion-browser-toggle-safe.audion-switcher-button-active:hover {
+            --audion-current-action-text: var(--audion-action-friendly-text-hover);
+            color: var(--audion-action-friendly-text-hover) !important;
+            background: var(--audion-action-friendly-hover-bg) !important;
+            border-color: var(--audion-action-friendly-border) !important;
+          }
+          .audion-browser-toggle-danger {
+            --audion-current-action-text: var(--audion-action-danger-text);
+            color: var(--audion-action-danger-text) !important;
+            background: var(--audion-action-danger-bg) !important;
+            border-color: var(--audion-action-danger-border) !important;
+            border-width: var(--audion-action-border-width) !important;
+          }
+          .audion-browser-toggle-danger:hover,
+          .audion-browser-toggle-danger.audion-switcher-button-active,
+          .audion-browser-toggle-danger.audion-switcher-button-active:hover {
+            --audion-current-action-text: var(--audion-action-danger-text-hover);
+            color: var(--audion-action-danger-text-hover) !important;
+            background: var(--audion-action-danger-hover-bg) !important;
+            border-color: var(--audion-action-danger-border) !important;
+          }
+          .audion-browser-toggle-safe .q-btn__content,
+          .audion-browser-toggle-safe .q-btn__content > span,
+          .audion-browser-toggle-safe .q-btn__content > div,
+          .audion-browser-toggle-safe .q-btn__content *,
+          .audion-browser-toggle-danger .q-btn__content,
+          .audion-browser-toggle-danger .q-btn__content > span,
+          .audion-browser-toggle-danger .q-btn__content > div,
+          .audion-browser-toggle-danger .q-btn__content * {
+            color: var(--audion-current-action-text) !important;
+          }
+          .audion-browser-toggle-process,
+          .audion-browser-toggle-process:hover {
+            color: color-mix(in srgb, #22d3ee 76%, var(--audion-primary-text) 24%) !important;
+            border-color: color-mix(in srgb, #155e75 66%, var(--audion-panel-border) 34%) !important;
+            background: color-mix(in srgb, #155e75 7%, var(--audion-terminal-background) 93%) !important;
+          }
+          .audion-browser-toggle-process.audion-switcher-button-active,
+          .audion-browser-toggle-process.audion-switcher-button-active:hover {
+            color: #f3fbfd !important;
+            border-color: color-mix(in srgb, #22d3ee 78%, var(--audion-panel-border) 22%) !important;
+            background: color-mix(in srgb, #155e75 30%, var(--audion-terminal-background) 70%) !important;
+            box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.28) !important;
+          }
+          .audion-browser-toggle-process .q-btn__content,
+          .audion-browser-toggle-process .q-btn__content * {
+            color: inherit !important;
+          }
+          .audion-browser-favicons-button {
+            min-width: min(100%, 260px) !important;
+            color: var(--audion-action-danger-text-hover) !important;
+            border: 1px solid var(--audion-action-danger-border) !important;
+            background: var(--audion-action-danger-bg) !important;
+          }
+          .audion-browser-favicons-button:hover {
+            background: var(--audion-action-danger-hover-bg) !important;
+          }
+          .audion-switcher-button-direct {
+            color: var(--audion-text) !important;
+            border-color: var(--audion-run-border) !important;
+            background: var(--audion-run-background) !important;
+            font-weight: 700 !important;
+          }
+          .audion-switcher-button-direct:hover {
+            color: var(--audion-text) !important;
+            border-color: var(--audion-run-border) !important;
+            background: var(--audion-run-hover-background) !important;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-switcher-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            min-width: 0;
+            width: 100%;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-browser-route-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            min-width: 0;
+          }
+          .audion-browser-route-card {
+            min-width: 0;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--audion-panel-border);
+            border-radius: var(--border-radius-md);
+            background: var(--audion-block-background);
+          }
+          .audion-browser-route-head {
+            min-width: 0;
+          }
+          .audion-browser-route-current {
+            display: block;
+            min-width: 0;
+            width: 100%;
+            margin: 1px 0 6px;
+            color: var(--audion-secondary-text);
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            line-height: 1.25;
+            overflow-wrap: anywhere;
+          }
+          .audion-browser-route-path {
+            width: 100%;
+            margin: 1px 0 6px;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-browser-route-path .q-field__control {
+            background: color-mix(in srgb, var(--audion-panel-background) 88%, var(--audion-primary-text) 12%) !important;
+            border-radius: 6px !important;
+          }
+          .audion-browser-route-path .q-field__control::before {
+            border: 2px solid rgba(112, 132, 142, 0.26) !important;
+            border-style: solid !important;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-browser-route-path input {
+            font-family: var(--font-mono) !important;
+            font-size: 10.5px !important;
+            overflow-wrap: anywhere;
+          }
+          .audion-unc-server input,
+          .audion-unc-share input,
+          .audion-unc-subpath input {
+            font-family: var(--font-mono) !important;
+            font-size: 11.5px !important;
+            line-height: 1.2 !important;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-unc-server .q-field__control,
+          .audion-unc-share .q-field__control,
+          .audion-unc-subpath .q-field__control {
+            background: color-mix(in srgb, var(--audion-panel-background) 76%, var(--audion-terminal-background) 24%) !important;
+            border-radius: 6px !important;
+            box-shadow: none !important;
+          }
+          .audion-unc-server .q-field__control::before,
+          .audion-unc-share .q-field__control::before,
+          .audion-unc-subpath .q-field__control::before {
+            border: 2px solid rgba(112, 132, 142, 0.28) !important;
+          }
+          .audion-unc-server.q-field--focused .q-field__control,
+          .audion-unc-share.q-field--focused .q-field__control,
+          .audion-unc-subpath.q-field--focused .q-field__control {
+            background: color-mix(in srgb, var(--audion-panel-background) 84%, var(--audion-primary-text) 16%) !important;
+            box-shadow: none !important;
+          }
+          .audion-unc-server.q-field--focused .q-field__control::after,
+          .audion-unc-share.q-field--focused .q-field__control::after,
+          .audion-unc-subpath.q-field--focused .q-field__control::after {
+            border: 2px solid rgba(34, 211, 238, 0.42) !important;
+          }
+          .audion-unc-server .q-field__label,
+          .audion-unc-share .q-field__label,
+          .audion-unc-subpath .q-field__label {
+            font-size: 11px !important;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-browser-unc-row {
+            flex-wrap: wrap !important;
+            min-width: 0;
+          }
+          .audion-unc-static {
+            flex: 0 0 auto;
+            min-width: 14px;
+            padding-top: 8px;
+            color: rgba(150, 168, 176, 0.46) !important;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 800;
+            line-height: 1;
+          }
+          .audion-unc-server {
+            flex: 1 1 150px;
+            min-width: 120px;
+          }
+          .audion-unc-share {
+            flex: 1 1 130px;
+            min-width: 110px;
+          }
+          .audion-unc-subpath {
+            flex: 2 1 190px;
+            min-width: 140px;
+          }
+          .audion-route-apply-button {
+            flex: 0 0 auto;
+            min-width: 78px !important;
+            margin-top: 4px;
+          }
+          .audion-browser-bookmarks-subtitle {
+            margin-top: 4px;
+          }
+          .audion-browser-block {
+            --audion-browser-block-accent: #22d3ee;
+            position: relative;
+            width: 100%;
+            min-width: 0;
+            padding: 9px 11px 10px 14px;
+            border: 1px solid color-mix(in srgb, var(--audion-panel-border) 72%, transparent 28%);
+            border-radius: 8px;
+            background:
+              linear-gradient(180deg,
+                color-mix(in srgb, var(--audion-panel-background) 90%, var(--audion-primary-text) 10%),
+                color-mix(in srgb, var(--audion-panel-background) 82%, var(--audion-terminal-background) 18%)
+              );
+            box-shadow:
+              inset 0 1px 0 color-mix(in srgb, var(--audion-primary-text) 6%, transparent 94%),
+              0 8px 18px rgba(0, 0, 0, 0.10);
+          }
+          .audion-browser-block::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            bottom: 10px;
+            width: 3px;
+            border-radius: 0 4px 4px 0;
+            background: var(--audion-browser-block-accent);
+          }
+          .audion-browser-block-location,
+          .audion-browser-block-browsers {
+            --audion-browser-block-accent: #22d3ee;
+          }
+          .audion-browser-block-source {
+            --audion-browser-block-accent: #a78bfa;
+          }
+          .audion-browser-block-routes {
+            --audion-browser-block-accent: #34d399;
+          }
+          .audion-browser-block-details {
+            --audion-browser-block-accent: #94a3b8;
+          }
+          .audion-browser-block > .audion-section-title:first-child,
+          .audion-browser-block > .audion-section-title:first-child .q-label {
+            display: inline-flex;
+            width: fit-content;
+            margin: 0 0 7px !important;
+            padding: 3px 9px;
+            border-radius: 999px;
+            color: var(--audion-secondary-text) !important;
+            border: 1px solid color-mix(in srgb, var(--audion-input-border) 55%, transparent 45%);
+            background: color-mix(in srgb, var(--audion-terminal-background) 74%, transparent 26%);
+            font-size: 10.5px !important;
+            font-weight: 800 !important;
+            line-height: 1.1 !important;
+            text-transform: uppercase;
+          }
+          .audion-browser-location-mode,
+          .audion-browser-import-kind {
+            display: flex !important;
+            width: 100% !important;
+            padding: 5px !important;
+            gap: 5px !important;
+            border: 1px solid color-mix(in srgb, var(--audion-panel-border) 72%, transparent 28%) !important;
+            border-radius: 8px !important;
+            background: color-mix(in srgb, var(--audion-terminal-background) 72%, var(--audion-panel-background) 28%) !important;
+            box-shadow: none !important;
+          }
+          .audion-browser-location-mode .q-btn,
+          .audion-browser-import-kind .q-btn {
+            flex: 1 1 0 !important;
+            min-width: 0 !important;
+            min-height: 34px !important;
+            color: var(--audion-secondary-text) !important;
+            border: 1px solid transparent !important;
+            border-radius: 6px !important;
+            background: transparent !important;
+            box-shadow: none !important;
+          }
+          .audion-browser-location-mode .q-btn.q-btn--active,
+          .audion-browser-import-kind .q-btn.q-btn--active,
+          .audion-browser-location-mode .q-btn[aria-pressed="true"],
+          .audion-browser-import-kind .q-btn[aria-pressed="true"] {
+            color: var(--audion-primary-text) !important;
+            border-color: transparent !important;
+            background: color-mix(in srgb, var(--audion-panel-background) 88%, var(--audion-primary-text) 12%) !important;
+            box-shadow: inset 0 -2px 0 rgba(34, 211, 238, 0.82) !important;
+            font-weight: 800 !important;
+          }
+          .audion-browser-mode-buttons {
+            display: grid !important;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 7px !important;
+            width: 100% !important;
+            padding: 0 !important;
+            border: 0 !important;
+            background: transparent !important;
+          }
+          .audion-browser-mode-button {
+            width: 100% !important;
+            min-width: 0 !important;
+            min-height: 36px !important;
+            color: var(--audion-secondary-text) !important;
+            border: 1px solid color-mix(in srgb, var(--audion-panel-border) 82%, transparent 18%) !important;
+            border-radius: 6px !important;
+            background: color-mix(in srgb, var(--audion-terminal-background) 68%, var(--audion-panel-background) 32%) !important;
+            box-shadow: none !important;
+          }
+          .audion-browser-mode-button-active {
+            color: var(--audion-primary-text) !important;
+            border: 2px solid color-mix(in srgb, #22d3ee 50%, var(--audion-panel-border) 50%) !important;
+            background: color-mix(in srgb, var(--audion-panel-background) 84%, var(--audion-primary-text) 16%) !important;
+            font-weight: 800 !important;
+          }
+          .audion-browser-mode-button-source {
+            border-color: color-mix(in srgb, #a78bfa 48%, var(--audion-panel-border) 52%) !important;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-browser-bookmarks-checkboxes,
+          .audion-browser-bookmarks-radio {
+            display: grid !important;
+            grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+            gap: 7px 8px !important;
+            width: 100% !important;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-browser-backup-radio {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)) !important;
+            gap: 7px 8px !important;
+            width: 100% !important;
+          }
+/* ========================================================================
+   RESPONSIVE
+   ======================================================================== */
+          @media (max-width: 1180px) {
+            .audion-browser-bookmarks-checkboxes,
+            .audion-browser-bookmarks-radio {
+              grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            }
+          }
+          @media (max-width: 760px) {
+            .audion-browser-bookmarks-checkboxes,
+            .audion-browser-bookmarks-radio {
+              grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-browser-block .audion-browser-bookmarks-checkboxes .q-checkbox,
+          .audion-browser-block .audion-browser-backup-radio .q-radio,
+          .audion-browser-block .audion-browser-bookmarks-radio .q-radio {
+            width: 100% !important;
+            min-width: 0 !important;
+            min-height: 36px !important;
+            margin: 0 !important;
+            padding: 4px 9px 4px 6px !important;
+            align-items: center !important;
+            border: 1px solid color-mix(in srgb, var(--audion-chip-accent) 34%, var(--audion-panel-border) 66%) !important;
+            border-radius: 6px !important;
+            background: color-mix(in srgb, var(--audion-terminal-background) 92%, #000 8%) !important;
+          }
+          .audion-browser-block .audion-browser-bookmarks-checkboxes .q-checkbox.q-checkbox--truthy,
+          .audion-browser-block .audion-browser-backup-radio .q-radio.q-radio--truthy,
+          .audion-browser-block .audion-browser-bookmarks-radio .q-radio.q-radio--truthy {
+            border: 2px solid color-mix(in srgb, #22d3ee 54%, var(--audion-panel-border) 46%) !important;
+            background: color-mix(in srgb, var(--audion-panel-background) 66%, var(--audion-primary-text) 34%) !important;
+            box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.08) !important;
+          }
+          .audion-browser-bookmarks-checkboxes .q-checkbox--truthy .q-checkbox__label,
+          .audion-browser-backup-radio .q-radio--truthy .q-radio__label,
+          .audion-browser-bookmarks-radio .q-radio--truthy .q-radio__label {
+            color: #f3fbfd !important;
+            font-weight: 700 !important;
+          }
+          .audion-browser-bookmarks-checkboxes .q-checkbox__inner--falsy,
+          .audion-browser-backup-radio .q-radio__inner--falsy,
+          .audion-browser-bookmarks-radio .q-radio__inner--falsy {
+            color: color-mix(in srgb, #0e7490 44%, var(--audion-secondary-text) 56%) !important;
+            opacity: 0.66;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-browser-run-button,
+          .audion-browser-run-button.audion-operation-button-tone-friendly,
+          .audion-browser-run-button.audion-operation-button-tone-medium,
+          .audion-browser-run-button.audion-operation-button-tone-danger {
+            color: #fff8e8 !important;
+            border: 1px solid rgba(245, 158, 11, 0.58) !important;
+            background: color-mix(in srgb, #854d0e 28%, var(--audion-terminal-background) 72%) !important;
+            box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.10) !important;
+          }
+          .audion-browser-run-button:hover,
+          .audion-browser-run-button.audion-operation-button-tone-friendly:hover,
+          .audion-browser-run-button.audion-operation-button-tone-medium:hover,
+          .audion-browser-run-button.audion-operation-button-tone-danger:hover {
+            color: #fffaf0 !important;
+            border-color: rgba(251, 191, 36, 0.76) !important;
+            background: color-mix(in srgb, #854d0e 38%, var(--audion-terminal-background) 62%) !important;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-browser-favicons-button {
+            color: color-mix(in srgb, #f59e0b 78%, var(--audion-primary-text) 22%) !important;
+            border-color: rgba(245, 158, 11, 0.38) !important;
+            background: color-mix(in srgb, #854d0e 10%, var(--audion-terminal-background) 90%) !important;
+            box-shadow: none !important;
+          }
+          .audion-browser-html-path {
+            flex: 1 1 280px;
+            min-width: 0;
+            min-height: 34px;
+            padding: 7px 10px;
+            border: 1px solid color-mix(in srgb, #a78bfa 28%, var(--audion-panel-border) 72%);
+            border-radius: 6px;
+            background: color-mix(in srgb, var(--audion-terminal-background) 82%, var(--audion-panel-background) 18%);
+            color: var(--audion-primary-text);
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            overflow-wrap: anywhere;
+          }
+          .audion-browser-service-row {
+            flex-wrap: nowrap !important;
+          }
+          .audion-browser-open-backup {
+            min-width: 180px !important;
+            color: var(--audion-secondary-text) !important;
+            border: 1px solid color-mix(in srgb, #34d399 30%, var(--audion-panel-border) 70%) !important;
+            background: color-mix(in srgb, var(--audion-terminal-background) 72%, var(--audion-panel-background) 28%) !important;
+          }
+/* ========================================================================
+   RESPONSIVE
+   ======================================================================== */
+          @media (max-width: 860px) {
+            .audion-browser-service-row {
+              flex-wrap: wrap !important;
+            }
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-switcher-description {
+            color: var(--audion-secondary-text);
+            font-size: 12.5px;
+            line-height: 1.24;
+            min-width: 0;
+            overflow-wrap: anywhere;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-operation-row {
+            --audion-operation-text-offset: 1px;
+          }
+          .audion-operation-row-direct {
+            padding-top: 4px;
+            padding-bottom: 4px;
+          }
+          .audion-operation-button {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            height: auto !important;
+            min-height: 28px !important;
+            justify-self: start;
+            padding-left: 9px !important;
+            padding-right: 9px !important;
+            padding-top: 3px !important;
+            padding-bottom: 3px !important;
+            margin-top: 0;
+          }
+          .audion-operation-button-direct,
+          /* In the nav row Run is a normal-width button beside Back, not a
+             full-width bar. */
+          .audion-command-nav .audion-command-run-button {
+            flex: 0 0 auto !important;
+            min-width: 132px !important;
+          }
+          .audion-command-run-button {
+            min-height: 32px !important;
+            color: var(--audion-action-neutral-text) !important;
+            background: var(--audion-run-background) !important;
+            border-color: var(--audion-run-border) !important;
+            font-weight: 700 !important;
+          }
+          .audion-operation-button-direct:hover,
+          .audion-command-run-button:hover {
+            color: var(--audion-action-neutral-text-hover) !important;
+            background: var(--audion-run-hover-background) !important;
+            border-color: var(--audion-run-border) !important;
+          }
+          .audion-operation-button-direct .q-btn__content,
+          .audion-operation-button-direct .q-btn__content *,
+          .audion-command-run-button .q-btn__content,
+          .audion-command-run-button .q-btn__content * {
+            color: inherit !important;
+          }
+          .audion-operation-button-direct-dangerous {
+            background: var(--audion-run-background) !important;
+            border-color: var(--audion-run-border) !important;
+          }
+          .audion-operation-button-direct-dangerous:hover {
+            background: var(--audion-run-hover-background) !important;
+            border-color: var(--audion-run-border) !important;
+          }
+          .audion-operation-button-tone-friendly {
+            --audion-current-action-text: var(--audion-action-friendly-text);
+            color: var(--audion-action-friendly-text) !important;
+            background: var(--audion-action-friendly-bg) !important;
+            border-color: var(--audion-action-friendly-border) !important;
+            border-width: var(--audion-action-border-width) !important;
+          }
+          .audion-operation-button-tone-friendly:hover {
+            --audion-current-action-text: var(--audion-action-friendly-text-hover);
+            color: var(--audion-action-friendly-text-hover) !important;
+            background: var(--audion-action-friendly-hover-bg) !important;
+            border-color: var(--audion-action-friendly-border) !important;
+          }
+          .audion-operation-button-tone-medium {
+            --audion-current-action-text: var(--audion-action-medium-text);
+            color: var(--audion-action-medium-text) !important;
+            background: var(--audion-action-medium-bg) !important;
+            border-color: var(--audion-action-medium-border) !important;
+            border-width: var(--audion-action-border-width) !important;
+          }
+          .audion-operation-button-tone-medium:hover {
+            --audion-current-action-text: var(--audion-action-medium-text-hover);
+            color: var(--audion-action-medium-text-hover) !important;
+            background: var(--audion-action-medium-hover-bg) !important;
+            border-color: var(--audion-action-medium-border) !important;
+          }
+          .audion-operation-button-tone-danger {
+            --audion-current-action-text: var(--audion-action-danger-text);
+            color: var(--audion-action-danger-text) !important;
+            background: var(--audion-action-danger-bg) !important;
+            border-color: var(--audion-action-danger-border) !important;
+            border-width: var(--audion-action-border-width) !important;
+          }
+          .audion-operation-button-tone-danger:hover {
+            --audion-current-action-text: var(--audion-action-danger-text-hover);
+            color: var(--audion-action-danger-text-hover) !important;
+            background: var(--audion-action-danger-hover-bg) !important;
+            border-color: var(--audion-action-danger-border) !important;
+          }
+          .audion-operation-button-tone-friendly .q-btn__content,
+          .audion-operation-button-tone-friendly .q-btn__content > span,
+          .audion-operation-button-tone-friendly .q-btn__content > div,
+          .audion-operation-button-tone-friendly .q-btn__content *,
+          .audion-operation-button-tone-medium .q-btn__content,
+          .audion-operation-button-tone-medium .q-btn__content > span,
+          .audion-operation-button-tone-medium .q-btn__content > div,
+          .audion-operation-button-tone-medium .q-btn__content *,
+          .audion-operation-button-tone-danger .q-btn__content,
+          .audion-operation-button-tone-danger .q-btn__content > span,
+          .audion-operation-button-tone-danger .q-btn__content > div,
+          .audion-operation-button-tone-danger .q-btn__content * {
+            color: var(--audion-current-action-text) !important;
+          }
+          .audion-operation-button .q-btn__content {
+            justify-content: flex-start !important;
+            align-items: center !important;
+            text-align: left !important;
+            min-width: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow: visible !important;
+            flex-wrap: wrap !important;
+            white-space: normal !important;
+            line-height: 1.18 !important;
+          }
+          .audion-operation-button-direct .q-icon,
+          .audion-command-run-button .q-icon {
+            flex: 0 0 auto;
+            font-size: 17px !important;
+            line-height: 1 !important;
+          }
+          .audion-operation-button .q-btn__content > span,
+          .audion-operation-button .q-btn__content > div {
+            display: block !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            white-space: normal !important;
+            overflow-wrap: normal !important;
+            word-break: normal !important;
+            line-height: 1.18 !important;
+            text-align: left !important;
+          }
+          .audion-operation-description {
+            min-width: 0;
+            color: var(--audion-secondary-text);
+            font-size: 12.5px;
+            line-height: 1.24;
+            white-space: normal;
+            overflow-wrap: anywhere;
+          }
+          .audion-operation-description-compact {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+          .audion-operation-row > .audion-operation-description {
+            padding-top: var(--audion-operation-text-offset);
+          }
+          .audion-operation-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+            padding-right: 6px;
+            padding-top: var(--audion-operation-text-offset);
+          }
+          .audion-operation-copy-title {
+            color: var(--audion-text);
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.16;
+          }
+          .audion-command-run-button {
+            min-width: 112px !important;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-selected-operation-summary {
+            border-top: 1px solid var(--audion-divider);
+            border-bottom: 1px solid var(--audion-divider);
+            padding: 4px 0;
+            width: 100%;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-operation-meta {
+            color: color-mix(in srgb, var(--audion-button-text) 34%, var(--audion-muted-text) 66%);
+            font-size: 11.5px;
+            line-height: 1.18;
+            margin-top: 0;
+            opacity: 0.92;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-empty-section {
+            color: var(--audion-muted-text);
+            font-size: 13px;
+            border: 1px dashed var(--audion-input-border);
+            border-radius: var(--border-radius-md);
+            padding: 10px;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-field-error {
+            grid-column: 1 / -1;
+            color: #fbbf24;
+            font-size: 12px;
+            border: 1px solid #4b3a17;
+            border-radius: var(--border-radius-md);
+            padding: 6px 8px;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-advanced-expansion {
+            border-top: 1px solid var(--audion-divider);
+            margin-top: 1px;
+            padding-top: 1px;
+          }
+          .audion-advanced-expansion .q-item {
+            min-height: 30px;
+            padding: 0 2px;
+            color: var(--audion-muted-text);
+            font-size: 13px;
+            font-weight: 600;
+          }
+          .audion-advanced-expansion .q-focus-helper {
+            opacity: 0 !important;
+          }
+          .audion-advanced-expansion .q-expansion-item__content {
+            padding-top: 3px;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-fields-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+          }
+          .audion-field-section {
+            min-width: 0;
+            width: 100%;
+            padding: 8px 10px 10px;
+            border: 1px solid var(--audion-panel-border);
+            border-radius: var(--border-radius-md);
+            background: var(--audion-block-background);
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-section-title {
+            color: var(--audion-muted-text);
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 7px;
+            opacity: 0.82;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-section-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 9px 12px;
+            align-items: start;
+            width: 100%;
+          }
+          .audion-field {
+            min-width: 0;
+            width: 100%;
+          }
+          .audion-field-select {
+            grid-column: span 2;
+            min-width: 0;
+            width: 100%;
+          }
+          .audion-field-wide {
+            grid-column: 1 / -1;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-info-badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            min-width: 0;
+            width: 100%;
+          }
+          .audion-info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            max-width: 100%;
+            min-height: 26px;
+            padding: 4px 8px;
+            border: 1px solid var(--audion-panel-border);
+            border-radius: var(--border-radius-md);
+            background: var(--audion-block-background);
+            color: var(--audion-secondary-text);
+            font-size: 11px;
+            line-height: 1.2;
+          }
+          .audion-info-badge-friendly {
+            border-color: var(--audion-safety-friendly-border);
+            background: var(--audion-safety-friendly-bg);
+          }
+          .audion-info-badge-medium {
+            border-color: var(--audion-safety-medium-border);
+            background: var(--audion-safety-medium-bg);
+          }
+          .audion-info-badge-danger {
+            border-color: var(--audion-safety-danger-border);
+            background: var(--audion-safety-danger-bg);
+          }
+          .audion-info-badge-lock {
+            border-color: #166534;
+            background: color-mix(in srgb, #166534 12%, var(--audion-block-background) 88%);
+          }
+          .audion-info-badge-lock .audion-info-badge-title,
+          .audion-info-badge-lock .audion-info-badge-summary {
+            color: #15803d;
+          }
+          .audion-info-badge-oem-tail {
+            border-color: #9a3412;
+            background: color-mix(in srgb, #9a3412 13%, var(--audion-block-background) 87%);
+          }
+          .audion-info-badge-oem-tail .audion-info-badge-title,
+          .audion-info-badge-oem-tail .audion-info-badge-summary {
+            color: #c2410c;
+          }
+          .audion-info-badge-pair {
+            color: var(--audion-muted-text);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0;
+            text-transform: uppercase;
+          }
+          .audion-info-badge-title {
+            color: var(--audion-text);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0;
+            overflow-wrap: anywhere;
+          }
+          .audion-info-badge-summary {
+            color: var(--audion-muted-text);
+            font-size: 10px;
+            letter-spacing: 0;
+            overflow-wrap: anywhere;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-select .q-field__native {
+            min-width: 0;
+          }
+          .audion-field:not(.audion-field-wide) .q-field__control,
+          .audion-select .q-field__control {
+            min-height: 38px !important;
+          }
+          .audion-field .q-field__marginal,
+          .audion-field .q-field__append,
+          .audion-select .q-field__marginal,
+          .audion-select .q-field__append {
+            min-height: 38px !important;
+            height: 38px !important;
+            display: flex !important;
+            align-items: center !important;
+            align-self: center !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+          }
+          .audion-field .q-field__append .q-icon,
+          .audion-select .q-field__append .q-icon,
+          .audion-theme-select .q-field__append .q-icon {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            height: 100% !important;
+            line-height: 1 !important;
+            transform: translateY(-1px);
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-number input[type="number"]::-webkit-inner-spin-button,
+          .audion-number input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          .audion-number input[type="number"] {
+            appearance: textfield;
+            -moz-appearance: textfield;
+          }
+          .audion-number-spinner {
+            width: 18px;
+            height: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-right: -2px;
+          }
+          .audion-number-spin-button {
+            width: 18px !important;
+            min-width: 18px !important;
+            height: 12px !important;
+            min-height: 12px !important;
+            padding: 0 !important;
+            border-radius: 3px !important;
+            color: var(--audion-button-text) !important;
+            opacity: 0.92;
+          }
+          .audion-number-spin-button:hover {
+            opacity: 1;
+            color: var(--audion-button-text) !important;
+            background: var(--audion-button-hover-background) !important;
+          }
+          .audion-number-spin-button .q-icon {
+            font-size: 13px !important;
+            line-height: 1 !important;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-field:not(.audion-field-wide) .q-field__native,
+          .audion-field:not(.audion-field-wide) input,
+          .audion-select .q-field__native,
+          .audion-select .q-field__input,
+          .audion-select input {
+            font-size: 13px !important;
+          }
+          .audion-select .q-field__input,
+          .audion-select input {
+            caret-color: transparent !important;
+          }
+/* ========================================================================
+   TERMINAL
+   ======================================================================== */
+          .audion-field .q-field__control,
+          .audion-select .q-field__control,
+          .audion-terminal .q-field__control {
+            background: var(--audion-terminal-background) !important;
+          }
+          .audion-field .q-field--outlined .q-field__control:before,
+          .audion-field .q-field--outlined .q-field__control:after,
+          .audion-select.q-field--outlined .q-field__control:before,
+          .audion-select.q-field--outlined .q-field__control:after,
+          .audion-terminal.q-field--outlined .q-field__control:before,
+          .audion-terminal.q-field--outlined .q-field__control:after {
+            border-style: solid !important;
+            border-color: var(--audion-input-border) !important;
+          }
+          .audion-field .q-field--outlined.q-field--focused .q-field__control:after,
+          .audion-select.q-field--outlined.q-field--focused .q-field__control:after,
+          .audion-terminal.q-field--outlined.q-field--focused .q-field__control:after {
+            border-color: var(--audion-input-border-focus) !important;
+          }
+          .audion-field .q-field--outlined:hover .q-field__control:before,
+          .audion-select.q-field--outlined:hover .q-field__control:before,
+          .audion-terminal.q-field--outlined:hover .q-field__control:before {
+            border-color: var(--audion-input-border-hover) !important;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-select-popup {
+            min-width: min(720px, calc(100vw - 48px)) !important;
+            max-width: min(900px, calc(100vw - 32px)) !important;
+            background: var(--audion-panel-background) !important;
+            border: 1px solid var(--audion-panel-border) !important;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32) !important;
+          }
+          .audion-select-popup .q-item__label {
+            white-space: normal;
+            line-height: 1.25;
+          }
+          .audion-field-label {
+            display: block;
+            color: var(--audion-secondary-text);
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 5px;
+          }
+          .audion-field-hint {
+            color: var(--audion-muted-text);
+            font-size: 11px;
+            line-height: 1.2;
+            margin-top: 6px;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-smb-cache {
+            display: grid;
+            gap: 8px;
+            min-width: 0;
+            width: 100%;
+          }
+          .audion-smb-cache-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 10px;
+            width: 100%;
+          }
+          .audion-smb-cache-column {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 6px 6px;
+            min-width: 0;
+            align-items: start;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-smb-cache-select,
+          .audion-smb-manual-input {
+            min-width: 0;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-smb-cache-button-row {
+            flex: 0 0 auto;
+            flex-wrap: nowrap !important;
+            gap: 2px !important;
+            margin-top: 4px;
+          }
+          .audion-smb-cache-icon-button {
+            width: 30px !important;
+            min-width: 30px !important;
+            height: 30px !important;
+            min-height: 30px !important;
+            padding: 0 !important;
+            border-radius: var(--border-radius-md) !important;
+          }
+          .audion-smb-cache-icon-button .q-icon,
+          .audion-smb-cache-icon-button .material-icons {
+            font-size: 17px !important;
+            line-height: 1 !important;
+          }
+          .audion-smb-current-row {
+            min-width: 0;
+            width: 100%;
+            padding: 4px 0 0;
+          }
+          .audion-smb-current {
+            min-width: 0;
+            color: var(--audion-secondary-text);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            line-height: 1.2;
+            overflow-wrap: anywhere;
+          }
+          .audion-choice-row {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 1px 8px !important;
+            width: 100%;
+          }
+          .audion-choice-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 10px 18px !important;
+            width: 100%;
+            align-items: start;
+          }
+          .audion-choice-grid .q-option-group {
+            display: contents !important;
+          }
+          /* Groups hug their content: a stretched group used to inflate its
+             cards, so a one-card group looked far more important than a
+             three-card one purely because of where it landed in the row. */
+          .audion-safety-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 10px;
+            width: 100%;
+            align-items: start;
+          }
+          .audion-safety-group {
+            box-sizing: border-box;
+            display: grid;
+            grid-template-rows: auto auto;
+            align-content: start;
+            min-width: 0;
+            gap: 6px;
+            padding: 8px;
+            border: 1px solid var(--audion-panel-border);
+            border-radius: var(--border-radius-md);
+            background: var(--audion-block-background);
+          }
+          .audion-safety-group-friendly {
+            border-color: var(--audion-safety-friendly-border);
+            background: var(--audion-safety-friendly-bg);
+          }
+          .audion-safety-group-medium {
+            border-color: var(--audion-safety-medium-border);
+            background: var(--audion-safety-medium-bg);
+          }
+          .audion-safety-group-danger {
+            border-color: var(--audion-safety-danger-border);
+            background: var(--audion-safety-danger-bg);
+          }
+          .audion-safety-group-title {
+            min-width: 0;
+            color: var(--audion-text);
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1.2;
+            overflow-wrap: anywhere;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          /* Cards flow into a row when the group is wide enough, instead of
+             always stacking and eating vertical space. */
+          .audion-safety-group-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
+            grid-auto-rows: min-content;
+            align-content: start;
+            gap: 6px;
+            min-width: 0;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          /* A group with three or more cards claims two columns so its cards
+             lay out side by side rather than in a tall single file. */
+          .audion-safety-group-wide {
+            grid-column: span 2;
+          }
+/* ========================================================================
+   RESPONSIVE
+   ======================================================================== */
+          @media (max-width: 1100px) {
+            .audion-safety-group-wide {
+              grid-column: auto;
+            }
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-safety-choice {
+            appearance: none;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: 24px minmax(0, 1fr);
+            align-items: start;
+            gap: 8px;
+            min-width: 0;
+            width: 100%;
+            min-height: 66px;
+            margin: 0;
+            padding: 8px 10px;
+            border: 1px solid var(--audion-panel-border);
+            border-radius: var(--border-radius-md);
+            background: color-mix(in srgb, var(--audion-terminal-background) 82%, transparent 18%);
+            color: var(--audion-text);
+            font-family: var(--font-sans);
+            text-align: left;
+            cursor: pointer;
+          }
+          .audion-safety-choice-icon {
+            pointer-events: none;
+            width: 24px;
+            min-width: 24px;
+            height: 24px;
+            color: var(--audion-text);
+            font-size: 20px !important;
+            line-height: 24px !important;
+            opacity: 0.92;
+          }
+          .audion-safety-choice-no-icon {
+            grid-template-columns: minmax(0, 1fr);
+          }
+          .audion-safety-choice-friendly {
+            background: var(--audion-safety-friendly-soft);
+          }
+          .audion-safety-choice-medium {
+            background: var(--audion-safety-medium-soft);
+          }
+          .audion-safety-choice-danger {
+            background: var(--audion-safety-danger-soft);
+          }
+          .audion-safety-choice:hover {
+            border-color: var(--audion-input-border-hover);
+            filter: brightness(1.08);
+          }
+          .audion-safety-choice:focus-visible {
+            outline: 2px solid var(--audion-input-border-focus);
+            outline-offset: 2px;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          /* One unmistakable amber outline for the selected card: the old
+             tone-coloured 1px ring was almost invisible on the dark panel, so
+             the form read as a wall of buttons with nothing chosen. */
+          .audion-safety-choice-selected,
+          .audion-safety-choice-selected.audion-safety-choice-friendly,
+          .audion-safety-choice-selected.audion-safety-choice-medium,
+          .audion-safety-choice-selected.audion-safety-choice-danger {
+            border-color: #f59e0b !important;
+            box-shadow: 0 0 0 1px color-mix(in srgb, #f59e0b 45%, transparent 55%) !important;
+            background: color-mix(in srgb, #f59e0b 12%, var(--audion-terminal-background) 88%) !important;
+          }
+          .audion-safety-choice-selected .audion-safety-choice-title {
+            color: #fbbf24 !important;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-mode-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+            gap: 6px;
+            width: 100%;
+          }
+          .audion-mode-button {
+            --audion-mode-accent: #22d3ee;
+            appearance: none;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-width: 0;
+            min-height: 38px;
+            margin: 0;
+            padding: 6px 10px;
+            border: 1px solid color-mix(in srgb, var(--audion-mode-accent) 40%, var(--audion-panel-border) 60%);
+            border-radius: 6px;
+            background: color-mix(in srgb, var(--audion-mode-accent) 8%, var(--audion-terminal-background) 92%);
+            color: color-mix(in srgb, var(--audion-mode-accent) 72%, var(--audion-primary-text) 28%);
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+          }
+          .audion-mode-button:hover {
+            border-color: color-mix(in srgb, var(--audion-mode-accent) 70%, var(--audion-panel-border) 30%);
+            background: color-mix(in srgb, var(--audion-mode-accent) 16%, var(--audion-terminal-background) 84%);
+          }
+          .audion-mode-button-active {
+            border: 1px solid var(--audion-mode-accent);
+            background: color-mix(in srgb, var(--audion-mode-accent) 30%, var(--audion-terminal-background) 70%);
+            color: var(--audion-active-button-text);
+          }
+          .audion-mode-button-title {
+            pointer-events: none;
+            min-width: 0;
+            overflow-wrap: anywhere;
+            text-align: center;
+            line-height: 1.15;
+          }
+          .audion-safety-choice-title,
+          .audion-safety-choice-text,
+          .audion-safety-choice-summary {
+            pointer-events: none;
+            min-width: 0;
+            overflow-wrap: anywhere;
+          }
+          /* Two lines of summary, then an ellipsis: the full text is in the
+             tooltip anyway, and clamping is what keeps every card the same
+             height instead of letting a long sentence inflate one of them. */
+          .audion-safety-choice-summary {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+          .audion-safety-choice-text {
+            display: block;
+          }
+          .audion-safety-choice-title {
+            color: var(--audion-text);
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.2;
+          }
+          .audion-safety-choice-summary {
+            margin-top: 4px;
+            color: var(--audion-secondary-text);
+            font-size: 11px;
+            line-height: 1.25;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          /* Presets sit at their natural width. Equal 1fr columns blew short
+             labels like "ВСЕ" up to 300px on a wide panel. */
+          .audion-checkbox-preset-row {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 6px 8px !important;
+            width: 100%;
+            margin: 2px 0 8px;
+          }
+          /* Presets are buttons, so they look like buttons at rest too: a
+             transparent background with a hairline border read as plain text. */
+          .audion-action.audion-checkbox-preset-button {
+            flex: 0 0 auto !important;
+            min-width: 96px !important;
+            width: auto !important;
+            min-height: 30px !important;
+            padding: 3px 10px !important;
+            font-size: 11px !important;
+            letter-spacing: 0 !important;
+            color: color-mix(in srgb, var(--audion-primary-text) 84%, var(--audion-muted-text) 16%) !important;
+            border: 1px solid color-mix(in srgb, var(--audion-panel-border) 70%, var(--audion-secondary-text) 30%) !important;
+            border-radius: 6px !important;
+            background: color-mix(in srgb, var(--audion-terminal-background) 92%, #000 8%) !important;
+            transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+          }
+          .audion-action.audion-checkbox-preset-button:hover {
+            border-color: color-mix(in srgb, #f59e0b 46%, var(--audion-panel-border) 54%) !important;
+            background: color-mix(in srgb, #f59e0b 10%, var(--audion-terminal-background) 90%) !important;
+            color: var(--audion-primary-text) !important;
+          }
+          /* These apply a set and do not stay on, so the amber flash lasts only
+             while the button is pressed. */
+          .audion-action.audion-checkbox-preset-button:active,
+          .audion-action.audion-checkbox-preset-button:focus-visible {
+            border-color: #f59e0b !important;
+            background: color-mix(in srgb, #f59e0b 22%, var(--audion-terminal-background) 78%) !important;
+            color: #fbbf24 !important;
+          }
+          .audion-checkbox-preset-button .q-btn__content {
+            justify-content: center !important;
+            width: 100%;
+          }
+          .audion-checkbox-preset-button:hover {
+            color: var(--audion-button-text) !important;
+            border-color: var(--audion-input-border-hover) !important;
+            background: var(--audion-button-hover-background) !important;
+          }
+/* ========================================================================
+   ARCHIVE
+   ======================================================================== */
+          /* Each family is its own boxed group, tinted with the family accent,
+             so "archives" and "audio" read as separate sets rather than one
+             long run of chips under small captions. */
+          .audion-chip-family {
+            --audion-chip-accent: #38bdf8;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+            min-width: 0;
+            margin-bottom: 8px;
+            padding: 8px 9px 9px;
+            border: 1px solid color-mix(in srgb, var(--audion-chip-accent) 30%, transparent 70%);
+            border-radius: var(--border-radius-md);
+            background: color-mix(in srgb, var(--audion-chip-accent) 5%, var(--audion-block-background) 95%);
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-chip-family:last-child {
+            margin-bottom: 0;
+          }
+          .audion-chip-family-title {
+            color: color-mix(in srgb, var(--audion-chip-accent) 58%, var(--audion-secondary-text) 42%);
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          /* A chip is one line. It grows to fit its label and wraps to the next
+             row when it no longer fits - the label itself never wraps inside
+             the chip, which is why this is a flex run and not a fixed grid. */
+          .audion-chip-checkboxes {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            align-items: flex-start !important;
+            gap: 7px 8px !important;
+            width: 100% !important;
+          }
+          .audion-chip-checkboxes .q-checkbox {
+            width: auto !important;
+            flex: 0 0 auto !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            min-height: 36px !important;
+            margin: 0 !important;
+            padding: 4px 9px 4px 6px !important;
+            align-items: center !important;
+            border: 1px solid color-mix(in srgb, var(--audion-chip-accent) 38%, transparent 62%) !important;
+            border-radius: 6px !important;
+            background: var(--audion-terminal-background) !important;
+          }
+          .audion-chip-checkboxes .q-checkbox.q-checkbox--truthy,
+          .audion-chip-checkboxes .q-checkbox:has(.q-checkbox__inner--truthy) {
+            border: 1px solid var(--audion-chip-accent) !important;
+            background: var(--audion-terminal-background) !important;
+            box-shadow: none !important;
+          }
+          .audion-chip-checkboxes .q-checkbox--truthy .q-checkbox__label,
+          .audion-chip-checkboxes .q-checkbox:has(.q-checkbox__inner--truthy) .q-checkbox__label {
+            color: var(--audion-primary-text) !important;
+            font-weight: 400 !important;
+          }
+          .audion-chip-checkboxes .q-checkbox__inner--falsy {
+            color: color-mix(in srgb, #0e7490 44%, var(--audion-secondary-text) 56%) !important;
+            opacity: 0.66;
+          }
+          .audion-chip-checkboxes .q-checkbox__label {
+            min-width: 0;
+            font-size: 12.5px;
+            line-height: 1.2;
+            white-space: nowrap !important;
+            overflow-wrap: normal;
+          }
+          .audion-checkbox-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 10px 18px;
+            width: 100%;
+            align-items: start;
+          }
+          .audion-checkbox-grid .q-checkbox,
+          .audion-grid-checkbox {
+            min-width: 0 !important;
+            min-height: 26px !important;
+            width: 100%;
+            margin: 0 !important;
+            align-items: flex-start !important;
+          }
+          .audion-checkbox-grid .q-checkbox__label,
+          .audion-grid-checkbox .q-checkbox__label {
+            min-width: 0;
+            font-size: 13px;
+            line-height: 1.2;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            overflow-wrap: anywhere;
+          }
+          .audion-path-field {
+            flex-wrap: nowrap !important;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-picker-button {
+            flex: 0 0 auto;
+            min-width: 96px;
+            margin-top: 4px;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-inline-actions {
+            display: flex !important;
+            flex-wrap: wrap !important;
+          }
+          .audion-inline-actions .audion-action {
+            min-width: 154px;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-choice-row .q-radio,
+          .audion-choice-grid .q-radio,
+          .audion-choice-row .q-checkbox,
+          .audion-single-checkbox {
+            min-height: 26px !important;
+          }
+          .audion-choice-row .q-radio__label,
+          .audion-choice-grid .q-radio__label,
+          .audion-choice-row .q-checkbox__label,
+          .audion-single-checkbox .q-checkbox__label {
+            font-size: 13px;
+            line-height: 1.2;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-choice-grid .q-radio {
+            min-width: 0 !important;
+            width: 100%;
+            margin: 0 !important;
+            align-items: flex-start !important;
+          }
+          .audion-choice-grid .q-radio__label {
+            min-width: 0;
+            white-space: normal;
+            overflow-wrap: anywhere;
+          }
+          .audion-shell {
+            display: grid;
+            grid-template-columns: minmax(430px, 1fr) 8px minmax(480px, var(--audion-terminal-width, 40%));
+            gap: 8px;
+            width: 100vw;
+            max-width: none;
+            height: calc(100vh - 42px);
+            padding: 10px;
+            overflow: hidden;
+          }
+          .audion-splitter {
+            min-height: 0;
+            height: 100%;
+            border-radius: var(--border-radius-md);
+            cursor: col-resize;
+            position: relative;
+            background: transparent;
+          }
+          .audion-splitter::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 3px;
+            width: 2px;
+            border-radius: 999px;
+            background: var(--audion-terminal-divider);
+          }
+          .audion-splitter:hover::before,
+          body.audion-resizing .audion-splitter::before {
+            background: var(--audion-terminal-input-border-hover);
+          }
+          body.audion-resizing,
+          body.audion-resizing * {
+            cursor: col-resize !important;
+            user-select: none !important;
+          }
+          .audion-pane { min-height: 0; overflow: hidden; }
+          .audion-scroll {
+            min-height: 0;
+            overflow: auto;
+            scrollbar-gutter: stable;
+          }
+          .audion-pane.audion-scroll {
+            padding-right: 12px;
+          }
+          .audion-pane.audion-scroll > * {
+            max-width: 100%;
+          }
+          .audion-right {
+            display: grid;
+            grid-template-rows: auto minmax(72vh, 1fr);
+            min-height: 0;
+            height: 100%;
+            overflow: hidden;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-panel {
+            background: var(--audion-panel-background);
+            border: 1px solid var(--audion-panel-border);
+            border-radius: var(--border-radius-md);
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-dialog {
+            background: var(--audion-panel-background) !important;
+            color: var(--audion-text) !important;
+          }
+          .audion-confirm-card {
+            width: min(620px, calc(100vw - 32px));
+            border: 1px solid var(--audion-panel-border);
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-confirm-operation {
+            color: var(--audion-text);
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-confirm-description,
+          .audion-confirm-note {
+            color: var(--audion-muted-text);
+          }
+          .audion-confirm-impact {
+            margin: 8px 0 10px;
+            padding: 10px 12px;
+            border: 1px solid var(--audion-panel-border);
+            border-radius: var(--border-radius-md);
+            background: var(--audion-block-background);
+          }
+          .audion-confirm-impact-title {
+            margin-bottom: 7px;
+            color: var(--audion-secondary-text);
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1;
+          }
+          .audion-confirm-list {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--audion-secondary-text);
+          }
+          .audion-confirm-list-item {
+            margin: 4px 0;
+            padding-left: 2px;
+          }
+          .audion-confirm-list-item::marker {
+            color: var(--audion-muted-text);
+          }
+          .audion-confirm-list-text {
+            color: var(--audion-secondary-text);
+            font-size: 12px;
+            line-height: 1.3;
+          }
+/* ========================================================================
+   TERMINAL
+   ======================================================================== */
+          .audion-terminal-panel {
+            display: flex;
+            flex-direction: column;
+            background: var(--audion-panel-background);
+            border: 1px solid var(--audion-terminal-border);
+            border-radius: var(--border-radius-md);
+            min-height: 0;
+            height: 100%;
+            overflow: hidden;
+          }
+          .audion-terminal {
+            flex: 1 1 auto;
+            min-height: 0;
+            height: 100% !important;
+            margin: 0;
+            padding: 12px 14px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            max-width: 100%;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            tab-size: 4;
+            user-select: text;
+            cursor: text;
+            color: var(--audion-muted-text) !important;
+            border: 1px solid var(--audion-terminal-input-border);
+            border-radius: 4px;
+            font-family: var(--font-mono) !important;
+            font-size: 12px !important;
+            line-height: 1.35 !important;
+            background: var(--audion-terminal-background) !important;
+          }
+          .audion-terminal-line {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+          }
+          .audion-terminal-line-table {
+            /* A table row keeps its columns: no wrapping, and none of the hanging
+               indent that a continuation line would otherwise be shifted by. The
+               panel scrolls sideways only while such a line is wider than it. */
+            max-width: none;
+            padding-left: 0;
+            text-indent: 0;
+            white-space: pre;
+            overflow-wrap: normal;
+            word-break: normal;
+          }
+          .audion-terminal-command {
+            flex: 0 0 auto;
+            padding-top: 3px;
+            border-top: 1px solid var(--audion-terminal-divider);
+          }
+          .audion-terminal-command .q-field__control {
+            background: var(--audion-terminal-background) !important;
+            min-height: 34px !important;
+            border-radius: var(--border-radius-md) !important;
+          }
+          .audion-terminal-command .q-field--outlined .q-field__control:before,
+          .audion-terminal-command .q-field--outlined .q-field__control:after {
+            border-color: var(--audion-terminal-input-border) !important;
+          }
+          .audion-terminal-command .q-field--outlined:hover .q-field__control:before {
+            border-color: var(--audion-terminal-input-border-hover) !important;
+          }
+          .audion-terminal-command .q-field--outlined.q-field--focused .q-field__control:after {
+            border-color: var(--audion-terminal-input-border-focus) !important;
+          }
+          .audion-terminal-command .q-field__native,
+          .audion-terminal-command .q-field__input,
+          .audion-terminal-command input {
+            color: var(--audion-text) !important;
+            font-size: 13px !important;
+          }
+          .audion-terminal-command .q-field__label {
+            color: var(--audion-muted-text) !important;
+          }
+          .audion-terminal-shell {
+            width: 100%;
+          }
+          .audion-terminal-history {
+            min-width: 0;
+            width: 100%;
+            flex: 1 1 auto;
+          }
+          .audion-terminal-command-row {
+            display: grid !important;
+            grid-template-columns: minmax(108px, 124px) minmax(96px, 1fr) 30px 30px 30px minmax(78px, auto);
+            gap: 6px !important;
+            flex-wrap: nowrap !important;
+          }
+          .audion-terminal-command-text .q-field__control {
+            min-height: 76px !important;
+            align-items: stretch !important;
+          }
+          .audion-terminal-command .audion-terminal-command-text textarea {
+            min-height: 46px !important;
+            max-height: 168px !important;
+            resize: vertical !important;
+            white-space: pre-wrap !important;
+            overflow-wrap: anywhere !important;
+            word-break: break-word !important;
+            color: var(--audion-text) !important;
+            font-family: var(--font-mono) !important;
+            font-size: 11.5px !important;
+            line-height: 1.25 !important;
+          }
+          .audion-terminal-run,
+          .audion-terminal-picker {
+            min-width: 78px;
+          }
+          .audion-terminal-run {
+            padding-left: 6px !important;
+            padding-right: 6px !important;
+          }
+          .audion-terminal-icon-button {
+            width: 30px !important;
+            min-width: 30px !important;
+            height: 30px !important;
+            min-height: 30px !important;
+            padding: 0 !important;
+            border-radius: var(--border-radius-md) !important;
+          }
+          .audion-terminal-icon-button .q-icon,
+          .audion-terminal-icon-button .material-icons {
+            font-size: 18px !important;
+            line-height: 1 !important;
+          }
+          .audion-terminal-footer {
+            flex: 0 0 auto;
+            min-height: 26px;
+            border-top: 1px solid var(--audion-terminal-divider);
+            color: var(--audion-muted-text);
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-tooltip {
+            background-color: var(--audion-tooltip-background) !important;
+            color: #f3f7fb !important;
+            border: 1px solid color-mix(in srgb, #9fb3c8 18%, transparent 82%);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.34);
+            max-width: min(520px, calc(100vw - 32px));
+            white-space: pre-line;
+            overflow-wrap: anywhere;
+            text-align: left;
+            font-size: 12px;
+            line-height: 1.35;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-log-toolbar .audion-action {
+            padding-left: 7px !important;
+            padding-right: 7px !important;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-log-toolbar {
+            flex-wrap: wrap !important;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-log-toolbar .audion-action .q-btn__content {
+            font-size: 11px;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-log-icon-button {
+            width: 30px !important;
+            min-width: 30px !important;
+            height: 30px !important;
+            min-height: 30px !important;
+            padding: 0 !important;
+            border-radius: var(--border-radius-md) !important;
+          }
+          .audion-log-icon-button .q-icon,
+          .audion-log-icon-button .material-icons {
+            font-size: 17px !important;
+            line-height: 1 !important;
+          }
+/* ========================================================================
+   TERMINAL
+   ======================================================================== */
+          .audion-terminal-expanded { height: calc(100vh - 96px) !important; }
+/* ========================================================================
+   RESPONSIVE
+   ======================================================================== */
+          @media (max-width: 900px) {
+            body { overflow: auto; }
+            .nicegui-content { height: auto; overflow: visible; }
+            .audion-shell {
+              display: flex;
+              flex-direction: column;
+              height: auto;
+              overflow: visible;
+            }
+            .audion-splitter { display: none; }
+            .audion-section-fields { grid-template-columns: minmax(0, 1fr); }
+            .audion-field-select { grid-column: 1 / -1; }
+            .audion-folder-strip,
+            .audion-route-strip {
+              grid-template-columns: 1fr;
+            }
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          /* Image Tools visual canon: shared by every DevOps Tools window. */
+          .audion-shell .audion-panel,
+          .audion-shell .audion-block,
+          .audion-shell .audion-safety-friendly,
+          .audion-shell .audion-safety-medium,
+          .audion-shell .audion-safety-danger {
+            background: var(--audion-panel-background) !important;
+            border-color: var(--audion-panel-border) !important;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-fields-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 8px;
+            align-items: start;
+            width: 100%;
+          }
+          .audion-field-section {
+            grid-column: 1 / -1;
+            position: relative;
+            min-width: 0;
+            width: 100%;
+            padding: 10px 12px 11px 16px;
+            border: 1px solid color-mix(in srgb, var(--audion-panel-border) 72%, transparent 28%) !important;
+            border-radius: var(--border-radius-lg);
+            background: linear-gradient(180deg,
+              color-mix(in srgb, var(--audion-panel-background) 86%, var(--audion-terminal-background) 14%),
+              color-mix(in srgb, var(--audion-panel-background) 68%, var(--audion-terminal-background) 32%)) !important;
+            box-shadow: inset 0 1px 0 color-mix(in srgb, var(--audion-primary-text) 3%, transparent 97%),
+              0 8px 18px rgba(0, 0, 0, 0.10) !important;
+          }
+          .audion-field-section::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            bottom: 10px;
+            width: 3px;
+            border-radius: 0 4px 4px 0;
+            background: #8b5cf6;
+          }
+          .audion-field-section-source::before { background: #5ad7ff; }
+          .audion-field-section-output::before { background: #60a5fa; }
+          .audion-field-section-parameters::before { background: #8b5cf6; }
+          .audion-field-section-format::before { background: #29d17d; }
+          .audion-field-section-options::before { background: #f59e0b; }
+          .audion-field-section-preset::before,
+          .audion-field-section-thumbnail::before { background: #ec4899; }
+          .audion-field-section-encoding::before { background: #22d3ee; }
+          .audion-field-section-run::before { background: var(--audion-action-amber); }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-section-title {
+            display: inline-flex;
+            align-items: center;
+            min-height: 18px;
+            width: fit-content;
+            padding: 0 7px;
+            margin: 0 0 9px;
+            color: var(--audion-secondary-text) !important;
+            border: 1px solid color-mix(in srgb, var(--audion-input-border) 55%, transparent 45%);
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--audion-terminal-background) 74%, transparent 26%);
+            font-size: 10px !important;
+            font-weight: 850 !important;
+            line-height: 1;
+            text-transform: uppercase;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-shell .audion-field .q-field__control,
+          .audion-shell .audion-select .q-field__control,
+          .audion-dialog .q-field__control,
+          .audion-shell .audion-browser-route-path .q-field__control,
+          .audion-shell .audion-unc-server .q-field__control,
+          .audion-shell .audion-unc-share .q-field__control,
+          .audion-shell .audion-unc-subpath .q-field__control {
+            background: var(--audion-terminal-background) !important;
+            border-radius: var(--border-radius-md) !important;
+            box-shadow: none !important;
+          }
+          .audion-shell .q-field--outlined .q-field__control::before,
+          .audion-dialog .q-field--outlined .q-field__control::before {
+            border: 1px solid var(--audion-input-border) !important;
+            border-style: solid !important;
+          }
+          .audion-shell .q-field--outlined:hover .q-field__control::before,
+          .audion-dialog .q-field--outlined:hover .q-field__control::before {
+            border-color: var(--audion-input-border-hover) !important;
+          }
+          .audion-shell .q-field--outlined.q-field--focused .q-field__control::after,
+          .audion-dialog .q-field--outlined.q-field--focused .q-field__control::after {
+            border: 1px solid var(--audion-button-text) !important;
+          }
+          .audion-shell .q-field__native,
+          .audion-shell .q-field__input,
+          .audion-shell .q-field input,
+          .audion-dialog .q-field__native,
+          .audion-dialog .q-field__input {
+            color: var(--audion-text) !important;
+          }
+          .audion-shell .q-field__label,
+          .audion-dialog .q-field__label {
+            color: var(--audion-secondary-text) !important;
+          }
+          .audion-shell .q-field__append,
+          .audion-shell .q-field__marginal,
+          .audion-dialog .q-field__append,
+          .audion-dialog .q-field__marginal {
+            color: var(--audion-button-text) !important;
+          }
+
+          .audion-field-radio .audion-choice-row:not(.audion-choice-column):not(.audion-segmented-choice),
+          .audion-field-checks .audion-choice-row:not(.audion-choice-column):not(.audion-segmented-choice) {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+            gap: 7px 8px !important;
+            align-items: stretch !important;
+            width: 100%;
+          }
+          .audion-field-radio .audion-choice-row:not(.audion-choice-column):not(.audion-segmented-choice) .q-radio,
+          .audion-field-checks .audion-choice-row:not(.audion-choice-column):not(.audion-segmented-choice) .q-checkbox,
+          .audion-browser-bookmarks-checkboxes .q-checkbox,
+          .audion-browser-bookmarks-radio .q-radio,
+          .audion-browser-backup-radio .q-radio {
+            width: 100% !important;
+            min-width: 0 !important;
+            min-height: 34px !important;
+            margin: 0 !important;
+            padding: 3px 8px 3px 5px !important;
+            align-items: center !important;
+            border: 1px solid var(--audion-panel-border) !important;
+            border-radius: 6px !important;
+            background: color-mix(in srgb, var(--audion-terminal-background) 92%, #000 8%) !important;
+          }
+          .audion-field-radio .q-radio--truthy,
+          .audion-field-checks .q-checkbox--truthy,
+          .audion-browser-bookmarks-checkboxes .q-checkbox--truthy,
+          .audion-browser-bookmarks-radio .q-radio--truthy,
+          .audion-browser-backup-radio .q-radio--truthy {
+            border-color: color-mix(in srgb, var(--audion-button-text) 72%, var(--audion-panel-border) 28%) !important;
+            background: color-mix(in srgb, #155e75 20%, var(--audion-terminal-background) 80%) !important;
+          }
+          .audion-shell .q-checkbox__inner--falsy .q-checkbox__bg,
+          .audion-shell .q-radio__inner--falsy .q-radio__bg,
+          .audion-dialog .q-checkbox__inner--falsy .q-checkbox__bg,
+          .audion-dialog .q-radio__inner--falsy .q-radio__bg {
+            opacity: 0.82;
+            border-color: #0e7490 !important;
+          }
+          .audion-shell .q-checkbox__inner--falsy,
+          .audion-shell .q-radio__inner--falsy,
+          .audion-dialog .q-checkbox__inner--falsy,
+          .audion-dialog .q-radio__inner--falsy {
+            color: #0e7490 !important;
+          }
+          .audion-shell .q-checkbox__label,
+          .audion-shell .q-radio__label {
+            color: var(--audion-text) !important;
+          }
+          html body .audion-shell .audion-browser-block .audion-browser-bookmarks-checkboxes .q-checkbox,
+          html body .audion-shell .audion-browser-block .audion-browser-bookmarks-radio .q-radio,
+          html body .audion-shell .audion-browser-block .audion-browser-backup-radio .q-radio {
+            border: 1px solid color-mix(in srgb, #164e63 76%, var(--audion-panel-border) 24%) !important;
+            background: color-mix(in srgb, var(--audion-terminal-background) 92%, #000 8%) !important;
+          }
+          html body .audion-shell .audion-browser-block .audion-browser-bookmarks-checkboxes .q-checkbox--truthy,
+          html body .audion-shell .audion-browser-block .audion-browser-bookmarks-radio .q-radio--truthy,
+          html body .audion-shell .audion-browser-block .audion-browser-backup-radio .q-radio--truthy {
+            border-color: color-mix(in srgb, #22d3ee 76%, var(--audion-panel-border) 24%) !important;
+            background: color-mix(in srgb, #155e75 24%, var(--audion-terminal-background) 76%) !important;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-mode-toggle,
+          .audion-segmented-choice,
+          .audion-browser-mode-buttons {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            width: 100% !important;
+            min-height: 34px !important;
+            padding: 5px !important;
+            gap: 5px !important;
+            border: 1px solid var(--audion-input-border) !important;
+            border-radius: 8px !important;
+            background: color-mix(in srgb, var(--audion-terminal-background) 86%, var(--audion-panel-background) 14%) !important;
+          }
+          .audion-mode-option,
+          .audion-browser-mode-button,
+          .audion-segmented-choice .q-btn,
+          .audion-switcher-button {
+            flex: 1 1 0 !important;
+            min-width: 0 !important;
+            min-height: 32px !important;
+            border: 1px solid color-mix(in srgb, #155e75 48%, var(--audion-panel-border) 52%) !important;
+            border-radius: 6px !important;
+            background: color-mix(in srgb, #155e75 7%, var(--audion-terminal-background) 93%) !important;
+            color: color-mix(in srgb, var(--audion-primary-text) 84%, var(--audion-muted-text) 16%) !important;
+            box-shadow: none !important;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          html body .audion-shell .audion-browser-mode-buttons,
+          html body .audion-shell .audion-command-switcher {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+            gap: 8px !important;
+            width: 100% !important;
+            padding: 0 !important;
+            border: 0 !important;
+            background: transparent !important;
+          }
+          /* Section tabs keep one row: a seven-tab section wrapped to a second
+             row and made the header twice as tall as every other section. */
+          html body .audion-shell .audion-command-switcher {
+            grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)) !important;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          html body .audion-shell .audion-browser-mode-buttons {
+            margin-bottom: 10px !important;
+          }
+          html body .audion-shell .audion-browser-service-row {
+            margin-top: 10px !important;
+            margin-bottom: 4px !important;
+          }
+          html body .audion-shell .audion-browser-mode-button,
+          html body .audion-shell .audion-switcher-button {
+            width: 100% !important;
+            min-width: 0 !important;
+            min-height: 38px !important;
+            height: 38px !important;
+            border: 1px solid color-mix(in srgb, #155e75 72%, var(--audion-panel-border) 28%) !important;
+            border-radius: 6px !important;
+            background: color-mix(in srgb, var(--audion-terminal-background) 92%, #000 8%) !important;
+            color: color-mix(in srgb, var(--audion-primary-text) 84%, var(--audion-muted-text) 16%) !important;
+            box-shadow: none !important;
+          }
+          html body .audion-shell .audion-browser-mode-button:hover,
+          html body .audion-shell .audion-switcher-button:hover {
+            border-color: color-mix(in srgb, #f59e0b 46%, var(--audion-panel-border) 54%) !important;
+            background: color-mix(in srgb, #f59e0b 9%, var(--audion-terminal-background) 91%) !important;
+            color: var(--audion-primary-text) !important;
+          }
+          html body .audion-shell .audion-browser-mode-button-active,
+          html body .audion-shell .audion-switcher-button-active {
+            border: 1px solid #f59e0b !important;
+            background: color-mix(in srgb, #f59e0b 20%, var(--audion-terminal-background) 80%) !important;
+            box-shadow: none !important;
+          }
+          html body .audion-shell .audion-switcher-button-active {
+            color: color-mix(in srgb, var(--audion-primary-text) 84%, var(--audion-muted-text) 16%) !important;
+          }
+          .audion-mode-option-active,
+          .audion-browser-mode-button-active,
+          .audion-switcher-button-active,
+          .audion-segmented-choice .q-btn.q-btn--active,
+          .audion-segmented-choice .q-btn[aria-pressed="true"] {
+            border-color: #f59e0b !important;
+            background: color-mix(in srgb, #f59e0b 20%, var(--audion-terminal-background) 80%) !important;
+            color: #fbbf24 !important;
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, #f59e0b 40%, transparent 60%) !important;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-action {
+            color: var(--audion-button-text) !important;
+            background: transparent !important;
+            border: 1px solid transparent !important;
+            box-shadow: none !important;
+          }
+          .audion-action:hover {
+            background: var(--audion-button-hover-background) !important;
+            border-color: var(--audion-button-hover-border) !important;
+          }
+          .audion-nav-run-button,
+          .audion-root-quick-button,
+          .audion-direct-action,
+          .audion-browser-clear-button,
+          .audion-browser-favicons-button,
+          .audion-command-run-button,
+          .audion-switcher-button-direct {
+            border: 1px solid var(--audion-action-amber-border) !important;
+            background: var(--audion-action-amber-bg) !important;
+            color: var(--audion-active-button-text) !important;
+          }
+          .audion-nav-run-button:hover,
+          .audion-root-quick-button:hover,
+          .audion-direct-action:hover,
+          .audion-browser-clear-button:hover,
+          .audion-browser-favicons-button:hover,
+          .audion-command-run-button:hover,
+          .audion-switcher-button-direct:hover {
+            border-color: color-mix(in srgb, var(--audion-action-amber) 72%, var(--audion-panel-border) 28%) !important;
+            background: var(--audion-action-amber-bg-hover) !important;
+          }
+
+          .audion-child-command-surface {
+            min-width: 0;
+            width: 100%;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-field-hide-hint > .audion-field-hint {
+            display: none !important;
+          }
+/* ========================================================================
+   SHELL
+   ======================================================================== */
+          .audion-child-command-surface .audion-command-switcher {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+            gap: 9px 10px !important;
+            width: 100% !important;
+            margin-bottom: 14px !important;
+            padding: 6px 0 8px !important;
+          }
+          .audion-child-command-surface .audion-command-switcher .audion-switcher-button {
+            width: 100% !important;
+            min-width: 0 !important;
+            min-height: 46px !important;
+            height: auto !important;
+            padding: 7px 10px !important;
+          }
+          .audion-child-command-surface .audion-command-switcher .audion-switcher-button .q-btn__content,
+          .audion-child-command-surface .audion-command-switcher .audion-switcher-button .q-btn__content > span,
+          .audion-child-command-surface .audion-command-switcher .audion-switcher-button .q-btn__content > div {
+            white-space: normal !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            overflow-wrap: anywhere !important;
+            line-height: 1.15 !important;
+          }
+          .audion-child-command-surface .audion-action-group {
+            position: relative;
+            padding: 10px 11px 8px 16px !important;
+            overflow: hidden;
+            border-color: color-mix(in srgb, var(--audion-panel-border) 72%, transparent 28%) !important;
+            background: linear-gradient(180deg,
+              color-mix(in srgb, var(--audion-panel-background) 94%, var(--audion-primary-text) 6%),
+              color-mix(in srgb, var(--audion-panel-background) 78%, var(--audion-terminal-background) 22%)) !important;
+            box-shadow: inset 0 1px 0 color-mix(in srgb, var(--audion-primary-text) 4%, transparent 96%),
+              0 8px 18px rgba(0, 0, 0, 0.10) !important;
+          }
+          .audion-child-command-surface .audion-action-group::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            bottom: 10px;
+            width: 3px;
+            border-radius: 0 4px 4px 0;
+            background: #8b5cf6;
+          }
+          .audion-child-command-surface .audion-action-group-friendly::before { background: #29d17d; }
+          .audion-child-command-surface .audion-action-group-medium::before { background: #22d3ee; }
+          .audion-child-command-surface .audion-action-group-danger::before { background: #f59e0b; }
+          .audion-child-command-surface .audion-action-group-title {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            min-height: 18px;
+            margin: 0 0 8px !important;
+            padding: 0 7px;
+            border: 1px solid color-mix(in srgb, var(--audion-input-border) 55%, transparent 45%);
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--audion-terminal-background) 74%, transparent 26%);
+            color: var(--audion-secondary-text) !important;
+            font-size: 10px !important;
+            font-weight: 850 !important;
+            opacity: 1 !important;
+          }
+          .audion-child-command-surface .audion-operation-row {
+            padding: 7px 0 !important;
+          }
+          .audion-child-command-surface .audion-operation-button {
+            min-height: 34px !important;
+            border: 1px solid color-mix(in srgb, var(--audion-panel-border) 74%, var(--audion-secondary-text) 26%) !important;
+            border-radius: 6px !important;
+            background: color-mix(in srgb, var(--audion-terminal-background) 92%, #000 8%) !important;
+            color: color-mix(in srgb, var(--audion-primary-text) 84%, var(--audion-muted-text) 16%) !important;
+            box-shadow: none !important;
+          }
+          .audion-child-command-surface .audion-operation-button:hover {
+            border-color: color-mix(in srgb, #22d3ee 70%, var(--audion-panel-border) 30%) !important;
+            background: color-mix(in srgb, #155e75 14%, var(--audion-terminal-background) 86%) !important;
+          }
+          .audion-child-command-surface .audion-operation-button-tone-friendly {
+            border-color: color-mix(in srgb, #166534 68%, var(--audion-panel-border) 32%) !important;
+            background: color-mix(in srgb, #166534 8%, var(--audion-terminal-background) 92%) !important;
+            color: color-mix(in srgb, #4ade80 68%, var(--audion-primary-text) 32%) !important;
+          }
+          .audion-child-command-surface .audion-operation-button-tone-medium {
+            border-color: color-mix(in srgb, #155e75 68%, var(--audion-panel-border) 32%) !important;
+            background: color-mix(in srgb, #155e75 9%, var(--audion-terminal-background) 91%) !important;
+            color: color-mix(in srgb, var(--audion-primary-text) 84%, var(--audion-muted-text) 16%) !important;
+          }
+          .audion-child-command-surface .audion-operation-button-tone-danger,
+          .audion-child-command-surface .audion-operation-button-direct-dangerous {
+            border-color: color-mix(in srgb, #854d0e 72%, var(--audion-panel-border) 28%) !important;
+            background: color-mix(in srgb, #854d0e 10%, var(--audion-terminal-background) 90%) !important;
+            color: color-mix(in srgb, #f59e0b 72%, var(--audion-primary-text) 28%) !important;
+          }
+          .audion-child-command-surface .audion-operation-button-direct,
+          .audion-child-command-surface .audion-operation-button-direct-dangerous {
+            border: 1px solid var(--audion-action-amber-border) !important;
+            background: var(--audion-action-amber-bg) !important;
+            color: var(--audion-active-button-text) !important;
+          }
+          .audion-child-command-surface .audion-operation-button-direct:hover,
+          .audion-child-command-surface .audion-operation-button-direct-dangerous:hover {
+            border-color: color-mix(in srgb, var(--audion-action-amber) 72%, var(--audion-panel-border) 28%) !important;
+            background: var(--audion-action-amber-bg-hover) !important;
+          }
+          html body .audion-shell .audion-child-command-surface .audion-operation-button-direct,
+          html body .audion-shell .audion-child-command-surface .audion-operation-button-direct *,
+          html body .audion-shell .audion-child-command-surface .audion-operation-button-direct-dangerous,
+          html body .audion-shell .audion-child-command-surface .audion-operation-button-direct-dangerous *,
+          html body .audion-shell .audion-browser-favicons-button,
+          html body .audion-shell .audion-browser-favicons-button *,
+          html body .audion-shell .audion-command-run-button,
+          html body .audion-shell .audion-command-run-button * {
+            color: var(--audion-active-button-text) !important;
+          }
+          .audion-child-command-surface .audion-operation-button .q-btn__content,
+          .audion-child-command-surface .audion-operation-button .q-btn__content * {
+            color: inherit !important;
+          }
+          .audion-command-run-button,
+          .audion-command-run-button .q-btn__content,
+          .audion-command-run-button .q-btn__content * {
+            color: var(--audion-active-button-text) !important;
+          }
+/* ========================================================================
+   BASE
+   ======================================================================== */
+          .audion-browser-block {
+            background: linear-gradient(180deg,
+              color-mix(in srgb, var(--audion-panel-background) 94%, var(--audion-primary-text) 6%),
+              color-mix(in srgb, var(--audion-panel-background) 78%, var(--audion-terminal-background) 22%)) !important;
+            border-color: color-mix(in srgb, var(--audion-panel-border) 72%, transparent 28%) !important;
+            box-shadow: inset 0 1px 0 color-mix(in srgb, var(--audion-primary-text) 4%, transparent 96%),
+              0 8px 18px rgba(0, 0, 0, 0.10) !important;
+          }
+/* ========================================================================
+   FIELDS
+   ======================================================================== */
+          .audion-browser-route-path .q-field__control,
+          .audion-unc-server .q-field__control,
+          .audion-unc-share .q-field__control,
+          .audion-unc-subpath .q-field__control {
+            background: var(--audion-terminal-background) !important;
+          }
+/* ========================================================================
+   RESPONSIVE
+   ======================================================================== */
+          @media (max-width: 900px) {
+            .audion-fields-grid,
+            .audion-section-fields { grid-template-columns: minmax(0, 1fr) !important; }
+          }
+
+/* ========================================================================
+   STATUS
+   ========================================================================
+   One row carries the whole answer: what state the run is in, what it is
+   doing, how long it has been going, and how far it has got. Colour says the
+   state, so it reads without being read. */
+          .audion-status-row {
+            --audion-status-tone: var(--audion-muted-text);
+            display: grid;
+            grid-template-columns: auto auto 1fr auto minmax(120px, 220px) auto;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--audion-panel-border);
+            border-left: 3px solid var(--audion-status-tone);
+            border-radius: var(--border-radius-md, 8px);
+            background: var(--audion-panel-background);
+          }
+          .audion-status-running { --audion-status-tone: var(--color-accent-secondary); }
+          .audion-status-done { --audion-status-tone: var(--color-border-success); }
+          .audion-status-error { --audion-status-tone: var(--color-border-danger); }
+          .audion-status-dot-mark {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--audion-status-tone);
+          }
+          .audion-status-running .audion-status-dot-mark {
+            animation: audion-status-pulse 1.4s ease-in-out infinite;
+          }
+          .audion-status-state {
+            color: var(--audion-status-tone);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+          }
+          .audion-status-message {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 13px;
+            color: var(--audion-text);
+          }
+          .audion-status-clock,
+          .audion-status-percent {
+            /* Tabular figures so the numbers do not jitter as they change. */
+            font-family: var(--font-mono);
+            font-variant-numeric: tabular-nums;
+            font-size: 12px;
+            white-space: nowrap;
+          }
+          .audion-status-clock { color: var(--audion-muted-text); }
+          .audion-status-percent {
+            color: var(--audion-text);
+            font-weight: 600;
+            min-width: 38px;
+            text-align: right;
+          }
+          .audion-status-bar {
+            height: 5px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.09);
+            overflow: hidden;
+          }
+          .audion-status-bar i {
+            display: block;
+            height: 100%;
+            border-radius: 3px;
+            background: var(--audion-status-tone);
+            transition: width 0.3s ease;
+          }
+          @keyframes audion-status-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+          }

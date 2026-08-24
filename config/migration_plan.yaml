@@ -1,0 +1,93 @@
+# What travels to a new machine.
+#
+# Each item is one piece of access or settings that a pack of this program
+# already knows how to carry. Migration moves nothing by itself: it walks this
+# list, calls the packs, and collects their output into one folder with an
+# inventory file next to it.
+#
+# `pack` must name a pack from the allow list inside the migration service.
+# An unknown name is refused outright rather than skipped: a migration that
+# quietly leaves a piece behind is worse than one that refuses to start,
+# because the gap only shows up on the new machine, days later.
+#
+# `import: manual` means the pack can export unattended but cannot import that
+# way — the reason is printed during import so the piece is not forgotten.
+
+version: 1
+
+items:
+  - id: ssh_access
+    title: "SSH keys, config and known_hosts"
+    title_ru: "Ключи SSH, config и known_hosts"
+    pack: ssh_keykit
+    folder: ssh_access
+    secret: true
+    export:
+      mode: export_client
+    import:
+      mode: import_client
+
+  # Order matters here. `ssh_access` puts the profile's own .ssh back, config
+  # included; this item then rewrites the paths inside that config to match
+  # where the carried files actually landed on the new machine.
+  - id: configured_access
+    title: "Files named by ssh and rclone configuration"
+    title_ru: "Файлы, названные в конфигурации ssh и rclone"
+    pack: access_links
+    folder: configured_access
+    secret: true
+    export:
+      mode: export
+    import:
+      mode: import
+
+  - id: wifi
+    title: "Saved Wi-Fi profiles"
+    title_ru: "Сохранённые профили Wi-Fi"
+    pack: wifi_profiles
+    folder: wifi
+    secret: true
+    export:
+      mode: export
+      # Without the keys the profiles are a list of network names and nothing
+      # more: the new machine still cannot connect. The whole migration is a
+      # secret export anyway, and it is confirmed as one before it starts.
+      include_keys: true
+    import:
+      mode: import
+
+  - id: user_fonts
+    title: "Fonts installed for this user"
+    title_ru: "Шрифты, установленные для этого пользователя"
+    pack: user_fonts
+    folder: user_fonts
+    secret: false
+    export:
+      mode: export
+    import:
+      mode: import
+
+  - id: shell_environment
+    title: "Windows Terminal settings and PowerShell profile"
+    title_ru: "Настройки Windows Terminal и профиль PowerShell"
+    pack: shell_environment
+    folder: shell_environment
+    secret: false
+    export:
+      mode: export
+    import:
+      mode: import
+
+  - id: certificates
+    title: "Certificates with an exportable private key"
+    title_ru: "Сертификаты с экспортируемым закрытым ключом"
+    pack: certificate_keykit
+    folder: certificates
+    secret: true
+    # Collecting encrypts every .pfx with the same password from the form and
+    # writes down which store each certificate came from, so the whole folder
+    # can go back unattended.
+    export:
+      mode: export_pfx
+    import:
+      mode: import_pfx_folder

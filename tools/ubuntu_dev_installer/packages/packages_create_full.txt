@@ -1,0 +1,23 @@
+# Create Full
+avidemux
+soundconverter
+strawberry
+vapoursynth
+gifski
+x264
+x265
+aom-tools
+svt-av1
+exiftool
+gpac
+atomicparsley
+ccextractor
+hashdeep
+normalize-audio
+kid3
+shntool
+audacity
+obs-studio
+qjackctl
+pipewire-pulse
+wireplumber

@@ -1,0 +1,8 @@
+# Media Minimal
+ffmpeg
+mpv
+vlc
+smplayer
+mediainfo
+deadbeef
+lollypop

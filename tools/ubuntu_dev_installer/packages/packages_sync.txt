@@ -1,0 +1,9 @@
+# Sync / network
+syncthing
+rclone
+wireguard-tools
+openssh-client
+openssh-server
+net-tools
+nmap
+traceroute

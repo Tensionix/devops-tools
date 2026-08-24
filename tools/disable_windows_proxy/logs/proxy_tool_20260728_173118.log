@@ -1,0 +1,23 @@
+[2026-07-28 17:31:18] [INFO] Audion Windows Proxy Tool started. Action: DisableUserProxy
+[2026-07-28 17:31:18] [INFO] Project root: E:\TOOLS\Audion DevOps Tools\tools\disable_windows_proxy
+[2026-07-28 17:31:18] [INFO] Backup directory: E:\TOOLS\Audion DevOps Tools\tools\disable_windows_proxy\backup\proxy_20260728_173118
+[2026-07-28 17:31:18] [INFO] Log file: E:\TOOLS\Audion DevOps Tools\tools\disable_windows_proxy\logs\proxy_tool_20260728_173118.log
+[2026-07-28 17:31:18] [INFO] Backed up registry key: HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings
+[2026-07-28 17:31:18] [INFO] Backed up registry key: HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections
+[2026-07-28 17:31:18] [INFO] Saved status snapshot: E:\TOOLS\Audion DevOps Tools\tools\disable_windows_proxy\backup\proxy_20260728_173118\status_before.txt
+[2026-07-28 17:31:18] [INFO] Disabling current user manual proxy.
+[2026-07-28 17:31:18] [INFO] Registry key exists: HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings
+[2026-07-28 17:31:18] [INFO] Registry key exists: HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings
+[2026-07-28 17:31:18] [INFO] Set registry DWORD: HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ProxyEnable = 0
+[2026-07-28 17:31:18] [INFO] Registry value already absent: HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ProxyServer
+[2026-07-28 17:31:18] [INFO] Registry value already absent: HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ProxyOverride
+[2026-07-28 17:31:18] [INFO] Registry value already absent: HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\AutoConfigURL
+[2026-07-28 17:31:18] [INFO] Registry key exists: HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings
+[2026-07-28 17:31:18] [INFO] Set registry DWORD: HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\AutoDetect = 0
+[2026-07-28 17:31:18] [INFO] Removed registry value: HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections\DefaultConnectionSettings
+[2026-07-28 17:31:18] [INFO] Removed registry value: HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections\SavedLegacySettings
+[2026-07-28 17:31:19] [INFO] Notified Windows about proxy settings changes.
+[2026-07-28 17:31:19] [INFO] Current user proxy cleanup completed.
+[2026-07-28 17:31:19] [INFO] Current user WinINet proxy state:
+[2026-07-28 17:31:19] [INFO] WinHTTP proxy state:
+[2026-07-28 17:31:19] [INFO] Done.

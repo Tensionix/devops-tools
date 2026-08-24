@@ -1,0 +1,9 @@
+[2026-06-06 09:59:29] [INFO] Audion Windows Proxy Tool started. Action: DisableUserProxy
+[2026-06-06 09:59:29] [INFO] Project root: E:\Audion\Apps\Audion DevOps Tools\Audion DevOps Tools\tools\disable_windows_proxy
+[2026-06-06 09:59:29] [INFO] Backup directory: E:\Audion\Apps\Audion DevOps Tools\Audion DevOps Tools\tools\disable_windows_proxy\backup\proxy_20260606_095929
+[2026-06-06 09:59:29] [INFO] Log file: E:\Audion\Apps\Audion DevOps Tools\Audion DevOps Tools\tools\disable_windows_proxy\logs\proxy_tool_20260606_095929.log
+[2026-06-06 09:59:29] [INFO] Backed up registry key: HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings
+[2026-06-06 09:59:29] [INFO] Backed up registry key: HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections
+[2026-06-06 09:59:29] [INFO] Saved status snapshot: E:\Audion\Apps\Audion DevOps Tools\Audion DevOps Tools\tools\disable_windows_proxy\backup\proxy_20260606_095929\status_before.txt
+[2026-06-06 09:59:29] [INFO] Disabling current user manual proxy.
+[2026-06-06 09:59:29] [ERROR] Attempted to perform an unauthorized operation.

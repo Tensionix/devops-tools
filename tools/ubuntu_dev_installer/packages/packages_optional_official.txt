@@ -1,0 +1,3 @@
+# Optional official Ubuntu extras
+flatpak
+ubuntu-restricted-extras

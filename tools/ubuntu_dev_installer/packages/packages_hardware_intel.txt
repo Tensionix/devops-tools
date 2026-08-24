@@ -1,0 +1,23 @@
+# Hardware / Intel GPU / Wi-Fi / Bluetooth / color basics
+linux-firmware
+mesa-utils
+mesa-va-drivers
+mesa-vulkan-drivers
+vulkan-tools
+intel-media-va-driver-non-free|intel-media-va-driver
+vainfo
+bluez
+bluez-tools
+blueman
+network-manager
+wireless-tools
+wpasupplicant
+iw
+ethtool
+pciutils
+usbutils
+inxi
+colord
+colord-sensor-argyll
+icc-profiles-free
+gnome-color-manager

@@ -1,0 +1,32 @@
+**********************
+PowerShell transcript start
+Start time: 20260727131711
+Username: AUDION-CARBON\Audion
+RunAs User: AUDION-CARBON\Audion
+Configuration Name: 
+Machine: AUDION-CARBON (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command try { $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8' } catch {}; if ($ExecutionContext.SessionState.LanguageMode -eq 'FullLanguage') { try { $OutputEncoding = [System.Text.UTF8Encoding]::new() } catch {}; if ($null -ne $PSStyle) { try { $PSStyle.OutputRendering = 'PlainText' } catch {} } }; $d='e:\TOOLS\Audion DevOps Tools\system_core\association_defense'
+& "$d\Group-Snapshot.ps1" -Status 2>&1 | Select-Object -First 12
+"`n=== commit photo (dry-run) ==="
+& "$d\Group-Snapshot.ps1" -Commit photo -DryRun 2>&1 | Select-Object -First 16
+; $_ec = if ($null -ne $LASTEXITCODE) { $LASTEXITCODE } elseif ($?) { 0 } else { 1 }
+; (Get-Location).Path | Out-File -FilePath 'C:\Users\Audion\AppData\Local\Temp\claude\claude-pwd-ps-3d73' -Encoding utf8 -NoNewline
+; if ($ExecutionContext.SessionState.LanguageMode -eq 'FullLanguage') { $host.SetShouldExit($_ec) } else { exit $_ec }
+Process ID: 20264
+PSVersion: 7.6.3
+PSEdition: Core
+GitCommitId: 7.6.3
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Log: E:\TOOLS\Audion DevOps Tools\system_core\association_defense\logs\2026-07-27_131711_341.AUDION-CARBON.Group-Snapshot-Commit-photo.log
+PS>TerminatingError(Get-ExtensionsForCommit): "The property 'Count' cannot be found on this object. Verify that the property exists."
+>> TerminatingError(Get-ExtensionsForCommit): "The property 'Count' cannot be found on this object. Verify that the property exists."
+**********************
+PowerShell transcript end
+End time: 20260727131711
+**********************

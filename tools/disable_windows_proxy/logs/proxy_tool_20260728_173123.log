@@ -1,0 +1,16 @@
+[2026-07-28 17:31:23] [INFO] Audion Windows Proxy Tool started. Action: ResetWinHttp
+[2026-07-28 17:31:23] [INFO] Project root: E:\TOOLS\Audion DevOps Tools\tools\disable_windows_proxy
+[2026-07-28 17:31:23] [INFO] Backup directory: E:\TOOLS\Audion DevOps Tools\tools\disable_windows_proxy\backup\proxy_20260728_173123
+[2026-07-28 17:31:23] [INFO] Log file: E:\TOOLS\Audion DevOps Tools\tools\disable_windows_proxy\logs\proxy_tool_20260728_173123.log
+[2026-07-28 17:31:23] [INFO] Backed up registry key: HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings
+[2026-07-28 17:31:23] [INFO] Saved status snapshot: E:\TOOLS\Audion DevOps Tools\tools\disable_windows_proxy\backup\proxy_20260728_173123\status_before.txt
+[2026-07-28 17:31:23] [INFO] Resetting WinHTTP proxy.
+
+Current WinHTTP proxy settings:
+
+    Direct access (no proxy server).
+
+[2026-07-28 17:31:23] [INFO] WinHTTP proxy reset completed.
+[2026-07-28 17:31:23] [INFO] Current user WinINet proxy state:
+[2026-07-28 17:31:23] [INFO] WinHTTP proxy state:
+[2026-07-28 17:31:23] [INFO] Done.
