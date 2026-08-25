@@ -8,7 +8,7 @@
 - [Direct download](https://audion.dev/get/devops-tools/1.8.1/Audion_DevOps_Tools_v1.8.1_Full.zip) — unmetered, no rate limits
 - [Project page](https://audion.dev/downloads/devops-tools) — every version and how to install
 
-![The program window](docs/screenshot.png)
+<img src="docs/screenshot.png" alt="The program window" width="560">
 
 `SHA-256: f1a33de918fd5fb0ad1affbadc728cf07c4a0e7e2cb7428fe18f993558ffc9cb`
 
