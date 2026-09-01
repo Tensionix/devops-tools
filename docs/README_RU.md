@@ -1,111 +1,126 @@
 # Audion DevOps Tools
 
-Audion DevOps Tools - portable GUI-shell для Windows-набора DevOps утилит Audion.
+[English](README_EN.md) · [Руководство](USER_GUIDE_RU.md)
 
-GUI не заменяет существующие CMD/FZF/PowerShell-слои. Он добавляет управляемую оболочку поверх них: поля, списки, checkbox/radio-группы, picker-кнопки, подтверждения, терминальный журнал и быстрый ручной запуск команд.
+Портативная оболочка для точных операций над Windows: подсистема Linux,
+виртуализация, драйверы и железо, диски, сеть, ассоциации файлов, ключи и
+сертификаты.
 
-Интерфейс намеренно остаётся техническим: кнопки короткие и часто English-heavy, видимые описания компактные, а полный Windows-контекст, риск, откат и официальные RU-термины раскрываются в tooltip. Логические рамки показывают пары и pipeline-сценарии вроде `backup / restore`, `export / import`, `block / unblock`; мягкие тона кнопок различают щадящие, обычные и сильные действия.
+## Зачем это сделано
 
-Audion DevOps Tools не является клоном Chris Titus WinUtil, generic Windows tuner или debloater. Проект закрывает недостающий тонкий программно-аппаратный слой вокруг Windows, WSL, virtualization, hardware policy, storage, network, default-app policy и secrets. Это рабочая кабина истребителя для контролируемых системных операций: явные параметры, backup, risk labels, подтверждения и logs.
+Есть класс задач, для которых нет хорошего инструмента. Не «ускорить Windows» и
+не «вырезать лишнее» — а сделать одну точную вещь и знать, что именно ты сделал:
+поставить дистрибутив Linux из файла, переключить машину между Hyper-V и сторонним
+гипервизором, запретить обновлению подменять драйвер видеокарты, снять слепок
+ассоциаций до и после установки программы, выгрузить сертификат вместе с
+закрытым ключом.
 
-## Возможности
+Каждая такая операция делается разными средствами: где-то `wsl.exe`, где-то
+`bcdedit`, где-то политика в реестре, где-то команды PowerShell. Все они
+документированы, но разбросаны, и половина требует помнить, что откатить, если
+пойдёт не так.
 
-- Desktop GUI на NiceGUI + pywebview.
-- Portable Python runtime в `runtime\`.
-- Единый WSL Toolkit: WSL2 features/update, online distro install, установка из `.wsl`/tar/vhd, list/status/shutdown, backup/clone/move/delete, import/restore, register all VHDX.
-- Virtualization switcher: read-only status/optimization diagnostics, режим Hyper-V/WSL2, быстрые сторонние VM, WHP coexist, Hyper-V/Sandbox toggles с BCD backup и reboot warnings.
-- Network Cleaner: диагностика, backup/restore состояния сети, proxy.
-- Connectivity / «Подключение и адаптеры»: адаптеры, SMB-вход к Windows file sharing через внешнюю `net use` консоль, sticky Wi-Fi пара, быстрые LAN/Wi-Fi режимы и все Wi-Fi profile-операции (status/connect/export/import).
-- Hosts and Bitrix profiles with local endpoint detection, DNS/hosts status, custom/auto-scanned TCP ports, managed hosts metadata and bitwise depatch from backup.
-- Default Apps Guard: snapshot/rescan Windows default associations, HKLM policy guard и current/profile/policy comparison.
-- Association Defense: встроенные приложения Microsoft (убрать / вернуть / держать удалёнными), AppLocker reinstall-block, Edge/Defender policy guards, снимки ассоциаций (общий и по группам) и отслеживание их смены.
-- Hardware / Driver Guard: Windows Update driver policy block, NVIDIA driver install restrictions, Driver Store backup/restore, NVIDIA HDMI/DP Audio control and disk procedures: disk inventory, WinRE, SSD/NVMe wizard launcher.
-- Utilities: AI CLI Backup для бэкапа, восстановления и слияния памяти данных Claude Code и Codex, OpenSSH KeyKit и Certificate KeyKit для sensitive key/certificate export/import, «Доступы из конфигурации» и «Переезд на новую машину» для сборки всех доступов в одну папку с описью, Documentation PDF export, Ubuntu Dev Installer materials, bundled ripgrep and quick folder shortcuts.
-- Theme catalog в `config\ui_colors.yaml` и переключатель темы в шапке.
-- Логические UI-блоки, компактные описания и полные tooltip для сложных Windows/policy/secrets-сценариев.
-- Live terminal с декодированием Windows/WSL вывода без кракозябр.
+Программа собирает их в одном месте — с явными параметрами, метками риска,
+копией перед изменением и живым журналом.
 
-## Официальная основа
+**Это не чистильщик системы и не сборник твиков.** Ассоциации не подделываются
+обходом защиты Windows, ключи реестра не правятся напрямую там, где есть
+документированный механизм. Программа оборачивает штатные средства
+администрирования, а не воюет с системой.
 
-Проект старается оборачивать документированные Windows admin/deployment механизмы, а не ломать систему прямой правкой защищённых ключей:
+## Принципы
 
-- Default Apps Guard: DISM default app associations + HKLM policy `DefaultAssociationsConfiguration`; снимки ассоциаций текущего пользователя живут в `Association Defense` и только читают реестр.
-- Windows Home/Core не считается гарантированным target для Default Apps Guard policy: GUI показывает edition и по умолчанию блокирует apply на неподдержанной редакции.
-- WSL Toolkit: официальный `wsl.exe`.
-- Wi-Fi profiles: официальный `netsh wlan`.
-- Virtualization switcher: `bcdedit`, DISM optional features, `Win32_DeviceGuard` status, power-plan/Defender/.wslconfig diagnostics и WSL VHDX placement.
-- Certificate KeyKit: PowerShell PKI cmdlets поверх `Cert:\` stores.
-- Hardware / Driver Guard: documented `ExcludeWUDriversInQualityUpdate` policy and Device Installation Restrictions.
-- Storage/WinRE/DISM/features inside Hardware: штатные Windows admin tools с backup/status/confirmation вокруг опасных действий.
-- OpenSSH KeyKit, Certificate KeyKit PFX backups и Wi-Fi-key backups are sensitive export workflows; generated archives must be stored as secrets.
-- `UserChoice` hashes и UCPD не обходятся вручную.
+**Оборачиваем документированное.** Подсистема Linux — через `wsl.exe`. Профили
+Wi-Fi — через `netsh wlan`. Ассоциации — через механизм развёртывания и политику
+для всей машины. Сертификаты — через средства PowerShell поверх системных
+хранилищ. Хэши пользовательского выбора и защита от их подмены не обходятся
+вручную.
 
-См. Microsoft docs: [ApplicationDefaults Policy CSP](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationdefaults), [DISM default app associations](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-default-application-association-servicing-command-line-options?view=windows-11), [netsh wlan](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-wlan), [WSL basic commands](https://learn.microsoft.com/en-us/windows/wsl/basic-commands).
+**Копия до изменения.** Загрузчик, ассоциации, файл `hosts`, состояние сети,
+хранилище драйверов — всё, что меняется, сначала снимается в `backup\`.
 
-Hardware scripts are project-local under `system_core\windows_driver_guard` and `system_core\nvidia_audio`; old standalone external folders are not runtime dependencies.
+**Метка риска у каждой команды.** Мягкие тона кнопок различают щадящее, обычное
+и сильное действие; опасное требует подтверждения. Парные сценарии — резерв и
+восстановление, выгрузка и загрузка, запрет и снятие запрета — показаны рамками,
+чтобы обратный ход был на виду.
 
-### Default Apps Guard: короткий сценарий
+**Интерфейс намеренно технический.** Кнопки короткие, подписи компактные, а
+полный контекст — что именно произойдёт, чем рискуете, как откатить — раскрыт в
+подсказке. Место экономится на подписи, а не на объяснении.
 
-После чистой установки Windows и ручной настройки defaults: `Проверить защиту defaults`, `Перезаписать эталон текущими defaults`, оставить `Remove Suggested=true`, `Включить / починить защиту defaults`, затем sign out/sign in или reboot и снова `Проверить защиту defaults`. Подробный список тонкостей Windows и gotchas: `docs\DEFAULT_APPS_GUARD_RU.md`.
+**Неподдерживаемая редакция — не цель.** Домашние выпуски Windows не гарантируют
+работу групповых политик; программа показывает редакцию и по умолчанию запрещает
+применение там, где оно не сработает.
 
-### Bitrix Hosts: короткий сценарий
+**Ничего не тянется из соседних папок.** Все средства лежат внутри проекта.
+Исторические папки читаются только для сравнения или восстановления — и только
+по прямой просьбе.
 
-Текущий default: `portal.itpgrad.ru -> 192.168.0.130`, port `443`. Ритуал: `Detect current endpoint` -> `Status / DNS / ports` -> `Enable override` -> после работы `Disable override`. `Disable override` восстанавливает `hosts` побитово из `backup=hosts_prepatch_....bak`, указанного в managed-комментарии. Подробно: `docs\BITRIX_HOSTS_RU.md`.
+## Что внутри
 
-## Запуск
+| раздел | о чём |
+|---|---|
+| Подсистема Linux | возможности и обновление, установка из сети и из файла, состояние, резерв, клонирование, перенос, удаление, регистрация дисков |
+| Виртуализация | состояние и диагностика без изменений, режим Hyper-V или сторонних машин, совместимость, переключатели с копией загрузчика и предупреждением о перезагрузке |
+| Сеть | диагностика, резерв и восстановление состояния, прокси, адаптеры, вход в общие папки, профили Wi-Fi, быстрые режимы |
+| Узлы и Bitrix | подмена адреса на локальный, определение точки, состояние службы имён и портов, побитовое возвращение файла `hosts` из копии |
+| Ассоциации | слепок и сверка умолчаний, защита политикой, встроенные приложения Microsoft — убрать, вернуть, держать удалёнными, запрет переустановки, отслеживание смены |
+| Железо и драйверы | запрет драйверов из обновлений, ограничения для видеокарты, резерв хранилища драйверов, звук по HDMI и DisplayPort, опись дисков, среда восстановления, мастер SSD |
+| Ключи | выгрузка и загрузка ключей SSH и сертификатов, сборка всех доступов в одну папку с описью, переезд на новую машину |
+| Обслуживание | резерв памяти командных помощников, выгрузка документации, ярлыки, встроенный поиск по файлам |
+
+## Дальше
+
+* [Руководство](USER_GUIDE_RU.md) — работа по разделам, порядок действий для
+  опасных подсистем.
+
+---
+
+## Техническая часть
+
+### Запуск
 
 ```bat
 launcher_gui.cmd
 ```
 
-Обычный запуск запрашивает UAC и поднимает весь GUI от имени администратора. Это удобно для DISM, hosts, сетевых адаптеров, diskpart/WinRE и WSL setup.
+Обычный запуск поднимает всё окно от имени администратора — это нужно для
+развёртывания, файла `hosts`, сетевых адаптеров, работы с дисками и настройки
+подсистемы Linux.
 
-Короткие модульные входы:
+Отдельные входы для одного раздела:
 
 ```bat
-launcher_project_ru.cmd
 cli\launcher_wsl.cmd
 cli\launcher_bitrix.cmd
 cli\launcher_default_apps.cmd
 cli\launcher_association_defense.cmd
 cli\launcher_hardware.cmd
 cli\launcher_docs_pdf.cmd
-cli\launcher_codex_nuke.cmd
-cli\launcher_python_nuke.cmd
 ```
 
-WSL, Bitrix, Default Apps и Association Defense launchers используют `system_core\cli_operation.py`, то есть идут через тот же manifest/service layer, что и GUI. Cleanup launchers являются корневыми wrappers для встроенных `tools\...\Nuke.cmd` с UAC elevation и typed confirmations.
+Они идут через тот же слой описаний и служб, что и окно, — поведение совпадает.
 
-Read-only/debug запуск без UAC:
+Только чтение, без запроса прав:
 
 ```bat
 set AUDION_GUI_NO_ELEVATE=1
 launcher_gui.cmd
 ```
 
-## Обслуживание
-
-Создать недостающие рабочие папки:
+### Обслуживание
 
 ```bat
-init_folders.cmd
+init_folders.cmd                  создать недостающие рабочие папки
+cleanup_project.cmd               деликатная очистка
+cleanup_project.cmd /DRYRUN /Y    показать план, ничего не удаляя
 ```
 
-Деликатная очистка проекта:
+Очистка оставляет скрипты, настройки, документацию, лицензии и сами папки.
+Удаляет порождённое и скачанное: рантайм, склад пакетов, сборки, загрузки,
+журналы, отчёты, содержимое рабочих папок и кэши.
 
-```bat
-cleanup_project.cmd
-```
-
-Cleaner оставляет скрипты, конфиги, документацию, tracked license docs и сами папки. Он удаляет generated/downloaded payloads: `runtime`, `wheelhouse`, `release`, `install\download`, `system_core\powershell`, `system_core\fzf.exe`, logs, reports, input/output/workspace/data contents и Python-кэши.
-
-Проверить план без удаления:
-
-```bat
-cleanup_project.cmd /DRYRUN /Y
-```
-
-## Проверка
+### Проверка
 
 ```bat
 runtime\python.exe -m py_compile system_core\ui_nicegui\app.py system_core\services\devops_tools.py system_core\core\jobs.py
@@ -113,31 +128,43 @@ runtime\python.exe system_core\ui_nicegui\app.py --smoke
 runtime\python.exe system_core\doctor.py
 ```
 
-## Документация
+### Устройство
 
-- `README_AUDION_DEVOPS_TOOLS_RU.md`
-- `USER_GUIDE_RU.md`
-- `USER_GUIDE_EN.md`
-- `AGENTS.md`
-- `docs\AUDION_DEVOPS_TOOLS_RU.md`
-- `docs\BITRIX_HOSTS_RU.md`
-- `docs\NETWORK_CONNECTIVITY_RU.md`
-- `docs\WSL_TOOLKIT_RU.md`
-- `docs\VIRTUALIZATION_SWITCHER_RU.md`
-- `docs\DEFAULT_APPS_GUARD_RU.md`
-- `docs\ASSOCIATION_DEFENSE_RU.md`
-- `docs\HARDWARE_DRIVER_GUARD_RU.md`
-- `docs\STORAGE_DISK_PROCEDURES_RU.md`
-- `docs\OPENSSH_KEYKIT_RU.md`
-- `docs\CERTIFICATE_KEYKIT_RU.md`
-- `docs\MAINTENANCE_CLEANUP_RU.md`
-- `docs\MANIFEST_REFERENCE_RU.md`
-- `docs\GUI_TREE_REFACTOR_RU.md`
-- `docs\MEMORY.md`
-- `docs\SMOKE_TEST_CHECKLIST_RU.md`
-- `docs\KNOWN_PITFALLS_RU.md`
-## Канонические названия Workbench
+```
+config\tool_manifest.yaml      дерево команд, поля, метки риска
+config\gui_settings.yaml       настройки окна при запуске
+config\ui_colors.yaml          темы оформления
+system_core\ui_nicegui\        окно
+system_core\core\jobs.py       запуск операций, разбор вывода
+system_core\services\          системные действия
+system_core\cli_operation.py   запуск операции из командной строки
+tools\                         средства проекта
+backup\                        слепки и данные для отката
+logs\                          журналы операций
+```
 
-Workbench использует единый публичный словарь Audion Image Tools во всех проектах. Кнопки всегда расположены и называются одинаково: **Источник**, **Добавить файл...**, **Назначение**, **Сбросить**, **Удалить**, **Список**.
+**Граница ответственности.** Окно не содержит системной логики: оно собирает
+параметры, показывает риск и подтверждение, вызывает операцию через слой
+описаний и служб. Системные действия живут в службах, модулях и скриптах
+проекта, а описания операций — в `tool_manifest.yaml`.
 
-`Сбросить` возвращает проектные `input/output` и не удаляет файлы; `Удалить` очищает текущие `Источник` и `Назначение` только после подтверждения. В английском интерфейсе точные названия: **Source**, **Add file...**, **Target**, **Reset**, **Delete**, **List**. Варианты `Цель`, `Очистить`, `Destination` и `Clear` для этих элементов Workbench не используются.
+### Названия в рабочей области
+
+Единый словарь для всех проектов Audion. Кнопки везде называются одинаково:
+**Источник**, **Добавить файл…**, **Назначение**, **Сбросить**, **Удалить**,
+**Список**. По-английски: **Source**, **Add file…**, **Target**, **Reset**,
+**Delete**, **List**.
+
+`Сбросить` возвращает проектные папки и файлов не трогает. `Удалить` очищает
+текущие источник и назначение только после подтверждения. Слова «Цель»,
+«Очистить», `Destination` и `Clear` для этих кнопок не используются.
+
+### Основания в документации Microsoft
+
+* [Политика умолчаний приложений](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationdefaults)
+* [Ассоциации через развёртывание](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-default-application-association-servicing-command-line-options?view=windows-11)
+* [Профили Wi-Fi](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-wlan)
+* [Команды подсистемы Linux](https://learn.microsoft.com/en-us/windows/wsl/basic-commands)
+
+Выгрузки ключей SSH, сертификатов с закрытой частью и паролей Wi-Fi — сведения
+чувствительные: полученные архивы хранятся как секреты.

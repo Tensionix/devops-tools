@@ -8,289 +8,187 @@
   <a href="https://github.com/Tensionix/devops-tools/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/Tensionix/devops-tools?style=flat-square&color=5fd08a&logo=apache&logoColor=white&cacheSeconds=3600"></a>
 </p>
 
-**Version 1.8.2** · 2026-09-01 · 14.2 MB
+**Version 1.8.2** · 2026-09-02 · 192.9 MB
 
-- [Direct download](https://dl.audion.dev/devops-tools/1.8.2/Audion_DevOps_Tools_v1.8.2.zip) — unmetered, no rate limits
+- [Direct download](https://audion.dev/get/devops-tools/1.8.2/Audion_DevOps_Tools_v1.8.2_Full.zip) — unmetered, no rate limits
 - [Project page](https://audion.dev/downloads/devops-tools) — every version and how to install
 
 <p align="center"><img src="docs/screenshot.png" alt="The program window" width="560"></p>
 
-`SHA-256: 0d8f943a4105895c1f4ac26d8bfec7ac8f67b4ce6bf48b3e9cd0d23c9cbd9fa5`
+`SHA-256: d3c55c5683c4cbe9bf603a570845cce75e755893a821d85c7b4fb76d30421029`
 
 ---
 
 An **Audion** tool, published by [Tensionix](https://github.com/Tensionix).
 <!-- /audion:release -->
 
-Audion DevOps Tools is a Windows-first portable GUI shell for the Audion DevOps utility bundle.
 
+[Русский](README_RU.md) · [User Guide](USER_GUIDE_EN.md)
 
+A portable shell for precise operations on Windows: the Linux subsystem,
+virtualisation, drivers and hardware, disks, networking, file associations, keys
+and certificates.
 
-It keeps existing CMD/FZF/PowerShell workflows as the source of truth and adds a safer desktop control layer: forms, pickers, checkboxes, confirmations, a live terminal and persistent command history.
+## Why It Exists
 
+There is a class of tasks with no good tool for them. Not "speed up Windows" and
+not "strip out the bloat" — but do one precise thing and know exactly what you
+did: install a Linux distribution from a file, switch the machine between Hyper-V
+and a third-party hypervisor, stop Windows Update from replacing a graphics
+driver, snapshot file associations before and after installing something, export
+a certificate together with its private key.
 
+Each of those is done by different means: `wsl.exe` here, `bcdedit` there, a
+registry policy somewhere else, PowerShell commands elsewhere again. They are all
+documented, but scattered — and half of them require remembering what to roll
+back if it goes wrong.
 
-The UI is intentionally technical: command buttons stay short and often English-heavy, visible descriptions stay compact, and the full Windows context, risk, rollback notes and terminology live in tooltips. Logical frames expose pairs and pipelines such as `backup / restore`, `export / import`, `block / unblock`; soft button tones distinguish gentle, normal and strong actions.
+This program gathers them in one place, with explicit parameters, risk labels, a
+backup before every change, and a live log.
 
+**It is not a debloater and not a collection of tweaks.** Associations are not
+forged by defeating Windows protections, and the registry is not edited directly
+where a documented mechanism exists. The program wraps the standard
+administration tools rather than fighting the system.
 
+## Principles
 
-Audion DevOps Tools is not a Chris Titus WinUtil clone, a generic Windows tuner, or a debloater. It targets the missing thin hardware/software layer around Windows, WSL, virtualization, hardware policy, storage, networking, default-app policy and secrets. Think of it as a fighter-jet cockpit for controlled system operations: explicit parameters, backups, risk labels, confirmations and logs.
+**Wrap what is documented.** The Linux subsystem goes through `wsl.exe`. Wi-Fi
+profiles through `netsh wlan`. Associations through the deployment mechanism and
+machine-wide policy. Certificates through PowerShell over the system stores. User
+choice hashes and the protection around them are never bypassed by hand.
 
+**A copy before the change.** The boot configuration, associations, the `hosts`
+file, network state, the driver store — anything that changes is snapshotted into
+`backup\` first.
 
+**A risk label on every command.** Muted button tones separate the gentle, the
+ordinary, and the forceful; dangerous actions require confirmation. Paired
+workflows — backup and restore, export and import, block and unblock — are framed
+together so the way back is always in view.
 
-## Features
+**The interface is deliberately technical.** Buttons are short, captions compact,
+and the full context — what exactly will happen, what you risk, how to undo it —
+lives in the tooltip. Space is saved on the caption, not on the explanation.
 
+**An unsupported edition is not a target.** Home editions of Windows do not
+guarantee that group policies apply; the program shows the edition and by default
+refuses to apply where it would not work.
 
+**Nothing is pulled from neighbouring folders.** Every tool lives inside the
+project. Historical folders are read only for comparison or recovery, and only
+when explicitly asked.
 
-- NiceGUI + pywebview desktop shell.
+## What Is Inside
 
-- Embedded portable Python runtime in `runtime\`.
+| section | about |
+|---|---|
+| Linux subsystem | features and updates, install from the network or a file, status, backup, clone, move, delete, register disks |
+| Virtualisation | read-only status and diagnostics, Hyper-V or third-party mode, coexistence, toggles with a boot-config backup and reboot warnings |
+| Networking | diagnostics, backup and restore of network state, proxy, adapters, sign-in to shared folders, Wi-Fi profiles, quick modes |
+| Hosts and Bitrix | redirecting an address to a local endpoint, endpoint detection, DNS and port status, byte-exact restoration of `hosts` from backup |
+| Associations | snapshot and comparison of defaults, policy protection, Microsoft built-in apps — remove, restore, keep removed — reinstall blocking, change tracking |
+| Hardware and drivers | blocking drivers from updates, graphics driver restrictions, driver store backup, HDMI and DisplayPort audio, disk inventory, recovery environment, SSD wizard |
+| Keys | export and import of SSH keys and certificates, gathering every credential into one folder with an inventory, moving to a new machine |
+| Maintenance | backup of command-assistant memory, documentation export, shortcuts, bundled file search |
 
-- Unified WSL Toolkit: WSL2 features/update, online distro install, local `.wsl`/tar/vhd install/import, list/status/shutdown, backup/clone/move/delete, restore and VHDX registration.
+## Next
 
-- Virtualization switcher: read-only status/optimization diagnostics, Hyper-V/WSL2 mode, fast third-party VM mode, WHP coexistence, Hyper-V/Sandbox toggles with BCD backup and reboot warnings.
+* [User Guide](USER_GUIDE_EN.md) — working through the sections, and the order of
+  operations for the dangerous subsystems.
 
-- Network Cleaner: diagnostics, network backup/restore, proxy tools.
+---
 
-- Connectivity: adapter control, SMB login to Windows file sharing through an external `net use` console, sticky Wi-Fi pair, quick LAN/Wi-Fi modes and full Wi-Fi profile management (status/connect/export/import).
+## Technical Reference
 
-- Hosts and Bitrix profiles with local endpoint detection, DNS/hosts status, custom/auto-scanned TCP ports, managed hosts metadata and bitwise depatch from backup.
-
-- Default Apps Guard for Windows default app associations: snapshot/rescan, HKLM policy guard and current/profile/policy comparison.
-
-- Association Defense: in-box Microsoft app control (remove / restore / keep removed), AppLocker reinstall-block, Edge/Defender policy guards, association snapshots (whole map and per group) and change tracking.
-
-- Hardware / Driver Guard: Windows Update driver policy block, NVIDIA driver install restrictions, Driver Store backup/restore, NVIDIA HDMI/DP Audio control and disk procedures: disk inventory, WinRE and SSD/NVMe wizard launch.
-
-- Utilities: AI CLI Backup for backing up, restoring and merging Claude Code and Codex data, OpenSSH KeyKit and Certificate KeyKit for sensitive key/certificate export/import, Configured access and Machine migration for collecting every access into one folder with an inventory, Documentation PDF export, Ubuntu Dev Installer materials, bundled ripgrep and quick folder shortcuts.
-
-- Theme catalog in `config\ui_colors.yaml` with a header theme selector.
-
-- Logical UI blocks, compact descriptions and full tooltips for complex Windows/policy/secrets workflows.
-
-- Live terminal output with robust Windows/WSL decoding.
-
-
-
-## Documented Admin Basis
-
-
-
-The project wraps documented Windows administrator/deployment mechanisms where possible instead of editing protected state directly:
-
-
-
-- Default Apps Guard: DISM default app associations + HKLM `DefaultAssociationsConfiguration` policy; current-user association snapshots live in `Association Defense` and only read the registry.
-
-- Windows Home/Core is not treated as a guaranteed target for the Default Apps Guard policy path: the GUI reports edition support and blocks apply by default on unsupported editions.
-
-- WSL Toolkit: official `wsl.exe` commands.
-
-- Wi-Fi profiles: official `netsh wlan` commands.
-
-- Virtualization switcher: `bcdedit`, DISM optional features, `Win32_DeviceGuard` status, power-plan/Defender/.wslconfig diagnostics and WSL VHDX placement.
-
-- Certificate KeyKit: PowerShell PKI cmdlets over `Cert:\` stores.
-
-- Hardware / Driver Guard: documented Windows Update driver policy and Device Installation Restrictions.
-
-- Storage/WinRE/DISM/features inside Hardware: standard Windows administrator tools with backup/status/confirmation around risky actions.
-
-- OpenSSH KeyKit, Certificate KeyKit PFX backups and Wi-Fi-key backups are sensitive export workflows; generated archives must be stored as secrets.
-
-- `UserChoice` hashes and UCPD are not bypassed by hand.
-
-
-
-Relevant Microsoft docs: [ApplicationDefaults Policy CSP](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationdefaults), [DISM default app associations](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-default-application-association-servicing-command-line-options?view=windows-11), [netsh wlan](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-wlan), [WSL basic commands](https://learn.microsoft.com/en-us/windows/wsl/basic-commands).
-
-
-
-Hardware helper scripts are project-local under `system_core\windows_driver_guard` and `system_core\nvidia_audio`.
-
-
-
-### Default Apps Guard: short workflow
-
-
-
-After a fresh Windows setup and manual default-app configuration: run `Check defaults protection`, `Overwrite reference from current Windows defaults`, keep `Remove Suggested=true`, run `Enable / repair defaults protection`, then sign out/sign in or reboot and run `Check defaults protection` again. The detailed Russian guide with Windows gotchas lives in `docs\DEFAULT_APPS_GUARD_RU.md`.
-
-
-
-### Bitrix Hosts: short workflow
-
-
-
-Current default: `portal.itpgrad.ru -> 192.168.0.130`, port `443`. Workflow: `Detect current endpoint` -> `Status / DNS / ports` -> `Enable override` -> after work `Disable override`. `Disable override` restores `hosts` byte-for-byte from the `backup=hosts_prepatch_....bak` metadata in the managed line. Details: `docs\BITRIX_HOSTS_RU.md`.
-
-
-
-## Run
-
-
+### Running
 
 ```bat
-
 launcher_gui.cmd
-
 ```
 
+An ordinary launch raises the whole window as administrator — needed for
+deployment, the `hosts` file, network adapters, disk work, and Linux subsystem
+setup.
 
-
-The standard launcher requests UAC and starts the whole GUI elevated. That is intentional for DISM, hosts edits, network adapters, disk/WinRE helpers and WSL setup.
-
-
-
-Short module entry points:
-
-
+Individual entry points for one section:
 
 ```bat
-
-launcher_project.cmd
-
 cli\launcher_wsl.cmd
-
 cli\launcher_bitrix.cmd
-
 cli\launcher_default_apps.cmd
-
 cli\launcher_association_defense.cmd
-
 cli\launcher_hardware.cmd
-
 cli\launcher_docs_pdf.cmd
-
-cli\launcher_codex_nuke.cmd
-
-cli\launcher_python_nuke.cmd
-
 ```
 
+They go through the same manifest and service layer as the window, so behaviour
+matches.
 
-
-The WSL, Bitrix, Default Apps and Association Defense launchers use `system_core\cli_operation.py`, so they run through the same manifest/service layer as the GUI. The Nuke launchers are root wrappers for the integrated `tools\...\Nuke.cmd` entry points with UAC elevation and typed confirmations.
-
-
-
-Read-only/debug launch without UAC:
-
-
+Read-only, without the elevation prompt:
 
 ```bat
-
 set AUDION_GUI_NO_ELEVATE=1
-
 launcher_gui.cmd
-
 ```
 
-
-
-## Maintenance
-
-
-
-Create missing managed folders:
-
-
+### Maintenance
 
 ```bat
-
-init_folders.cmd
-
+init_folders.cmd                  create missing working folders
+cleanup_project.cmd               careful cleanup
+cleanup_project.cmd /DRYRUN /Y    show the plan, delete nothing
 ```
 
+Cleanup keeps scripts, configuration, documentation, licences, and the folders
+themselves. It removes what was generated or downloaded: the runtime, the wheel
+store, builds, downloads, logs, reports, working-folder contents, and caches.
 
-
-Run project cleanup:
-
-
-
-```bat
-
-cleanup_project.cmd
-
-```
-
-
-
-The cleaner preserves scripts, configs, documentation, tracked license docs and folder structure. It removes generated/downloaded payloads: `runtime`, `wheelhouse`, `release`, `install\download`, `system_core\powershell`, `system_core\fzf.exe`, logs, reports, input/output/workspace/data contents and Python caches.
-
-
-
-Preview cleanup actions:
-
-
+### Verification
 
 ```bat
-
-cleanup_project.cmd /DRYRUN /Y
-
-```
-
-
-
-## Verification
-
-
-
-```bat
-
 runtime\python.exe -m py_compile system_core\ui_nicegui\app.py system_core\services\devops_tools.py system_core\core\jobs.py
-
 runtime\python.exe system_core\ui_nicegui\app.py --smoke
-
 runtime\python.exe system_core\doctor.py
-
 ```
 
+### Structure
 
+```
+config\tool_manifest.yaml      command tree, fields, risk metadata
+config\gui_settings.yaml       window settings at startup
+config\ui_colors.yaml          theme catalogue
+system_core\ui_nicegui\        the window
+system_core\core\jobs.py       operation runner, output decoding
+system_core\services\          system actions
+system_core\cli_operation.py   running an operation from the command line
+tools\                         project-local utilities
+backup\                        snapshots and rollback data
+logs\                          operation logs
+```
 
-## Documentation
+**The service boundary.** The window holds no system logic: it collects
+parameters, shows risk and confirmation, and calls the operation through the
+manifest and service layer. System actions live in services, project modules, and
+project scripts; operation definitions live in `tool_manifest.yaml`.
 
+### Workbench Naming
 
+One shared vocabulary across all Audion projects. The buttons are always named the
+same: **Source**, **Add file…**, **Target**, **Reset**, **Delete**, **List**. In
+Russian: **Источник**, **Добавить файл…**, **Назначение**, **Сбросить**,
+**Удалить**, **Список**.
 
-- `README_AUDION_DEVOPS_TOOLS_RU.md`
+`Reset` restores the project folders and deletes no files. `Delete` clears the
+current source and target only after confirmation. The words `Destination`,
+`Clear`, «Цель», and «Очистить» are not used for these controls.
 
-- `USER_GUIDE_RU.md`
+### Microsoft Documentation Behind It
 
-- `USER_GUIDE_EN.md`
+* [Application defaults policy](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationdefaults)
+* [Associations through deployment servicing](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-default-application-association-servicing-command-line-options?view=windows-11)
+* [Wi-Fi profiles](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-wlan)
+* [Linux subsystem commands](https://learn.microsoft.com/en-us/windows/wsl/basic-commands)
 
-- `AGENTS.md`
-
-- `docs\AUDION_DEVOPS_TOOLS_RU.md`
-
-- `docs\BITRIX_HOSTS_RU.md`
-
-- `docs\NETWORK_CONNECTIVITY_RU.md`
-
-- `docs\WSL_TOOLKIT_RU.md`
-
-- `docs\VIRTUALIZATION_SWITCHER_RU.md`
-
-- `docs\DEFAULT_APPS_GUARD_RU.md`
-
-- `docs\ASSOCIATION_DEFENSE_RU.md`
-
-- `docs\HARDWARE_DRIVER_GUARD_RU.md`
-
-- `docs\STORAGE_DISK_PROCEDURES_RU.md`
-
-- `docs\OPENSSH_KEYKIT_RU.md`
-
-- `docs\CERTIFICATE_KEYKIT_RU.md`
-
-- `docs\MAINTENANCE_CLEANUP_RU.md`
-
-- `docs\MANIFEST_REFERENCE_RU.md`
-
-- `docs\GUI_TREE_REFACTOR_RU.md`
-
-- `docs\MEMORY.md`
-
-- `docs\SMOKE_TEST_CHECKLIST_RU.md`
-
-- `docs\KNOWN_PITFALLS_RU.md`
-
+Exports of SSH keys, certificates with private parts, and Wi-Fi passwords are
+sensitive: the resulting archives are stored as secrets.
