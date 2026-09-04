@@ -2,6 +2,18 @@
 
 [Русский](USER_GUIDE_RU.md) · [About](README_EN.md) · [Command Reference](COMMANDS_EN.md)
 
+**Contents**
+
+- [Quick Start](#quick-start)
+- [The Central Rule](#the-central-rule)
+- [Risk and Confirmation](#risk-and-confirmation)
+- [Reading the Interface](#reading-the-interface)
+- [Where the Working Data Lives](#where-the-working-data-lives)
+- [The Sections](#the-sections)
+- [The Terminal](#the-terminal)
+- [Checks](#checks)
+- [Technical Reference](#technical-reference)
+
 How to work with it: launching, the central rule, risk marking, the sections, and
 what to read about each.
 

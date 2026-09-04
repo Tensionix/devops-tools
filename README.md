@@ -10,7 +10,7 @@
 
 **Version 1.8.2** · 2026-09-04 · 193.5 MB
 
-- [Direct download](https://dl.audion.dev/devops-tools/1.8.2/Audion_DevOps_Tools_v1.8.2_Full.zip) — unmetered, no rate limits
+- [Direct download](https://audion.dev/get/devops-tools/1.8.2/Audion_DevOps_Tools_v1.8.2_Full.zip) — unmetered, no rate limits
 - [Project page](https://audion.dev/downloads/devops-tools) — every version and how to install
 
 <p align="center"><img src="docs/screenshot.png" alt="The program window" width="560"></p>
@@ -23,7 +23,21 @@ An **Audion** tool, published by [Tensionix](https://github.com/Tensionix).
 <!-- /audion:release -->
 
 
-[Русский](README_RU.md) · [User Guide](USER_GUIDE_EN.md)
+[Русский](Docs/README_RU.md) · [User Guide](Docs/USER_GUIDE_EN.md)
+
+**Contents**
+
+- [Why It Exists](#why-it-exists)
+- [Principles](#principles)
+- [What Is Inside](#what-is-inside)
+- [Next](#next)
+- [Technical Reference](#technical-reference)
+  - [Running](#running)
+  - [Maintenance](#maintenance)
+  - [Verification](#verification)
+  - [Structure](#structure)
+  - [Workbench Naming](#workbench-naming)
+  - [Microsoft Documentation Behind It](#microsoft-documentation-behind-it)
 
 A portable shell for precise operations on Windows: the Linux subsystem,
 virtualisation, drivers and hardware, disks, networking, file associations, keys
@@ -94,7 +108,7 @@ when explicitly asked.
 
 ## Next
 
-* [User Guide](USER_GUIDE_EN.md) — working through the sections, and the order of
+* [User Guide](Docs/USER_GUIDE_EN.md) — working through the sections, and the order of
   operations for the dangerous subsystems.
 
 ---

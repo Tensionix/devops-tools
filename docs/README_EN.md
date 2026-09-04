@@ -2,6 +2,20 @@
 
 [Русский](README_RU.md) · [User Guide](USER_GUIDE_EN.md)
 
+**Contents**
+
+- [Why It Exists](#why-it-exists)
+- [Principles](#principles)
+- [What Is Inside](#what-is-inside)
+- [Next](#next)
+- [Technical Reference](#technical-reference)
+  - [Running](#running)
+  - [Maintenance](#maintenance)
+  - [Verification](#verification)
+  - [Structure](#structure)
+  - [Workbench Naming](#workbench-naming)
+  - [Microsoft Documentation Behind It](#microsoft-documentation-behind-it)
+
 A portable shell for precise operations on Windows: the Linux subsystem,
 virtualisation, drivers and hardware, disks, networking, file associations, keys
 and certificates.

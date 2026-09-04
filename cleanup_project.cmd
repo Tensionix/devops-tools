@@ -63,7 +63,7 @@ echo     backup, tools\network_cleaner\backup, tools\disable_windows_proxy\backu
 echo     tools\bitrix_hosts_toggle_pack\backup, tools\wsl\...\WSL\Backup
 echo     Those hold this machine's network state - MAC and IP addresses, DNS
 echo     servers, Wi-Fi network names, firewall and registry exports - so a
-echo     release must not carry them. Folder structure and .gitkeep stay.
+echo     release must not carry them. The folder structure stays.
 echo.
 echo Protected: scripts, config, docs, source code, tracked license docs,
 echo            folder structure and external historical tools.
@@ -169,7 +169,7 @@ if "%DRY_RUN%"=="1" echo Dry-run: ON
 echo.
 echo This mode removes backup snapshots only - from the project's backup folder
 echo and from every pack that keeps its own under tools\ - then recreates the
-echo managed backup folder structure with .gitkeep files.
+echo managed backup folder structure.
 echo.
 echo WARNING: this can delete Network, Default Apps, Driver Guard, Browser,
 echo          NVIDIA Audio, certificate, SSH, virtualization and hosts backups.
@@ -428,7 +428,8 @@ for /f "delims=" %%D in ('dir /ad /b /s "%BASE_DIR%" 2^>nul') do (
 exit /b 0
 
 :IsPreservedBackupFile
-rem .gitkeep and .keep carry the folder structure in git.
+rem .gitkeep and .keep are spared if an older tree still carries them; the
+rem folder structure itself now comes from init_folders.cmd.
 rem
 rem "hosts" is the Bitrix pack's factory reference - the file its restore copies
 rem from, holding the stock Windows hosts and nothing of this machine. It is not
