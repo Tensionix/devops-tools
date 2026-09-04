@@ -23,7 +23,7 @@ An **Audion** tool, published by [Tensionix](https://github.com/Tensionix).
 <!-- /audion:release -->
 
 
-[Русский](Docs/README_RU.md) · [User Guide](Docs/USER_GUIDE_EN.md)
+[Русский](docs/README_RU.md) · [User Guide](docs/USER_GUIDE_EN.md)
 
 **Contents**
 
@@ -108,7 +108,7 @@ when explicitly asked.
 
 ## Next
 
-* [User Guide](Docs/USER_GUIDE_EN.md) — working through the sections, and the order of
+* [User Guide](docs/USER_GUIDE_EN.md) — working through the sections, and the order of
   operations for the dangerous subsystems.
 
 ---
