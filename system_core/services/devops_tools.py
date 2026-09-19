@@ -1228,6 +1228,21 @@ def windows_proxy_tool(context: JobContext) -> dict[str, object]:
     return {"action": action}
 
 
+def dns_doctor(context: JobContext) -> dict[str, object]:
+    mode = str(context.operation.parameters.get("mode") or "Status").strip() or "Status"
+    allowed = {
+        "Status", "Repair", "FixIcon", "Help",
+        "UseAuto", "UseRouter", "UseCloudflare", "UseGoogle", "UseQuad9", "UseYandex", "UseAdGuard",
+    }
+    if mode not in allowed:
+        raise RuntimeError(f"Unsupported DNS Doctor mode: {mode}")
+    script = project_tool_dir(context, "dns_doctor") / "system_core" / "Audion_Dns_Doctor.ps1"
+    context.log(f"DNS Doctor mode: {mode}")
+    elevated = mode not in {"Status", "Help"}
+    run_ps1(context, script, {"Mode": mode}, cwd=script.parents[1], progress_seconds=300.0, elevated=elevated)
+    return {"mode": mode}
+
+
 def network_restore(context: JobContext) -> dict[str, object]:
     params = context.operation.parameters
     restore_mode = str(params.get("restore_mode") or "latest").strip().lower()
@@ -1277,6 +1292,38 @@ def network_wifi_status(context: JobContext) -> dict[str, object]:
             progress_seconds=20.0,
         )
     return {"status": "wifi", "profile": profile, "adapter": adapter}
+
+
+def wifi_hotspot(context: JobContext) -> dict[str, object]:
+    """Wi-Fi sharing: show, start, stop.
+
+    Windows PowerShell on purpose: the tethering manager is a WinRT type, and
+    loading those from pwsh takes extra assemblies that are not always there.
+    """
+    action = str(context.operation.parameters.get("hotspot_action") or "status").strip()
+    script = project_tool_dir(context, "wires_wireless") / "Audion-Hotspot.ps1"
+    command = powershell_command(
+        context.paths.root, "-File", str(script), "-Action", action, "-NoPause",
+        windows_powershell=True,
+    )
+    run_process(context, command, cwd=context.paths.root, check=False, progress_seconds=30.0)
+    return {"action": action, "script": str(script)}
+
+
+def wifi_hotspot(context: JobContext) -> dict[str, object]:
+    """Wi-Fi sharing: show, start, stop.
+
+    Windows PowerShell on purpose: the tethering manager is a WinRT type, and
+    loading those from pwsh takes extra assemblies that are not always there.
+    """
+    action = str(context.operation.parameters.get("hotspot_action") or "status").strip()
+    script = project_tool_dir(context, "wires_wireless") / "Audion-Hotspot.ps1"
+    command = powershell_command(
+        context.paths.root, "-File", str(script), "-Action", action, "-NoPause",
+        windows_powershell=True,
+    )
+    run_process(context, command, cwd=context.paths.root, check=False, progress_seconds=30.0)
+    return {"action": action, "script": str(script)}
 
 
 def wifi_connect(context: JobContext) -> dict[str, object]:
@@ -6515,6 +6562,18 @@ def launch_external_cmd(context: JobContext, script: Path) -> None:
 
 def run_ssd_reset_wizard(context: JobContext) -> dict[str, object]:
     script = project_tool_dir(context, "ssd_nvme_reset_wizard") / "Run-Audion-SSD-NVMe-Reset-Wizard.cmd"
+    launch_external_cmd(context, script)
+    return {"script": str(script)}
+
+
+def run_removable_prepare(context: JobContext) -> dict[str, object]:
+    script = project_tool_dir(context, "disk-removable") / "Run-Audion-Disk-Removable.cmd"
+    launch_external_cmd(context, script)
+    return {"script": str(script)}
+
+
+def run_startup_kit(context: JobContext) -> dict[str, object]:
+    script = project_tool_dir(context, "startup_kit") / "Run-Audion-Startup-Kit.cmd"
     launch_external_cmd(context, script)
     return {"script": str(script)}
 

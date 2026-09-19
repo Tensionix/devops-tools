@@ -28,6 +28,16 @@
 - [Network Cleaner > Proxy > Disable user proxy](#network-cleaner--proxy--disable-user-proxy)
 - [Network Cleaner > Proxy > Reset WinHTTP proxy](#network-cleaner--proxy--reset-winhttp-proxy)
 - [Network Cleaner > Open backup folder](#network-cleaner--open-backup-folder)
+- [DNS Doctor > Status snapshot](#dns-doctor--status-snapshot)
+- [DNS Doctor > Repair names and icon](#dns-doctor--repair-names-and-icon)
+- [DNS Doctor > Fix the tray icon](#dns-doctor--fix-the-tray-icon)
+- [DNS Doctor > Resolver: router (DHCP)](#dns-doctor--resolver-router-dhcp)
+- [DNS Doctor > Resolver: the router itself](#dns-doctor--resolver-the-router-itself)
+- [DNS Doctor > Resolver: Cloudflare](#dns-doctor--resolver-cloudflare)
+- [DNS Doctor > Resolver: Google](#dns-doctor--resolver-google)
+- [DNS Doctor > Resolver: Quad9](#dns-doctor--resolver-quad9)
+- [DNS Doctor > Resolver: Yandex](#dns-doctor--resolver-yandex)
+- [DNS Doctor > Resolver: AdGuard](#dns-doctor--resolver-adguard)
 - [Connectivity > Wi-Fi profiles > Wi-Fi status](#connectivity--wi-fi-profiles--wi-fi-status)
 - [Connectivity > Wi-Fi profiles > Connect profile](#connectivity--wi-fi-profiles--connect-profile)
 - [Connectivity > Wi-Fi profiles > Profile autoconnect](#connectivity--wi-fi-profiles--profile-autoconnect)
@@ -120,6 +130,11 @@
 - [Hardware > Storage / Disk procedures > Selected disk details](#hardware--storage--disk-procedures--selected-disk-details)
 - [Hardware > Storage / Disk procedures > Launch SSD/NVMe wizard](#hardware--storage--disk-procedures--launch-ssdnvme-wizard)
 - [Hardware > Storage / Disk procedures > Open SSD/NVMe folder](#hardware--storage--disk-procedures--open-ssdnvme-folder)
+- [Hardware > Removable drives > Wipe removable and lay one partition](#hardware--removable-drives--wipe-removable-and-lay-one-partition)
+- [Hardware > Removable drives > Open removable-drive folder](#hardware--removable-drives--open-removable-drive-folder)
+- [Network > Wi-Fi status / connect > Wi-Fi sharing](#network--wi-fi-status--connect--wi-fi-sharing)
+- [Hardware > Autostart > What starts by itself](#hardware--autostart--what-starts-by-itself)
+- [Hardware > Autostart > Open autostart folder](#hardware--autostart--open-autostart-folder)
 - [Hardware > Storage / Disk procedures > WinRE layout status](#hardware--storage--disk-procedures--winre-layout-status)
 - [Hardware > Storage / Disk procedures > Run WinRE extend wizard](#hardware--storage--disk-procedures--run-winre-extend-wizard)
 - [OpenSSH KeyKit > Check access links](#openssh-keykit--check-access-links)
@@ -387,6 +402,76 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Operation id: `network_open_backup`
 - Description: Open the project-local Network Cleaner backup folder with snapshots, restore manifests and run logs.
 - Risk: kind=`safe`, risk_level=`readonly`
+- Parameters: none.
+
+### DNS Doctor > Status snapshot
+
+- Operation id: `dns_status`
+- Description: Read-only: adapter DNS, what the router offers over DHCP, who holds port 53, who ends up asking outward with its reverse name, whether a name resolves, and the state of the tray-icon service.
+- Risk: kind=`safe`, risk_level=`readonly`
+- Parameters: none.
+
+### DNS Doctor > Repair names and icon
+
+- Operation id: `dns_repair`
+- Description: Starts a stopped local resolver (ControlD, YogaDNS, AdGuard, dnscrypt); if there is none, hands the adapters back to the router. Then restores the tray-icon service the way Windows keeps it.
+- Risk: kind=`dangerous`, risk_level=`system_change`
+- Parameters: none.
+
+### DNS Doctor > Fix the tray icon
+
+- Operation id: `dns_fix_icon`
+- Description: Only NlaSvc: enables the active internet probe if it was disabled, sets the service to automatic start, starts it, and restarts it when the verdict is stale.
+- Risk: kind=`dangerous`, risk_level=`system_change`
+- Parameters: none.
+
+### DNS Doctor > Resolver: router (DHCP)
+
+- Operation id: `dns_use_auto`
+- Description: Returns every physical adapter to automatic DNS, as intended in the network the machine is plugged into.
+- Risk: kind=`dangerous`, risk_level=`system_change`
+- Parameters: none.
+
+### DNS Doctor > Resolver: the router itself
+
+- Operation id: `dns_use_router`
+- Description: Points the adapters at the default gateway directly. Checked with a name request before it is written.
+- Risk: kind=`dangerous`, risk_level=`system_change`
+- Parameters: none.
+
+### DNS Doctor > Resolver: Cloudflare
+
+- Operation id: `dns_use_cloudflare`
+- Description: Cloudflare 1.1.1.1 and 1.0.0.1 - fast, filters nothing. Checked with a name request before it is written.
+- Risk: kind=`dangerous`, risk_level=`system_change`
+- Parameters: none.
+
+### DNS Doctor > Resolver: Google
+
+- Operation id: `dns_use_google`
+- Description: Google 8.8.8.8 and 8.8.4.4. Checked with a name request before it is written.
+- Risk: kind=`dangerous`, risk_level=`system_change`
+- Parameters: none.
+
+### DNS Doctor > Resolver: Quad9
+
+- Operation id: `dns_use_quad9`
+- Description: Quad9 9.9.9.9 and 149.112.112.112 - blocks malicious names. Checked with a name request before it is written.
+- Risk: kind=`dangerous`, risk_level=`system_change`
+- Parameters: none.
+
+### DNS Doctor > Resolver: Yandex
+
+- Operation id: `dns_use_yandex`
+- Description: Yandex 77.88.8.8 and 77.88.8.1 - the closest hop from here, has its own filters. Checked with a name request before it is written.
+- Risk: kind=`dangerous`, risk_level=`system_change`
+- Parameters: none.
+
+### DNS Doctor > Resolver: AdGuard
+
+- Operation id: `dns_use_adguard`
+- Description: AdGuard 94.140.14.14 and 94.140.15.15 - blocks ads and trackers. Checked with a name request before it is written.
+- Risk: kind=`dangerous`, risk_level=`system_change`
 - Parameters: none.
 
 ### Connectivity > Wi-Fi profiles > Wi-Fi status
@@ -1320,6 +1405,42 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`safe`, risk_level=`readonly`
 - Parameters: none.
 
+### Hardware > Removable drives > Wipe removable and lay one partition
+
+- Operation id: `storage_removable_prepare`
+- Description: Open the removable-drive tool in an external console: it lists disks, asks for the number and that disk's size as confirmation, then wipes and formats.
+- Risk: kind=`dangerous`, risk_level=`destructive`
+- Parameters: none.
+
+### Hardware > Removable drives > Open removable-drive folder
+
+- Operation id: `storage_removable_open_folder`
+- Description: Open the disk-removable folder with README and scripts; no disk changes.
+- Risk: kind=`safe`, risk_level=`readonly`
+- Parameters: none.
+
+### Network > Wi-Fi status / connect > Wi-Fi sharing
+
+- Operation id: `network_wifi_hotspot`
+- Description: Show, start or stop Wi-Fi sharing - the same switch as in Windows settings. The network name and password stay in Windows' own settings; this only brings the sharing up. It cannot be started at boot: the tethering interface needs a logged-in user.
+- Risk: kind=`dangerous`, risk_level=`modifies`
+- Parameters:
+  - `hotspot_action` — **What to do** (type=`select`, default=`status`). Options: `status` — Show state; `on` — Start sharing; `off` — Stop sharing
+
+### Hardware > Autostart > What starts by itself
+
+- Operation id: `startup_kit_open`
+- Description: Open the startup tool in an external console: scheduled tasks with logon/boot triggers, both Startup folders, Run and RunOnce - in one list, with delays. It adds entries, finds what already launches the same program, and removes overlaps.
+- Risk: kind=`dangerous`, risk_level=`modifies`
+- Parameters: none.
+
+### Hardware > Autostart > Open autostart folder
+
+- Operation id: `startup_kit_open_folder`
+- Description: Open the startup_kit folder with README and scripts; changes nothing.
+- Risk: kind=`safe`, risk_level=`readonly`
+- Parameters: none.
+
 ### Hardware > Storage / Disk procedures > WinRE layout status
 
 - Operation id: `storage_winre_status`
@@ -1839,5 +1960,3 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Description: Delete contents of managed input and output folders.
 - Risk: kind=`dangerous`, risk_level=`destructive`
 - Parameters: none.
-
-<!-- END GENERATED PARAMETER REFERENCE -->

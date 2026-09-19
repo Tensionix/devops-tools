@@ -15,10 +15,13 @@ DEFAULT_ENGINE_PATH = Path(
     r"E:\TOOLS\Audion Office OCR AI\Audion Office OCR AI\system_core\dev_markdown_pdf_engine.py"
 )
 
+# Пути от корня проекта. Прежний список звал файлы, которых в проекте нет:
+# документацию перенесли в docs\, а имена остались от старой раскладки.
 ROOT_GUIDES = [
-    "README_AUDION_DEVOPS_TOOLS_RU.md",
-    "USER_GUIDE_RU.md",
-    "USER_GUIDE_EN.md",
+    "README.md",
+    "docs/README_RU.md",
+    "docs/USER_GUIDE_RU.md",
+    "docs/USER_GUIDE_EN.md",
 ]
 
 AGENT_INSTRUCTIONS = [
