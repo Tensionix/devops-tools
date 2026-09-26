@@ -1,10 +1,10 @@
 # Audion Build Licenses Scan Report
 
 - Project: **Audion DevOps Tools** (`audion-devops-tools`)
-- Run: `20260918T025310Z_audion-devops-tools_af54b353`
-- Project root: `S:\Releases\Audion DevOps Tools`
-- Scan root: `S:\Releases\Audion DevOps Tools`
-- Output: `S:\Releases\Audion DevOps Tools\licenses`
+- Run: `20260926T204200Z_audion-devops-tools_fcb6bf8b`
+- Project root: `E:\Release\Audion DevOps Tools`
+- Scan root: `E:\Release\Audion DevOps Tools`
+- Output: `E:\Release\Audion DevOps Tools\licenses`
 - Status: **PASS**
 - Components: 72
 - Bundled: 72
@@ -18,78 +18,78 @@ No issues detected.
 
 | Component | Change | Old | New |
 |---|---|---:|---:|
-| aiofiles | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 25.1.0 | 25.1.0 |
-| aiohappyeyeballs | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.7.1 | 2.7.1 |
-| aiohttp | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.14.3 | 3.14.3 |
-| aiosignal | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.4.0 | 1.4.0 |
-| annotated-doc | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.0.5 | 0.0.5 |
-| annotated-types | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.8.0 | 0.8.0 |
-| anyio | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 4.15.1 | 4.15.1 |
-| attrs | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 26.1.0 | 26.1.0 |
+| aiofiles | `NEW_COMPONENT_APPROVED_PROFILE` | - | 25.1.0 |
+| aiohappyeyeballs | `NEW_COMPONENT_APPROVED_PROFILE` | - | 2.7.1 |
+| aiohttp | `NEW_COMPONENT_APPROVED_PROFILE` | - | 3.14.3 |
+| aiosignal | `NEW_COMPONENT_APPROVED_PROFILE` | - | 1.4.0 |
+| annotated-doc | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.0.5 |
+| annotated-types | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.8.0 |
+| anyio | `NEW_COMPONENT_APPROVED_PROFILE` | - | 4.15.1 |
+| attrs | `NEW_COMPONENT_APPROVED_PROFILE` | - | 26.1.0 |
 | Audion launcher | `NEW_COMPONENT_APPROVED_PROFILE` | - | bundled |
-| beautifulsoup4 | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 4.15.0 | 4.15.0 |
-| bidict | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.24.1 | 0.24.1 |
-| bottle | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.13.4 | 0.13.4 |
-| certifi | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2026.7.22 | 2026.7.22 |
-| cffi | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.1.1 | 2.1.1 |
-| click | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 8.5.0 | 8.5.0 |
-| clr_loader | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.3.1 | 0.3.1 |
-| colorama | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.4.6 | 0.4.6 |
-| docutils | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.23 | 0.23 |
-| fastapi | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.141.1 | 0.141.1 |
-| frozenlist | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.8.0 | 1.8.0 |
-| fzf | `UNCHANGED` | bundled | bundled |
-| h11 | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.16.0 | 0.16.0 |
-| httpcore | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.0.9 | 1.0.9 |
-| httptools | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.8.0 | 0.8.0 |
-| httpx | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.28.1 | 0.28.1 |
-| idna | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.20 | 3.20 |
-| ifaddr | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.2.0 | 0.2.0 |
-| iniconfig | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.3.0 | 2.3.0 |
-| itsdangerous | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.2.0 | 2.2.0 |
-| Jinja2 | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.1.6 | 3.1.6 |
-| markdown-it-py | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 4.2.0 | 4.2.0 |
-| markdown2 | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.5.5 | 2.5.5 |
-| MarkupSafe | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.0.3 | 3.0.3 |
-| mdurl | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.1.2 | 0.1.2 |
-| multidict | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 6.8.0 | 6.8.0 |
-| nicegui | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.17.0 | 3.17.0 |
-| orjson | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.12.0 | 3.12.0 |
-| packaging | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 26.3 | 26.3 |
-| pip | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 26.2.1 | 26.2.1 |
-| pluggy | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.6.0 | 1.6.0 |
-| PowerShell | `UNCHANGED` | portable | portable |
-| propcache | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.5.4 | 0.5.4 |
-| proxy_tools | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.1.0 | 0.1.0 |
-| pycparser | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.0 | 3.0 |
-| pydantic | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.13.5 | 2.13.5 |
-| pydantic_core | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.46.5 | 2.46.5 |
-| Pygments | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.21.0 | 2.21.0 |
-| pytest | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 9.1.1 | 9.1.1 |
-| python-dotenv | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.2.3 | 1.2.3 |
-| Python Embedded | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.12.x | 3.12.x |
-| python-engineio | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 4.14.0 | 4.14.0 |
-| python-multipart | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.0.32 | 0.0.32 |
-| python-socketio | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 5.17.0 | 5.17.0 |
-| pythonnet | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.1.0 | 3.1.0 |
-| pywebview | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 6.2.1 | 6.2.1 |
-| PyYAML | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 6.0.3 | 6.0.3 |
-| rich | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 15.0.0 | 15.0.0 |
-| setuptools | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 84.0.0 | 84.0.0 |
-| simple-websocket | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.1.0 | 1.1.0 |
-| soupsieve | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.9.2 | 2.9.2 |
-| starlette | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.6.0 | 1.6.0 |
-| tinycss2 | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.5.1 | 1.5.1 |
-| tqdm | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 4.70.1 | 4.70.1 |
-| typing_extensions | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 4.16.0 | 4.16.0 |
-| typing-inspection | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.4.4 | 0.4.4 |
-| uvicorn | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.53.0 | 0.53.0 |
-| watchfiles | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.2.0 | 1.2.0 |
-| webencodings | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.6.1 | 0.6.1 |
-| websockets | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 17.1 | 17.1 |
-| wheel | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.48.0 | 0.48.0 |
-| wsproto | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.3.2 | 1.3.2 |
-| yarl | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.25.1 | 1.25.1 |
+| beautifulsoup4 | `NEW_COMPONENT_APPROVED_PROFILE` | - | 4.15.0 |
+| bidict | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.24.1 |
+| bottle | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.13.4 |
+| certifi | `NEW_COMPONENT_APPROVED_PROFILE` | - | 2026.7.22 |
+| cffi | `NEW_COMPONENT_APPROVED_PROFILE` | - | 2.1.1 |
+| click | `NEW_COMPONENT_APPROVED_PROFILE` | - | 8.5.0 |
+| clr_loader | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.3.1 |
+| colorama | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.4.6 |
+| docutils | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.23 |
+| fastapi | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.141.1 |
+| frozenlist | `NEW_COMPONENT_APPROVED_PROFILE` | - | 1.8.0 |
+| fzf | `NEW_COMPONENT_APPROVED_PROFILE` | - | bundled |
+| h11 | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.16.0 |
+| httpcore | `NEW_COMPONENT_APPROVED_PROFILE` | - | 1.0.9 |
+| httptools | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.8.0 |
+| httpx | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.28.1 |
+| idna | `NEW_COMPONENT_APPROVED_PROFILE` | - | 3.20 |
+| ifaddr | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.2.0 |
+| iniconfig | `NEW_COMPONENT_APPROVED_PROFILE` | - | 2.3.0 |
+| itsdangerous | `NEW_COMPONENT_APPROVED_PROFILE` | - | 2.2.0 |
+| Jinja2 | `NEW_COMPONENT_APPROVED_PROFILE` | - | 3.1.6 |
+| markdown-it-py | `NEW_COMPONENT_APPROVED_PROFILE` | - | 4.2.0 |
+| markdown2 | `NEW_COMPONENT_APPROVED_PROFILE` | - | 2.5.5 |
+| MarkupSafe | `NEW_COMPONENT_APPROVED_PROFILE` | - | 3.0.3 |
+| mdurl | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.1.2 |
+| multidict | `NEW_COMPONENT_APPROVED_PROFILE` | - | 6.9.1 |
+| nicegui | `NEW_COMPONENT_APPROVED_PROFILE` | - | 3.17.1 |
+| orjson | `NEW_COMPONENT_APPROVED_PROFILE` | - | 3.12.0 |
+| packaging | `NEW_COMPONENT_APPROVED_PROFILE` | - | 26.3 |
+| pip | `NEW_COMPONENT_APPROVED_PROFILE` | - | 26.2.1 |
+| pluggy | `NEW_COMPONENT_APPROVED_PROFILE` | - | 1.6.0 |
+| PowerShell | `NEW_COMPONENT_APPROVED_PROFILE` | - | portable |
+| propcache | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.5.4 |
+| proxy_tools | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.1.0 |
+| pycparser | `NEW_COMPONENT_APPROVED_PROFILE` | - | 3.0 |
+| pydantic | `NEW_COMPONENT_APPROVED_PROFILE` | - | 2.13.5 |
+| pydantic_core | `NEW_COMPONENT_APPROVED_PROFILE` | - | 2.46.5 |
+| Pygments | `NEW_COMPONENT_APPROVED_PROFILE` | - | 2.21.0 |
+| pytest | `NEW_COMPONENT_APPROVED_PROFILE` | - | 9.1.1 |
+| python-dotenv | `NEW_COMPONENT_APPROVED_PROFILE` | - | 1.2.3 |
+| Python Embedded | `NEW_COMPONENT_APPROVED_PROFILE` | - | 3.12.x |
+| python-engineio | `NEW_COMPONENT_APPROVED_PROFILE` | - | 4.14.0 |
+| python-multipart | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.0.32 |
+| python-socketio | `NEW_COMPONENT_APPROVED_PROFILE` | - | 5.17.0 |
+| pythonnet | `NEW_COMPONENT_APPROVED_PROFILE` | - | 3.1.0 |
+| pywebview | `NEW_COMPONENT_APPROVED_PROFILE` | - | 6.2.1 |
+| PyYAML | `NEW_COMPONENT_APPROVED_PROFILE` | - | 6.0.3 |
+| rich | `NEW_COMPONENT_APPROVED_PROFILE` | - | 15.0.0 |
+| setuptools | `NEW_COMPONENT_APPROVED_PROFILE` | - | 84.0.0 |
+| simple-websocket | `NEW_COMPONENT_APPROVED_PROFILE` | - | 1.1.0 |
+| soupsieve | `NEW_COMPONENT_APPROVED_PROFILE` | - | 2.10 |
+| starlette | `NEW_COMPONENT_APPROVED_PROFILE` | - | 1.7.0 |
+| tinycss2 | `NEW_COMPONENT_APPROVED_PROFILE` | - | 1.5.1 |
+| tqdm | `NEW_COMPONENT_APPROVED_PROFILE` | - | 4.70.1 |
+| typing_extensions | `NEW_COMPONENT_APPROVED_PROFILE` | - | 4.16.0 |
+| typing-inspection | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.4.4 |
+| uvicorn | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.54.0 |
+| watchfiles | `NEW_COMPONENT_APPROVED_PROFILE` | - | 1.3.0 |
+| webencodings | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.6.1 |
+| websockets | `NEW_COMPONENT_APPROVED_PROFILE` | - | 17.1 |
+| wheel | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.48.0 |
+| wsproto | `NEW_COMPONENT_APPROVED_PROFILE` | - | 1.3.2 |
+| yarl | `NEW_COMPONENT_APPROVED_PROFILE` | - | 1.25.1 |
 
 ## Scope
 

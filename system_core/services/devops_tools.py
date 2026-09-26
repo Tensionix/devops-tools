@@ -1310,20 +1310,258 @@ def wifi_hotspot(context: JobContext) -> dict[str, object]:
     return {"action": action, "script": str(script)}
 
 
-def wifi_hotspot(context: JobContext) -> dict[str, object]:
-    """Wi-Fi sharing: show, start, stop.
+WIFI_SLOTS = {"main": "WI-FI MAIN", "second": "WI-FI SECOND"}
+WIFI_SECURITY = {
+    "wpa2": ("WPA2PSK", "WPA2-Personal"),
+    "wpa3": ("WPA3SAE", "WPA3-Personal"),
+}
+# Ties the DPAPI blobs to this tool: another program running as the same user
+# cannot open them by accident with a plain CryptUnprotectData call.
+_WIFI_DPAPI_ENTROPY = b"Audion DevOps Tools / Wi-Fi slots"
 
-    Windows PowerShell on purpose: the tethering manager is a WinRT type, and
-    loading those from pwsh takes extra assemblies that are not always there.
-    """
-    action = str(context.operation.parameters.get("hotspot_action") or "status").strip()
-    script = project_tool_dir(context, "wires_wireless") / "Audion-Hotspot.ps1"
-    command = powershell_command(
-        context.paths.root, "-File", str(script), "-Action", action, "-NoPause",
-        windows_powershell=True,
+
+def _dpapi(data: bytes, protect: bool) -> bytes:
+    """Windows DPAPI for the current user: only this Windows account on this machine can open the blob."""
+    import ctypes
+    from ctypes import wintypes
+
+    class DataBlob(ctypes.Structure):
+        _fields_ = [("cbData", wintypes.DWORD), ("pbData", ctypes.POINTER(ctypes.c_char))]
+
+    def blob(raw: bytes) -> tuple[DataBlob, Any]:
+        buffer = ctypes.create_string_buffer(raw, len(raw))
+        return DataBlob(len(raw), ctypes.cast(buffer, ctypes.POINTER(ctypes.c_char))), buffer
+
+    source, _keep_source = blob(data)
+    entropy, _keep_entropy = blob(_WIFI_DPAPI_ENTROPY)
+    result = DataBlob()
+    crypt32 = ctypes.windll.crypt32
+    call = crypt32.CryptProtectData if protect else crypt32.CryptUnprotectData
+    # CRYPTPROTECT_UI_FORBIDDEN = 0x1: never raise a prompt from a background job.
+    ok = call(ctypes.byref(source), None, ctypes.byref(entropy), None, None, 0x1, ctypes.byref(result))
+    if not ok:
+        raise RuntimeError(f"DPAPI {'protect' if protect else 'unprotect'} failed: WinError {ctypes.GetLastError()}")
+    try:
+        return ctypes.string_at(result.pbData, result.cbData)
+    finally:
+        ctypes.windll.kernel32.LocalFree(result.pbData)
+
+
+def wifi_slots_path(context: JobContext) -> Path:
+    # data\ is this machine's state: cleanup clears it, so network names never reach a release.
+    return context.paths.root / "data" / "wifi" / "slots.json"
+
+
+def _load_wifi_slots(path: Path) -> dict[str, dict[str, str]]:
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise RuntimeError(f"Wi-Fi slots file is unreadable: {path} ({exc})") from exc
+    return {key: value for key, value in data.items() if key in WIFI_SLOTS and isinstance(value, dict)}
+
+
+def _save_wifi_slots(path: Path, slots: dict[str, dict[str, str]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp = path.with_suffix(".tmp")
+    temp.write_text(json.dumps(slots, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temp.replace(path)
+
+
+def _wifi_profile_xml(ssid: str, password: str, security: str) -> str:
+    from xml.sax.saxutils import escape
+
+    authentication = WIFI_SECURITY[security][0]
+    return (
+        '<?xml version="1.0"?>\n'
+        '<WLANProfile xmlns="http://www.microsoft.com/networking/WLAN/profile/v1">\n'
+        f"  <name>{escape(ssid)}</name>\n"
+        f"  <SSIDConfig><SSID><name>{escape(ssid)}</name></SSID></SSIDConfig>\n"
+        "  <connectionType>ESS</connectionType>\n"
+        "  <connectionMode>auto</connectionMode>\n"
+        "  <MSM><security>\n"
+        f"    <authEncryption><authentication>{authentication}</authentication><encryption>AES</encryption><useOneX>false</useOneX></authEncryption>\n"
+        f"    <sharedKey><keyType>passPhrase</keyType><protected>false</protected><keyMaterial>{escape(password)}</keyMaterial></sharedKey>\n"
+        "  </security></MSM>\n"
+        "</WLANProfile>\n"
     )
-    run_process(context, command, cwd=context.paths.root, check=False, progress_seconds=30.0)
-    return {"action": action, "script": str(script)}
+
+
+def wifi_slot(context: JobContext) -> dict[str, object]:
+    """WI-FI MAIN and WI-FI SECOND: a network typed once in the window, the password kept under DPAPI.
+
+    Connect writes the Windows profile from the slot every time, so a changed
+    password or a wiped profile list is fixed by one press. The plain password
+    exists only in memory and, for the moment netsh reads it, in a profile file
+    that is deleted right after.
+    """
+    params = context.operation.parameters
+    mode = str(params.get("mode") or "status").strip().lower()
+    slot = str(params.get("slot") or "").strip().lower()
+    path = wifi_slots_path(context)
+    slots = _load_wifi_slots(path)
+
+    if mode == "status":
+        known = {option.get("value") for option in wifi_profile_options(context.paths.root)}
+        for key, name in WIFI_SLOTS.items():
+            entry = slots.get(key)
+            if not entry:
+                context.log(f"{name}: not set")
+                continue
+            security = WIFI_SECURITY.get(entry.get("security", "wpa2"), WIFI_SECURITY["wpa2"])[1]
+            in_windows = "yes" if entry.get("ssid") in known else "no"
+            context.log(f"{name}: SSID {entry.get('ssid')} | {security} | password stored (DPAPI) | Windows profile: {in_windows}")
+        context.log("")
+        run_process(context, ["netsh.exe", "wlan", "show", "interfaces"], cwd=context.paths.root, check=False, progress_seconds=20.0)
+        return {"mode": mode, "slots": sorted(slots)}
+
+    if slot not in WIFI_SLOTS:
+        raise RuntimeError(f"Unknown Wi-Fi slot: {slot}")
+    name = WIFI_SLOTS[slot]
+
+    if mode == "save":
+        ssid = str(params.get(f"wifi_{slot}_ssid") or "").strip()
+        password = str(params.get(f"wifi_{slot}_password") or "")
+        security = str(params.get(f"wifi_{slot}_security") or "wpa2").strip().lower()
+        if not ssid:
+            raise RuntimeError(f"{name}: SSID is empty.")
+        if len(ssid.encode("utf-8")) > 32:
+            raise RuntimeError(f"{name}: SSID is longer than 32 bytes.")
+        if security not in WIFI_SECURITY:
+            raise RuntimeError(f"{name}: unknown security type {security}.")
+        previous = slots.get(slot) or {}
+        if password:
+            if not (8 <= len(password) <= 63 or re.fullmatch(r"[0-9A-Fa-f]{64}", password)):
+                raise RuntimeError(f"{name}: a WPA password is 8 to 63 characters (or 64 hex digits).")
+            protected = base64.b64encode(_dpapi(password.encode("utf-8"), True)).decode("ascii")
+        elif previous.get("ssid") == ssid and previous.get("password_dpapi"):
+            # Same network, empty password field: keep the stored one (change only the security type).
+            protected = previous["password_dpapi"]
+        else:
+            raise RuntimeError(f"{name}: password is empty.")
+        slots[slot] = {
+            "ssid": ssid,
+            "security": security,
+            "password_dpapi": protected,
+            "saved": datetime.now().isoformat(timespec="seconds"),
+        }
+        _save_wifi_slots(path, slots)
+        context.log(f"{name} saved: SSID {ssid}, {WIFI_SECURITY[security][1]}; password stored under DPAPI (this Windows user only).")
+        context.log(f"File: {path}")
+        # The typed password leaves the window as soon as it is stored.
+        return {"mode": mode, "slot": slot, "ssid": ssid, "field_updates": {f"wifi_{slot}_password": ""}}
+
+    if mode == "forget":
+        if slots.pop(slot, None) is None:
+            context.log(f"{name} is not set.")
+        else:
+            _save_wifi_slots(path, slots)
+            context.log(f"{name} forgotten. The Windows profile, if any, stays; remove it in Windows settings if needed.")
+        return {"mode": mode, "slot": slot}
+
+    if mode == "connect":
+        entry = slots.get(slot)
+        if not entry:
+            raise RuntimeError(f"{name} is not set: save its SSID and password first.")
+        adapter = str(params.get("wifi_adapter") or "").strip()
+        # The cable goes to the router of the first provider: while it is up, Windows
+        # keeps sending traffic there, so the Wi-Fi slot gets the machine only with it off.
+        _internet_route(context, lan_on=False, lan=str(params.get("lan_adapter") or "").strip(), wifi=adapter)
+        ssid = entry["ssid"]
+        security = entry.get("security", "wpa2")
+        password = _dpapi(base64.b64decode(entry["password_dpapi"]), False).decode("utf-8")
+        context.log(f"{name}: SSID {ssid}, {WIFI_SECURITY.get(security, WIFI_SECURITY['wpa2'])[1]}")
+        profile_dir = path.parent
+        profile_dir.mkdir(parents=True, exist_ok=True)
+        profile_file = profile_dir / f"profile_{slot}_{os.getpid()}.xml"
+        try:
+            profile_file.write_text(_wifi_profile_xml(ssid, password, security), encoding="utf-8")
+            command = ["netsh.exe", "wlan", "add", "profile", f"filename={profile_file}", "user=current"]
+            if adapter:
+                command.append(f"interface={adapter}")
+            run_process(context, command, cwd=context.paths.root, progress_seconds=30.0)
+        finally:
+            password = ""
+            try:
+                profile_file.unlink()
+            except FileNotFoundError:
+                pass
+        command = ["netsh.exe", "wlan", "connect", f"name={ssid}"]
+        if adapter:
+            command.append(f"interface={adapter}")
+        run_process(context, command, cwd=context.paths.root, progress_seconds=40.0)
+        _show_internet_route(context, wait_for="wifi", wifi=adapter)
+        return {"mode": mode, "slot": slot, "ssid": ssid, "adapter": adapter}
+
+    raise RuntimeError(f"Unknown Wi-Fi slot mode: {mode}")
+
+
+# Physical adapters only: VPN, WireGuard, Hyper-V and other virtual ones are never switched here.
+# NdisPhysicalMedium 14 = 802.3 (cable), 9 = Native 802.11 (Wi-Fi).
+_ROUTE_ADAPTERS_PS = """
+$lanName = {lan}
+$wifiName = {wifi}
+$physical = @(Get-NetAdapter -Physical -ErrorAction SilentlyContinue)
+$lanList = if ($lanName) {{ @(Get-NetAdapter -Name $lanName -ErrorAction Stop) }} else {{ @($physical | Where-Object {{ $_.NdisPhysicalMedium -eq 14 }}) }}
+$wifiList = if ($wifiName) {{ @(Get-NetAdapter -Name $wifiName -ErrorAction Stop) }} else {{ @($physical | Where-Object {{ $_.NdisPhysicalMedium -eq 9 }}) }}
+"""
+
+
+def _internet_route(context: JobContext, *, lan_on: bool, lan: str, wifi: str) -> None:
+    """Cable on and Wi-Fi off, or the other way round. Needs administrator rights (UAC)."""
+    lines = [
+        "$ErrorActionPreference = 'Stop'",
+        _ROUTE_ADAPTERS_PS.format(lan=ps_quote(lan), wifi=ps_quote(wifi)),
+        # With no cable adapter, "cable" would only switch Wi-Fi off and leave the machine offline.
+        ("if (-not $lanList) { throw 'No cable adapter found: nothing switched.' }" if lan_on
+         else "if (-not $lanList) { Write-Host 'No cable adapter found.' }"),
+        "if (-not $wifiList) { throw 'No Wi-Fi adapter found.' }",
+    ]
+    if lan_on:
+        lines += [
+            "foreach ($a in $lanList) { Write-Host ('Cable ON:  ' + $a.Name); Enable-NetAdapter -Name $a.Name -Confirm:$false }",
+            "foreach ($a in $wifiList) { Write-Host ('Wi-Fi OFF: ' + $a.Name); Disable-NetAdapter -Name $a.Name -Confirm:$false }",
+        ]
+    else:
+        lines += [
+            "foreach ($a in $lanList) { Write-Host ('Cable OFF: ' + $a.Name); Disable-NetAdapter -Name $a.Name -Confirm:$false }",
+            "foreach ($a in $wifiList) { Write-Host ('Wi-Fi ON:  ' + $a.Name); Enable-NetAdapter -Name $a.Name -Confirm:$false }",
+            # The radio needs a moment after Enable before netsh can add a profile to it.
+            "$deadline = (Get-Date).AddSeconds(15)",
+            "while ((Get-Date) -lt $deadline -and @($wifiList | ForEach-Object { Get-NetAdapter -Name $_.Name } | Where-Object { $_.Status -eq 'Disabled' }).Count) { Start-Sleep -Milliseconds 500 }",
+            "Start-Sleep -Seconds 2",
+        ]
+    run_ps_command(context, "\n".join(lines), progress_seconds=60.0, elevated=True)
+
+
+def _show_internet_route(context: JobContext, *, wait_for: str, lan: str = "", wifi: str = "") -> None:
+    """Wait until the chosen side is up, then print which adapter now carries the default route."""
+    lines = [
+        _ROUTE_ADAPTERS_PS.format(lan=ps_quote(lan), wifi=ps_quote(wifi)),
+        f"$want = @(if ('{wait_for}' -eq 'wifi') {{ $wifiList }} else {{ $lanList }})",
+        "$deadline = (Get-Date).AddSeconds(30)",
+        "while ((Get-Date) -lt $deadline) {",
+        "  $up = @($want | ForEach-Object { Get-NetAdapter -Name $_.Name } | Where-Object { $_.Status -eq 'Up' })",
+        "  $route = @($up | ForEach-Object { Get-NetRoute -InterfaceIndex $_.ifIndex -DestinationPrefix '0.0.0.0/0' -ErrorAction SilentlyContinue })",
+        "  if ($route) { break }",
+        "  Start-Sleep -Seconds 1",
+        "}",
+        "Write-Host ''",
+        "($lanList + $wifiList) | ForEach-Object { Get-NetAdapter -Name $_.Name } | Format-Table Name,Status,LinkSpeed,InterfaceDescription -AutoSize | Out-String -Width 200",
+        "$default = Get-NetRoute -DestinationPrefix '0.0.0.0/0' -ErrorAction SilentlyContinue | Sort-Object { $_.RouteMetric + $_.InterfaceMetric } | Select-Object -First 1",
+        "if ($default) { Write-Host ('Internet goes through: ' + $default.InterfaceAlias + ', gateway ' + $default.NextHop) } else { Write-Host 'No default route yet: the connection is still coming up.' }",
+    ]
+    run_ps_command(context, "\n".join(lines), progress_seconds=45.0, check=False)
+
+
+def internet_via_cable(context: JobContext) -> dict[str, object]:
+    params = context.operation.parameters
+    lan = str(params.get("lan_adapter") or "").strip()
+    wifi = str(params.get("wifi_adapter") or "").strip()
+    _internet_route(context, lan_on=True, lan=lan, wifi=wifi)
+    _show_internet_route(context, wait_for="lan", lan=lan)
+    return {"route": "cable", "lan": lan or "auto", "wifi": wifi or "auto"}
 
 
 def wifi_connect(context: JobContext) -> dict[str, object]:
@@ -4244,11 +4482,91 @@ def ai_backup(context: JobContext) -> dict[str, object]:
     # Merge keeps local files on name clashes unless the "Overwrite" box is ticked.
     if mode == "merge" and bool(params.get("overwrite", False)):
         script_params["Overwrite"] = True
+    # The ticked chats travel as a file: a few hundred ids outgrow a command line.
+    chat_key = {"export": "export_chats", "import": "import_chats"}.get(mode)
+    if chat_key and chat_key in params:
+        chosen = [str(value).strip() for value in params.get(chat_key) or [] if str(value).strip()]
+        context.paths.logs.mkdir(parents=True, exist_ok=True)
+        chat_file = context.paths.logs / f"ai_backup_{mode}_chats.json"
+        chat_file.write_text(json.dumps(chosen, ensure_ascii=False), encoding="utf-8")
+        script_params["ChatListFile"] = str(chat_file)
+        context.log(f"AI Backup chats chosen: {len(chosen)}")
 
     context.log(f"AI Backup mode: {mode}")
     context.log(f"AI Backup I/O: {io_dir}")
     run_ps1(context, script, script_params, cwd=tool_root, progress_seconds=600.0)
     return {"mode": mode, "path": str(io_dir), "script": str(script)}
+
+
+def _chat_list_options(sessions_root: Path, transcript_size: Callable[[str], int], empty_ru: str) -> list[dict[str, Any]]:
+    """Claude app chats as checkbox options: real title and date, grouped by project folder."""
+    chats: list[dict[str, Any]] = []
+    for path in sessions_root.rglob("local_*.json") if sessions_root.is_dir() else []:
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        stamp = data.get("lastActivityAt") or data.get("createdAt") or 0
+        when = datetime.fromtimestamp(stamp / 1000) if isinstance(stamp, (int, float)) and stamp > 0 else None
+        title = str(data.get("title") or "").strip()
+        date = f" · {when:%d.%m}" if when else ""
+        folder = str(data.get("cwd") or "").strip()
+        size = transcript_size(str(data.get("cliSessionId") or ""))
+        details = [f"{when:%d.%m.%Y %H:%M}" if when else "", folder, f"{size / 1048576:.1f} MB" if size else ""]
+        hint = " · ".join(item for item in details if item)
+        archived = bool(data.get("isArchived"))
+        chats.append(
+            {
+                "value": path.stem,
+                "label": (title or "Untitled") + date,
+                "label_ru": (title or "Без названия") + date,
+                "hint": hint + (" · archived" if archived else ""),
+                "hint_ru": hint + (" · в архиве" if archived else ""),
+                "group": folder,
+                "default": True,
+                "_sort": stamp if isinstance(stamp, (int, float)) else 0,
+            }
+        )
+    if not chats:
+        return [_option("", "No Claude app chats found", empty_ru)]
+    chats.sort(key=lambda item: item["_sort"], reverse=True)
+    for item in chats:
+        item.pop("_sort")
+    return chats
+
+
+def ai_backup_live_chat_options(root: Path | str | None = None) -> list[dict[str, Any]]:
+    """Chats of this PC's Claude app, for choosing what the backup carries."""
+    appdata = Path(os.environ.get("APPDATA") or Path.home() / "AppData" / "Roaming")
+    claude_home = Path(os.environ.get("CLAUDE_CONFIG_DIR") or Path.home() / ".claude")
+    projects = claude_home / "projects"
+
+    def transcript_size(cli: str) -> int:
+        if not re.fullmatch(r"[0-9a-fA-F-]{36}", cli):
+            return 0
+        return sum(path.stat().st_size for path in projects.glob(f"*/{cli}.jsonl"))
+
+    return _chat_list_options(appdata / "Claude" / "claude-code-sessions", transcript_size, "Чаты приложения Claude не найдены")
+
+
+def ai_backup_bundle_chat_options(root: Path | str | None = None) -> list[dict[str, Any]]:
+    """Chats inside the backup staged in input, for choosing what to restore."""
+    project_root = Path(root).resolve() if root else Path(__file__).resolve().parents[2]
+    bundle = project_root / "input"
+    sizes: dict[str, int] = {}
+    try:
+        manifest = json.loads((bundle / "manifest.json").read_text(encoding="utf-8"))
+        for entry in manifest.get("files", []):
+            found = re.match(r"(?i)^claude/projects/[^/]+/([0-9a-f-]{36})\.jsonl$", str(entry.get("path", "")))
+            if found:
+                sizes[found.group(1).lower()] = int(entry.get("size") or 0)
+    except (OSError, ValueError):
+        pass
+    return _chat_list_options(
+        bundle / "claude_app" / "claude-code-sessions",
+        lambda cli: sizes.get(cli.lower(), 0),
+        "В input нет бэкапа с чатами — положите его и нажмите «Обновить»",
+    )
 
 
 _CERT_VALID_STORES = {
@@ -6478,6 +6796,26 @@ def python_nuke(context: JobContext) -> dict[str, object]:
     parameters = dict(context.operation.parameters)
     parameters.update({"tool": "python", "mode": "Nuke"})
     return _run_integrated_nuke_tool(context, parameters)
+
+
+def cache_cleaner(context: JobContext) -> dict[str, object]:
+    params = context.operation.parameters
+    mode = str(params.get("mode") or "Audit").strip()
+    script = project_tool_dir(context, "cache_cleaner") / "Invoke-CacheCleaner.ps1"
+    if mode == "ChromeUndo":
+        run_ps1(context, script, {"ChromePolicyUndo": True})
+        return {"mode": mode}
+    if mode not in ("Audit", "Clean"):
+        raise RuntimeError(f"Unknown cache cleaner mode: {mode}")
+    script_params: dict[str, Any] = {"Mode": mode}
+    targets = str(params.get("Targets") or "").strip()
+    if targets:
+        script_params["Targets"] = targets
+    if params.get("NuGetPackages"):
+        script_params["NuGetPackages"] = True
+    # Exit 1 means some files were in use and stayed: a report, not a failure.
+    result = run_ps1(context, script, script_params, check=False)
+    return {"mode": mode, "targets": targets or "default", "left_in_use": result.exit_code == 1}
 
 
 def storage_inventory(context: JobContext) -> dict[str, object]:

@@ -6,13 +6,25 @@
     -IncludeAuth is supplied. Import validates the whole bundle before writing.
 
       AI-Backup.ps1 -Mode Export -Path <dir> [-Full] [-IncludeAuth] [-DryRun]
+                    [-ChatListFile <chats.json>]
       AI-Backup.ps1 -Mode Import -Path <dir> [-Full] [-IncludeAuth] [-DryRun]
+                    [-ChatListFile <chats.json>]
                     [-AllowForeignPaths] [-AllowLegacy] [-Yes]
       AI-Backup.ps1 -Mode Merge  -Path <dir> [-Overwrite] [-DryRun] [-AllowLegacy]
+
+    A chat is one entry of the Claude app chat list plus its transcript
+    (projects\<folder>\<id>.jsonl and the folder of the same name).
+    -ChatListFile is a JSON array of chat ids (local_<uuid>); only those chats
+    are exported or restored, in either mode. Without it Full carries every
+    chat and Essential none.
 
     Profile roots follow CLAUDE_CONFIG_DIR, CODEX_HOME, CODEX_SQLITE_HOME and
     Codex config.toml sqlite_home. Matching files are overwritten on restore;
     unrelated local files are never deleted.
+
+    Full also carries the Claude desktop chat list (%APPDATA%\Claude\
+    claude-code-sessions): the sidebar is built from it, not from the session
+    transcripts, so transcripts restored without it stay invisible.
 #>
 [CmdletBinding()]
 param(
@@ -25,13 +37,20 @@ param(
     [switch]$DryRun,
     [switch]$AllowForeignPaths,
     [switch]$AllowLegacy,
-    [switch]$AllowRunningApps
+    [switch]$AllowRunningApps,
+    [string]$ChatListFile
 )
 
 $ErrorActionPreference = 'Stop'
 try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch { }
 
-$script:BundleSchemaVersion = 1
+# Schema 2 gives chats their own category; schema 1 bundles still verify.
+$script:BundleSchemaVersion = 2
+$script:UuidPattern = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+$script:ChatListPattern = '^claude_app/claude-code-sessions/(?:[^/]+/)*local_[^/]+\.json$'
+$script:ChatSelectionGiven = $false
+$script:ChatSelected = @{}
+$script:ChatFolderMap = @{}
 $script:Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 $script:ProjectRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 
@@ -76,7 +95,7 @@ function Get-RelativePath([string]$Base, [string]$Child) {
 
 function Assert-BundleOutsideProfiles([string]$BundleRoot) {
     $bundle = [System.IO.Path]::GetFullPath($BundleRoot).TrimEnd('\')
-    foreach ($profile in @($script:ClaudeHome, $script:CodexHome, $script:CodexSqliteHome) | Select-Object -Unique) {
+    foreach ($profile in @($script:ClaudeHome, $script:CodexHome, $script:CodexSqliteHome, $script:ClaudeAppSessions) | Select-Object -Unique) {
         if ([string]::IsNullOrWhiteSpace($profile)) { continue }
         $root = [System.IO.Path]::GetFullPath($profile).TrimEnd('\')
         $bundleInside = $bundle.StartsWith($root + '\', [System.StringComparison]::OrdinalIgnoreCase)
@@ -111,11 +130,12 @@ function Get-SafeBundlePath([string]$Root, [string]$Relative) {
     return $full
 }
 
-function Invoke-Robocopy([string]$Source, [string]$Destination, [string[]]$ExcludeFiles = @()) {
+function Invoke-Robocopy([string]$Source, [string]$Destination, [string[]]$ExcludeFiles = @(), [string[]]$ExcludeDirs = @()) {
     if (-not (Test-Path -LiteralPath $Source -PathType Container)) { return $false }
     New-Item -ItemType Directory -Force -Path $Destination | Out-Null
     $arguments = @($Source, $Destination, '/E', '/XJ', '/R:2', '/W:1', '/COPY:DAT', '/DCOPY:DAT', '/NFL', '/NDL', '/NJH', '/NJS', '/NP')
     if ($ExcludeFiles.Count) { $arguments += '/XF'; $arguments += $ExcludeFiles }
+    if ($ExcludeDirs.Count) { $arguments += '/XD'; $arguments += $ExcludeDirs }
     $output = @(& robocopy.exe @arguments 2>&1)
     $code = $LASTEXITCODE
     if ($code -ge 8) {
@@ -187,7 +207,114 @@ function Copy-SqliteState([string]$BundleRoot, [switch]$Everything) {
     }
 }
 
-function Get-FileCategory([string]$Relative) {
+function Import-ChatSelection {
+    $script:ChatSelected = @{}
+    $script:ChatSelectionGiven = -not [string]::IsNullOrWhiteSpace($ChatListFile)
+    if (-not $script:ChatSelectionGiven) { return }
+    if (-not (Test-Path -LiteralPath $ChatListFile -PathType Leaf)) { throw "Файл выбора чатов не найден: $ChatListFile" }
+    foreach ($id in (ConvertFrom-Json -InputObject ([System.IO.File]::ReadAllText($ChatListFile)))) {
+        $text = ([string]$id).Trim()
+        if ($text) { $script:ChatSelected[$text.ToLowerInvariant()] = $true }
+    }
+}
+
+function Test-ChatSelected([string]$Id) {
+    # Without a chat list the old rule holds: Full carries every chat, Essential none.
+    if (-not $script:ChatSelectionGiven) { return [bool]$Full }
+    return $script:ChatSelected.ContainsKey($Id.ToLowerInvariant())
+}
+
+function Read-ChatEntry([string]$File) {
+    try { $data = [System.IO.File]::ReadAllText($File) | ConvertFrom-Json } catch { return $null }
+    return [pscustomobject]@{
+        id = [System.IO.Path]::GetFileNameWithoutExtension($File)
+        cli = [string]$data.cliSessionId
+        title = [string]$data.title
+    }
+}
+
+function Get-LiveChats {
+    if (-not (Test-Path -LiteralPath $script:ClaudeAppSessions -PathType Container)) { return }
+    foreach ($file in @(Get-ChildItem -LiteralPath $script:ClaudeAppSessions -Recurse -File -Filter 'local_*.json')) {
+        $chat = Read-ChatEntry $file.FullName
+        if (-not $chat) { continue }
+        $chat | Add-Member -NotePropertyName relative -NotePropertyValue (Get-RelativePath $script:ClaudeAppSessions $file.FullName)
+        $chat
+    }
+}
+
+function Get-TranscriptItems([string]$Cli) {
+    # The transcript file and the folder of the same name, in whichever project folder holds them.
+    if ($Cli -notmatch "^$($script:UuidPattern)$") { return }
+    $projects = Join-Path $script:ClaudeHome 'projects'
+    if (-not (Test-Path -LiteralPath $projects -PathType Container)) { return }
+    foreach ($project in @(Get-ChildItem -LiteralPath $projects -Directory)) {
+        foreach ($name in @("$Cli.jsonl", $Cli)) {
+            $candidate = Join-Path $project.FullName $name
+            if (Test-Path -LiteralPath $candidate) { Get-Item -LiteralPath $candidate -Force }
+        }
+    }
+}
+
+function Copy-SelectedChats([string]$BundleRoot, [object[]]$Chats) {
+    $count = 0
+    foreach ($chat in $Chats) {
+        if (-not (Test-ChatSelected $chat.id)) { continue }
+        [void](Copy-OneFile (Join-Path $script:ClaudeAppSessions $chat.relative) (Join-Path $BundleRoot "claude_app\claude-code-sessions\$($chat.relative)"))
+        foreach ($item in @(Get-TranscriptItems $chat.cli)) {
+            $destination = Join-Path $BundleRoot ('claude\' + (Get-RelativePath $script:ClaudeHome $item.FullName))
+            if ($item.PSIsContainer) { [void](Invoke-Robocopy $item.FullName $destination) }
+            else { [void](Copy-OneFile $item.FullName $destination) }
+        }
+        $count++
+    }
+    return $count
+}
+
+function Get-BundleChats([string]$BundleRoot, [object[]]$Files) {
+    $transcripts = @{}
+    foreach ($entry in $Files) {
+        $path = [string]$entry.path
+        if ($path -match "(?i)^claude/projects/[^/]+/($($script:UuidPattern))(?:\.jsonl$|/)") {
+            $key = $Matches[1].ToLowerInvariant()
+            if (-not $transcripts.ContainsKey($key)) { $transcripts[$key] = New-Object System.Collections.ArrayList }
+            [void]$transcripts[$key].Add($path)
+        }
+    }
+    foreach ($entry in $Files) {
+        $path = [string]$entry.path
+        if ($path.ToLowerInvariant() -notmatch $script:ChatListPattern) { continue }
+        $chat = Read-ChatEntry (Get-SafeBundlePath $BundleRoot $path)
+        if (-not $chat) { continue }
+        $paths = @($path)
+        $key = $chat.cli.ToLowerInvariant()
+        if ($key -and $transcripts.ContainsKey($key)) { $paths += @($transcripts[$key]) }
+        [pscustomobject]@{ id = $chat.id; title = $chat.title; paths = $paths }
+    }
+}
+
+function Resolve-ChatFolder([string]$Relative) {
+    # <account>/<workspace>/...: a reinstalled app may start a new workspace
+    # folder, and a chat list left in the old one would stay invisible.
+    $parts = $Relative.Split('/')
+    if ($parts.Count -lt 3) { return $Relative }
+    $prefix = "$($parts[0])/$($parts[1])"
+    if (-not $script:ChatFolderMap.ContainsKey($prefix)) {
+        $mapped = $prefix
+        $local = Join-Path $script:ClaudeAppSessions $prefix.Replace('/', '\')
+        if (-not (Test-Path -LiteralPath $local -PathType Container) -and (Test-Path -LiteralPath $script:ClaudeAppSessions -PathType Container)) {
+            $existing = @(Get-ChildItem -LiteralPath $script:ClaudeAppSessions -Directory | ForEach-Object { Get-ChildItem -LiteralPath $_.FullName -Directory })
+            if ($existing.Count -eq 1) {
+                $mapped = (Get-RelativePath $script:ClaudeAppSessions $existing[0].FullName).Replace('\', '/')
+                Write-Host "Список чатов: папки $prefix здесь нет, кладу в $mapped" -ForegroundColor Yellow
+            }
+        }
+        $script:ChatFolderMap[$prefix] = $mapped
+    }
+    return $script:ChatFolderMap[$prefix] + '/' + ($parts[2..($parts.Count - 1)] -join '/')
+}
+
+function Get-FileCategory([string]$Relative, [int]$Schema = $script:BundleSchemaVersion) {
     $path = $Relative.Replace('\', '/').ToLowerInvariant()
     if ($path -in @('claude/.credentials.json', 'codex/auth.json')) { return 'auth' }
     if ($path -eq 'claude.json') { return 'essential' }
@@ -197,6 +324,11 @@ function Get-FileCategory([string]$Relative) {
     if ($path -match '^codex/(config\.toml|agents\.md)$') { return 'essential' }
     if ($path -match '^codex/(memories|rules|automations|skills|plugins)/') { return 'essential' }
     if ($path -match '^codex(_sqlite)?/(memories_1|goals_1)\.sqlite$') { return 'essential' }
+    # A chat is its chat-list entry plus its transcript; they travel by choice.
+    if ($Schema -ge 2) {
+        if ($path -match $script:ChatListPattern) { return 'chat' }
+        if ($path -match "^claude/projects/[^/]+/$($script:UuidPattern)(?:\.jsonl$|/)") { return 'chat' }
+    }
     return 'full'
 }
 
@@ -249,6 +381,7 @@ function Write-Manifest([string]$BundleRoot, [bool]$IsFull, [bool]$HasAuth) {
             claude_state_file = $script:ClaudeStateFile
             codex_home = $script:CodexHome
             codex_sqlite_home = $script:CodexSqliteHome
+            claude_app_sessions = $script:ClaudeAppSessions
         }
         absolute_path_warnings = @(Get-AbsolutePathWarnings $BundleRoot)
         files = $entries
@@ -274,7 +407,8 @@ function Read-AndVerifyManifest([string]$BundleRoot, [switch]$LegacyAllowed) {
     }
 
     $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-    if ([int]$manifest.schema_version -ne $script:BundleSchemaVersion) {
+    $schema = [int]$manifest.schema_version
+    if ($schema -lt 1 -or $schema -gt $script:BundleSchemaVersion) {
         throw "Неподдерживаемая версия manifest: $($manifest.schema_version)"
     }
     $declared = @{}
@@ -282,7 +416,7 @@ function Read-AndVerifyManifest([string]$BundleRoot, [switch]$LegacyAllowed) {
         $relative = [string]$entry.path
         $key = $relative.ToLowerInvariant()
         if ($declared.ContainsKey($key)) { throw "Повтор пути в manifest: $relative" }
-        $expectedCategory = Get-FileCategory $relative
+        $expectedCategory = Get-FileCategory $relative $schema
         if ([string]$entry.category -ne $expectedCategory) { throw "Неверная категория в manifest: $relative" }
         $file = Get-SafeBundlePath $BundleRoot $relative
         if (-not (Test-Path -LiteralPath $file -PathType Leaf)) { throw "Файл из manifest отсутствует: $relative" }
@@ -327,6 +461,10 @@ function Test-ForeignPaths([object]$Manifest) {
 function Resolve-ImportDestination([string]$Relative) {
     $path = $Relative.Replace('\', '/')
     if ($path.Equals('claude.json', [System.StringComparison]::OrdinalIgnoreCase)) { return $script:ClaudeStateFile }
+    # Only the chat list goes back into %APPDATA%\Claude, never the app's other files.
+    if ($path -match '(?i)^claude_app/claude-code-sessions/(.+)$') {
+        return Join-Path $script:ClaudeAppSessions (Resolve-ChatFolder $Matches[1]).Replace('/', '\')
+    }
     if ($path -match '(?i)^claude/(.+)$') { return Join-Path $script:ClaudeHome $Matches[1].Replace('/', '\') }
     if ($path -match '(?i)^codex_sqlite/(.+)$') { return Join-Path $script:CodexSqliteHome $Matches[1].Replace('/', '\') }
     if ($path -match '(?i)^codex/((?:memories_1|goals_1)\.sqlite(?:-(?:wal|shm|journal))?)$') {
@@ -345,7 +483,7 @@ function Assert-AppsStopped([bool]$NeedClaude, [bool]$NeedCodex) {
 }
 
 function Copy-ManifestEntries([string]$BundleRoot, [object[]]$Entries) {
-    $needClaude = @($Entries | Where-Object { ([string]$_.path) -match '(?i)^claude(?:/|\.json$)' }).Count -gt 0
+    $needClaude = @($Entries | Where-Object { ([string]$_.path) -match '(?i)^claude(?:/|_app/|\.json$)' }).Count -gt 0
     $needCodex = @($Entries | Where-Object { ([string]$_.path) -match '(?i)^codex(?:/|_)' }).Count -gt 0
     Assert-AppsStopped $needClaude $needCodex
     $added = 0; $replaced = 0; $same = 0
@@ -460,6 +598,8 @@ $script:ClaudeHome = Resolve-AbsolutePath $env:CLAUDE_CONFIG_DIR (Join-Path $scr
 $script:ClaudeStateFile = Join-Path $script:UserProfile '.claude.json'
 $script:CodexHome = Resolve-AbsolutePath $env:CODEX_HOME (Join-Path $script:UserProfile '.codex') (Get-Location).Path
 $script:CodexSqliteHome = Read-CodexSqliteHome $script:CodexHome
+$script:AppData = if ($env:APPDATA) { [System.IO.Path]::GetFullPath($env:APPDATA) } else { [Environment]::GetFolderPath('ApplicationData') }
+$script:ClaudeAppSessions = Join-Path $script:AppData 'Claude\claude-code-sessions'
 
 if (-not $Mode) {
     $answer = Read-Host 'Режим: [E] экспорт / [I] импорт-восстановление / [M] слияние памяти'
@@ -473,6 +613,7 @@ Assert-BundleOutsideProfiles $bundlePath
 Write-Host "Claude config: $script:ClaudeHome"
 Write-Host "Codex home:    $script:CodexHome"
 Write-Host "Codex SQLite:  $script:CodexSqliteHome"
+Write-Host "Claude chats:  $script:ClaudeAppSessions"
 
 if ($Mode -eq 'Export') {
     Write-Host "Экспорт -> $bundlePath" -ForegroundColor Cyan
@@ -482,6 +623,8 @@ if ($Mode -eq 'Export') {
         throw 'Не найден ни профиль Claude, ни профиль Codex.'
     }
 
+    Import-ChatSelection
+    $chats = @(Get-LiveChats)
     $parent = Split-Path -Parent $bundlePath
     if (-not $parent) { throw "Небезопасная целевая папка: $bundlePath" }
     New-Item -ItemType Directory -Force -Path $parent | Out-Null
@@ -489,8 +632,14 @@ if ($Mode -eq 'Export') {
     New-Item -ItemType Directory -Path $temporary | Out-Null
     try {
         if ($Full) {
+            # Chats left out of the selection lose their list entry and transcript;
+            # the rest of the profile, terminal sessions included, goes whole.
+            $skipped = @($chats | Where-Object { -not (Test-ChatSelected $_.id) })
+            $skippedCli = @($skipped | Where-Object { $_.cli -match "^$($script:UuidPattern)$" } | ForEach-Object { $_.cli })
             Write-Host 'Claude: полный профиль'
-            [void](Invoke-Robocopy $script:ClaudeHome (Join-Path $temporary 'claude') @('.credentials.json'))
+            [void](Invoke-Robocopy $script:ClaudeHome (Join-Path $temporary 'claude') (@('.credentials.json') + @($skippedCli | ForEach-Object { "$_.jsonl" })) $skippedCli)
+            [void](Invoke-Robocopy $script:ClaudeAppSessions (Join-Path $temporary 'claude_app\claude-code-sessions') @($skipped | ForEach-Object { "$($_.id).json" }))
+            if ($chats.Count) { Write-Host ("Claude: чатов в бэкапе {0} из {1}" -f ($chats.Count - $skipped.Count), $chats.Count) }
             Write-Host 'Codex: полный профиль без machine-id и live SQLite'
             [void](Invoke-Robocopy $script:CodexHome (Join-Path $temporary 'codex') @(
                 'auth.json', 'installation_id', '*.sqlite', '*.sqlite3', '*.db', '*.db3',
@@ -508,6 +657,8 @@ if ($Mode -eq 'Export') {
                     }
                 }
             }
+            $copied = Copy-SelectedChats $temporary $chats
+            if ($chats.Count) { Write-Host ("Claude: чатов в бэкапе {0} из {1}" -f $copied, $chats.Count) }
             Write-Host 'Codex: essential'
             Copy-SelectedItems $script:CodexHome (Join-Path $temporary 'codex') @('config.toml', 'AGENTS.md', 'memories', 'rules', 'automations', 'skills', 'plugins')
         }
@@ -554,12 +705,29 @@ else {
         Write-Host "Codex SQLite после импорта: $script:CodexSqliteHome"
     }
     Test-ForeignPaths $manifest
+    Import-ChatSelection
+    $chats = @(Get-BundleChats $bundlePath @($manifest.files))
+    $chosen = @{}
+    $claimed = @{}
+    foreach ($chat in $chats) {
+        $take = Test-ChatSelected $chat.id
+        foreach ($chatPath in $chat.paths) {
+            $key = ([string]$chatPath).ToLowerInvariant()
+            $claimed[$key] = $true
+            if ($take) { $chosen[$key] = $true }
+        }
+    }
     $selected = @($manifest.files | Where-Object {
-        $category = [string]$_.category
-        ($category -eq 'essential') -or ($category -eq 'full' -and $Full) -or ($category -eq 'auth' -and $IncludeAuth)
+        $path = ([string]$_.path).ToLowerInvariant()
+        # Categories come from the path, so schema 1 bundles get chat choice too.
+        # A transcript no chat claims (a terminal session) goes with Full.
+        $category = Get-FileCategory ([string]$_.path)
+        ($category -eq 'essential') -or ($category -eq 'full' -and $Full) -or ($category -eq 'auth' -and $IncludeAuth) -or
+        ($category -eq 'chat' -and ($chosen.ContainsKey($path) -or ($Full -and -not $claimed.ContainsKey($path))))
     })
     if (-not $selected.Count) { throw 'После применения параметров не осталось файлов для импорта.' }
-    Write-Host ("Режим: {0}; авторизация: {1}; файлов: {2}" -f $(if ($Full) { 'full' } else { 'essential' }), $IncludeAuth.IsPresent, $selected.Count)
+    $chatCount = @($chats | Where-Object { Test-ChatSelected $_.id }).Count
+    Write-Host ("Режим: {0}; авторизация: {1}; чатов: {2} из {3}; файлов: {4}" -f $(if ($Full) { 'full' } else { 'essential' }), $IncludeAuth.IsPresent, $chatCount, $chats.Count, $selected.Count)
     if (-not $DryRun -and -not $Yes) {
         $answer = Read-Host 'Продолжить импорт совпадающих файлов? (y/N)'
         if ($answer -notmatch '^[yYдД]') { Write-Host 'Отменено.'; exit 0 }

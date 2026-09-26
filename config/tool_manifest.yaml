@@ -807,6 +807,239 @@ operation_groups:
                     label: "Profile XML folder"
                     label_ru: "Папка XML профилей"
                     default: "output\\wifi_profiles"
+      - id: network_wifi_slots
+        title: "Internet: cable / WI-FI MAIN / SECOND"
+        title_ru: "Интернет: провод / WI-FI MAIN / SECOND"
+        description: "Choose how this machine reaches the internet: the cable to the router (first provider) or Wi-Fi MAIN / SECOND with the cable switched off. The two networks are typed once in the window; the password is kept under Windows DPAPI."
+        description_ru: "Выбрать, через что машина выходит в интернет: провод в роутер (первый провайдер) или Wi-Fi MAIN / SECOND с выключенным проводом. Сети задаются один раз в окне, пароль хранится под DPAPI Windows."
+        children:
+          - id: wifi_slot_status
+            title: "Slots status"
+            title_ru: "Состояние слотов"
+            action_group: "WI-FI MAIN / SECOND"
+            action_group_ru: "WI-FI MAIN / SECOND"
+            action_group_tone: "neutral"
+            action_tone: "friendly"
+            description: "Show which slots are set (SSID and security, never the password), whether Windows has their profiles, and the current connection."
+            description_ru: "Показать, какие слоты заданы (сеть и защита, пароль — никогда), есть ли их профили в Windows, и текущее подключение."
+            service: "system_core.services.devops_tools:wifi_slot"
+            kind: "safe"
+            risk_level: "readonly"
+            parameters:
+              mode: "status"
+          - id: internet_via_cable
+            title: "Internet: CABLE"
+            title_ru: "Интернет: ПРОВОД"
+            action_group: "Internet route"
+            action_group_ru: "Выход в интернет"
+            action_group_tone: "neutral"
+            action_tone: "medium"
+            description: "Cable on (the router, first provider), Wi-Fi off. Administrator rights."
+            description_ru: "Провод включается (роутер, первый провайдер), Wi-Fi выключается. Нужны права администратора."
+            service: "system_core.services.devops_tools:internet_via_cable"
+            kind: "dangerous"
+            risk_level: "system_change"
+            fields:
+              - id: lan_adapter
+                type: "select"
+                label: "Cable adapter"
+                label_ru: "Проводной адаптер"
+                options_source: "system_core.services.devops_tools:network_adapter_options"
+                cache_seconds: 20
+                searchable: true
+                advanced: true
+                hint: "Empty: every physical cable adapter."
+                hint_ru: "Пусто — все физические проводные адаптеры."
+              - id: wifi_adapter
+                type: "select"
+                label: "Wi-Fi adapter"
+                label_ru: "Wi-Fi адаптер"
+                options_source: "system_core.services.devops_tools:wifi_adapter_options"
+                cache_seconds: 20
+                searchable: true
+                advanced: true
+                hint: "Empty: every physical Wi-Fi adapter."
+                hint_ru: "Пусто — все физические Wi-Fi адаптеры."
+          - id: wifi_slot_connect_main
+            title: "Internet: WI-FI MAIN"
+            title_ru: "Интернет: WI-FI MAIN"
+            action_group: "Internet route"
+            action_group_ru: "Выход в интернет"
+            action_group_tone: "neutral"
+            action_tone: "medium"
+            description: "Cable off (it goes to the router of the first provider), Wi-Fi on, the Windows profile written from WI-FI MAIN, connected. Administrator rights."
+            description_ru: "Провод выключается (он идёт в роутер первого провайдера), Wi-Fi включается, профиль Windows записывается из WI-FI MAIN и подключается. Нужны права администратора."
+            service: "system_core.services.devops_tools:wifi_slot"
+            kind: "dangerous"
+            risk_level: "system_change"
+            parameters:
+              mode: "connect"
+              slot: "main"
+            fields:
+              - id: lan_adapter
+                type: "select"
+                label: "Cable adapter"
+                label_ru: "Проводной адаптер"
+                options_source: "system_core.services.devops_tools:network_adapter_options"
+                cache_seconds: 20
+                searchable: true
+                advanced: true
+                hint: "Empty: every physical cable adapter."
+                hint_ru: "Пусто — все физические проводные адаптеры."
+              - id: wifi_adapter
+                type: "select"
+                label: "Wi-Fi adapter"
+                label_ru: "Wi-Fi адаптер"
+                options_source: "system_core.services.devops_tools:wifi_adapter_options"
+                cache_seconds: 20
+                searchable: true
+                advanced: true
+                hint: "Empty: every physical Wi-Fi adapter."
+                hint_ru: "Пусто — все физические Wi-Fi адаптеры."
+          - id: wifi_slot_connect_second
+            title: "Internet: WI-FI SECOND"
+            title_ru: "Интернет: WI-FI SECOND"
+            action_group: "Internet route"
+            action_group_ru: "Выход в интернет"
+            action_group_tone: "neutral"
+            action_tone: "medium"
+            description: "Cable off (it goes to the router of the first provider), Wi-Fi on, the Windows profile written from WI-FI SECOND, connected. Administrator rights."
+            description_ru: "Провод выключается (он идёт в роутер первого провайдера), Wi-Fi включается, профиль Windows записывается из WI-FI SECOND и подключается. Нужны права администратора."
+            service: "system_core.services.devops_tools:wifi_slot"
+            kind: "dangerous"
+            risk_level: "system_change"
+            parameters:
+              mode: "connect"
+              slot: "second"
+            fields:
+              - id: lan_adapter
+                type: "select"
+                label: "Cable adapter"
+                label_ru: "Проводной адаптер"
+                options_source: "system_core.services.devops_tools:network_adapter_options"
+                cache_seconds: 20
+                searchable: true
+                advanced: true
+                hint: "Empty: every physical cable adapter."
+                hint_ru: "Пусто — все физические проводные адаптеры."
+              - id: wifi_adapter
+                type: "select"
+                label: "Wi-Fi adapter"
+                label_ru: "Wi-Fi адаптер"
+                options_source: "system_core.services.devops_tools:wifi_adapter_options"
+                cache_seconds: 20
+                searchable: true
+                advanced: true
+                hint: "Empty: every physical Wi-Fi adapter."
+                hint_ru: "Пусто — все физические Wi-Fi адаптеры."
+          - id: wifi_slot_save_main
+            title: "Save WI-FI MAIN"
+            title_ru: "Сохранить WI-FI MAIN"
+            action_group: "WI-FI MAIN / SECOND"
+            action_group_ru: "WI-FI MAIN / SECOND"
+            action_group_tone: "neutral"
+            action_tone: "friendly"
+            description: "Store the SSID and password of WI-FI MAIN; the password goes under DPAPI and is cleared from the window."
+            description_ru: "Сохранить имя сети и пароль WI-FI MAIN; пароль уходит под DPAPI и стирается из окна."
+            service: "system_core.services.devops_tools:wifi_slot"
+            kind: "safe"
+            risk_level: "user_write"
+            parameters:
+              mode: "save"
+              slot: "main"
+            fields:
+              - id: wifi_main_ssid
+                type: "text"
+                label: "WI-FI MAIN SSID"
+                label_ru: "WI-FI MAIN: имя сети (SSID)"
+                placeholder: "SSID"
+              - id: wifi_main_password
+                type: "password"
+                label: "WI-FI MAIN password"
+                label_ru: "WI-FI MAIN: пароль"
+                hint: "Stored under Windows DPAPI for this user; never written to logs. Leave empty to keep the stored one for the same SSID."
+                hint_ru: "Хранится под DPAPI Windows для этого пользователя, в журнал не пишется. Пусто — оставить сохранённый для той же сети."
+              - id: wifi_main_security
+                type: "select"
+                label: "Security"
+                label_ru: "Защита"
+                default: "wpa2"
+                options:
+                  - value: "wpa2"
+                    label: "WPA2-Personal"
+                    label_ru: "WPA2-Personal"
+                  - value: "wpa3"
+                    label: "WPA3-Personal"
+                    label_ru: "WPA3-Personal"
+          - id: wifi_slot_save_second
+            title: "Save WI-FI SECOND"
+            title_ru: "Сохранить WI-FI SECOND"
+            action_group: "WI-FI MAIN / SECOND"
+            action_group_ru: "WI-FI MAIN / SECOND"
+            action_group_tone: "neutral"
+            action_tone: "friendly"
+            description: "Store the SSID and password of WI-FI SECOND; the password goes under DPAPI and is cleared from the window."
+            description_ru: "Сохранить имя сети и пароль WI-FI SECOND; пароль уходит под DPAPI и стирается из окна."
+            service: "system_core.services.devops_tools:wifi_slot"
+            kind: "safe"
+            risk_level: "user_write"
+            parameters:
+              mode: "save"
+              slot: "second"
+            fields:
+              - id: wifi_second_ssid
+                type: "text"
+                label: "WI-FI SECOND SSID"
+                label_ru: "WI-FI SECOND: имя сети (SSID)"
+                placeholder: "SSID"
+              - id: wifi_second_password
+                type: "password"
+                label: "WI-FI SECOND password"
+                label_ru: "WI-FI SECOND: пароль"
+                hint: "Stored under Windows DPAPI for this user; never written to logs. Leave empty to keep the stored one for the same SSID."
+                hint_ru: "Хранится под DPAPI Windows для этого пользователя, в журнал не пишется. Пусто — оставить сохранённый для той же сети."
+              - id: wifi_second_security
+                type: "select"
+                label: "Security"
+                label_ru: "Защита"
+                default: "wpa2"
+                options:
+                  - value: "wpa2"
+                    label: "WPA2-Personal"
+                    label_ru: "WPA2-Personal"
+                  - value: "wpa3"
+                    label: "WPA3-Personal"
+                    label_ru: "WPA3-Personal"
+          - id: wifi_slot_forget_main
+            title: "Forget WI-FI MAIN"
+            title_ru: "Забыть WI-FI MAIN"
+            action_group: "WI-FI MAIN / SECOND"
+            action_group_ru: "WI-FI MAIN / SECOND"
+            action_group_tone: "neutral"
+            action_tone: "danger"
+            description: "Remove WI-FI MAIN from the slots file. The Windows profile stays."
+            description_ru: "Удалить WI-FI MAIN из файла слотов. Профиль Windows остаётся."
+            service: "system_core.services.devops_tools:wifi_slot"
+            kind: "dangerous"
+            risk_level: "user_write"
+            parameters:
+              mode: "forget"
+              slot: "main"
+          - id: wifi_slot_forget_second
+            title: "Forget WI-FI SECOND"
+            title_ru: "Забыть WI-FI SECOND"
+            action_group: "WI-FI MAIN / SECOND"
+            action_group_ru: "WI-FI MAIN / SECOND"
+            action_group_tone: "neutral"
+            action_tone: "danger"
+            description: "Remove WI-FI SECOND from the slots file. The Windows profile stays."
+            description_ru: "Удалить WI-FI SECOND из файла слотов. Профиль Windows остаётся."
+            service: "system_core.services.devops_tools:wifi_slot"
+            kind: "dangerous"
+            risk_level: "user_write"
+            parameters:
+              mode: "forget"
+              slot: "second"
       - id: smb_network_login
         title: "SMB network login"
         title_ru: "SMB вход в сеть"
@@ -4705,8 +4938,8 @@ operation_groups:
             label: "Move only the essentials"
             label_ru: "Перенести самое необходимое"
             default: true
-            hint: "On keeps memory, settings, skills, plugins and automation. Off also adds full session history and caches."
-            hint_ru: "Вкл сохраняет память, настройки, навыки, плагины и автоматизации. Выкл добавляет полную историю сессий и кэш."
+            hint: "On keeps memory, settings, skills, plugins and automation. Off also adds caches, terminal sessions and the rest of the profiles. Chats go by the list below."
+            hint_ru: "Вкл сохраняет память, настройки, навыки, плагины и автоматизации. Выкл добавляет кэш, сессии терминала и остальное содержимое профилей. Чаты — по списку ниже."
           - id: include_auth
             type: "checkbox"
             label: "Include authentication secrets"
@@ -4714,6 +4947,23 @@ operation_groups:
             default: false
             hint: "Adds Claude .credentials.json and Codex auth.json when present. Treat the bundle like a password."
             hint_ru: "Добавляет Claude .credentials.json и Codex auth.json, если они есть. Храните такой бэкап как пароль."
+          - id: export_chats
+            type: "multiselect"
+            label: "Chats"
+            label_ru: "Чаты"
+            options_source: "system_core.services.devops_tools:ai_backup_live_chat_options"
+            cache_seconds: 20
+            refresh_label: "Refresh chats"
+            refresh_label_ru: "Обновить список чатов"
+            selection_presets:
+              - mode: "all"
+                label: "All"
+                label_ru: "Все"
+              - mode: "none"
+                label: "None"
+                label_ru: "Ничего"
+            hint: "Ticked chats go into the backup in either mode, each with its whole conversation. Hover a chat for its date, folder and size."
+            hint_ru: "Отмеченные чаты попадут в бэкап в любом режиме, каждый со всей перепиской. Дата, папка и размер — в подсказке чата."
         parameters:
           mode: "export"
       - id: ai_backup_import
@@ -4734,8 +4984,8 @@ operation_groups:
             label: "Restore only the essentials"
             label_ru: "Восстановить только необходимое"
             default: true
-            hint: "On ignores session history and caches even when the staged bundle is full."
-            hint_ru: "Вкл не импортирует историю сессий и кэш, даже если в input лежит полный бэкап."
+            hint: "On ignores caches, terminal sessions and the rest of the profiles even when the staged bundle is full. Chats go by the list below."
+            hint_ru: "Вкл не импортирует кэш, сессии терминала и остальное содержимое профилей, даже если в input лежит полный бэкап. Чаты — по списку ниже."
           - id: include_auth
             type: "checkbox"
             label: "Restore authentication secrets"
@@ -4748,6 +4998,23 @@ operation_groups:
             default: true
             hint: "Shows ADD/REPLACE/SAME without changing the profiles."
             hint_ru: "Показывает ADD/REPLACE/SAME без изменения профилей."
+          - id: import_chats
+            type: "multiselect"
+            label: "Chats in the backup"
+            label_ru: "Чаты в бэкапе"
+            options_source: "system_core.services.devops_tools:ai_backup_bundle_chat_options"
+            cache_seconds: 5
+            refresh_label: "Refresh chats"
+            refresh_label_ru: "Обновить список чатов"
+            selection_presets:
+              - mode: "all"
+                label: "All"
+                label_ru: "Все"
+              - mode: "none"
+                label: "None"
+                label_ru: "Ничего"
+            hint: "Ticked chats are restored in either mode. Staged a new backup in input? Refresh the list first. Close the Claude app before restoring."
+            hint_ru: "Отмеченные чаты восстановятся в любом режиме. Положили новый бэкап в input — сначала обновите список. Перед восстановлением закройте приложение Claude."
           - id: allow_foreign_paths
             type: "checkbox"
             label: "Allow saved absolute paths from another PC"
@@ -5439,14 +5706,14 @@ operation_groups:
                 label: "tools/ssd_nvme_reset_wizard"
               - value: "tools/winre_extend"
                 label: "tools/winre_extend"
-              - value: "tools/bitrix_hosts_toggle_pack"
-                label: "tools/bitrix_hosts_toggle_pack"
               - value: "tools/disable_windows_proxy"
                 label: "tools/disable_windows_proxy"
               - value: "tools/wires_wireless"
                 label: "tools/wires_wireless"
               - value: "tools/wsl"
                 label: "tools/wsl"
+              - value: "tools/cache_cleaner"
+                label: "tools/cache_cleaner"
 
 
   - id: maintenance
@@ -5539,6 +5806,84 @@ operation_groups:
             parameters:
               tool: "codex"
               mode: "Nuke"
+      - id: runtime_cache_cleaner
+        title: "Cache Cleaner"
+        title_ru: "Очистка кэшей"
+        description: "Free the system drive from caches that rebuild themselves: pip, npm, NuGet, Temp, Adobe media cache, Chrome on-device AI model."
+        description_ru: "Освободить системный диск от кэшей, которые программы сами наполнят снова: pip, npm, NuGet, Temp, медиакэш Adobe, локальная ИИ-модель Chrome."
+        children:
+          - id: cache_cleaner_audit
+            title: "Measure caches"
+            title_ru: "Замерить кэши"
+            action_group: "Cache cleanup"
+            action_group_ru: "Кэши: замер / очистка / модель Chrome"
+            action_group_tone: "neutral"
+            action_tone: "friendly"
+            description: "Measure pip, npm, NuGet, Temp older than 24 h and Adobe media cache; change nothing."
+            description_ru: "Замерить pip, npm, NuGet, Temp старше суток и медиакэш Adobe; ничего не менять."
+            service: "system_core.services.devops_tools:cache_cleaner"
+            kind: "safe"
+            risk_level: "readonly"
+            parameters:
+              mode: "Audit"
+          - id: cache_cleaner_clean
+            title: "Clear caches"
+            title_ru: "Очистить кэши"
+            action_group: "Cache cleanup"
+            action_group_ru: "Кэши: замер / очистка / модель Chrome"
+            action_group_tone: "neutral"
+            action_tone: "medium"
+            description: "Clear pip, npm, NuGet http cache, Temp older than 24 h (files in use stay) and Adobe media cache (skipped while Adobe video apps run)."
+            description_ru: "Очистить pip, npm, http-кэш NuGet, Temp старше суток (занятые файлы остаются) и медиакэш Adobe (пропускается, пока открыты видеопрограммы Adobe)."
+            service: "system_core.services.devops_tools:cache_cleaner"
+            kind: "dangerous"
+            risk_level: "user_write"
+            parameters:
+              mode: "Clean"
+          - id: cache_cleaner_clean_nuget
+            title: "Clear caches and NuGet packages"
+            title_ru: "Очистить кэши и пакеты NuGet"
+            action_group: "Cache cleanup"
+            action_group_ru: "Кэши: замер / очистка / модель Chrome"
+            action_group_tone: "neutral"
+            action_tone: "medium"
+            description: "Same as Clear caches plus ~/.nuget/packages; the next build downloads every package again."
+            description_ru: "То же, плюс ~/.nuget/packages: следующая сборка скачает все пакеты заново."
+            service: "system_core.services.devops_tools:cache_cleaner"
+            kind: "dangerous"
+            risk_level: "user_write"
+            parameters:
+              mode: "Clean"
+              NuGetPackages: true
+          - id: cache_cleaner_chrome_model
+            title: "Remove Chrome AI model"
+            title_ru: "Убрать ИИ-модель Chrome"
+            action_group: "Cache cleanup"
+            action_group_ru: "Кэши: замер / очистка / модель Chrome"
+            action_group_tone: "neutral"
+            action_tone: "danger"
+            description: "Delete Chrome on-device AI model (OptGuideOnDeviceModel) and set the user Chrome policy GenAILocalFoundationalModelSettings = 1 so it does not come back. Close Chrome first."
+            description_ru: "Удалить локальную ИИ-модель Chrome (OptGuideOnDeviceModel) и поставить пользовательскую политику Chrome GenAILocalFoundationalModelSettings = 1, чтобы она не скачалась снова. Сначала закройте Chrome."
+            service: "system_core.services.devops_tools:cache_cleaner"
+            kind: "dangerous"
+            risk_level: "user_write"
+            parameters:
+              mode: "Clean"
+              Targets: "chrome"
+          - id: cache_cleaner_chrome_undo
+            title: "Allow Chrome AI model again"
+            title_ru: "Вернуть ИИ-модель Chrome"
+            action_group: "Cache cleanup"
+            action_group_ru: "Кэши: замер / очистка / модель Chrome"
+            action_group_tone: "neutral"
+            action_tone: "friendly"
+            description: "Remove the Chrome policy set by Remove Chrome AI model; Chrome may download the model again."
+            description_ru: "Снять политику Chrome, поставленную кнопкой «Убрать ИИ-модель Chrome»; Chrome может снова скачать модель."
+            service: "system_core.services.devops_tools:cache_cleaner"
+            kind: "safe"
+            risk_level: "user_write"
+            parameters:
+              mode: "ChromeUndo"
       - id: runtime_python_nuke
         title: "Python Nuke"
         title_ru: "Очистка Python"

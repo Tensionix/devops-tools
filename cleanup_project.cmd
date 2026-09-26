@@ -60,7 +60,7 @@ echo   - root licenses\ is preserved unchanged
 echo   - Python caches and coverage output
 echo   - snapshots in EVERY backup folder, the project's and each pack's:
 echo     backup, tools\network_cleaner\backup, tools\disable_windows_proxy\backup,
-echo     tools\bitrix_hosts_toggle_pack\backup, tools\wsl\...\WSL\Backup
+echo     tools\wsl\...\WSL\Backup
 echo     Those hold this machine's network state - MAC and IP addresses, DNS
 echo     servers, Wi-Fi network names, firewall and registry exports - so a
 echo     release must not carry them. The folder structure stays.
@@ -430,15 +430,8 @@ exit /b 0
 :IsPreservedBackupFile
 rem .gitkeep and .keep are spared if an older tree still carries them; the
 rem folder structure itself now comes from init_folders.cmd.
-rem
-rem "hosts" is the Bitrix pack's factory reference - the file its restore copies
-rem from, holding the stock Windows hosts and nothing of this machine. It is not
-rem tracked in git and nothing would recreate it, so deleting it would quietly
-rem disable that tool's restore. Only the file is spared; the root backup\hosts
-rem folder is a snapshot target and gets cleared like the rest.
 if /I "%~1"==".gitkeep" exit /b 0
 if /I "%~1"==".keep" exit /b 0
-if /I "%~1"=="hosts" exit /b 0
 exit /b 1
 
 :ResetTerminalCommandCache

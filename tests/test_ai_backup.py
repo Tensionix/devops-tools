@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import shutil
 import sqlite3
 import subprocess
 import sys
@@ -24,16 +25,42 @@ SCRIPT = TOOL_ROOT / "AI-Backup.ps1"
 PWSH = PROJECT_ROOT / "system_core" / "powershell" / "pwsh.exe"
 PYTHON = PROJECT_ROOT / "runtime" / "python.exe"
 
+KEEP_CLI = "11111111-1111-1111-1111-111111111111"
+SKIP_CLI = "22222222-2222-2222-2222-222222222222"
+TERMINAL_CLI = "33333333-3333-3333-3333-333333333333"
+CHAT_LIST = "claude_app/claude-code-sessions/account/workspace"
+
+
+def chat_files(name: str, cli: str) -> list[str]:
+    """Bundle paths of one chat: its chat-list entry, transcript and side folder."""
+    return [
+        f"{CHAT_LIST}/local_{name}.json",
+        f"claude/projects/sample/{cli}.jsonl",
+        f"claude/projects/sample/{cli}/subagents/agent.jsonl",
+    ]
+
 
 def make_profile(root: Path) -> dict[str, Path]:
     user = root / "user"
     claude = root / "claude-home"
     codex = root / "codex-home"
     sqlite_home = root / "codex-sqlite"
-    for directory in (user, claude, codex, sqlite_home):
+    appdata = root / "appdata"
+    for directory in (user, claude, codex, sqlite_home, appdata):
         directory.mkdir(parents=True, exist_ok=True)
 
     (claude / "projects" / "sample" / "memory").mkdir(parents=True)
+    chats = appdata / "Claude" / "claude-code-sessions" / "account" / "workspace"
+    chats.mkdir(parents=True)
+    for name, cli in (("keep", KEEP_CLI), ("skip", SKIP_CLI)):
+        entry = {"title": f"{name} chat", "cliSessionId": cli, "cwd": "E:\\Work", "lastActivityAt": 1790000000000}
+        (chats / f"local_{name}.json").write_text(json.dumps(entry), encoding="utf-8")
+        (claude / "projects" / "sample" / f"{cli}.jsonl").write_text(f"{name} transcript\n", encoding="utf-8")
+        (claude / "projects" / "sample" / cli / "subagents").mkdir(parents=True)
+        (claude / "projects" / "sample" / cli / "subagents" / "agent.jsonl").write_text("agent\n", encoding="utf-8")
+    (claude / "projects" / "sample" / f"{TERMINAL_CLI}.jsonl").write_text("terminal session\n", encoding="utf-8")
+    (appdata / "Claude" / "config.json").write_text('{"app":"not backed up"}\n', encoding="utf-8")
+
     (claude / "projects" / "sample" / "memory" / "fact.md").write_text("portable fact\n", encoding="utf-8")
     (claude / "projects" / "sample" / "memory" / "second.md").write_text("second fact\n", encoding="utf-8")
     (claude / "projects" / "sample" / "memory" / "MEMORY.md").write_text(
@@ -64,7 +91,7 @@ def make_profile(root: Path) -> dict[str, Path]:
         connection.execute("INSERT INTO goal VALUES ('goal')")
         connection.commit()
 
-    return {"user": user, "claude": claude, "codex": codex, "sqlite": sqlite_home}
+    return {"user": user, "claude": claude, "codex": codex, "sqlite": sqlite_home, "appdata": appdata}
 
 
 def tool_env(profile: dict[str, Path]) -> dict[str, str]:
@@ -75,11 +102,18 @@ def tool_env(profile: dict[str, Path]) -> dict[str, str]:
             "CLAUDE_CONFIG_DIR": str(profile["claude"]),
             "CODEX_HOME": str(profile["codex"]),
             "CODEX_SQLITE_HOME": str(profile["sqlite"]),
+            "APPDATA": str(profile["appdata"]),
             "AUDION_GUI_PYTHON": str(PYTHON),
             "AUDION_NO_PAUSE": "1",
         }
     )
     return env
+
+
+def chat_choice(tmp_path: Path, *ids: str) -> list[str]:
+    choice = tmp_path / f"chats-{len(list(tmp_path.glob('chats-*.json')))}.json"
+    choice.write_text(json.dumps(list(ids)), encoding="utf-8")
+    return ["-ChatListFile", str(choice)]
 
 
 def run_tool(profile: dict[str, Path], mode: str, bundle: Path, *flags: str) -> subprocess.CompletedProcess[str]:
@@ -128,6 +162,9 @@ def test_essential_export_is_fresh_verified_and_excludes_auth(tmp_path: Path) ->
     assert "claude/sessions/old.jsonl" not in files
     assert "codex/sessions/old.jsonl" not in files
     assert "codex/installation_id" not in files
+    # Without a chat list Essential carries no chats, as before.
+    assert not any(relative.startswith("claude_app/") for relative in files)
+    assert f"claude/projects/sample/{KEEP_CLI}.jsonl" not in files
 
     for relative, entry in files.items():
         digest = hashlib.sha256((bundle / Path(relative)).read_bytes()).hexdigest()
@@ -154,8 +191,14 @@ def test_full_bundle_respects_restore_scope_and_auth_opt_in(tmp_path: Path) -> N
     assert "claude/sessions/old.jsonl" in files
     assert "codex/sessions/old.jsonl" in files
     assert files["codex/auth.json"]["category"] == "auth"
+    # Without a chat list Full carries every chat, terminal sessions too.
+    for relative in chat_files("keep", KEEP_CLI) + chat_files("skip", SKIP_CLI) + [f"claude/projects/sample/{TERMINAL_CLI}.jsonl"]:
+        assert files[relative]["category"] == "chat"
+    assert "claude_app/config.json" not in files
 
     target = make_profile(tmp_path / "target")
+    target_chat = target["appdata"] / "Claude" / "claude-code-sessions" / "account" / "workspace" / "local_keep.json"
+    target_chat.unlink()
     (target["claude"] / "settings.json").write_text('{"theme":"target"}\n', encoding="utf-8")
     with closing(sqlite3.connect(target["sqlite"] / "memories_1.sqlite")) as connection:
         connection.execute("UPDATE memory SET value = 'target'")
@@ -174,6 +217,7 @@ def test_full_bundle_respects_restore_scope_and_auth_opt_in(tmp_path: Path) -> N
     assert not (target["codex"] / "sessions" / "old.jsonl").exists()
     assert not (target["claude"] / ".credentials.json").exists()
     assert not (target["codex"] / "auth.json").exists()
+    assert not target_chat.exists()
     assert (target["claude"] / "settings.json").read_text(encoding="utf-8") == '{"theme":"dark"}\n'
     with closing(sqlite3.connect(target["sqlite"] / "memories_1.sqlite")) as connection:
         assert connection.execute("SELECT value FROM memory").fetchone() == ("from-wal",)
@@ -184,6 +228,95 @@ def test_full_bundle_respects_restore_scope_and_auth_opt_in(tmp_path: Path) -> N
     assert (target["codex"] / "sessions" / "old.jsonl").read_text(encoding="utf-8") == "session\n"
     assert (target["claude"] / ".credentials.json").is_file()
     assert (target["codex"] / "auth.json").is_file()
+    assert json.loads(target_chat.read_text(encoding="utf-8"))["title"] == "keep chat"
+
+
+def test_export_carries_only_the_ticked_chats_in_either_mode(tmp_path: Path) -> None:
+    source = make_profile(tmp_path / "source")
+    keep, skip = chat_files("keep", KEEP_CLI), chat_files("skip", SKIP_CLI)
+    terminal = f"claude/projects/sample/{TERMINAL_CLI}.jsonl"
+
+    essential = tmp_path / "essential"
+    result = run_tool(source, "Export", essential, *chat_choice(tmp_path, "local_keep"))
+    assert result.returncode == 0, result.stdout + result.stderr
+    files = manifest_files(essential)
+    assert all(relative in files for relative in keep)
+    assert not any(relative in files for relative in skip)
+    assert terminal not in files
+    assert "claude/projects/sample/memory/fact.md" in files
+
+    full = tmp_path / "full"
+    result = run_tool(source, "Export", full, "-Full", *chat_choice(tmp_path, "local_keep"))
+    assert result.returncode == 0, result.stdout + result.stderr
+    files = manifest_files(full)
+    assert all(relative in files for relative in keep)
+    assert not any(relative in files for relative in skip)
+    assert terminal in files
+    assert "claude/sessions/old.jsonl" in files
+
+
+def test_import_restores_only_the_ticked_chats(tmp_path: Path) -> None:
+    source = make_profile(tmp_path / "source")
+    bundle = tmp_path / "bundle"
+    assert run_tool(source, "Export", bundle, "-Full").returncode == 0
+
+    target = make_profile(tmp_path / "target")
+    shutil.rmtree(target["appdata"] / "Claude" / "claude-code-sessions")
+    for cli in (KEEP_CLI, SKIP_CLI, TERMINAL_CLI):
+        (target["claude"] / "projects" / "sample" / f"{cli}.jsonl").unlink()
+    (target["appdata"] / "Claude" / "claude-code-sessions" / "account" / "workspace").mkdir(parents=True)
+
+    def restored(relative: str) -> Path:
+        if relative.startswith("claude_app/claude-code-sessions/"):
+            return target["appdata"] / "Claude" / "claude-code-sessions" / relative.split("/", 2)[2]
+        return target["claude"] / relative.split("/", 1)[1]
+
+    essential = run_tool(target, "Import", bundle, "-Yes", "-AllowRunningApps", *chat_choice(tmp_path, "local_skip"))
+    assert essential.returncode == 0, essential.stdout + essential.stderr
+    assert all(restored(relative).is_file() for relative in chat_files("skip", SKIP_CLI))
+    assert not restored(chat_files("keep", KEEP_CLI)[0]).exists()
+    assert not restored(chat_files("keep", KEEP_CLI)[1]).exists()
+    assert not (target["claude"] / "projects" / "sample" / f"{TERMINAL_CLI}.jsonl").exists()
+
+    full = run_tool(target, "Import", bundle, "-Full", "-Yes", "-AllowRunningApps", *chat_choice(tmp_path))
+    assert full.returncode == 0, full.stdout + full.stderr
+    assert not restored(chat_files("keep", KEEP_CLI)[1]).exists()
+    # A transcript no chat claims is a terminal session and goes with Full.
+    assert (target["claude"] / "projects" / "sample" / f"{TERMINAL_CLI}.jsonl").is_file()
+
+
+def test_schema_1_bundle_still_restores_chosen_chats(tmp_path: Path) -> None:
+    source = make_profile(tmp_path / "source")
+    bundle = tmp_path / "bundle"
+    assert run_tool(source, "Export", bundle, "-Full").returncode == 0
+    manifest_path = bundle / "manifest.json"
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    payload["schema_version"] = 1
+    for entry in payload["files"]:
+        if entry["category"] == "chat":
+            entry["category"] = "full"
+    manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+
+    target = make_profile(tmp_path / "target")
+    (target["claude"] / "projects" / "sample" / f"{KEEP_CLI}.jsonl").unlink()
+    result = run_tool(target, "Import", bundle, "-Yes", "-AllowRunningApps", *chat_choice(tmp_path, "local_keep"))
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert (target["claude"] / "projects" / "sample" / f"{KEEP_CLI}.jsonl").read_text(encoding="utf-8") == "keep transcript\n"
+
+
+def test_chat_list_lands_in_the_only_workspace_of_a_reinstalled_app(tmp_path: Path) -> None:
+    source = make_profile(tmp_path / "source")
+    bundle = tmp_path / "bundle"
+    assert run_tool(source, "Export", bundle, *chat_choice(tmp_path, "local_keep")).returncode == 0
+
+    target = make_profile(tmp_path / "target")
+    sessions = target["appdata"] / "Claude" / "claude-code-sessions"
+    shutil.rmtree(sessions)
+    (sessions / "new-account" / "new-workspace").mkdir(parents=True)
+    result = run_tool(target, "Import", bundle, "-Yes", "-AllowRunningApps", *chat_choice(tmp_path, "local_keep"))
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert (sessions / "new-account" / "new-workspace" / "local_keep.json").is_file()
+    assert not (sessions / "account").exists()
 
 
 def test_corrupt_bundle_is_rejected_before_profile_write(tmp_path: Path) -> None:
@@ -323,6 +456,46 @@ def test_gui_service_maps_the_same_restore_controls_as_cli(service_project: Path
     }
 
 
+def test_gui_service_hands_the_ticked_chats_over_as_a_file(service_project: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    parameters = run_service(service_project, monkeypatch, mode="export", export_chats=["local_a", "", "local_b"])
+    chosen = Path(parameters["ChatListFile"])
+    assert json.loads(chosen.read_text(encoding="utf-8")) == ["local_a", "local_b"]
+
+    parameters = run_service(service_project, monkeypatch, mode="import", import_chats=[])
+    assert json.loads(Path(parameters["ChatListFile"]).read_text(encoding="utf-8")) == []
+
+    parameters = run_service(service_project, monkeypatch, mode="merge", import_chats=["local_a"])
+    assert "ChatListFile" not in parameters
+
+
+def test_chat_options_show_real_titles_grouped_by_folder(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    profile = make_profile(tmp_path / "live")
+    monkeypatch.setenv("APPDATA", str(profile["appdata"]))
+    monkeypatch.setenv("CLAUDE_CONFIG_DIR", str(profile["claude"]))
+    options = devops.ai_backup_live_chat_options()
+    assert {option["value"] for option in options} == {"local_keep", "local_skip"}
+    keep = next(option for option in options if option["value"] == "local_keep")
+    assert keep["label"].startswith("keep chat · ")
+    assert keep["group"] == "E:\\Work"
+    assert keep["default"] is True
+    assert "E:\\Work" in keep["hint"]
+
+    project = tmp_path / "project"
+    bundle_chats = project / "input" / "claude_app" / "claude-code-sessions" / "a" / "w"
+    bundle_chats.mkdir(parents=True)
+    (bundle_chats / "local_old.json").write_text(json.dumps({"title": "old chat", "cliSessionId": KEEP_CLI}), encoding="utf-8")
+    (project / "input" / "manifest.json").write_text(
+        json.dumps({"files": [{"path": f"claude/projects/x/{KEEP_CLI}.jsonl", "size": 3 * 1048576}]}), encoding="utf-8"
+    )
+    options = devops.ai_backup_bundle_chat_options(project)
+    assert [option["label"] for option in options] == ["old chat"]
+    assert "3.0 MB" in options[0]["hint"]
+
+    (project / "input" / "manifest.json").unlink()
+    shutil.rmtree(project / "input" / "claude_app")
+    assert devops.ai_backup_bundle_chat_options(project)[0]["value"] == ""
+
+
 def test_gui_service_rejects_unknown_mode(service_project: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     with pytest.raises(RuntimeError, match="Unknown AI Backup mode"):
         run_service(service_project, monkeypatch, mode="guess")
@@ -340,8 +513,8 @@ def test_manifest_scopes_fields_to_the_relevant_operation() -> None:
     export_fields = {field["id"] for field in nodes["ai_backup_export"].fields}
     import_fields = {field["id"] for field in nodes["ai_backup_import"].fields}
     merge_fields = {field["id"] for field in nodes["ai_backup_merge"].fields}
-    assert export_fields == {"essentials", "include_auth"}
-    assert import_fields == {"essentials", "include_auth", "dry_run", "allow_foreign_paths", "allow_legacy"}
+    assert export_fields == {"essentials", "include_auth", "export_chats"}
+    assert import_fields == {"essentials", "include_auth", "dry_run", "import_chats", "allow_foreign_paths", "allow_legacy"}
     assert merge_fields == {"overwrite", "dry_run", "allow_legacy"}
 
 

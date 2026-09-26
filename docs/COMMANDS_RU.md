@@ -44,6 +44,14 @@
 - [Подключение и адаптеры > Wi-Fi профили > Экспорт профилей](#подключение-и-адаптеры--wi-fi-профили--экспорт-профилей)
 - [Подключение и адаптеры > Wi-Fi профили > Импорт профилей > Импорт XML файла](#подключение-и-адаптеры--wi-fi-профили--импорт-профилей--импорт-xml-файла)
 - [Подключение и адаптеры > Wi-Fi профили > Импорт профилей > Импорт папки XML](#подключение-и-адаптеры--wi-fi-профили--импорт-профилей--импорт-папки-xml)
+- [Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Состояние слотов](#подключение-и-адаптеры--интернет-провод--wi-fi-main--second--состояние-слотов)
+- [Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Интернет: ПРОВОД](#подключение-и-адаптеры--интернет-провод--wi-fi-main--second--интернет-провод)
+- [Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Интернет: WI-FI MAIN](#подключение-и-адаптеры--интернет-провод--wi-fi-main--second--интернет-wi-fi-main)
+- [Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Интернет: WI-FI SECOND](#подключение-и-адаптеры--интернет-провод--wi-fi-main--second--интернет-wi-fi-second)
+- [Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Сохранить WI-FI MAIN](#подключение-и-адаптеры--интернет-провод--wi-fi-main--second--сохранить-wi-fi-main)
+- [Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Сохранить WI-FI SECOND](#подключение-и-адаптеры--интернет-провод--wi-fi-main--second--сохранить-wi-fi-second)
+- [Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Забыть WI-FI MAIN](#подключение-и-адаптеры--интернет-провод--wi-fi-main--second--забыть-wi-fi-main)
+- [Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Забыть WI-FI SECOND](#подключение-и-адаптеры--интернет-провод--wi-fi-main--second--забыть-wi-fi-second)
 - [Подключение и адаптеры > SMB вход в сеть](#подключение-и-адаптеры--smb-вход-в-сеть)
 - [Подключение и адаптеры > Действие адаптера](#подключение-и-адаптеры--действие-адаптера)
 - [Подключение и адаптеры > LAN/Wi-Fi переключатель](#подключение-и-адаптеры--lanwi-fi-переключатель)
@@ -180,6 +188,11 @@
 - [Обслуживание и очистка > Очистка Codex > Сброс сессии Codex](#обслуживание-и-очистка--очистка-codex--сброс-сессии-codex)
 - [Обслуживание и очистка > Очистка Codex > Полная очистка Codex, сохранить CLI state](#обслуживание-и-очистка--очистка-codex--полная-очистка-codex-сохранить-cli-state)
 - [Обслуживание и очистка > Очистка Codex > Полная очистка Codex](#обслуживание-и-очистка--очистка-codex--полная-очистка-codex)
+- [Обслуживание и очистка > Очистка кэшей > Замерить кэши](#обслуживание-и-очистка--очистка-кэшей--замерить-кэши)
+- [Обслуживание и очистка > Очистка кэшей > Очистить кэши](#обслуживание-и-очистка--очистка-кэшей--очистить-кэши)
+- [Обслуживание и очистка > Очистка кэшей > Очистить кэши и пакеты NuGet](#обслуживание-и-очистка--очистка-кэшей--очистить-кэши-и-пакеты-nuget)
+- [Обслуживание и очистка > Очистка кэшей > Убрать ИИ-модель Chrome](#обслуживание-и-очистка--очистка-кэшей--убрать-ии-модель-chrome)
+- [Обслуживание и очистка > Очистка кэшей > Вернуть ИИ-модель Chrome](#обслуживание-и-очистка--очистка-кэшей--вернуть-ии-модель-chrome)
 - [Обслуживание и очистка > Очистка Python > Аудит Python](#обслуживание-и-очистка--очистка-python--аудит-python)
 - [Обслуживание и очистка > Очистка Python > Симуляция очистки Python](#обслуживание-и-очистка--очистка-python--симуляция-очистки-python)
 - [Обслуживание и очистка > Очистка Python > Полная очистка Python](#обслуживание-и-очистка--очистка-python--полная-очистка-python)
@@ -543,6 +556,62 @@
   - `import_user_scope` — **Область импорта** (type=`radio`, default=`current`).
     - Варианты: `current` — Текущий пользователь; `all` — Все пользователи
   - `import_profile_folder` — **Папка XML профилей** (type=`folder`, default=`output\wifi_profiles`).
+
+### Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Состояние слотов
+
+- Operation id: `wifi_slot_status`
+- Описание: Показать, какие слоты заданы (сеть и защита, пароль — никогда), есть ли их профили в Windows, и текущее подключение.
+- Риск: kind=`safe`, risk_level=`readonly`
+- Параметры: поля формы.
+
+### Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Интернет: ПРОВОД
+
+- Operation id: `internet_via_cable`
+- Описание: Провод включается (роутер, первый провайдер), Wi-Fi выключается. Нужны права администратора.
+- Риск: kind=`dangerous`, risk_level=`system_change`
+- Параметры: поля формы.
+
+### Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Интернет: WI-FI MAIN
+
+- Operation id: `wifi_slot_connect_main`
+- Описание: Провод выключается (он идёт в роутер первого провайдера), Wi-Fi включается, профиль Windows записывается из WI-FI MAIN и подключается. Нужны права администратора.
+- Риск: kind=`dangerous`, risk_level=`system_change`
+- Параметры: поля формы.
+
+### Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Интернет: WI-FI SECOND
+
+- Operation id: `wifi_slot_connect_second`
+- Описание: Провод выключается (он идёт в роутер первого провайдера), Wi-Fi включается, профиль Windows записывается из WI-FI SECOND и подключается. Нужны права администратора.
+- Риск: kind=`dangerous`, risk_level=`system_change`
+- Параметры: поля формы.
+
+### Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Сохранить WI-FI MAIN
+
+- Operation id: `wifi_slot_save_main`
+- Описание: Сохранить имя сети и пароль WI-FI MAIN; пароль уходит под DPAPI и стирается из окна.
+- Риск: kind=`safe`, risk_level=`user_write`
+- Параметры: поля формы.
+
+### Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Сохранить WI-FI SECOND
+
+- Operation id: `wifi_slot_save_second`
+- Описание: Сохранить имя сети и пароль WI-FI SECOND; пароль уходит под DPAPI и стирается из окна.
+- Риск: kind=`safe`, risk_level=`user_write`
+- Параметры: поля формы.
+
+### Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Забыть WI-FI MAIN
+
+- Operation id: `wifi_slot_forget_main`
+- Описание: Удалить WI-FI MAIN из файла слотов. Профиль Windows остаётся.
+- Риск: kind=`dangerous`, risk_level=`user_write`
+- Параметры: поля формы.
+
+### Подключение и адаптеры > Интернет: провод / WI-FI MAIN / SECOND > Забыть WI-FI SECOND
+
+- Operation id: `wifi_slot_forget_second`
+- Описание: Удалить WI-FI SECOND из файла слотов. Профиль Windows остаётся.
+- Риск: kind=`dangerous`, risk_level=`user_write`
+- Параметры: поля формы.
 
 ### Подключение и адаптеры > SMB вход в сеть
 
@@ -1554,6 +1623,7 @@
 - Параметры:
   - `essentials` — **Перенести самое необходимое** (type=`checkbox`, default=true).
   - `include_auth` — **Включить секреты авторизации** (type=`checkbox`, default=false).
+  - `export_chats` — **Чаты** (type=`multiselect`, default=все чаты приложения Claude).
 
 ### Бэкап AI CLI > Восстановить (импорт)
 
@@ -1564,6 +1634,7 @@
   - `essentials` — **Восстановить только необходимое** (type=`checkbox`, default=true).
   - `include_auth` — **Восстановить секреты авторизации** (type=`checkbox`, default=false).
   - `dry_run` — **Пробный запуск** (type=`checkbox`, default=true).
+  - `import_chats` — **Чаты в бэкапе** (type=`multiselect`, default=все чаты бэкапа из input).
   - `allow_foreign_paths` — **Разрешить абсолютные пути другого ПК** (type=`checkbox`, default=false).
   - `allow_legacy` — **Разрешить старый бэкап без manifest** (type=`checkbox`, default=false).
 
@@ -1882,7 +1953,7 @@
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
   - `folder` — **Папка** (type=`select`).
-    - Варианты: `ripgrep` — ripgrep; `tools/network_cleaner` — tools/network_cleaner; `WSL` — WSL; `tools/codex_nuke` — tools/codex_nuke; `tools/python_nuke` — tools/python_nuke; `tools/driver_firmware_audit` — tools/driver_firmware_audit; `tools/ssh_keykit` — tools/ssh_keykit; `tools/ubuntu_dev_installer` — tools/ubuntu_dev_installer; `tools/ssd_nvme_reset_wizard` — tools/ssd_nvme_reset_wizard; `tools/winre_extend` — tools/winre_extend; `tools/bitrix_hosts_toggle_pack` — tools/bitrix_hosts_toggle_pack; `tools/disable_windows_proxy` — tools/disable_windows_proxy; `tools/wires_wireless` — tools/wires_wireless; `tools/wsl` — tools/wsl
+    - Варианты: `ripgrep` — ripgrep; `tools/network_cleaner` — tools/network_cleaner; `WSL` — WSL; `tools/codex_nuke` — tools/codex_nuke; `tools/python_nuke` — tools/python_nuke; `tools/driver_firmware_audit` — tools/driver_firmware_audit; `tools/ssh_keykit` — tools/ssh_keykit; `tools/ubuntu_dev_installer` — tools/ubuntu_dev_installer; `tools/ssd_nvme_reset_wizard` — tools/ssd_nvme_reset_wizard; `tools/winre_extend` — tools/winre_extend; `tools/disable_windows_proxy` — tools/disable_windows_proxy; `tools/wires_wireless` — tools/wires_wireless; `tools/wsl` — tools/wsl; `tools/cache_cleaner` — tools/cache_cleaner
 
 ### Обслуживание и очистка > Очистка Codex > Аудит Codex
 
@@ -1917,6 +1988,41 @@
 - Operation id: `codex_nuke_full`
 - Описание: Полное удаление Codex Desktop, включая общий пользовательский state Codex.
 - Риск: kind=`dangerous`, risk_level=`destructive`
+- Параметры: нет.
+
+### Обслуживание и очистка > Очистка кэшей > Замерить кэши
+
+- Operation id: `cache_cleaner_audit`
+- Описание: Замерить pip, npm, NuGet, Temp старше суток и медиакэш Adobe; ничего не менять.
+- Риск: kind=`safe`, risk_level=`readonly`
+- Параметры: нет.
+
+### Обслуживание и очистка > Очистка кэшей > Очистить кэши
+
+- Operation id: `cache_cleaner_clean`
+- Описание: Очистить pip, npm, http-кэш NuGet, Temp старше суток (занятые файлы остаются) и медиакэш Adobe (пропускается, пока открыты видеопрограммы Adobe).
+- Риск: kind=`dangerous`, risk_level=`user_write`
+- Параметры: нет.
+
+### Обслуживание и очистка > Очистка кэшей > Очистить кэши и пакеты NuGet
+
+- Operation id: `cache_cleaner_clean_nuget`
+- Описание: То же, плюс ~/.nuget/packages: следующая сборка скачает все пакеты заново.
+- Риск: kind=`dangerous`, risk_level=`user_write`
+- Параметры: нет.
+
+### Обслуживание и очистка > Очистка кэшей > Убрать ИИ-модель Chrome
+
+- Operation id: `cache_cleaner_chrome_model`
+- Описание: Удалить локальную ИИ-модель Chrome (OptGuideOnDeviceModel) и поставить пользовательскую политику Chrome GenAILocalFoundationalModelSettings = 1, чтобы она не скачалась снова. Сначала закройте Chrome.
+- Риск: kind=`dangerous`, risk_level=`user_write`
+- Параметры: нет.
+
+### Обслуживание и очистка > Очистка кэшей > Вернуть ИИ-модель Chrome
+
+- Operation id: `cache_cleaner_chrome_undo`
+- Описание: Снять политику Chrome, поставленную кнопкой «Убрать ИИ-модель Chrome»; Chrome может снова скачать модель.
+- Риск: kind=`safe`, risk_level=`user_write`
 - Параметры: нет.
 
 ### Обслуживание и очистка > Очистка Python > Аудит Python

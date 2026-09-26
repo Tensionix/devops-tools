@@ -44,6 +44,14 @@
 - [Connectivity > Wi-Fi profiles > Export profiles](#connectivity--wi-fi-profiles--export-profiles)
 - [Connectivity > Wi-Fi profiles > Import profiles > Import XML file](#connectivity--wi-fi-profiles--import-profiles--import-xml-file)
 - [Connectivity > Wi-Fi profiles > Import profiles > Import XML folder](#connectivity--wi-fi-profiles--import-profiles--import-xml-folder)
+- [Connectivity > Internet: cable / WI-FI MAIN / SECOND > Slots status](#connectivity--internet-cable--wi-fi-main--second--slots-status)
+- [Connectivity > Internet: cable / WI-FI MAIN / SECOND > Internet: CABLE](#connectivity--internet-cable--wi-fi-main--second--internet-cable)
+- [Connectivity > Internet: cable / WI-FI MAIN / SECOND > Internet: WI-FI MAIN](#connectivity--internet-cable--wi-fi-main--second--internet-wi-fi-main)
+- [Connectivity > Internet: cable / WI-FI MAIN / SECOND > Internet: WI-FI SECOND](#connectivity--internet-cable--wi-fi-main--second--internet-wi-fi-second)
+- [Connectivity > Internet: cable / WI-FI MAIN / SECOND > Save WI-FI MAIN](#connectivity--internet-cable--wi-fi-main--second--save-wi-fi-main)
+- [Connectivity > Internet: cable / WI-FI MAIN / SECOND > Save WI-FI SECOND](#connectivity--internet-cable--wi-fi-main--second--save-wi-fi-second)
+- [Connectivity > Internet: cable / WI-FI MAIN / SECOND > Forget WI-FI MAIN](#connectivity--internet-cable--wi-fi-main--second--forget-wi-fi-main)
+- [Connectivity > Internet: cable / WI-FI MAIN / SECOND > Forget WI-FI SECOND](#connectivity--internet-cable--wi-fi-main--second--forget-wi-fi-second)
 - [Connectivity > SMB network login](#connectivity--smb-network-login)
 - [Connectivity > Adapter action](#connectivity--adapter-action)
 - [Connectivity > LAN/Wi-Fi switch](#connectivity--lanwi-fi-switch)
@@ -180,6 +188,11 @@
 - [Maintenance & Cleanup > Codex Nuke > Codex session reset](#maintenance--cleanup--codex-nuke--codex-session-reset)
 - [Maintenance & Cleanup > Codex Nuke > Codex NUKE, keep CLI state](#maintenance--cleanup--codex-nuke--codex-nuke-keep-cli-state)
 - [Maintenance & Cleanup > Codex Nuke > Codex NUKE full](#maintenance--cleanup--codex-nuke--codex-nuke-full)
+- [Maintenance & Cleanup > Cache Cleaner > Measure caches](#maintenance--cleanup--cache-cleaner--measure-caches)
+- [Maintenance & Cleanup > Cache Cleaner > Clear caches](#maintenance--cleanup--cache-cleaner--clear-caches)
+- [Maintenance & Cleanup > Cache Cleaner > Clear caches and NuGet packages](#maintenance--cleanup--cache-cleaner--clear-caches-and-nuget-packages)
+- [Maintenance & Cleanup > Cache Cleaner > Remove Chrome AI model](#maintenance--cleanup--cache-cleaner--remove-chrome-ai-model)
+- [Maintenance & Cleanup > Cache Cleaner > Allow Chrome AI model again](#maintenance--cleanup--cache-cleaner--allow-chrome-ai-model-again)
 - [Maintenance & Cleanup > Python Nuke > Python Nuke audit](#maintenance--cleanup--python-nuke--python-nuke-audit)
 - [Maintenance & Cleanup > Python Nuke > Python Nuke dry run](#maintenance--cleanup--python-nuke--python-nuke-dry-run)
 - [Maintenance & Cleanup > Python Nuke > Python NUKE full](#maintenance--cleanup--python-nuke--python-nuke-full)
@@ -543,6 +556,62 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `import_user_scope` — **User scope** (type=`radio`, default=`current`).
     - Options: `current` — Current user; `all` — All users
   - `import_profile_folder` — **Profile XML folder** (type=`folder`, default=`output\wifi_profiles`).
+
+### Connectivity > Internet: cable / WI-FI MAIN / SECOND > Slots status
+
+- Operation id: `wifi_slot_status`
+- Description: Show which slots are set (SSID and security, never the password), whether Windows has their profiles, and the current connection.
+- Risk: kind=`safe`, risk_level=`readonly`
+- Parameters: form fields.
+
+### Connectivity > Internet: cable / WI-FI MAIN / SECOND > Internet: CABLE
+
+- Operation id: `internet_via_cable`
+- Description: Cable on (the router, first provider), Wi-Fi off. Administrator rights.
+- Risk: kind=`dangerous`, risk_level=`system_change`
+- Parameters: form fields.
+
+### Connectivity > Internet: cable / WI-FI MAIN / SECOND > Internet: WI-FI MAIN
+
+- Operation id: `wifi_slot_connect_main`
+- Description: Cable off (it goes to the router of the first provider), Wi-Fi on, the Windows profile written from WI-FI MAIN, connected. Administrator rights.
+- Risk: kind=`dangerous`, risk_level=`system_change`
+- Parameters: form fields.
+
+### Connectivity > Internet: cable / WI-FI MAIN / SECOND > Internet: WI-FI SECOND
+
+- Operation id: `wifi_slot_connect_second`
+- Description: Cable off (it goes to the router of the first provider), Wi-Fi on, the Windows profile written from WI-FI SECOND, connected. Administrator rights.
+- Risk: kind=`dangerous`, risk_level=`system_change`
+- Parameters: form fields.
+
+### Connectivity > Internet: cable / WI-FI MAIN / SECOND > Save WI-FI MAIN
+
+- Operation id: `wifi_slot_save_main`
+- Description: Store the SSID and password of WI-FI MAIN; the password goes under DPAPI and is cleared from the window.
+- Risk: kind=`safe`, risk_level=`user_write`
+- Parameters: form fields.
+
+### Connectivity > Internet: cable / WI-FI MAIN / SECOND > Save WI-FI SECOND
+
+- Operation id: `wifi_slot_save_second`
+- Description: Store the SSID and password of WI-FI SECOND; the password goes under DPAPI and is cleared from the window.
+- Risk: kind=`safe`, risk_level=`user_write`
+- Parameters: form fields.
+
+### Connectivity > Internet: cable / WI-FI MAIN / SECOND > Forget WI-FI MAIN
+
+- Operation id: `wifi_slot_forget_main`
+- Description: Remove WI-FI MAIN from the slots file. The Windows profile stays.
+- Risk: kind=`dangerous`, risk_level=`user_write`
+- Parameters: form fields.
+
+### Connectivity > Internet: cable / WI-FI MAIN / SECOND > Forget WI-FI SECOND
+
+- Operation id: `wifi_slot_forget_second`
+- Description: Remove WI-FI SECOND from the slots file. The Windows profile stays.
+- Risk: kind=`dangerous`, risk_level=`user_write`
+- Parameters: form fields.
 
 ### Connectivity > SMB network login
 
@@ -1554,6 +1623,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Parameters:
   - `essentials` — **Move only the essentials** (type=`checkbox`, default=true).
   - `include_auth` — **Include authentication secrets** (type=`checkbox`, default=false).
+  - `export_chats` — **Chats** (type=`multiselect`, default=every Claude app chat).
 
 ### AI CLI Backup > Restore (import)
 
@@ -1564,6 +1634,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `essentials` — **Restore only the essentials** (type=`checkbox`, default=true).
   - `include_auth` — **Restore authentication secrets** (type=`checkbox`, default=false).
   - `dry_run` — **Dry run** (type=`checkbox`, default=true).
+  - `import_chats` — **Chats in the backup** (type=`multiselect`, default=every chat of the backup in input).
   - `allow_foreign_paths` — **Allow saved absolute paths from another PC** (type=`checkbox`, default=false).
   - `allow_legacy` — **Allow legacy bundle without manifest** (type=`checkbox`, default=false).
 
@@ -1882,7 +1953,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`safe`, risk_level=`readonly`
 - Parameters:
   - `folder` — **Folder** (type=`select`).
-    - Options: `ripgrep` — ripgrep; `tools/network_cleaner` — tools/network_cleaner; `WSL` — WSL; `tools/codex_nuke` — tools/codex_nuke; `tools/python_nuke` — tools/python_nuke; `tools/driver_firmware_audit` — tools/driver_firmware_audit; `tools/ssh_keykit` — tools/ssh_keykit; `tools/ubuntu_dev_installer` — tools/ubuntu_dev_installer; `tools/ssd_nvme_reset_wizard` — tools/ssd_nvme_reset_wizard; `tools/winre_extend` — tools/winre_extend; `tools/bitrix_hosts_toggle_pack` — tools/bitrix_hosts_toggle_pack; `tools/disable_windows_proxy` — tools/disable_windows_proxy; `tools/wires_wireless` — tools/wires_wireless; `tools/wsl` — tools/wsl
+    - Options: `ripgrep` — ripgrep; `tools/network_cleaner` — tools/network_cleaner; `WSL` — WSL; `tools/codex_nuke` — tools/codex_nuke; `tools/python_nuke` — tools/python_nuke; `tools/driver_firmware_audit` — tools/driver_firmware_audit; `tools/ssh_keykit` — tools/ssh_keykit; `tools/ubuntu_dev_installer` — tools/ubuntu_dev_installer; `tools/ssd_nvme_reset_wizard` — tools/ssd_nvme_reset_wizard; `tools/winre_extend` — tools/winre_extend; `tools/disable_windows_proxy` — tools/disable_windows_proxy; `tools/wires_wireless` — tools/wires_wireless; `tools/wsl` — tools/wsl; `tools/cache_cleaner` — tools/cache_cleaner
 
 ### Maintenance & Cleanup > Codex Nuke > Codex Nuke audit
 
@@ -1917,6 +1988,41 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Operation id: `codex_nuke_full`
 - Description: Full Codex desktop removal, including shared Codex user state.
 - Risk: kind=`dangerous`, risk_level=`destructive`
+- Parameters: none.
+
+### Maintenance & Cleanup > Cache Cleaner > Measure caches
+
+- Operation id: `cache_cleaner_audit`
+- Description: Measure pip, npm, NuGet, Temp older than 24 h and Adobe media cache; change nothing.
+- Risk: kind=`safe`, risk_level=`readonly`
+- Parameters: none.
+
+### Maintenance & Cleanup > Cache Cleaner > Clear caches
+
+- Operation id: `cache_cleaner_clean`
+- Description: Clear pip, npm, NuGet http cache, Temp older than 24 h (files in use stay) and Adobe media cache (skipped while Adobe video apps run).
+- Risk: kind=`dangerous`, risk_level=`user_write`
+- Parameters: none.
+
+### Maintenance & Cleanup > Cache Cleaner > Clear caches and NuGet packages
+
+- Operation id: `cache_cleaner_clean_nuget`
+- Description: Same as Clear caches plus ~/.nuget/packages; the next build downloads every package again.
+- Risk: kind=`dangerous`, risk_level=`user_write`
+- Parameters: none.
+
+### Maintenance & Cleanup > Cache Cleaner > Remove Chrome AI model
+
+- Operation id: `cache_cleaner_chrome_model`
+- Description: Delete Chrome on-device AI model (OptGuideOnDeviceModel) and set the user Chrome policy GenAILocalFoundationalModelSettings = 1 so it does not come back. Close Chrome first.
+- Risk: kind=`dangerous`, risk_level=`user_write`
+- Parameters: none.
+
+### Maintenance & Cleanup > Cache Cleaner > Allow Chrome AI model again
+
+- Operation id: `cache_cleaner_chrome_undo`
+- Description: Remove the Chrome policy set by Remove Chrome AI model; Chrome may download the model again.
+- Risk: kind=`safe`, risk_level=`user_write`
 - Parameters: none.
 
 ### Maintenance & Cleanup > Python Nuke > Python Nuke audit

@@ -2733,6 +2733,8 @@ def field_default(field: dict[str, Any]) -> Any:
     kind = str(field.get("type", field.get("kind", "text"))).lower()
     options = field.get("options", [])
     if kind in {"checkboxes", "multi_checkbox", "multicheckbox", "multi-select", "multiselect"}:
+        # Options from a live source can carry their own `default` ticks.
+        options = field_options(field)
         if not isinstance(options, list):
             return []
         selected: list[Any] = []
