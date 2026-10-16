@@ -243,5 +243,3 @@ def decode_process_bytes(data: bytes) -> str:
     return data.decode("utf-8", errors="replace")
 
 
-def decode_process_output(data: bytes) -> str:
-    return decode_process_bytes(data)

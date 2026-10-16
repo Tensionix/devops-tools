@@ -1,7 +1,7 @@
 # Certificate KeyKit — спецификация и код
 
-Статус: **реализовано**. Новая группа `cert_keykit` внутри секции `Utilities`,
-рядом с `OpenSSH KeyKit` (тот же `secret_export`-жанр).
+Статус: **реализовано**. Группа `cert_keykit`; в окне — страница `ЭКСПОРТ И ИМПОРТ -> СЕРТИФИКАТЫ`,
+рядом с `SSH` (тот же `secret_export`-жанр).
 
 Зачем: ключи всё чаще привязаны к **TPM** (non-exportable) и умирают при
 переустановке/релокации. Эта секция:
@@ -350,25 +350,22 @@ exit 0
 ## Проверка после правки
 
 ```cmd
-runtime\python.exe -m py_compile system_core\ui_nicegui\app.py system_core\services\devops_tools.py
-runtime\python.exe system_core\ui_nicegui\app.py --smoke
-runtime\python.exe system_core\ui_nicegui\app.py --host 127.0.0.1 --port 8092 --no-browser
+runtime\python.exe -m py_compile system_core\services\devops_tools.py
+runtime\python.exe -m pytest -q
+install\verify_portable_env.cmd
 ```
 
 Ручной обход:
 
-- `Utilities -> Certificate KeyKit` стоит сразу после `OpenSSH KeyKit`;
+- страница `СЕРТИФИКАТЫ` стоит рядом с `SSH` в разделе `ЭКСПОРТ И ИМПОРТ`;
 - `Статус сертификатов` для `CurrentUser\My` печатает subject/thumbprint/expiry и
   колонку `Exportable` — TPM-ключи помечены `No (TPM / non-exportable)`;
-- `Экспорт personal ключей в PFX` (с заданным паролем) создаёт `<thumbprint>.pfx`
+- `Экспорт личных ключей в PFX` (с заданным паролем) создаёт `<thumbprint>.pfx`
   для экспортируемых и пишет SKIP для TPM-ключей; confirm-плашка появляется;
 - `Экспорт store в SST` для `LocalMachine\Root` создаёт `.sst` без приватных ключей;
-- `Импорт PFX` / `Импорт сертификата / CA` принимают файл и целевой store из Advanced.
+- `Импорт PFX` / `Импорт сертификата / CA` принимают файл и целевой store из блока `ДОПОЛНИТЕЛЬНО` формы.
 
 ## Заметки
 
 - Поле `pfx_password` — секрет; в журнал его не логируем (логируются только mode и
   пути). Не добавлять пароль в `field_updates`.
-- Доку добавить в список `Read first` (AGENTS.md / CLAUDE.md), если секция уходит в
-  постоянный состав. Обновить `docs/MEMORY.md` (Utilities теперь содержит и
-  Certificate KeyKit).

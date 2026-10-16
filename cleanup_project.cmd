@@ -32,7 +32,7 @@ echo.
 goto usage
 
 :args_done
-call :CHECK_MARKER "%BASE_DIR%\system_core\ui_nicegui\app.py" || goto abort
+call :CHECK_MARKER "%BASE_DIR%\system_core\cli.py" || goto abort
 call :CHECK_MARKER "%BASE_DIR%\config\tool_manifest.yaml" || goto abort
 if "%BACKUP_ONLY%"=="1" goto backup_only
 
@@ -51,10 +51,10 @@ echo   - input, output, logs, report, workspace, data
 echo   - runtime, wheelhouse, release, ._runtime
 echo   - install\download
 echo   - ripgrep
-echo   - system_core\powershell
-echo   - system_core\_pwsh_tmp, system_core\_powershell_tmp, system_core\_fzf_tmp
-echo   - system_core\fzf.exe
-echo   - config\terminal_commands.json local command cache
+echo   - system_core\_fzf_tmp, system_core\fzf.exe
+echo   - Source\bin, Source\obj, Source\Ps\bin, Source\Ps\obj: what building App leaves
+echo   - the state of this machine's window in config: window_settings.json,
+echo     terminal_commands.json local command cache
 echo   - tools\codex_nuke\Logs and tools\python_nuke\Logs generated logs
 echo   - root licenses\ is preserved unchanged
 echo   - Python caches and coverage output
@@ -66,6 +66,7 @@ echo     servers, Wi-Fi network names, firewall and registry exports - so a
 echo     release must not carry them. The folder structure stays.
 echo.
 echo Protected: scripts, config, docs, source code, tracked license docs,
+echo            the window and its PowerShell (App and its Source),
 echo            folder structure and external historical tools.
 echo Use /BACKUP to clear the backup folders alone, with its own Y/N/Q prompt.
 echo.
@@ -92,10 +93,12 @@ call :ClearDirItems "%BASE_DIR%\release"
 call :ClearDirItems "%BASE_DIR%\ripgrep"
 call :ClearDirItems "%BASE_DIR%\._runtime"
 call :ClearDirItems "%BASE_DIR%\install\download"
-call :ClearDirItems "%BASE_DIR%\system_core\powershell"
-call :RemoveDir "%BASE_DIR%\system_core\_pwsh_tmp"
-call :RemoveDir "%BASE_DIR%\system_core\_powershell_tmp"
 call :RemoveDir "%BASE_DIR%\system_core\_fzf_tmp"
+rem The built window, App\, stays: a release carries it as it was built.
+call :RemoveDir "%BASE_DIR%\Source\bin"
+call :RemoveDir "%BASE_DIR%\Source\obj"
+call :RemoveDir "%BASE_DIR%\Source\Ps\bin"
+call :RemoveDir "%BASE_DIR%\Source\Ps\obj"
 
 call :RemoveDir "%BASE_DIR%\.pytest_cache"
 call :RemoveDir "%BASE_DIR%\.ruff_cache"
@@ -116,6 +119,9 @@ call :RemoveFile "%BASE_DIR%\.coverage"
 call :RemoveFile "%BASE_DIR%\system_core\fzf.exe"
 call :RemoveFilesByPatternUnder "%BASE_DIR%\tools\codex_nuke\Logs" "*.log"
 call :RemoveFilesByPatternUnder "%BASE_DIR%\tools\python_nuke\Logs" "*.log"
+rem What the window of this machine remembers - its look, its size, its folders - is not source:
+rem a copy made for a release must not carry it. The window writes it anew at its first start.
+call :RemoveFile "%BASE_DIR%\config\window_settings.json"
 call :ResetTerminalCommandCache "%BASE_DIR%\config\terminal_commands.json"
 call :ClearAllBackups
 rem licenses\ is intentionally preserved by release cleanup.

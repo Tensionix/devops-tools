@@ -50,6 +50,7 @@ echo [OK] Elevated PowerShell window was launched.
 exit /b 0
 
 :find_ps_engine
+if exist "%SCRIPT_DIR%..\..\App\AudionPs.exe" set "PS_ENGINE=%SCRIPT_DIR%..\..\App\AudionPs.exe" & exit /b 0
 if exist "%SCRIPT_DIR%pwsh.exe" set "PS_ENGINE=%SCRIPT_DIR%pwsh.exe" & exit /b 0
 if exist "%SCRIPT_DIR%runtime\pwsh.exe" set "PS_ENGINE=%SCRIPT_DIR%runtime\pwsh.exe" & exit /b 0
 if exist "%SCRIPT_DIR%system_core\powershell\pwsh.exe" set "PS_ENGINE=%SCRIPT_DIR%system_core\powershell\pwsh.exe" & exit /b 0

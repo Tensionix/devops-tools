@@ -30,18 +30,14 @@ goto FALLBACK_MENU
 >"%MENU_FILE%" echo [01] PYTHON ENV CMD                        ^| build_cmd         ^| build portable runtime via CMD
 >>"%MENU_FILE%" echo [02] PYTHON ENV PS                         ^| build_ps          ^| optional PowerShell env builder
 >>"%MENU_FILE%" echo [03] FZF                                   ^| update_fzf        ^| install/update system_core\fzf.exe
->>"%MENU_FILE%" echo [04] POWERSHELL                            ^| install_pwsh      ^| install portable PowerShell
+>>"%MENU_FILE%" echo [06] WINDOW                                ^| build_app         ^| rebuild App\ - the window and its PowerShell
 >>"%MENU_FILE%" echo [09] PORTABLE OFFLINE                      ^| install_offline   ^| install from local runtime/wheelhouse
 >>"%MENU_FILE%" echo.
 >>"%MENU_FILE%" echo [10] RIPGREP                               ^| update_ripgrep    ^| install/update ripgrep\rg.exe
 >>"%MENU_FILE%" echo.
->>"%MENU_FILE%" echo [70] CLEAN INSTALL CACHE                   ^| clean_cache       ^| clean install cache/staging/bytecode
->>"%MENU_FILE%" echo [71] VERIFY / DOCTOR                       ^| verify            ^| run portable environment checks
+>>"%MENU_FILE%" echo [70] CLEAN INSTALL CACHE                   ^| clean_cache       ^| install cache, bytecode, bin and obj of Source
+>>"%MENU_FILE%" echo [71] VERIFY / DOCTOR                       ^| verify            ^| the environment, devops_cli.cmd, the built window
 >>"%MENU_FILE%" echo [72] CMD ENCODING CHECK                    ^| cmd_encoding      ^| UTF-8 no-BOM CRLF check/fix
->>"%MENU_FILE%" echo [74] COLLECT LICENSES                      ^| collect_licenses  ^| collect third-party license files
->>"%MENU_FILE%" echo [75] PRUNE LICENSES                        ^| prune_licenses    ^| remove stale license folders
->>"%MENU_FILE%" echo [76] DEDUP LICENSES                        ^| dedupe_licenses   ^| deduplicate exact license texts
->>"%MENU_FILE%" echo [77] MAKE RELEASE ARCHIVE                  ^| release           ^| stage and create release zip
 >>"%MENU_FILE%" echo [78] INIT FOLDERS                          ^| init_folders      ^| recreate managed folders ^(non-destructive^)
 >>"%MENU_FILE%" echo.
 >>"%MENU_FILE%" echo [90] PROJECT LAUNCHER                      ^| project           ^| open project workflow menu
@@ -67,15 +63,12 @@ if /I "%RAW%"=="build_cmd" goto BUILD_CMD
 if /I "%RAW%"=="build_ps" goto BUILD_PS
 if /I "%RAW%"=="update_fzf" goto UPDATE_FZF
 if /I "%RAW%"=="install_pwsh" goto INSTALL_PWSH
+if /I "%RAW%"=="build_app" goto BUILD_APP
 if /I "%RAW%"=="install_offline" goto INSTALL_OFFLINE
 if /I "%RAW%"=="update_ripgrep" goto UPDATE_RIPGREP
 if /I "%RAW%"=="clean_cache" goto CLEAN_CACHE
 if /I "%RAW%"=="verify" goto VERIFY
 if /I "%RAW%"=="cmd_encoding" goto CMD_ENCODING
-if /I "%RAW%"=="collect_licenses" goto COLLECT_LICENSES
-if /I "%RAW%"=="prune_licenses" goto PRUNE_LICENSES
-if /I "%RAW%"=="dedupe_licenses" goto DEDUPE_LICENSES
-if /I "%RAW%"=="release" goto RELEASE
 if /I "%RAW%"=="init_folders" goto INIT_FOLDERS
 if /I "%RAW%"=="project" goto PROJECT
 if /I "%RAW%"=="open_install" goto OPEN_INSTALL
@@ -90,7 +83,7 @@ goto MAIN
 echo [01] PYTHON ENV CMD
 echo [02] PYTHON ENV PS
 echo [03] FZF
-echo [04] POWERSHELL
+echo [06] WINDOW
 echo [09] PORTABLE OFFLINE
 echo.
 echo [10] RIPGREP
@@ -98,10 +91,6 @@ echo.
 echo [70] CLEAN INSTALL CACHE
 echo [71] VERIFY / DOCTOR
 echo [72] CMD ENCODING CHECK
-echo [74] COLLECT LICENSES
-echo [75] PRUNE LICENSES
-echo [76] DEDUP LICENSES
-echo [77] MAKE RELEASE ARCHIVE
 echo [78] INIT FOLDERS ^(non-destructive^)
 echo.
 echo [90] PROJECT LAUNCHER
@@ -130,6 +119,9 @@ if /I "%RAW%"=="update_fzf" goto UPDATE_FZF
 if /I "%RAW%"=="04" goto INSTALL_PWSH
 if /I "%RAW%"=="4" goto INSTALL_PWSH
 if /I "%RAW%"=="install_pwsh" goto INSTALL_PWSH
+if /I "%RAW%"=="06" goto BUILD_APP
+if /I "%RAW%"=="6" goto BUILD_APP
+if /I "%RAW%"=="build_app" goto BUILD_APP
 if /I "%RAW%"=="09" goto INSTALL_OFFLINE
 if /I "%RAW%"=="9" goto INSTALL_OFFLINE
 if /I "%RAW%"=="install_offline" goto INSTALL_OFFLINE
@@ -141,14 +133,6 @@ if /I "%RAW%"=="71" goto VERIFY
 if /I "%RAW%"=="verify" goto VERIFY
 if /I "%RAW%"=="72" goto CMD_ENCODING
 if /I "%RAW%"=="cmd_encoding" goto CMD_ENCODING
-if /I "%RAW%"=="74" goto COLLECT_LICENSES
-if /I "%RAW%"=="collect_licenses" goto COLLECT_LICENSES
-if /I "%RAW%"=="75" goto PRUNE_LICENSES
-if /I "%RAW%"=="prune_licenses" goto PRUNE_LICENSES
-if /I "%RAW%"=="76" goto DEDUPE_LICENSES
-if /I "%RAW%"=="dedupe_licenses" goto DEDUPE_LICENSES
-if /I "%RAW%"=="77" goto RELEASE
-if /I "%RAW%"=="release" goto RELEASE
 if /I "%RAW%"=="78" goto INIT_FOLDERS
 if /I "%RAW%"=="init_folders" goto INIT_FOLDERS
 if /I "%RAW%"=="90" goto PROJECT
@@ -175,8 +159,18 @@ goto MAIN
 call "%BASE_DIR%\install\Build_Portable_Env.cmd"
 goto MAIN
 
+rem Step 04 installed a portable PowerShell into system_core\powershell. The program carries its
+rem own since 2.0.0 - App\AudionPs.exe, built with the window (step 06). A build map that still
+rem names the step is answered, not left without a word.
 :INSTALL_PWSH
-call "%BASE_DIR%\install\Install-Portable-PowerShell.cmd"
+echo [SKIP] Step 04 is gone: the PowerShell of the program is App\AudionPs.exe. Take 04:install_pwsh off the build map.
+goto MAIN
+
+rem The window is App\, built from Source\ with its own .NET runtime. It is a hand step: the
+rem steps of a release update what the engine runs on, and App\ travels as it was built.
+:BUILD_APP
+call "%BASE_DIR%\install\Build-App.cmd" /NOPAUSE
+if not defined AUDION_NO_PAUSE pause
 goto MAIN
 
 :INSTALL_OFFLINE
@@ -198,22 +192,6 @@ goto MAIN
 
 :UPDATE_RIPGREP
 call "%BASE_DIR%\install\launcher-tools-update_ripgrep.cmd"
-goto MAIN
-
-:COLLECT_LICENSES
-call "%BASE_DIR%\system_core\license\Run-Collect-ThirdPartyLicenses.cmd"
-goto MAIN
-
-:PRUNE_LICENSES
-call "%BASE_DIR%\system_core\license\Run-Prune-Stale-ThirdPartyLicenses.cmd"
-goto MAIN
-
-:DEDUPE_LICENSES
-call "%BASE_DIR%\system_core\license\Run-Deduplicate-ThirdPartyLicenses.cmd"
-goto MAIN
-
-:RELEASE
-call "%BASE_DIR%\install\make_release_archive.cmd"
 goto MAIN
 
 :CLEAN_CACHE

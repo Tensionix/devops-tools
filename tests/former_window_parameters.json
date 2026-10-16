@@ -1,0 +1,8417 @@
+{
+ "__bookmarks__": {
+  "operations": {
+   "browser_bookmarks_clear_favicons": {
+    "import_html": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "edge",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "edge"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "clear_favicons"
+     }
+    },
+    "import_master": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "clear_favicons"
+     }
+    },
+    "import_native": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "clear_favicons"
+     }
+    },
+    "no_rollback": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": false,
+      "mode": "clear_favicons"
+     }
+    },
+    "portable": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "portable",
+      "browser_profile": "chrome",
+      "browser_profile_path": "D:\\Portable\\Chrome\\Default",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "clear_favicons"
+     }
+    },
+    "system": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profiles": [
+       "chrome",
+       "edge"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "clear_favicons"
+     }
+    },
+    "transfer": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "edge",
+      "browser_profiles": [
+       "edge",
+       "brave"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "clear_favicons"
+     }
+    }
+   },
+   "browser_bookmarks_export_master": {
+    "import_html": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "edge",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "edge"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "export_master"
+     }
+    },
+    "import_master": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "export_master"
+     }
+    },
+    "import_native": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "export_master"
+     }
+    },
+    "no_rollback": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": false,
+      "mode": "export_master"
+     }
+    },
+    "portable": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "portable",
+      "browser_profile": "chrome",
+      "browser_profile_path": "D:\\Portable\\Chrome\\Default",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "export_master"
+     }
+    },
+    "system": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profiles": [
+       "chrome",
+       "edge"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "export_master"
+     }
+    },
+    "transfer": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "edge",
+      "browser_profiles": [
+       "edge",
+       "brave"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "export_master"
+     }
+    }
+   },
+   "browser_bookmarks_import_master": {
+    "import_html": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "bookmark_backup_path": "",
+      "bookmark_html_path": "D:\\Bookmarks\\bookmarks.html",
+      "bookmark_import_kind": "html",
+      "browser_location_mode": "system",
+      "browser_profile": "edge",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "edge"
+      ],
+      "clear_favicons_before_import": false,
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "import_master"
+     }
+    },
+    "import_master": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "bookmark_backup_path": "",
+      "bookmark_html_path": "",
+      "bookmark_import_kind": "master",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "clear_favicons_before_import": false,
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "import_master"
+     }
+    },
+    "import_native": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "bookmark_backup_path": "D:\\Backups\\chrome_bookmarks_v01",
+      "bookmark_html_path": "",
+      "bookmark_import_kind": "native",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "clear_favicons_before_import": false,
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "import_master"
+     }
+    },
+    "no_rollback": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "bookmark_backup_path": "",
+      "bookmark_html_path": "",
+      "bookmark_import_kind": "html",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "clear_favicons_before_import": false,
+      "close_browser_process": true,
+      "create_rollback_backup": false,
+      "mode": "import_master"
+     }
+    },
+    "portable": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "bookmark_backup_path": "",
+      "bookmark_html_path": "",
+      "bookmark_import_kind": "html",
+      "browser_location_mode": "portable",
+      "browser_profile": "chrome",
+      "browser_profile_path": "D:\\Portable\\Chrome\\Default",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "clear_favicons_before_import": false,
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "import_master"
+     }
+    },
+    "system": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "bookmark_backup_path": "",
+      "bookmark_html_path": "",
+      "bookmark_import_kind": "html",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profiles": [
+       "chrome",
+       "edge"
+      ],
+      "clear_favicons_before_import": false,
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "import_master"
+     }
+    },
+    "transfer": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "bookmark_backup_path": "",
+      "bookmark_html_path": "",
+      "bookmark_import_kind": "html",
+      "browser_location_mode": "system",
+      "browser_profile": "edge",
+      "browser_profiles": [
+       "edge",
+       "brave"
+      ],
+      "clear_favicons_before_import": false,
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "import_master"
+     }
+    }
+   },
+   "browser_bookmarks_status": {
+    "import_html": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "edge",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "edge"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "status"
+     }
+    },
+    "import_master": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "status"
+     }
+    },
+    "import_native": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "status"
+     }
+    },
+    "no_rollback": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profile_path": "<root>\\input",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": false,
+      "mode": "status"
+     }
+    },
+    "portable": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "portable",
+      "browser_profile": "chrome",
+      "browser_profile_path": "D:\\Portable\\Chrome\\Default",
+      "browser_profiles": [
+       "chrome"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "status"
+     }
+    },
+    "system": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profiles": [
+       "chrome",
+       "edge"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "status"
+     }
+    },
+    "transfer": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "edge",
+      "browser_profiles": [
+       "edge",
+       "brave"
+      ],
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "status"
+     }
+    }
+   },
+   "browser_bookmarks_transfer_master": {
+    "import_html": {
+     "refused": "RuntimeError: Source browser cannot also be a transfer target."
+    },
+    "import_master": {
+     "refused": "RuntimeError: Source browser cannot also be a transfer target."
+    },
+    "import_native": {
+     "refused": "RuntimeError: Source browser cannot also be a transfer target."
+    },
+    "no_rollback": {
+     "refused": "RuntimeError: Source browser cannot also be a transfer target."
+    },
+    "portable": {
+     "refused": "RuntimeError: Source browser cannot also be a transfer target."
+    },
+    "system": {
+     "refused": "RuntimeError: Source browser cannot also be a transfer target."
+    },
+    "transfer": {
+     "parameters": {
+      "backup_label": "bookmarks_master",
+      "backup_source_path": "<root>\\input",
+      "backup_target_path": "<root>\\output",
+      "backup_version": "auto",
+      "browser_location_mode": "system",
+      "browser_profile": "chrome",
+      "browser_profiles": [
+       "edge",
+       "brave"
+      ],
+      "clear_favicons_before_import": true,
+      "close_browser_process": true,
+      "create_rollback_backup": true,
+      "mode": "transfer_master",
+      "source_browser_profile": "chrome",
+      "target_browser_profiles": [
+       "edge",
+       "brave"
+      ]
+     }
+    }
+   }
+  },
+  "states": {
+   "import_html": {
+    "html_path": "D:\\Bookmarks\\bookmarks.html",
+    "import_kind": "html",
+    "location": "system",
+    "selected": [
+     "edge"
+    ],
+    "single": "edge"
+   },
+   "import_master": {
+    "backup_path": "",
+    "html_path": "",
+    "import_kind": "master",
+    "location": "system",
+    "selected": [
+     "chrome"
+    ],
+    "single": "chrome"
+   },
+   "import_native": {
+    "backup_path": "D:\\Backups\\chrome_bookmarks_v01",
+    "import_kind": "native",
+    "location": "system",
+    "selected": [
+     "chrome"
+    ],
+    "single": "chrome"
+   },
+   "no_rollback": {
+    "location": "system",
+    "rollback": false,
+    "selected": [
+     "chrome"
+    ],
+    "single": "chrome"
+   },
+   "portable": {
+    "location": "portable",
+    "profile_path": "D:\\Portable\\Chrome\\Default",
+    "selected": [
+     "chrome"
+    ],
+    "single": "chrome"
+   },
+   "system": {
+    "location": "system",
+    "selected": [
+     "chrome",
+     "edge"
+    ],
+    "single": "chrome"
+   },
+   "transfer": {
+    "location": "system",
+    "selected": [
+     "edge",
+     "brave"
+    ],
+    "single": "chrome"
+   }
+  }
+ },
+ "access_export": {
+  "en": {
+   "changed": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "mode": "export",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   },
+   "defaults": {
+    "access_folder": "",
+    "access_key_root": "",
+    "mode": "export",
+    "rclone_config_path": "",
+    "ssh_config_path": ""
+   },
+   "values": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "mode": "export",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   },
+   "defaults": {
+    "access_folder": "",
+    "access_key_root": "",
+    "mode": "export",
+    "rclone_config_path": "",
+    "ssh_config_path": ""
+   },
+   "values": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   }
+  },
+  "signature": [
+   "access_folder:folder",
+   "access_key_root:folder",
+   "ssh_config_path:file",
+   "rclone_config_path:file"
+  ]
+ },
+ "access_import": {
+  "en": {
+   "changed": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "mode": "import",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   },
+   "defaults": {
+    "access_folder": "",
+    "access_key_root": "",
+    "mode": "import",
+    "rclone_config_path": "",
+    "ssh_config_path": ""
+   },
+   "values": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "mode": "import",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   },
+   "defaults": {
+    "access_folder": "",
+    "access_key_root": "",
+    "mode": "import",
+    "rclone_config_path": "",
+    "ssh_config_path": ""
+   },
+   "values": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   }
+  },
+  "signature": [
+   "access_folder:folder",
+   "access_key_root:folder",
+   "ssh_config_path:file",
+   "rclone_config_path:file"
+  ]
+ },
+ "access_status": {
+  "en": {
+   "changed": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "mode": "status",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   },
+   "defaults": {
+    "access_folder": "",
+    "access_key_root": "",
+    "mode": "status",
+    "rclone_config_path": "",
+    "ssh_config_path": ""
+   },
+   "values": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "mode": "status",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   },
+   "defaults": {
+    "access_folder": "",
+    "access_key_root": "",
+    "mode": "status",
+    "rclone_config_path": "",
+    "ssh_config_path": ""
+   },
+   "values": {
+    "access_folder": "probe value",
+    "access_key_root": "probe value",
+    "rclone_config_path": "probe value",
+    "ssh_config_path": "probe value"
+   }
+  },
+  "signature": [
+   "access_folder:folder",
+   "access_key_root:folder",
+   "ssh_config_path:file",
+   "rclone_config_path:file"
+  ]
+ },
+ "ai_backup_export": {
+  "en": {
+   "changed": {
+    "essentials": false,
+    "export_chats": [
+     "probe-b"
+    ],
+    "include_auth": true,
+    "mode": "export"
+   },
+   "defaults": {
+    "essentials": true,
+    "export_chats": [
+     "probe-a"
+    ],
+    "include_auth": false,
+    "mode": "export"
+   },
+   "values": {
+    "essentials": false,
+    "export_chats": [
+     "probe-b"
+    ],
+    "include_auth": true
+   }
+  },
+  "ru": {
+   "changed": {
+    "essentials": false,
+    "export_chats": [
+     "probe-b"
+    ],
+    "include_auth": true,
+    "mode": "export"
+   },
+   "defaults": {
+    "essentials": true,
+    "export_chats": [
+     "probe-a"
+    ],
+    "include_auth": false,
+    "mode": "export"
+   },
+   "values": {
+    "essentials": false,
+    "export_chats": [
+     "probe-b"
+    ],
+    "include_auth": true
+   }
+  },
+  "signature": [
+   "essentials:checkbox",
+   "include_auth:checkbox",
+   "export_chats:multiselect"
+  ]
+ },
+ "ai_backup_import": {
+  "en": {
+   "changed": {
+    "allow_foreign_paths": true,
+    "allow_legacy": true,
+    "dry_run": false,
+    "essentials": false,
+    "import_chats": [
+     "probe-b"
+    ],
+    "include_auth": true,
+    "mode": "import"
+   },
+   "defaults": {
+    "allow_foreign_paths": false,
+    "allow_legacy": false,
+    "dry_run": true,
+    "essentials": true,
+    "import_chats": [
+     "probe-a"
+    ],
+    "include_auth": false,
+    "mode": "import"
+   },
+   "values": {
+    "allow_foreign_paths": true,
+    "allow_legacy": true,
+    "dry_run": false,
+    "essentials": false,
+    "import_chats": [
+     "probe-b"
+    ],
+    "include_auth": true
+   }
+  },
+  "ru": {
+   "changed": {
+    "allow_foreign_paths": true,
+    "allow_legacy": true,
+    "dry_run": false,
+    "essentials": false,
+    "import_chats": [
+     "probe-b"
+    ],
+    "include_auth": true,
+    "mode": "import"
+   },
+   "defaults": {
+    "allow_foreign_paths": false,
+    "allow_legacy": false,
+    "dry_run": true,
+    "essentials": true,
+    "import_chats": [
+     "probe-a"
+    ],
+    "include_auth": false,
+    "mode": "import"
+   },
+   "values": {
+    "allow_foreign_paths": true,
+    "allow_legacy": true,
+    "dry_run": false,
+    "essentials": false,
+    "import_chats": [
+     "probe-b"
+    ],
+    "include_auth": true
+   }
+  },
+  "signature": [
+   "essentials:checkbox",
+   "include_auth:checkbox",
+   "dry_run:checkbox",
+   "import_chats:multiselect",
+   "allow_foreign_paths:checkbox",
+   "allow_legacy:checkbox"
+  ]
+ },
+ "ai_backup_merge": {
+  "en": {
+   "changed": {
+    "allow_legacy": true,
+    "dry_run": false,
+    "mode": "merge",
+    "overwrite": true
+   },
+   "defaults": {
+    "allow_legacy": false,
+    "dry_run": true,
+    "mode": "merge",
+    "overwrite": false
+   },
+   "values": {
+    "allow_legacy": true,
+    "dry_run": false,
+    "overwrite": true
+   }
+  },
+  "ru": {
+   "changed": {
+    "allow_legacy": true,
+    "dry_run": false,
+    "mode": "merge",
+    "overwrite": true
+   },
+   "defaults": {
+    "allow_legacy": false,
+    "dry_run": true,
+    "mode": "merge",
+    "overwrite": false
+   },
+   "values": {
+    "allow_legacy": true,
+    "dry_run": false,
+    "overwrite": true
+   }
+  },
+  "signature": [
+   "overwrite:checkbox",
+   "dry_run:checkbox",
+   "allow_legacy:checkbox"
+  ]
+ },
+ "ai_backup_open": {
+  "en": {
+   "changed": {
+    "mode": "open_tool_folder"
+   },
+   "defaults": {
+    "mode": "open_tool_folder"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "open_tool_folder"
+   },
+   "defaults": {
+    "mode": "open_tool_folder"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "bitrix_detect_endpoint": {
+  "en": {
+   "changed": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value",
+    "mode": "detect"
+   },
+   "defaults": {
+    "bitrix_auto_scan_ports": true,
+    "bitrix_port_scan_candidates": "80,443,8080,8443,8890,8891,8892",
+    "bitrix_ports": "443",
+    "host_name": "portal.itpgrad.ru",
+    "hosts_presets": "",
+    "ip_address": "192.168.0.130",
+    "mode": "detect"
+   },
+   "values": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value",
+    "mode": "detect"
+   },
+   "defaults": {
+    "bitrix_auto_scan_ports": true,
+    "bitrix_port_scan_candidates": "80,443,8080,8443,8890,8891,8892",
+    "bitrix_ports": "443",
+    "host_name": "portal.itpgrad.ru",
+    "hosts_presets": "",
+    "ip_address": "192.168.0.130",
+    "mode": "detect"
+   },
+   "values": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value"
+   }
+  },
+  "signature": [
+   "hosts_presets:profile_buttons",
+   "host_name:text",
+   "ip_address:text",
+   "bitrix_ports:text",
+   "bitrix_auto_scan_ports:checkbox",
+   "bitrix_port_scan_candidates:text"
+  ]
+ },
+ "bitrix_disable": {
+  "en": {
+   "changed": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value",
+    "mode": "disable"
+   },
+   "defaults": {
+    "bitrix_auto_scan_ports": true,
+    "bitrix_port_scan_candidates": "80,443,8080,8443,8890,8891,8892",
+    "bitrix_ports": "443",
+    "host_name": "portal.itpgrad.ru",
+    "hosts_presets": "",
+    "ip_address": "192.168.0.130",
+    "mode": "disable"
+   },
+   "values": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value",
+    "mode": "disable"
+   },
+   "defaults": {
+    "bitrix_auto_scan_ports": true,
+    "bitrix_port_scan_candidates": "80,443,8080,8443,8890,8891,8892",
+    "bitrix_ports": "443",
+    "host_name": "portal.itpgrad.ru",
+    "hosts_presets": "",
+    "ip_address": "192.168.0.130",
+    "mode": "disable"
+   },
+   "values": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value"
+   }
+  },
+  "signature": [
+   "hosts_presets:profile_buttons",
+   "host_name:text",
+   "ip_address:text",
+   "bitrix_ports:text",
+   "bitrix_auto_scan_ports:checkbox",
+   "bitrix_port_scan_candidates:text"
+  ]
+ },
+ "bitrix_enable": {
+  "en": {
+   "changed": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value",
+    "mode": "enable"
+   },
+   "defaults": {
+    "bitrix_auto_scan_ports": true,
+    "bitrix_port_scan_candidates": "80,443,8080,8443,8890,8891,8892",
+    "bitrix_ports": "443",
+    "host_name": "portal.itpgrad.ru",
+    "hosts_presets": "",
+    "ip_address": "192.168.0.130",
+    "mode": "enable"
+   },
+   "values": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value",
+    "mode": "enable"
+   },
+   "defaults": {
+    "bitrix_auto_scan_ports": true,
+    "bitrix_port_scan_candidates": "80,443,8080,8443,8890,8891,8892",
+    "bitrix_ports": "443",
+    "host_name": "portal.itpgrad.ru",
+    "hosts_presets": "",
+    "ip_address": "192.168.0.130",
+    "mode": "enable"
+   },
+   "values": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value"
+   }
+  },
+  "signature": [
+   "hosts_presets:profile_buttons",
+   "host_name:text",
+   "ip_address:text",
+   "bitrix_ports:text",
+   "bitrix_auto_scan_ports:checkbox",
+   "bitrix_port_scan_candidates:text"
+  ]
+ },
+ "bitrix_restore": {
+  "en": {
+   "changed": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value",
+    "mode": "restore"
+   },
+   "defaults": {
+    "bitrix_auto_scan_ports": true,
+    "bitrix_port_scan_candidates": "80,443,8080,8443,8890,8891,8892",
+    "bitrix_ports": "443",
+    "host_name": "portal.itpgrad.ru",
+    "hosts_presets": "",
+    "ip_address": "192.168.0.130",
+    "mode": "restore"
+   },
+   "values": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value",
+    "mode": "restore"
+   },
+   "defaults": {
+    "bitrix_auto_scan_ports": true,
+    "bitrix_port_scan_candidates": "80,443,8080,8443,8890,8891,8892",
+    "bitrix_ports": "443",
+    "host_name": "portal.itpgrad.ru",
+    "hosts_presets": "",
+    "ip_address": "192.168.0.130",
+    "mode": "restore"
+   },
+   "values": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value"
+   }
+  },
+  "signature": [
+   "hosts_presets:profile_buttons",
+   "host_name:text",
+   "ip_address:text",
+   "bitrix_ports:text",
+   "bitrix_auto_scan_ports:checkbox",
+   "bitrix_port_scan_candidates:text"
+  ]
+ },
+ "bitrix_status": {
+  "en": {
+   "changed": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value",
+    "mode": "status"
+   },
+   "defaults": {
+    "bitrix_auto_scan_ports": true,
+    "bitrix_port_scan_candidates": "80,443,8080,8443,8890,8891,8892",
+    "bitrix_ports": "443",
+    "host_name": "portal.itpgrad.ru",
+    "hosts_presets": "",
+    "ip_address": "192.168.0.130",
+    "mode": "status"
+   },
+   "values": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value",
+    "mode": "status"
+   },
+   "defaults": {
+    "bitrix_auto_scan_ports": true,
+    "bitrix_port_scan_candidates": "80,443,8080,8443,8890,8891,8892",
+    "bitrix_ports": "443",
+    "host_name": "portal.itpgrad.ru",
+    "hosts_presets": "",
+    "ip_address": "192.168.0.130",
+    "mode": "status"
+   },
+   "values": {
+    "bitrix_auto_scan_ports": false,
+    "bitrix_port_scan_candidates": "probe value",
+    "bitrix_ports": "probe value",
+    "host_name": "probe value",
+    "hosts_presets": "probe value",
+    "ip_address": "probe value"
+   }
+  },
+  "signature": [
+   "hosts_presets:profile_buttons",
+   "host_name:text",
+   "ip_address:text",
+   "bitrix_ports:text",
+   "bitrix_auto_scan_ports:checkbox",
+   "bitrix_port_scan_candidates:text"
+  ]
+ },
+ "browser_bookmarks_clear_favicons": {
+  "en": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "clear_favicons"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "clear_favicons"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "ru": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "clear_favicons"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "clear_favicons"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "signature": [
+   "browser_profile:select",
+   "backup_label:text",
+   "backup_version:text",
+   "close_browser_process:checkbox",
+   "browser_profile_path:folder",
+   "backup_source_path:folder",
+   "backup_target_path:folder"
+  ]
+ },
+ "browser_bookmarks_export_master": {
+  "en": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "export_master"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "export_master"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "ru": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "export_master"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "export_master"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "signature": [
+   "browser_profile:select",
+   "backup_label:text",
+   "backup_version:text",
+   "close_browser_process:checkbox",
+   "browser_profile_path:folder",
+   "backup_source_path:folder",
+   "backup_target_path:folder"
+  ]
+ },
+ "browser_bookmarks_import_master": {
+  "en": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "import_master"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "import_master"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "ru": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "import_master"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "import_master"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "signature": [
+   "browser_profile:select",
+   "backup_label:text",
+   "backup_version:text",
+   "close_browser_process:checkbox",
+   "browser_profile_path:folder",
+   "backup_source_path:folder",
+   "backup_target_path:folder"
+  ]
+ },
+ "browser_bookmarks_open_local_backup": {
+  "en": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "open_local_backup"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "open_local_backup"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "ru": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "open_local_backup"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "open_local_backup"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "signature": [
+   "browser_profile:select",
+   "backup_label:text",
+   "backup_version:text",
+   "close_browser_process:checkbox",
+   "browser_profile_path:folder",
+   "backup_source_path:folder",
+   "backup_target_path:folder"
+  ]
+ },
+ "browser_bookmarks_status": {
+  "en": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "status"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "status"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "ru": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "status"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "status"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "signature": [
+   "browser_profile:select",
+   "backup_label:text",
+   "backup_version:text",
+   "close_browser_process:checkbox",
+   "browser_profile_path:folder",
+   "backup_source_path:folder",
+   "backup_target_path:folder"
+  ]
+ },
+ "browser_bookmarks_transfer_master": {
+  "en": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "transfer_master"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "transfer_master"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "ru": {
+   "changed": {
+    "backup_label": "probe value",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": false,
+    "mode": "transfer_master"
+   },
+   "defaults": {
+    "backup_label": "bookmarks_master",
+    "backup_source_path": "<root>\\input",
+    "backup_target_path": "<root>\\output",
+    "backup_version": "auto",
+    "browser_profile": "chrome",
+    "browser_profile_path": "<root>\\input",
+    "close_browser_process": true,
+    "mode": "transfer_master"
+   },
+   "values": {
+    "backup_label": "probe value",
+    "backup_source_path": "probe value",
+    "backup_target_path": "probe value",
+    "backup_version": "probe value",
+    "browser_profile": "probe-b",
+    "browser_profile_path": "probe value",
+    "close_browser_process": false
+   }
+  },
+  "signature": [
+   "browser_profile:select",
+   "backup_label:text",
+   "backup_version:text",
+   "close_browser_process:checkbox",
+   "browser_profile_path:folder",
+   "backup_source_path:folder",
+   "backup_target_path:folder"
+  ]
+ },
+ "cache_cleaner_audit": {
+  "en": {
+   "changed": {
+    "mode": "Audit"
+   },
+   "defaults": {
+    "mode": "Audit"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "Audit"
+   },
+   "defaults": {
+    "mode": "Audit"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "cache_cleaner_chrome_model": {
+  "en": {
+   "changed": {
+    "Targets": "chrome",
+    "mode": "Clean"
+   },
+   "defaults": {
+    "Targets": "chrome",
+    "mode": "Clean"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "Targets": "chrome",
+    "mode": "Clean"
+   },
+   "defaults": {
+    "Targets": "chrome",
+    "mode": "Clean"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "cache_cleaner_chrome_undo": {
+  "en": {
+   "changed": {
+    "mode": "ChromeUndo"
+   },
+   "defaults": {
+    "mode": "ChromeUndo"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "ChromeUndo"
+   },
+   "defaults": {
+    "mode": "ChromeUndo"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "cache_cleaner_clean": {
+  "en": {
+   "changed": {
+    "mode": "Clean"
+   },
+   "defaults": {
+    "mode": "Clean"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "Clean"
+   },
+   "defaults": {
+    "mode": "Clean"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "cache_cleaner_clean_nuget": {
+  "en": {
+   "changed": {
+    "NuGetPackages": true,
+    "mode": "Clean"
+   },
+   "defaults": {
+    "NuGetPackages": true,
+    "mode": "Clean"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "NuGetPackages": true,
+    "mode": "Clean"
+   },
+   "defaults": {
+    "NuGetPackages": true,
+    "mode": "Clean"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "cert_export_pfx": {
+  "en": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "export_pfx",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "export_pfx",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "export_pfx",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "export_pfx",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "signature": [
+   "cert_store:select",
+   "cert_backup_dir:folder",
+   "pfx_password:text",
+   "import_file:file",
+   "import_store:select"
+  ]
+ },
+ "cert_export_roots": {
+  "en": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "export_roots",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "export_roots",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "export_roots",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "export_roots",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "signature": [
+   "cert_store:select",
+   "cert_backup_dir:folder",
+   "pfx_password:text",
+   "import_file:file",
+   "import_store:select"
+  ]
+ },
+ "cert_import_cert": {
+  "en": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "import_cert",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "import_cert",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "import_cert",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "import_cert",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "signature": [
+   "cert_store:select",
+   "cert_backup_dir:folder",
+   "pfx_password:text",
+   "import_file:file",
+   "import_store:select"
+  ]
+ },
+ "cert_import_pfx": {
+  "en": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "import_pfx",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "import_pfx",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "import_pfx",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "import_pfx",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "signature": [
+   "cert_store:select",
+   "cert_backup_dir:folder",
+   "pfx_password:text",
+   "import_file:file",
+   "import_store:select"
+  ]
+ },
+ "cert_import_pfx_folder": {
+  "en": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "import_pfx_folder",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "import_pfx_folder",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "import_pfx_folder",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "import_pfx_folder",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "signature": [
+   "cert_store:select",
+   "cert_backup_dir:folder",
+   "pfx_password:text",
+   "import_file:file",
+   "import_store:select"
+  ]
+ },
+ "cert_open_folder": {
+  "en": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "open_folder",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "open_folder",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "open_folder",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "open_folder",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "signature": [
+   "cert_store:select",
+   "cert_backup_dir:folder",
+   "pfx_password:text",
+   "import_file:file",
+   "import_store:select"
+  ]
+ },
+ "cert_status": {
+  "en": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "status",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "status",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "mode": "status",
+    "pfx_password": "probe value"
+   },
+   "defaults": {
+    "cert_backup_dir": "",
+    "cert_store": "CurrentUser\\My",
+    "import_file": "",
+    "import_store": "CurrentUser\\My",
+    "mode": "status",
+    "pfx_password": ""
+   },
+   "values": {
+    "cert_backup_dir": "probe value",
+    "cert_store": "LocalMachine\\CA",
+    "import_file": "probe value",
+    "import_store": "LocalMachine\\CA",
+    "pfx_password": "probe value"
+   }
+  },
+  "signature": [
+   "cert_store:select",
+   "cert_backup_dir:folder",
+   "pfx_password:text",
+   "import_file:file",
+   "import_store:select"
+  ]
+ },
+ "cleanup_input_output": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "cleanup_workspace": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "codex_nuke_audit": {
+  "en": {
+   "changed": {
+    "mode": "Audit",
+    "tool": "codex"
+   },
+   "defaults": {
+    "mode": "Audit",
+    "tool": "codex"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "Audit",
+    "tool": "codex"
+   },
+   "defaults": {
+    "mode": "Audit",
+    "tool": "codex"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "codex_nuke_dryrun": {
+  "en": {
+   "changed": {
+    "mode": "DryRun",
+    "tool": "codex"
+   },
+   "defaults": {
+    "mode": "DryRun",
+    "tool": "codex"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "DryRun",
+    "tool": "codex"
+   },
+   "defaults": {
+    "mode": "DryRun",
+    "tool": "codex"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "codex_nuke_full": {
+  "en": {
+   "changed": {
+    "mode": "Nuke",
+    "tool": "codex"
+   },
+   "defaults": {
+    "mode": "Nuke",
+    "tool": "codex"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "Nuke",
+    "tool": "codex"
+   },
+   "defaults": {
+    "mode": "Nuke",
+    "tool": "codex"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "codex_nuke_keep_cli_state": {
+  "en": {
+   "changed": {
+    "KeepCliState": true,
+    "mode": "Nuke",
+    "tool": "codex"
+   },
+   "defaults": {
+    "KeepCliState": true,
+    "mode": "Nuke",
+    "tool": "codex"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "KeepCliState": true,
+    "mode": "Nuke",
+    "tool": "codex"
+   },
+   "defaults": {
+    "KeepCliState": true,
+    "mode": "Nuke",
+    "tool": "codex"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "codex_nuke_session_reset": {
+  "en": {
+   "changed": {
+    "mode": "SessionReset",
+    "tool": "codex"
+   },
+   "defaults": {
+    "mode": "SessionReset",
+    "tool": "codex"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "SessionReset",
+    "tool": "codex"
+   },
+   "defaults": {
+    "mode": "SessionReset",
+    "tool": "codex"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "default_apps_edge": {
+  "en": {
+   "changed": {
+    "dry_run": false,
+    "edge_action": "webview2",
+    "edge_level": "quiet",
+    "mode": "edge_control"
+   },
+   "defaults": {
+    "dry_run": true,
+    "edge_action": "status",
+    "edge_level": "calm",
+    "mode": "edge_control"
+   },
+   "values": {
+    "dry_run": false,
+    "edge_action": "webview2",
+    "edge_level": "quiet",
+    "edge_owned_now": "probe-b"
+   }
+  },
+  "ru": {
+   "changed": {
+    "dry_run": false,
+    "edge_action": "webview2",
+    "edge_level": "quiet",
+    "mode": "edge_control"
+   },
+   "defaults": {
+    "dry_run": true,
+    "edge_action": "status",
+    "edge_level": "calm",
+    "mode": "edge_control"
+   },
+   "values": {
+    "dry_run": false,
+    "edge_action": "webview2",
+    "edge_level": "quiet",
+    "edge_owned_now": "probe-b"
+   }
+  },
+  "signature": [
+   "edge_owned_now:info_badges",
+   "edge_action:radio",
+   "edge_level:radio",
+   "dry_run:checkbox"
+  ]
+ },
+ "default_apps_groups": {
+  "en": {
+   "changed": {
+    "dry_run": false,
+    "group_action": "compose",
+    "group_custom_name": "probe value",
+    "group_ext": "probe value",
+    "group_name": "custom",
+    "mode": "groups_control",
+    "snapshot_machine": "probe value",
+    "snapshot_name": "probe value"
+   },
+   "defaults": {
+    "dry_run": true,
+    "group_action": "status",
+    "group_custom_name": "",
+    "group_ext": "",
+    "group_name": "photo",
+    "mode": "groups_control",
+    "snapshot_machine": "",
+    "snapshot_name": "Microsoft Snapshot"
+   },
+   "values": {
+    "dry_run": false,
+    "group_action": "compose",
+    "group_custom_name": "probe value",
+    "group_ext": "probe value",
+    "group_name": "custom",
+    "snapshot_machine": "probe value",
+    "snapshot_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "dry_run": false,
+    "group_action": "compose",
+    "group_custom_name": "probe value",
+    "group_ext": "probe value",
+    "group_name": "custom",
+    "mode": "groups_control",
+    "snapshot_machine": "probe value",
+    "snapshot_name": "probe value"
+   },
+   "defaults": {
+    "dry_run": true,
+    "group_action": "status",
+    "group_custom_name": "",
+    "group_ext": "",
+    "group_name": "photo",
+    "mode": "groups_control",
+    "snapshot_machine": "",
+    "snapshot_name": "Microsoft Snapshot"
+   },
+   "values": {
+    "dry_run": false,
+    "group_action": "compose",
+    "group_custom_name": "probe value",
+    "group_ext": "probe value",
+    "group_name": "custom",
+    "snapshot_machine": "probe value",
+    "snapshot_name": "probe value"
+   }
+  },
+  "signature": [
+   "group_action:radio",
+   "group_name:radio",
+   "group_custom_name:text",
+   "group_ext:text",
+   "snapshot_name:text",
+   "snapshot_machine:text",
+   "dry_run:checkbox"
+  ]
+ },
+ "default_apps_microsoft": {
+  "en": {
+   "changed": {
+    "apps": [
+     "Photos",
+     "Clipchamp"
+    ],
+    "apps_action": "open_logs",
+    "dry_run": false,
+    "mode": "apps_control"
+   },
+   "defaults": {
+    "apps": [
+     "ZuneMusic",
+     "ZuneVideo"
+    ],
+    "apps_action": "status",
+    "dry_run": true,
+    "mode": "apps_control"
+   },
+   "values": {
+    "apps": [
+     "Photos",
+     "Clipchamp"
+    ],
+    "apps_action": "open_logs",
+    "dry_run": false
+   }
+  },
+  "ru": {
+   "changed": {
+    "apps": [
+     "Photos",
+     "Clipchamp"
+    ],
+    "apps_action": "open_logs",
+    "dry_run": false,
+    "mode": "apps_control"
+   },
+   "defaults": {
+    "apps": [
+     "ZuneMusic",
+     "ZuneVideo"
+    ],
+    "apps_action": "status",
+    "dry_run": true,
+    "mode": "apps_control"
+   },
+   "values": {
+    "apps": [
+     "Photos",
+     "Clipchamp"
+    ],
+    "apps_action": "open_logs",
+    "dry_run": false
+   }
+  },
+  "signature": [
+   "apps_action:radio",
+   "apps:checkboxes",
+   "dry_run:checkbox"
+  ]
+ },
+ "default_apps_overview": {
+  "en": {
+   "changed": {
+    "mode": "overview_control",
+    "overview_action": "status_all"
+   },
+   "defaults": {
+    "mode": "overview_control",
+    "overview_action": "status_all"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "overview_control",
+    "overview_action": "status_all"
+   },
+   "defaults": {
+    "mode": "overview_control",
+    "overview_action": "status_all"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "default_apps_policy": {
+  "en": {
+   "changed": {
+    "allow_unsupported_policy_edition": true,
+    "backup_dir": "probe value",
+    "backup_label": "probe value",
+    "backup_retention_days": 31,
+    "check_identifiers": [
+     "probe-item"
+    ],
+    "cleanup_dry_run": false,
+    "extra_identifiers": "probe value",
+    "import_backup_xml": "probe-b",
+    "import_profile_xml": "probe value",
+    "include_dism_inventory": true,
+    "mode": "policy_control",
+    "policy_action": "open_backups",
+    "profile_xml": "probe value",
+    "program_data_dir": "probe value",
+    "remove_policy_xml": true,
+    "strip_suggested": false
+   },
+   "defaults": {
+    "allow_unsupported_policy_edition": false,
+    "backup_dir": "backup\\default_apps",
+    "backup_label": "",
+    "backup_retention_days": 30,
+    "check_identifiers": [
+     "http",
+     "https",
+     ".htm",
+     ".html",
+     ".pdf",
+     ".txt",
+     ".md",
+     ".rtf",
+     ".doc",
+     ".docx",
+     ".xls",
+     ".xlsx",
+     ".ppt",
+     ".pptx",
+     ".zip",
+     ".7z",
+     ".rar",
+     ".tar",
+     ".gz",
+     ".jpg",
+     ".jpeg",
+     ".png",
+     ".webp",
+     ".gif",
+     ".bmp",
+     ".tif",
+     ".tiff",
+     ".svg",
+     ".avif",
+     ".heic",
+     ".psd",
+     ".mp4",
+     ".mkv",
+     ".webm",
+     ".avi",
+     ".mov",
+     ".mxf",
+     ".mp3",
+     ".flac",
+     ".wav",
+     ".m4a",
+     ".aac",
+     ".ogg",
+     ".opus",
+     ".alac",
+     ".m3u",
+     ".m3u8",
+     ".pls"
+    ],
+    "cleanup_dry_run": true,
+    "extra_identifiers": "",
+    "import_backup_xml": "",
+    "import_profile_xml": "",
+    "include_dism_inventory": false,
+    "mode": "policy_control",
+    "policy_action": "status",
+    "profile_xml": "profiles\\default_apps\\AppAssociations.xml",
+    "program_data_dir": "%ProgramData%\\Audion\\DefaultApps",
+    "remove_policy_xml": false,
+    "strip_suggested": true
+   },
+   "values": {
+    "allow_unsupported_policy_edition": true,
+    "backup_dir": "probe value",
+    "backup_label": "probe value",
+    "backup_retention_days": 31,
+    "check_identifiers": [
+     "probe-item"
+    ],
+    "cleanup_dry_run": false,
+    "extra_identifiers": "probe value",
+    "import_backup_xml": "probe-b",
+    "import_profile_xml": "probe value",
+    "include_dism_inventory": true,
+    "policy_action": "open_backups",
+    "profile_xml": "probe value",
+    "program_data_dir": "probe value",
+    "remove_policy_xml": true,
+    "strip_suggested": false
+   }
+  },
+  "ru": {
+   "changed": {
+    "allow_unsupported_policy_edition": true,
+    "backup_dir": "probe value",
+    "backup_label": "probe value",
+    "backup_retention_days": 31,
+    "check_identifiers": [
+     "probe-item"
+    ],
+    "cleanup_dry_run": false,
+    "extra_identifiers": "probe value",
+    "import_backup_xml": "probe-b",
+    "import_profile_xml": "probe value",
+    "include_dism_inventory": true,
+    "mode": "policy_control",
+    "policy_action": "open_backups",
+    "profile_xml": "probe value",
+    "program_data_dir": "probe value",
+    "remove_policy_xml": true,
+    "strip_suggested": false
+   },
+   "defaults": {
+    "allow_unsupported_policy_edition": false,
+    "backup_dir": "backup\\default_apps",
+    "backup_label": "",
+    "backup_retention_days": 30,
+    "check_identifiers": [
+     "http",
+     "https",
+     ".htm",
+     ".html",
+     ".pdf",
+     ".txt",
+     ".md",
+     ".rtf",
+     ".doc",
+     ".docx",
+     ".xls",
+     ".xlsx",
+     ".ppt",
+     ".pptx",
+     ".zip",
+     ".7z",
+     ".rar",
+     ".tar",
+     ".gz",
+     ".jpg",
+     ".jpeg",
+     ".png",
+     ".webp",
+     ".gif",
+     ".bmp",
+     ".tif",
+     ".tiff",
+     ".svg",
+     ".avif",
+     ".heic",
+     ".psd",
+     ".mp4",
+     ".mkv",
+     ".webm",
+     ".avi",
+     ".mov",
+     ".mxf",
+     ".mp3",
+     ".flac",
+     ".wav",
+     ".m4a",
+     ".aac",
+     ".ogg",
+     ".opus",
+     ".alac",
+     ".m3u",
+     ".m3u8",
+     ".pls"
+    ],
+    "cleanup_dry_run": true,
+    "extra_identifiers": "",
+    "import_backup_xml": "",
+    "import_profile_xml": "",
+    "include_dism_inventory": false,
+    "mode": "policy_control",
+    "policy_action": "status",
+    "profile_xml": "profiles\\default_apps\\AppAssociations.xml",
+    "program_data_dir": "%ProgramData%\\Audion\\DefaultApps",
+    "remove_policy_xml": false,
+    "strip_suggested": true
+   },
+   "values": {
+    "allow_unsupported_policy_edition": true,
+    "backup_dir": "probe value",
+    "backup_label": "probe value",
+    "backup_retention_days": 31,
+    "check_identifiers": [
+     "probe-item"
+    ],
+    "cleanup_dry_run": false,
+    "extra_identifiers": "probe value",
+    "import_backup_xml": "probe-b",
+    "import_profile_xml": "probe value",
+    "include_dism_inventory": true,
+    "policy_action": "open_backups",
+    "profile_xml": "probe value",
+    "program_data_dir": "probe value",
+    "remove_policy_xml": true,
+    "strip_suggested": false
+   }
+  },
+  "signature": [
+   "policy_action:radio",
+   "profile_xml:file",
+   "import_backup_xml:select",
+   "import_profile_xml:file",
+   "strip_suggested:checkbox",
+   "backup_label:text",
+   "check_identifiers:checkboxes",
+   "extra_identifiers:text",
+   "include_dism_inventory:checkbox",
+   "remove_policy_xml:checkbox",
+   "allow_unsupported_policy_edition:checkbox",
+   "program_data_dir:folder",
+   "backup_dir:folder",
+   "backup_retention_days:number",
+   "cleanup_dry_run:checkbox"
+  ]
+ },
+ "default_apps_snapshot": {
+  "en": {
+   "changed": {
+    "dry_run": false,
+    "mode": "snapshot_control",
+    "snapshot_action": "open_snapshots",
+    "snapshot_machine": "probe value",
+    "snapshot_name": "probe value"
+   },
+   "defaults": {
+    "dry_run": true,
+    "mode": "snapshot_control",
+    "snapshot_action": "status",
+    "snapshot_machine": "",
+    "snapshot_name": "Microsoft Snapshot"
+   },
+   "values": {
+    "dry_run": false,
+    "snapshot_action": "open_snapshots",
+    "snapshot_machine": "probe value",
+    "snapshot_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "dry_run": false,
+    "mode": "snapshot_control",
+    "snapshot_action": "open_snapshots",
+    "snapshot_machine": "probe value",
+    "snapshot_name": "probe value"
+   },
+   "defaults": {
+    "dry_run": true,
+    "mode": "snapshot_control",
+    "snapshot_action": "status",
+    "snapshot_machine": "",
+    "snapshot_name": "Microsoft Snapshot"
+   },
+   "values": {
+    "dry_run": false,
+    "snapshot_action": "open_snapshots",
+    "snapshot_machine": "probe value",
+    "snapshot_name": "probe value"
+   }
+  },
+  "signature": [
+   "snapshot_action:radio",
+   "snapshot_name:text",
+   "snapshot_machine:text",
+   "dry_run:checkbox"
+  ]
+ },
+ "default_apps_watch": {
+  "en": {
+   "changed": {
+    "guard_action": "run_check",
+    "guard_targets": [
+     "Defender"
+    ],
+    "mode": "guards_control"
+   },
+   "defaults": {
+    "guard_action": "status",
+    "guard_targets": [
+     "Drift"
+    ],
+    "mode": "guards_control"
+   },
+   "values": {
+    "guard_action": "run_check",
+    "guard_targets": [
+     "Defender"
+    ]
+   }
+  },
+  "ru": {
+   "changed": {
+    "guard_action": "run_check",
+    "guard_targets": [
+     "Defender"
+    ],
+    "mode": "guards_control"
+   },
+   "defaults": {
+    "guard_action": "status",
+    "guard_targets": [
+     "Drift"
+    ],
+    "mode": "guards_control"
+   },
+   "values": {
+    "guard_action": "run_check",
+    "guard_targets": [
+     "Defender"
+    ]
+   }
+  },
+  "signature": [
+   "guard_action:radio",
+   "guard_targets:checkboxes"
+  ]
+ },
+ "dns_fix_icon": {
+  "en": {
+   "changed": {
+    "mode": "FixIcon"
+   },
+   "defaults": {
+    "mode": "FixIcon"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "FixIcon"
+   },
+   "defaults": {
+    "mode": "FixIcon"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "dns_repair": {
+  "en": {
+   "changed": {
+    "mode": "Repair"
+   },
+   "defaults": {
+    "mode": "Repair"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "Repair"
+   },
+   "defaults": {
+    "mode": "Repair"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "dns_status": {
+  "en": {
+   "changed": {
+    "mode": "Status"
+   },
+   "defaults": {
+    "mode": "Status"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "Status"
+   },
+   "defaults": {
+    "mode": "Status"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "dns_use_adguard": {
+  "en": {
+   "changed": {
+    "mode": "UseAdGuard"
+   },
+   "defaults": {
+    "mode": "UseAdGuard"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "UseAdGuard"
+   },
+   "defaults": {
+    "mode": "UseAdGuard"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "dns_use_auto": {
+  "en": {
+   "changed": {
+    "mode": "UseAuto"
+   },
+   "defaults": {
+    "mode": "UseAuto"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "UseAuto"
+   },
+   "defaults": {
+    "mode": "UseAuto"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "dns_use_cloudflare": {
+  "en": {
+   "changed": {
+    "mode": "UseCloudflare"
+   },
+   "defaults": {
+    "mode": "UseCloudflare"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "UseCloudflare"
+   },
+   "defaults": {
+    "mode": "UseCloudflare"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "dns_use_google": {
+  "en": {
+   "changed": {
+    "mode": "UseGoogle"
+   },
+   "defaults": {
+    "mode": "UseGoogle"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "UseGoogle"
+   },
+   "defaults": {
+    "mode": "UseGoogle"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "dns_use_quad9": {
+  "en": {
+   "changed": {
+    "mode": "UseQuad9"
+   },
+   "defaults": {
+    "mode": "UseQuad9"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "UseQuad9"
+   },
+   "defaults": {
+    "mode": "UseQuad9"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "dns_use_router": {
+  "en": {
+   "changed": {
+    "mode": "UseRouter"
+   },
+   "defaults": {
+    "mode": "UseRouter"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "UseRouter"
+   },
+   "defaults": {
+    "mode": "UseRouter"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "dns_use_yandex": {
+  "en": {
+   "changed": {
+    "mode": "UseYandex"
+   },
+   "defaults": {
+    "mode": "UseYandex"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "UseYandex"
+   },
+   "defaults": {
+    "mode": "UseYandex"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "docs_pdf_open": {
+  "en": {
+   "changed": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand",
+    "mode": "open_folder"
+   },
+   "defaults": {
+    "docs_pdf_include_agent_instructions": true,
+    "docs_pdf_theme": "both",
+    "mode": "open_folder"
+   },
+   "values": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand"
+   }
+  },
+  "ru": {
+   "changed": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand",
+    "mode": "open_folder"
+   },
+   "defaults": {
+    "docs_pdf_include_agent_instructions": true,
+    "docs_pdf_theme": "both",
+    "mode": "open_folder"
+   },
+   "values": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand"
+   }
+  },
+  "signature": [
+   "docs_pdf_theme:select",
+   "docs_pdf_include_agent_instructions:checkbox"
+  ]
+ },
+ "docs_pdf_plan": {
+  "en": {
+   "changed": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand",
+    "mode": "plan"
+   },
+   "defaults": {
+    "docs_pdf_include_agent_instructions": true,
+    "docs_pdf_theme": "both",
+    "mode": "plan"
+   },
+   "values": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand"
+   }
+  },
+  "ru": {
+   "changed": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand",
+    "mode": "plan"
+   },
+   "defaults": {
+    "docs_pdf_include_agent_instructions": true,
+    "docs_pdf_theme": "both",
+    "mode": "plan"
+   },
+   "values": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand"
+   }
+  },
+  "signature": [
+   "docs_pdf_theme:select",
+   "docs_pdf_include_agent_instructions:checkbox"
+  ]
+ },
+ "docs_pdf_render": {
+  "en": {
+   "changed": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand",
+    "mode": "render"
+   },
+   "defaults": {
+    "docs_pdf_include_agent_instructions": true,
+    "docs_pdf_theme": "both",
+    "mode": "render"
+   },
+   "values": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand"
+   }
+  },
+  "ru": {
+   "changed": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand",
+    "mode": "render"
+   },
+   "defaults": {
+    "docs_pdf_include_agent_instructions": true,
+    "docs_pdf_theme": "both",
+    "mode": "render"
+   },
+   "values": {
+    "docs_pdf_include_agent_instructions": false,
+    "docs_pdf_theme": "light-sand"
+   }
+  },
+  "signature": [
+   "docs_pdf_theme:select",
+   "docs_pdf_include_agent_instructions:checkbox"
+  ]
+ },
+ "driver_firmware_audit": {
+  "en": {
+   "changed": {
+    "csv": false,
+    "json": false,
+    "open_report": true,
+    "output_dir": "<root>\\output"
+   },
+   "defaults": {
+    "csv": true,
+    "json": true,
+    "open_report": false,
+    "output_dir": "<root>\\output"
+   },
+   "values": {
+    "csv": false,
+    "json": false,
+    "open_report": true,
+    "output_dir": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "csv": false,
+    "json": false,
+    "open_report": true,
+    "output_dir": "<root>\\output"
+   },
+   "defaults": {
+    "csv": true,
+    "json": true,
+    "open_report": false,
+    "output_dir": "<root>\\output"
+   },
+   "values": {
+    "csv": false,
+    "json": false,
+    "open_report": true,
+    "output_dir": "probe value"
+   }
+  },
+  "signature": [
+   "output_dir:folder",
+   "json:checkbox",
+   "csv:checkbox",
+   "open_report:checkbox"
+  ]
+ },
+ "driver_firmware_audit_open_folder": {
+  "en": {
+   "changed": {
+    "folder": "tools/driver_firmware_audit"
+   },
+   "defaults": {
+    "folder": "tools/driver_firmware_audit"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "folder": "tools/driver_firmware_audit"
+   },
+   "defaults": {
+    "folder": "tools/driver_firmware_audit"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "driver_firmware_audit_open_readme": {
+  "en": {
+   "changed": {
+    "path": "tools/driver_firmware_audit/README.md"
+   },
+   "defaults": {
+    "path": "tools/driver_firmware_audit/README.md"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "path": "tools/driver_firmware_audit/README.md"
+   },
+   "defaults": {
+    "path": "tools/driver_firmware_audit/README.md"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "driver_store_export": {
+  "en": {
+   "changed": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "probe-b",
+    "mode": "export_drivers"
+   },
+   "defaults": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "",
+    "mode": "export_drivers"
+   },
+   "values": {
+    "driver_backup_path": "probe value",
+    "driver_backup_select": "probe-b"
+   }
+  },
+  "ru": {
+   "changed": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "probe-b",
+    "mode": "export_drivers"
+   },
+   "defaults": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "",
+    "mode": "export_drivers"
+   },
+   "values": {
+    "driver_backup_path": "probe value",
+    "driver_backup_select": "probe-b"
+   }
+  },
+  "signature": [
+   "driver_backup_select:select",
+   "driver_backup_path:folder"
+  ]
+ },
+ "driver_store_manifest": {
+  "en": {
+   "changed": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "probe-b",
+    "mode": "backup_manifest"
+   },
+   "defaults": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "",
+    "mode": "backup_manifest"
+   },
+   "values": {
+    "driver_backup_path": "probe value",
+    "driver_backup_select": "probe-b"
+   }
+  },
+  "ru": {
+   "changed": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "probe-b",
+    "mode": "backup_manifest"
+   },
+   "defaults": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "",
+    "mode": "backup_manifest"
+   },
+   "values": {
+    "driver_backup_path": "probe value",
+    "driver_backup_select": "probe-b"
+   }
+  },
+  "signature": [
+   "driver_backup_select:select",
+   "driver_backup_path:folder"
+  ]
+ },
+ "driver_store_open_backups": {
+  "en": {
+   "changed": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "probe-b",
+    "mode": "open_driver_backups"
+   },
+   "defaults": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "",
+    "mode": "open_driver_backups"
+   },
+   "values": {
+    "driver_backup_path": "probe value",
+    "driver_backup_select": "probe-b"
+   }
+  },
+  "ru": {
+   "changed": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "probe-b",
+    "mode": "open_driver_backups"
+   },
+   "defaults": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "",
+    "mode": "open_driver_backups"
+   },
+   "values": {
+    "driver_backup_path": "probe value",
+    "driver_backup_select": "probe-b"
+   }
+  },
+  "signature": [
+   "driver_backup_select:select",
+   "driver_backup_path:folder"
+  ]
+ },
+ "driver_store_restore": {
+  "en": {
+   "changed": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "probe-b",
+    "mode": "restore_drivers"
+   },
+   "defaults": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "",
+    "mode": "restore_drivers"
+   },
+   "values": {
+    "driver_backup_path": "probe value",
+    "driver_backup_select": "probe-b"
+   }
+  },
+  "ru": {
+   "changed": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "probe-b",
+    "mode": "restore_drivers"
+   },
+   "defaults": {
+    "driver_backup_path": "<root>\\input",
+    "driver_backup_select": "",
+    "mode": "restore_drivers"
+   },
+   "values": {
+    "driver_backup_path": "probe value",
+    "driver_backup_select": "probe-b"
+   }
+  },
+  "signature": [
+   "driver_backup_select:select",
+   "driver_backup_path:folder"
+  ]
+ },
+ "driver_update_block_all": {
+  "en": {
+   "changed": {
+    "mode": "block_all"
+   },
+   "defaults": {
+    "mode": "block_all"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "block_all"
+   },
+   "defaults": {
+    "mode": "block_all"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "driver_update_open_policy_backups": {
+  "en": {
+   "changed": {
+    "mode": "open_policy_backups"
+   },
+   "defaults": {
+    "mode": "open_policy_backups"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "open_policy_backups"
+   },
+   "defaults": {
+    "mode": "open_policy_backups"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "driver_update_open_tool": {
+  "en": {
+   "changed": {
+    "mode": "open_tool_folder"
+   },
+   "defaults": {
+    "mode": "open_tool_folder"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "open_tool_folder"
+   },
+   "defaults": {
+    "mode": "open_tool_folder"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "driver_update_status": {
+  "en": {
+   "changed": {
+    "mode": "status"
+   },
+   "defaults": {
+    "mode": "status"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "status"
+   },
+   "defaults": {
+    "mode": "status"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "driver_update_unblock_all": {
+  "en": {
+   "changed": {
+    "mode": "unblock_all"
+   },
+   "defaults": {
+    "mode": "unblock_all"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "unblock_all"
+   },
+   "defaults": {
+    "mode": "unblock_all"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "fonts_export": {
+  "en": {
+   "changed": {
+    "fonts_folder": "probe value",
+    "include_system": true,
+    "mode": "export"
+   },
+   "defaults": {
+    "fonts_folder": "",
+    "include_system": false,
+    "mode": "export"
+   },
+   "values": {
+    "fonts_folder": "probe value",
+    "include_system": true
+   }
+  },
+  "ru": {
+   "changed": {
+    "fonts_folder": "probe value",
+    "include_system": true,
+    "mode": "export"
+   },
+   "defaults": {
+    "fonts_folder": "",
+    "include_system": false,
+    "mode": "export"
+   },
+   "values": {
+    "fonts_folder": "probe value",
+    "include_system": true
+   }
+  },
+  "signature": [
+   "fonts_folder:folder",
+   "include_system:checkbox"
+  ]
+ },
+ "fonts_import": {
+  "en": {
+   "changed": {
+    "fonts_folder": "probe value",
+    "include_system": true,
+    "mode": "import"
+   },
+   "defaults": {
+    "fonts_folder": "",
+    "include_system": false,
+    "mode": "import"
+   },
+   "values": {
+    "fonts_folder": "probe value",
+    "include_system": true
+   }
+  },
+  "ru": {
+   "changed": {
+    "fonts_folder": "probe value",
+    "include_system": true,
+    "mode": "import"
+   },
+   "defaults": {
+    "fonts_folder": "",
+    "include_system": false,
+    "mode": "import"
+   },
+   "values": {
+    "fonts_folder": "probe value",
+    "include_system": true
+   }
+  },
+  "signature": [
+   "fonts_folder:folder",
+   "include_system:checkbox"
+  ]
+ },
+ "fonts_open_folder": {
+  "en": {
+   "changed": {
+    "fonts_folder": "probe value",
+    "include_system": true,
+    "mode": "open_folder"
+   },
+   "defaults": {
+    "fonts_folder": "",
+    "include_system": false,
+    "mode": "open_folder"
+   },
+   "values": {
+    "fonts_folder": "probe value",
+    "include_system": true
+   }
+  },
+  "ru": {
+   "changed": {
+    "fonts_folder": "probe value",
+    "include_system": true,
+    "mode": "open_folder"
+   },
+   "defaults": {
+    "fonts_folder": "",
+    "include_system": false,
+    "mode": "open_folder"
+   },
+   "values": {
+    "fonts_folder": "probe value",
+    "include_system": true
+   }
+  },
+  "signature": [
+   "fonts_folder:folder",
+   "include_system:checkbox"
+  ]
+ },
+ "fonts_status": {
+  "en": {
+   "changed": {
+    "fonts_folder": "probe value",
+    "include_system": true,
+    "mode": "status"
+   },
+   "defaults": {
+    "fonts_folder": "",
+    "include_system": false,
+    "mode": "status"
+   },
+   "values": {
+    "fonts_folder": "probe value",
+    "include_system": true
+   }
+  },
+  "ru": {
+   "changed": {
+    "fonts_folder": "probe value",
+    "include_system": true,
+    "mode": "status"
+   },
+   "defaults": {
+    "fonts_folder": "",
+    "include_system": false,
+    "mode": "status"
+   },
+   "values": {
+    "fonts_folder": "probe value",
+    "include_system": true
+   }
+  },
+  "signature": [
+   "fonts_folder:folder",
+   "include_system:checkbox"
+  ]
+ },
+ "git_long_paths_enable": {
+  "en": {
+   "changed": {
+    "mode": "enable_git"
+   },
+   "defaults": {
+    "mode": "enable_git"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "enable_git"
+   },
+   "defaults": {
+    "mode": "enable_git"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "hwid_driver_block": {
+  "en": {
+   "changed": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "mode": "block_hwid",
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   },
+   "defaults": {
+    "hwid_builtin_cache_pins": "",
+    "hwid_keep_global_wu_block": false,
+    "hwid_retroactive": false,
+    "mode": "block_hwid",
+    "target_device_instance_id": "",
+    "target_hardware_ids": "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA\n"
+   },
+   "values": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_guard_identity_badges": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "mode": "block_hwid",
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   },
+   "defaults": {
+    "hwid_builtin_cache_pins": "",
+    "hwid_keep_global_wu_block": false,
+    "hwid_retroactive": false,
+    "mode": "block_hwid",
+    "target_device_instance_id": "",
+    "target_hardware_ids": "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA\n"
+   },
+   "values": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_guard_identity_badges": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   }
+  },
+  "signature": [
+   "hwid_builtin_cache_pins:profile_buttons",
+   "hwid_guard_identity_badges:info_badges",
+   "target_hardware_ids:textarea",
+   "target_device_instance_id:text",
+   "hwid_retroactive:checkbox",
+   "hwid_keep_global_wu_block:checkbox"
+  ]
+ },
+ "hwid_driver_rank_repair": {
+  "en": {
+   "changed": {
+    "allow_version_only_target_inf_fallback": true,
+    "bad_driver_version": "probe value",
+    "driver_rank_class": "probe value",
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "mode": "repair_rank_hwid",
+    "no_policy_block_after_repair": true,
+    "skip_current_version_check": true,
+    "target_device_instance_id": "probe value",
+    "target_driver_version": "probe value",
+    "target_hardware_ids": "probe value",
+    "target_inf_name_pattern": "probe value",
+    "target_inf_path": "<root>\\output"
+   },
+   "defaults": {
+    "allow_version_only_target_inf_fallback": false,
+    "bad_driver_version": "32.0.101.7026",
+    "driver_rank_class": "Display",
+    "hwid_builtin_cache_pins": "",
+    "hwid_keep_global_wu_block": false,
+    "mode": "repair_rank_hwid",
+    "no_policy_block_after_repair": false,
+    "skip_current_version_check": false,
+    "target_device_instance_id": "",
+    "target_driver_version": "32.0.101.7085",
+    "target_hardware_ids": "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA\n",
+    "target_inf_name_pattern": "*.inf",
+    "target_inf_path": "<root>\\output"
+   },
+   "values": {
+    "allow_version_only_target_inf_fallback": true,
+    "bad_driver_version": "probe value",
+    "driver_rank_class": "probe value",
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_repair_identity_badges": "probe value",
+    "no_policy_block_after_repair": true,
+    "skip_current_version_check": true,
+    "target_device_instance_id": "probe value",
+    "target_driver_version": "probe value",
+    "target_hardware_ids": "probe value",
+    "target_inf_name_pattern": "probe value",
+    "target_inf_path": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "allow_version_only_target_inf_fallback": true,
+    "bad_driver_version": "probe value",
+    "driver_rank_class": "probe value",
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "mode": "repair_rank_hwid",
+    "no_policy_block_after_repair": true,
+    "skip_current_version_check": true,
+    "target_device_instance_id": "probe value",
+    "target_driver_version": "probe value",
+    "target_hardware_ids": "probe value",
+    "target_inf_name_pattern": "probe value",
+    "target_inf_path": "<root>\\output"
+   },
+   "defaults": {
+    "allow_version_only_target_inf_fallback": false,
+    "bad_driver_version": "32.0.101.7026",
+    "driver_rank_class": "Display",
+    "hwid_builtin_cache_pins": "",
+    "hwid_keep_global_wu_block": false,
+    "mode": "repair_rank_hwid",
+    "no_policy_block_after_repair": false,
+    "skip_current_version_check": false,
+    "target_device_instance_id": "",
+    "target_driver_version": "32.0.101.7085",
+    "target_hardware_ids": "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA\n",
+    "target_inf_name_pattern": "*.inf",
+    "target_inf_path": "<root>\\output"
+   },
+   "values": {
+    "allow_version_only_target_inf_fallback": true,
+    "bad_driver_version": "probe value",
+    "driver_rank_class": "probe value",
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_repair_identity_badges": "probe value",
+    "no_policy_block_after_repair": true,
+    "skip_current_version_check": true,
+    "target_device_instance_id": "probe value",
+    "target_driver_version": "probe value",
+    "target_hardware_ids": "probe value",
+    "target_inf_name_pattern": "probe value",
+    "target_inf_path": "probe value"
+   }
+  },
+  "signature": [
+   "hwid_builtin_cache_pins:profile_buttons",
+   "hwid_repair_identity_badges:info_badges",
+   "target_hardware_ids:textarea",
+   "target_device_instance_id:text",
+   "bad_driver_version:text",
+   "target_driver_version:text",
+   "target_inf_name_pattern:text",
+   "target_inf_path:text",
+   "driver_rank_class:text",
+   "skip_current_version_check:checkbox",
+   "allow_version_only_target_inf_fallback:checkbox",
+   "no_policy_block_after_repair:checkbox",
+   "hwid_keep_global_wu_block:checkbox"
+  ]
+ },
+ "hwid_driver_rank_status": {
+  "en": {
+   "changed": {
+    "allow_version_only_target_inf_fallback": true,
+    "bad_driver_version": "probe value",
+    "driver_rank_class": "probe value",
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "mode": "repair_rank_hwid_status",
+    "no_policy_block_after_repair": true,
+    "skip_current_version_check": true,
+    "target_device_instance_id": "probe value",
+    "target_driver_version": "probe value",
+    "target_hardware_ids": "probe value",
+    "target_inf_name_pattern": "probe value",
+    "target_inf_path": "<root>\\output"
+   },
+   "defaults": {
+    "allow_version_only_target_inf_fallback": false,
+    "bad_driver_version": "32.0.101.7026",
+    "driver_rank_class": "Display",
+    "hwid_builtin_cache_pins": "",
+    "hwid_keep_global_wu_block": false,
+    "mode": "repair_rank_hwid_status",
+    "no_policy_block_after_repair": false,
+    "skip_current_version_check": false,
+    "target_device_instance_id": "",
+    "target_driver_version": "32.0.101.7085",
+    "target_hardware_ids": "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA\n",
+    "target_inf_name_pattern": "*.inf",
+    "target_inf_path": "<root>\\output"
+   },
+   "values": {
+    "allow_version_only_target_inf_fallback": true,
+    "bad_driver_version": "probe value",
+    "driver_rank_class": "probe value",
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_repair_identity_badges": "probe value",
+    "no_policy_block_after_repair": true,
+    "skip_current_version_check": true,
+    "target_device_instance_id": "probe value",
+    "target_driver_version": "probe value",
+    "target_hardware_ids": "probe value",
+    "target_inf_name_pattern": "probe value",
+    "target_inf_path": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "allow_version_only_target_inf_fallback": true,
+    "bad_driver_version": "probe value",
+    "driver_rank_class": "probe value",
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "mode": "repair_rank_hwid_status",
+    "no_policy_block_after_repair": true,
+    "skip_current_version_check": true,
+    "target_device_instance_id": "probe value",
+    "target_driver_version": "probe value",
+    "target_hardware_ids": "probe value",
+    "target_inf_name_pattern": "probe value",
+    "target_inf_path": "<root>\\output"
+   },
+   "defaults": {
+    "allow_version_only_target_inf_fallback": false,
+    "bad_driver_version": "32.0.101.7026",
+    "driver_rank_class": "Display",
+    "hwid_builtin_cache_pins": "",
+    "hwid_keep_global_wu_block": false,
+    "mode": "repair_rank_hwid_status",
+    "no_policy_block_after_repair": false,
+    "skip_current_version_check": false,
+    "target_device_instance_id": "",
+    "target_driver_version": "32.0.101.7085",
+    "target_hardware_ids": "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA\n",
+    "target_inf_name_pattern": "*.inf",
+    "target_inf_path": "<root>\\output"
+   },
+   "values": {
+    "allow_version_only_target_inf_fallback": true,
+    "bad_driver_version": "probe value",
+    "driver_rank_class": "probe value",
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_repair_identity_badges": "probe value",
+    "no_policy_block_after_repair": true,
+    "skip_current_version_check": true,
+    "target_device_instance_id": "probe value",
+    "target_driver_version": "probe value",
+    "target_hardware_ids": "probe value",
+    "target_inf_name_pattern": "probe value",
+    "target_inf_path": "probe value"
+   }
+  },
+  "signature": [
+   "hwid_builtin_cache_pins:profile_buttons",
+   "hwid_repair_identity_badges:info_badges",
+   "target_hardware_ids:textarea",
+   "target_device_instance_id:text",
+   "bad_driver_version:text",
+   "target_driver_version:text",
+   "target_inf_name_pattern:text",
+   "target_inf_path:text",
+   "driver_rank_class:text",
+   "skip_current_version_check:checkbox",
+   "allow_version_only_target_inf_fallback:checkbox",
+   "no_policy_block_after_repair:checkbox",
+   "hwid_keep_global_wu_block:checkbox"
+  ]
+ },
+ "hwid_driver_status": {
+  "en": {
+   "changed": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "mode": "status_hwid",
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   },
+   "defaults": {
+    "hwid_builtin_cache_pins": "",
+    "hwid_keep_global_wu_block": false,
+    "hwid_retroactive": false,
+    "mode": "status_hwid",
+    "target_device_instance_id": "",
+    "target_hardware_ids": "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA\n"
+   },
+   "values": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_guard_identity_badges": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "mode": "status_hwid",
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   },
+   "defaults": {
+    "hwid_builtin_cache_pins": "",
+    "hwid_keep_global_wu_block": false,
+    "hwid_retroactive": false,
+    "mode": "status_hwid",
+    "target_device_instance_id": "",
+    "target_hardware_ids": "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA\n"
+   },
+   "values": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_guard_identity_badges": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   }
+  },
+  "signature": [
+   "hwid_builtin_cache_pins:profile_buttons",
+   "hwid_guard_identity_badges:info_badges",
+   "target_hardware_ids:textarea",
+   "target_device_instance_id:text",
+   "hwid_retroactive:checkbox",
+   "hwid_keep_global_wu_block:checkbox"
+  ]
+ },
+ "hwid_driver_unblock": {
+  "en": {
+   "changed": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "mode": "unblock_hwid",
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   },
+   "defaults": {
+    "hwid_builtin_cache_pins": "",
+    "hwid_keep_global_wu_block": false,
+    "hwid_retroactive": false,
+    "mode": "unblock_hwid",
+    "target_device_instance_id": "",
+    "target_hardware_ids": "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA\n"
+   },
+   "values": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_guard_identity_badges": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "mode": "unblock_hwid",
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   },
+   "defaults": {
+    "hwid_builtin_cache_pins": "",
+    "hwid_keep_global_wu_block": false,
+    "hwid_retroactive": false,
+    "mode": "unblock_hwid",
+    "target_device_instance_id": "",
+    "target_hardware_ids": "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA\n"
+   },
+   "values": {
+    "hwid_builtin_cache_pins": "probe value",
+    "hwid_guard_identity_badges": "probe value",
+    "hwid_keep_global_wu_block": true,
+    "hwid_retroactive": true,
+    "target_device_instance_id": "probe value",
+    "target_hardware_ids": "probe value"
+   }
+  },
+  "signature": [
+   "hwid_builtin_cache_pins:profile_buttons",
+   "hwid_guard_identity_badges:info_badges",
+   "target_hardware_ids:textarea",
+   "target_device_instance_id:text",
+   "hwid_retroactive:checkbox",
+   "hwid_keep_global_wu_block:checkbox"
+  ]
+ },
+ "install_portable_powershell": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "internet_via_cable": {
+  "en": {
+   "changed": {
+    "lan_adapter": "probe-b",
+    "wifi_adapter": "probe-b"
+   },
+   "defaults": {
+    "lan_adapter": "",
+    "wifi_adapter": ""
+   },
+   "values": {
+    "lan_adapter": "probe-b",
+    "wifi_adapter": "probe-b"
+   }
+  },
+  "ru": {
+   "changed": {
+    "lan_adapter": "probe-b",
+    "wifi_adapter": "probe-b"
+   },
+   "defaults": {
+    "lan_adapter": "",
+    "wifi_adapter": ""
+   },
+   "values": {
+    "lan_adapter": "probe-b",
+    "wifi_adapter": "probe-b"
+   }
+  },
+  "signature": [
+   "lan_adapter:select",
+   "wifi_adapter:select"
+  ]
+ },
+ "migration_export": {
+  "en": {
+   "changed": {
+    "migration_folder": "probe value",
+    "mode": "export",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "migration_folder": "",
+    "mode": "export",
+    "pfx_password": "",
+    "profile_name": "",
+    "user_name": ""
+   },
+   "values": {
+    "migration_folder": "probe value",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "migration_folder": "probe value",
+    "mode": "export",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "migration_folder": "",
+    "mode": "export",
+    "pfx_password": "",
+    "profile_name": "",
+    "user_name": ""
+   },
+   "values": {
+    "migration_folder": "probe value",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "signature": [
+   "migration_folder:folder",
+   "profile_name:text",
+   "user_name:text",
+   "pfx_password:text"
+  ]
+ },
+ "migration_import": {
+  "en": {
+   "changed": {
+    "migration_folder": "probe value",
+    "mode": "import",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "migration_folder": "",
+    "mode": "import",
+    "pfx_password": "",
+    "profile_name": "",
+    "user_name": ""
+   },
+   "values": {
+    "migration_folder": "probe value",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "migration_folder": "probe value",
+    "mode": "import",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "migration_folder": "",
+    "mode": "import",
+    "pfx_password": "",
+    "profile_name": "",
+    "user_name": ""
+   },
+   "values": {
+    "migration_folder": "probe value",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "signature": [
+   "migration_folder:folder",
+   "profile_name:text",
+   "user_name:text",
+   "pfx_password:text"
+  ]
+ },
+ "migration_open_folder": {
+  "en": {
+   "changed": {
+    "migration_folder": "probe value",
+    "mode": "open_folder",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "migration_folder": "",
+    "mode": "open_folder",
+    "pfx_password": "",
+    "profile_name": "",
+    "user_name": ""
+   },
+   "values": {
+    "migration_folder": "probe value",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "migration_folder": "probe value",
+    "mode": "open_folder",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "migration_folder": "",
+    "mode": "open_folder",
+    "pfx_password": "",
+    "profile_name": "",
+    "user_name": ""
+   },
+   "values": {
+    "migration_folder": "probe value",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "signature": [
+   "migration_folder:folder",
+   "profile_name:text",
+   "user_name:text",
+   "pfx_password:text"
+  ]
+ },
+ "migration_plan": {
+  "en": {
+   "changed": {
+    "migration_folder": "probe value",
+    "mode": "plan",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "migration_folder": "",
+    "mode": "plan",
+    "pfx_password": "",
+    "profile_name": "",
+    "user_name": ""
+   },
+   "values": {
+    "migration_folder": "probe value",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "migration_folder": "probe value",
+    "mode": "plan",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "migration_folder": "",
+    "mode": "plan",
+    "pfx_password": "",
+    "profile_name": "",
+    "user_name": ""
+   },
+   "values": {
+    "migration_folder": "probe value",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "signature": [
+   "migration_folder:folder",
+   "profile_name:text",
+   "user_name:text",
+   "pfx_password:text"
+  ]
+ },
+ "migration_verify": {
+  "en": {
+   "changed": {
+    "migration_folder": "probe value",
+    "mode": "verify",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "migration_folder": "",
+    "mode": "verify",
+    "pfx_password": "",
+    "profile_name": "",
+    "user_name": ""
+   },
+   "values": {
+    "migration_folder": "probe value",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "migration_folder": "probe value",
+    "mode": "verify",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "migration_folder": "",
+    "mode": "verify",
+    "pfx_password": "",
+    "profile_name": "",
+    "user_name": ""
+   },
+   "values": {
+    "migration_folder": "probe value",
+    "pfx_password": "probe value",
+    "profile_name": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "signature": [
+   "migration_folder:folder",
+   "profile_name:text",
+   "user_name:text",
+   "pfx_password:text"
+  ]
+ },
+ "network_adapter_apply": {
+  "en": {
+   "changed": {
+    "adapter": "probe-b",
+    "adapter_action": "disable"
+   },
+   "defaults": {
+    "adapter": "",
+    "adapter_action": "restart"
+   },
+   "values": {
+    "adapter": "probe-b",
+    "adapter_action": "disable"
+   }
+  },
+  "ru": {
+   "changed": {
+    "adapter": "probe-b",
+    "adapter_action": "disable"
+   },
+   "defaults": {
+    "adapter": "",
+    "adapter_action": "restart"
+   },
+   "values": {
+    "adapter": "probe-b",
+    "adapter_action": "disable"
+   }
+  },
+  "signature": [
+   "adapter:select",
+   "adapter_action:radio"
+  ]
+ },
+ "network_backup": {
+  "en": {
+   "changed": {
+    "mode": "Backup"
+   },
+   "defaults": {
+    "mode": "Backup"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "Backup"
+   },
+   "defaults": {
+    "mode": "Backup"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "network_backup_wifi_keys": {
+  "en": {
+   "changed": {
+    "mode": "BackupWithWiFiKeys"
+   },
+   "defaults": {
+    "mode": "BackupWithWiFiKeys"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "BackupWithWiFiKeys"
+   },
+   "defaults": {
+    "mode": "BackupWithWiFiKeys"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "network_lan_wifi_switch": {
+  "en": {
+   "changed": {
+    "lan_adapter": "probe-b",
+    "switch_mode": "cycle_wifi",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "lan_adapter": "",
+    "switch_mode": "wifi_only",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "lan_adapter": "probe-b",
+    "switch_mode": "cycle_wifi",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "lan_adapter": "probe-b",
+    "switch_mode": "cycle_wifi",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "lan_adapter": "",
+    "switch_mode": "wifi_only",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "lan_adapter": "probe-b",
+    "switch_mode": "cycle_wifi",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "signature": [
+   "lan_adapter:select",
+   "wifi_adapter:select",
+   "wifi_profile:select",
+   "wifi_profile_override:text",
+   "switch_mode:radio"
+  ]
+ },
+ "network_light_repair": {
+  "en": {
+   "changed": {
+    "mode": "LightRepair"
+   },
+   "defaults": {
+    "mode": "LightRepair"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "LightRepair"
+   },
+   "defaults": {
+    "mode": "LightRepair"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "network_nuclear_repair": {
+  "en": {
+   "changed": {
+    "mode": "NuclearRepair"
+   },
+   "defaults": {
+    "mode": "NuclearRepair"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "NuclearRepair"
+   },
+   "defaults": {
+    "mode": "NuclearRepair"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "network_open_backup": {
+  "en": {
+   "changed": {
+    "mode": "OpenBackup"
+   },
+   "defaults": {
+    "mode": "OpenBackup"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "OpenBackup"
+   },
+   "defaults": {
+    "mode": "OpenBackup"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "network_proxy_disable_user": {
+  "en": {
+   "changed": {
+    "action": "DisableUserProxy"
+   },
+   "defaults": {
+    "action": "DisableUserProxy"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "action": "DisableUserProxy"
+   },
+   "defaults": {
+    "action": "DisableUserProxy"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "network_proxy_reset_winhttp": {
+  "en": {
+   "changed": {
+    "action": "ResetWinHttp"
+   },
+   "defaults": {
+    "action": "ResetWinHttp"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "action": "ResetWinHttp"
+   },
+   "defaults": {
+    "action": "ResetWinHttp"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "network_proxy_status": {
+  "en": {
+   "changed": {
+    "action": "Status"
+   },
+   "defaults": {
+    "action": "Status"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "action": "Status"
+   },
+   "defaults": {
+    "action": "Status"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "network_restore_latest": {
+  "en": {
+   "changed": {
+    "restore_mode": "latest"
+   },
+   "defaults": {
+    "restore_mode": "latest"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "restore_mode": "latest"
+   },
+   "defaults": {
+    "restore_mode": "latest"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "network_restore_selected": {
+  "en": {
+   "changed": {
+    "network_restore_snapshot": "probe-b",
+    "restore_mode": "selected"
+   },
+   "defaults": {
+    "network_restore_snapshot": "",
+    "restore_mode": "selected"
+   },
+   "values": {
+    "network_restore_snapshot": "probe-b"
+   }
+  },
+  "ru": {
+   "changed": {
+    "network_restore_snapshot": "probe-b",
+    "restore_mode": "selected"
+   },
+   "defaults": {
+    "network_restore_snapshot": "",
+    "restore_mode": "selected"
+   },
+   "values": {
+    "network_restore_snapshot": "probe-b"
+   }
+  },
+  "signature": [
+   "network_restore_snapshot:select"
+  ]
+ },
+ "network_standard_repair": {
+  "en": {
+   "changed": {
+    "mode": "StandardRepair"
+   },
+   "defaults": {
+    "mode": "StandardRepair"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "StandardRepair"
+   },
+   "defaults": {
+    "mode": "StandardRepair"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "network_status": {
+  "en": {
+   "changed": {
+    "mode": "Status"
+   },
+   "defaults": {
+    "mode": "Status"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "Status"
+   },
+   "defaults": {
+    "mode": "Status"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "network_wifi_connect": {
+  "en": {
+   "changed": {
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "signature": [
+   "wifi_profile:select",
+   "wifi_profile_override:text",
+   "wifi_adapter:select"
+  ]
+ },
+ "network_wifi_connection_mode": {
+  "en": {
+   "changed": {
+    "connection_mode": "manual",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "connection_mode": "auto",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "connection_mode": "manual",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "connection_mode": "manual",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "connection_mode": "auto",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "connection_mode": "manual",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "signature": [
+   "wifi_profile:select",
+   "wifi_profile_override:text",
+   "wifi_adapter:select",
+   "connection_mode:radio"
+  ]
+ },
+ "network_wifi_export": {
+  "en": {
+   "changed": {
+    "include_keys": true,
+    "target_folder": "<root>\\output",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "include_keys": false,
+    "target_folder": "<root>\\output",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "include_keys": true,
+    "target_folder": "probe value",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "include_keys": true,
+    "target_folder": "<root>\\output",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "include_keys": false,
+    "target_folder": "<root>\\output",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "include_keys": true,
+    "target_folder": "probe value",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "signature": [
+   "wifi_profile:select",
+   "wifi_profile_override:text",
+   "wifi_adapter:select",
+   "target_folder:folder",
+   "include_keys:checkbox"
+  ]
+ },
+ "network_wifi_hotspot": {
+  "en": {
+   "changed": {
+    "hotspot_action": "off",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "hotspot_action": "status",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "hotspot_action": "off",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "hotspot_action": "off",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "hotspot_action": "status",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "hotspot_action": "off",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "signature": [
+   "wifi_profile:select",
+   "wifi_profile_override:text",
+   "wifi_adapter:select",
+   "hotspot_action:select"
+  ]
+ },
+ "network_wifi_import_file": {
+  "en": {
+   "changed": {
+    "import_profile_xml": "probe value",
+    "import_user_scope": "all",
+    "source_kind": "file",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "import_profile_xml": "",
+    "import_user_scope": "current",
+    "source_kind": "file",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "import_profile_xml": "probe value",
+    "import_user_scope": "all",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "import_profile_xml": "probe value",
+    "import_user_scope": "all",
+    "source_kind": "file",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "import_profile_xml": "",
+    "import_user_scope": "current",
+    "source_kind": "file",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "import_profile_xml": "probe value",
+    "import_user_scope": "all",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "signature": [
+   "wifi_profile:select",
+   "wifi_profile_override:text",
+   "wifi_adapter:select",
+   "import_user_scope:radio",
+   "wifi_adapter:select",
+   "import_profile_xml:file"
+  ]
+ },
+ "network_wifi_import_folder": {
+  "en": {
+   "changed": {
+    "import_profile_folder": "<root>\\input",
+    "import_user_scope": "all",
+    "source_kind": "folder",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "import_profile_folder": "<root>\\input",
+    "import_user_scope": "current",
+    "source_kind": "folder",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "import_profile_folder": "probe value",
+    "import_user_scope": "all",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "import_profile_folder": "<root>\\input",
+    "import_user_scope": "all",
+    "source_kind": "folder",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "import_profile_folder": "<root>\\input",
+    "import_user_scope": "current",
+    "source_kind": "folder",
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "import_profile_folder": "probe value",
+    "import_user_scope": "all",
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "signature": [
+   "wifi_profile:select",
+   "wifi_profile_override:text",
+   "wifi_adapter:select",
+   "import_user_scope:radio",
+   "wifi_adapter:select",
+   "import_profile_folder:folder"
+  ]
+ },
+ "network_wifi_status": {
+  "en": {
+   "changed": {
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   },
+   "defaults": {
+    "wifi_adapter": "",
+    "wifi_profile": "",
+    "wifi_profile_override": ""
+   },
+   "values": {
+    "wifi_adapter": "probe-b",
+    "wifi_profile": "probe-b",
+    "wifi_profile_override": "probe value"
+   }
+  },
+  "signature": [
+   "wifi_profile:select",
+   "wifi_profile_override:text",
+   "wifi_adapter:select"
+  ]
+ },
+ "network_wifi_sticky_pair": {
+  "en": {
+   "changed": {
+    "auto_wifi_profile": "probe-b",
+    "auto_wifi_profile_override": "probe value",
+    "connect_auto_profile": false,
+    "manual_wifi_profile": "probe-b",
+    "manual_wifi_profile_override": "probe value",
+    "wifi_adapter": "probe-b"
+   },
+   "defaults": {
+    "auto_wifi_profile": "",
+    "auto_wifi_profile_override": "",
+    "connect_auto_profile": true,
+    "manual_wifi_profile": "",
+    "manual_wifi_profile_override": "",
+    "wifi_adapter": ""
+   },
+   "values": {
+    "auto_wifi_profile": "probe-b",
+    "auto_wifi_profile_override": "probe value",
+    "connect_auto_profile": false,
+    "manual_wifi_profile": "probe-b",
+    "manual_wifi_profile_override": "probe value",
+    "wifi_adapter": "probe-b"
+   }
+  },
+  "ru": {
+   "changed": {
+    "auto_wifi_profile": "probe-b",
+    "auto_wifi_profile_override": "probe value",
+    "connect_auto_profile": false,
+    "manual_wifi_profile": "probe-b",
+    "manual_wifi_profile_override": "probe value",
+    "wifi_adapter": "probe-b"
+   },
+   "defaults": {
+    "auto_wifi_profile": "",
+    "auto_wifi_profile_override": "",
+    "connect_auto_profile": true,
+    "manual_wifi_profile": "",
+    "manual_wifi_profile_override": "",
+    "wifi_adapter": ""
+   },
+   "values": {
+    "auto_wifi_profile": "probe-b",
+    "auto_wifi_profile_override": "probe value",
+    "connect_auto_profile": false,
+    "manual_wifi_profile": "probe-b",
+    "manual_wifi_profile_override": "probe value",
+    "wifi_adapter": "probe-b"
+   }
+  },
+  "signature": [
+   "auto_wifi_profile:select",
+   "auto_wifi_profile_override:text",
+   "manual_wifi_profile:select",
+   "manual_wifi_profile_override:text",
+   "wifi_adapter:select",
+   "connect_auto_profile:checkbox"
+  ]
+ },
+ "nvidia_audio_block_policy": {
+  "en": {
+   "changed": {
+    "mode": "block_policy"
+   },
+   "defaults": {
+    "mode": "block_policy"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "block_policy"
+   },
+   "defaults": {
+    "mode": "block_policy"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "nvidia_audio_disable": {
+  "en": {
+   "changed": {
+    "mode": "disable"
+   },
+   "defaults": {
+    "mode": "disable"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "disable"
+   },
+   "defaults": {
+    "mode": "disable"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "nvidia_audio_enable": {
+  "en": {
+   "changed": {
+    "mode": "enable"
+   },
+   "defaults": {
+    "mode": "enable"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "enable"
+   },
+   "defaults": {
+    "mode": "enable"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "nvidia_audio_export_ids": {
+  "en": {
+   "changed": {
+    "mode": "export_ids"
+   },
+   "defaults": {
+    "mode": "export_ids"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "export_ids"
+   },
+   "defaults": {
+    "mode": "export_ids"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "nvidia_audio_open_backup": {
+  "en": {
+   "changed": {
+    "mode": "open_backup"
+   },
+   "defaults": {
+    "mode": "open_backup"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "open_backup"
+   },
+   "defaults": {
+    "mode": "open_backup"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "nvidia_audio_open_output": {
+  "en": {
+   "changed": {
+    "mode": "open_output"
+   },
+   "defaults": {
+    "mode": "open_output"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "open_output"
+   },
+   "defaults": {
+    "mode": "open_output"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "nvidia_audio_open_tool": {
+  "en": {
+   "changed": {
+    "mode": "open_tool_folder"
+   },
+   "defaults": {
+    "mode": "open_tool_folder"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "open_tool_folder"
+   },
+   "defaults": {
+    "mode": "open_tool_folder"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "nvidia_audio_status": {
+  "en": {
+   "changed": {
+    "mode": "status"
+   },
+   "defaults": {
+    "mode": "status"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "status"
+   },
+   "defaults": {
+    "mode": "status"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "nvidia_audio_unblock_policy": {
+  "en": {
+   "changed": {
+    "mode": "unblock_policy"
+   },
+   "defaults": {
+    "mode": "unblock_policy"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "unblock_policy"
+   },
+   "defaults": {
+    "mode": "unblock_policy"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "nvidia_driver_block": {
+  "en": {
+   "changed": {
+    "include_compatible_ids": true,
+    "mode": "block_nvidia",
+    "nvidia_retroactive": true
+   },
+   "defaults": {
+    "include_compatible_ids": false,
+    "mode": "block_nvidia",
+    "nvidia_retroactive": false
+   },
+   "values": {
+    "include_compatible_ids": true,
+    "nvidia_retroactive": true
+   }
+  },
+  "ru": {
+   "changed": {
+    "include_compatible_ids": true,
+    "mode": "block_nvidia",
+    "nvidia_retroactive": true
+   },
+   "defaults": {
+    "include_compatible_ids": false,
+    "mode": "block_nvidia",
+    "nvidia_retroactive": false
+   },
+   "values": {
+    "include_compatible_ids": true,
+    "nvidia_retroactive": true
+   }
+  },
+  "signature": [
+   "include_compatible_ids:checkbox",
+   "nvidia_retroactive:checkbox"
+  ]
+ },
+ "nvidia_driver_unblock": {
+  "en": {
+   "changed": {
+    "include_compatible_ids": true,
+    "mode": "unblock_nvidia",
+    "nvidia_retroactive": true
+   },
+   "defaults": {
+    "include_compatible_ids": false,
+    "mode": "unblock_nvidia",
+    "nvidia_retroactive": false
+   },
+   "values": {
+    "include_compatible_ids": true,
+    "nvidia_retroactive": true
+   }
+  },
+  "ru": {
+   "changed": {
+    "include_compatible_ids": true,
+    "mode": "unblock_nvidia",
+    "nvidia_retroactive": true
+   },
+   "defaults": {
+    "include_compatible_ids": false,
+    "mode": "unblock_nvidia",
+    "nvidia_retroactive": false
+   },
+   "values": {
+    "include_compatible_ids": true,
+    "nvidia_retroactive": true
+   }
+  },
+  "signature": [
+   "include_compatible_ids:checkbox",
+   "nvidia_retroactive:checkbox"
+  ]
+ },
+ "open_tool_folder": {
+  "en": {
+   "changed": {
+    "folder": "tools/cache_cleaner"
+   },
+   "defaults": {
+    "folder": "ripgrep"
+   },
+   "values": {
+    "folder": "tools/cache_cleaner"
+   }
+  },
+  "ru": {
+   "changed": {
+    "folder": "tools/cache_cleaner"
+   },
+   "defaults": {
+    "folder": "ripgrep"
+   },
+   "values": {
+    "folder": "tools/cache_cleaner"
+   }
+  },
+  "signature": [
+   "folder:select"
+  ]
+ },
+ "preflight_status": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "python_nuke_audit": {
+  "en": {
+   "changed": {
+    "mode": "Audit",
+    "tool": "python"
+   },
+   "defaults": {
+    "mode": "Audit",
+    "tool": "python"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "Audit",
+    "tool": "python"
+   },
+   "defaults": {
+    "mode": "Audit",
+    "tool": "python"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "python_nuke_dryrun": {
+  "en": {
+   "changed": {
+    "mode": "DryRun",
+    "tool": "python"
+   },
+   "defaults": {
+    "mode": "DryRun",
+    "tool": "python"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "DryRun",
+    "tool": "python"
+   },
+   "defaults": {
+    "mode": "DryRun",
+    "tool": "python"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "python_nuke_full": {
+  "en": {
+   "changed": {
+    "mode": "Nuke",
+    "tool": "python"
+   },
+   "defaults": {
+    "mode": "Nuke",
+    "tool": "python"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "Nuke",
+    "tool": "python"
+   },
+   "defaults": {
+    "mode": "Nuke",
+    "tool": "python"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "python_nuke_keep_winget": {
+  "en": {
+   "changed": {
+    "KeepWinget": true,
+    "mode": "Nuke",
+    "tool": "python"
+   },
+   "defaults": {
+    "KeepWinget": true,
+    "mode": "Nuke",
+    "tool": "python"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "KeepWinget": true,
+    "mode": "Nuke",
+    "tool": "python"
+   },
+   "defaults": {
+    "KeepWinget": true,
+    "mode": "Nuke",
+    "tool": "python"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "ripgrep_status": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "runtime_status": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "shell_export": {
+  "en": {
+   "changed": {
+    "mode": "export",
+    "shell_folder": "probe value"
+   },
+   "defaults": {
+    "mode": "export",
+    "shell_folder": ""
+   },
+   "values": {
+    "shell_folder": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "mode": "export",
+    "shell_folder": "probe value"
+   },
+   "defaults": {
+    "mode": "export",
+    "shell_folder": ""
+   },
+   "values": {
+    "shell_folder": "probe value"
+   }
+  },
+  "signature": [
+   "shell_folder:folder"
+  ]
+ },
+ "shell_import": {
+  "en": {
+   "changed": {
+    "mode": "import",
+    "shell_folder": "probe value"
+   },
+   "defaults": {
+    "mode": "import",
+    "shell_folder": ""
+   },
+   "values": {
+    "shell_folder": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "mode": "import",
+    "shell_folder": "probe value"
+   },
+   "defaults": {
+    "mode": "import",
+    "shell_folder": ""
+   },
+   "values": {
+    "shell_folder": "probe value"
+   }
+  },
+  "signature": [
+   "shell_folder:folder"
+  ]
+ },
+ "shell_open_folder": {
+  "en": {
+   "changed": {
+    "mode": "open_folder",
+    "shell_folder": "probe value"
+   },
+   "defaults": {
+    "mode": "open_folder",
+    "shell_folder": ""
+   },
+   "values": {
+    "shell_folder": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "mode": "open_folder",
+    "shell_folder": "probe value"
+   },
+   "defaults": {
+    "mode": "open_folder",
+    "shell_folder": ""
+   },
+   "values": {
+    "shell_folder": "probe value"
+   }
+  },
+  "signature": [
+   "shell_folder:folder"
+  ]
+ },
+ "shell_status": {
+  "en": {
+   "changed": {
+    "mode": "status",
+    "shell_folder": "probe value"
+   },
+   "defaults": {
+    "mode": "status",
+    "shell_folder": ""
+   },
+   "values": {
+    "shell_folder": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "mode": "status",
+    "shell_folder": "probe value"
+   },
+   "defaults": {
+    "mode": "status",
+    "shell_folder": ""
+   },
+   "values": {
+    "shell_folder": "probe value"
+   }
+  },
+  "signature": [
+   "shell_folder:folder"
+  ]
+ },
+ "smb_network_login": {
+  "en": {
+   "changed": {
+    "smb_computer": "PROBE-PC",
+    "smb_login": {
+     "cleared": "",
+     "computer": "PROBE-PC",
+     "computer_manual": "",
+     "record_key": "PROBE-PC\tprobe",
+     "user": "probe",
+     "user_manual": ""
+    },
+    "smb_open_explorer": false,
+    "smb_user": "probe"
+   },
+   "defaults": {
+    "smb_computer": "",
+    "smb_login": {
+     "cleared": "",
+     "computer": "",
+     "computer_manual": "",
+     "record_key": "",
+     "user": "",
+     "user_manual": ""
+    },
+    "smb_open_explorer": true,
+    "smb_user": ""
+   },
+   "values": {
+    "smb_login": {
+     "computer_manual": "PROBE-PC",
+     "user_manual": "probe"
+    },
+    "smb_open_explorer": false
+   }
+  },
+  "ru": {
+   "changed": {
+    "smb_computer": "PROBE-PC",
+    "smb_login": {
+     "cleared": "",
+     "computer": "PROBE-PC",
+     "computer_manual": "",
+     "record_key": "PROBE-PC\tprobe",
+     "user": "probe",
+     "user_manual": ""
+    },
+    "smb_open_explorer": false,
+    "smb_user": "probe"
+   },
+   "defaults": {
+    "smb_computer": "",
+    "smb_login": {
+     "cleared": "",
+     "computer": "",
+     "computer_manual": "",
+     "record_key": "",
+     "user": "",
+     "user_manual": ""
+    },
+    "smb_open_explorer": true,
+    "smb_user": ""
+   },
+   "values": {
+    "smb_login": {
+     "computer_manual": "PROBE-PC",
+     "user_manual": "probe"
+    },
+    "smb_open_explorer": false
+   }
+  },
+  "signature": [
+   "smb_login:smb_login_cache",
+   "smb_open_explorer:checkbox"
+  ]
+ },
+ "ssh_keykit_check_links": {
+  "en": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "check_links",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "check_links",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "check_links",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "check_links",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "signature": [
+   "ssh_root:folder",
+   "profile_name:text",
+   "user_name:text",
+   "ssh_config_path:file",
+   "rclone_config_path:file",
+   "links_report_path:text",
+   "fail_on_broken:checkbox",
+   "snapshot:text"
+  ]
+ },
+ "ssh_keykit_export_all": {
+  "en": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "export_all",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "export_all",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "export_all",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "export_all",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "signature": [
+   "ssh_root:folder",
+   "profile_name:text",
+   "user_name:text",
+   "ssh_config_path:file",
+   "rclone_config_path:file",
+   "links_report_path:text",
+   "fail_on_broken:checkbox",
+   "snapshot:text"
+  ]
+ },
+ "ssh_keykit_export_client": {
+  "en": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "export_client",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "export_client",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "export_client",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "export_client",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "signature": [
+   "ssh_root:folder",
+   "profile_name:text",
+   "user_name:text",
+   "ssh_config_path:file",
+   "rclone_config_path:file",
+   "links_report_path:text",
+   "fail_on_broken:checkbox",
+   "snapshot:text"
+  ]
+ },
+ "ssh_keykit_import_all": {
+  "en": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "import_all",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "import_all",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "import_all",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "import_all",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "signature": [
+   "ssh_root:folder",
+   "profile_name:text",
+   "user_name:text",
+   "ssh_config_path:file",
+   "rclone_config_path:file",
+   "links_report_path:text",
+   "fail_on_broken:checkbox",
+   "snapshot:text"
+  ]
+ },
+ "ssh_keykit_import_client": {
+  "en": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "import_client",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "import_client",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "import_client",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "import_client",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "signature": [
+   "ssh_root:folder",
+   "profile_name:text",
+   "user_name:text",
+   "ssh_config_path:file",
+   "rclone_config_path:file",
+   "links_report_path:text",
+   "fail_on_broken:checkbox",
+   "snapshot:text"
+  ]
+ },
+ "ssh_keykit_open_folder": {
+  "en": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "open_tool_folder",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "open_tool_folder",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "mode": "open_tool_folder",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   },
+   "defaults": {
+    "fail_on_broken": true,
+    "links_report_path": "",
+    "mode": "open_tool_folder",
+    "profile_name": "",
+    "rclone_config_path": "",
+    "snapshot": "",
+    "ssh_config_path": "",
+    "ssh_root": "",
+    "user_name": ""
+   },
+   "values": {
+    "fail_on_broken": false,
+    "links_report_path": "probe value",
+    "profile_name": "probe value",
+    "rclone_config_path": "probe value",
+    "snapshot": "probe value",
+    "ssh_config_path": "probe value",
+    "ssh_root": "probe value",
+    "user_name": "probe value"
+   }
+  },
+  "signature": [
+   "ssh_root:folder",
+   "profile_name:text",
+   "user_name:text",
+   "ssh_config_path:file",
+   "rclone_config_path:file",
+   "links_report_path:text",
+   "fail_on_broken:checkbox",
+   "snapshot:text"
+  ]
+ },
+ "startup_kit_open": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "startup_kit_open_folder": {
+  "en": {
+   "changed": {
+    "folder": "tools/startup_kit"
+   },
+   "defaults": {
+    "folder": "tools/startup_kit"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "folder": "tools/startup_kit"
+   },
+   "defaults": {
+    "folder": "tools/startup_kit"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "storage_disk_details": {
+  "en": {
+   "changed": {
+    "disk_number": "probe-b"
+   },
+   "defaults": {
+    "disk_number": ""
+   },
+   "values": {
+    "disk_number": "probe-b"
+   }
+  },
+  "ru": {
+   "changed": {
+    "disk_number": "probe-b"
+   },
+   "defaults": {
+    "disk_number": ""
+   },
+   "values": {
+    "disk_number": "probe-b"
+   }
+  },
+  "signature": [
+   "disk_number:select"
+  ]
+ },
+ "storage_inventory": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "storage_removable_open_folder": {
+  "en": {
+   "changed": {
+    "folder": "tools/disk-removable"
+   },
+   "defaults": {
+    "folder": "tools/disk-removable"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "folder": "tools/disk-removable"
+   },
+   "defaults": {
+    "folder": "tools/disk-removable"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "storage_removable_prepare": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "storage_ssd_open_folder": {
+  "en": {
+   "changed": {
+    "folder": "tools/ssd_nvme_reset_wizard"
+   },
+   "defaults": {
+    "folder": "tools/ssd_nvme_reset_wizard"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "folder": "tools/ssd_nvme_reset_wizard"
+   },
+   "defaults": {
+    "folder": "tools/ssd_nvme_reset_wizard"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "storage_ssd_reset_wizard": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "storage_winre_status": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "storage_winre_wizard": {
+  "en": {
+   "changed": {
+    "winre_typed_confirm": "probe value"
+   },
+   "defaults": {
+    "winre_typed_confirm": ""
+   },
+   "values": {
+    "winre_typed_confirm": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "winre_typed_confirm": "probe value"
+   },
+   "defaults": {
+    "winre_typed_confirm": ""
+   },
+   "values": {
+    "winre_typed_confirm": "probe value"
+   }
+  },
+  "signature": [
+   "winre_typed_confirm:text"
+  ]
+ },
+ "ubuntu_dev_open_btrfs_guide": {
+  "en": {
+   "changed": {
+    "path": "tools/ubuntu_dev_installer/Btrfs_Timeshift_Ubuntu_LiveUSB_Guide_RU.md"
+   },
+   "defaults": {
+    "path": "tools/ubuntu_dev_installer/Btrfs_Timeshift_Ubuntu_LiveUSB_Guide_RU.md"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "path": "tools/ubuntu_dev_installer/Btrfs_Timeshift_Ubuntu_LiveUSB_Guide_RU.md"
+   },
+   "defaults": {
+    "path": "tools/ubuntu_dev_installer/Btrfs_Timeshift_Ubuntu_LiveUSB_Guide_RU.md"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "ubuntu_dev_open_folder": {
+  "en": {
+   "changed": {
+    "folder": "tools/ubuntu_dev_installer"
+   },
+   "defaults": {
+    "folder": "tools/ubuntu_dev_installer"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "folder": "tools/ubuntu_dev_installer"
+   },
+   "defaults": {
+    "folder": "tools/ubuntu_dev_installer"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "ubuntu_dev_open_installer_script": {
+  "en": {
+   "changed": {
+    "path": "tools/ubuntu_dev_installer/Run-Ubuntu-Dev-Create-Installer.sh"
+   },
+   "defaults": {
+    "path": "tools/ubuntu_dev_installer/Run-Ubuntu-Dev-Create-Installer.sh"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "path": "tools/ubuntu_dev_installer/Run-Ubuntu-Dev-Create-Installer.sh"
+   },
+   "defaults": {
+    "path": "tools/ubuntu_dev_installer/Run-Ubuntu-Dev-Create-Installer.sh"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "ubuntu_dev_open_nvme_prep_script": {
+  "en": {
+   "changed": {
+    "path": "tools/ubuntu_dev_installer/Ubuntu_Btrfs_LU_Prep_NVMe.sh"
+   },
+   "defaults": {
+    "path": "tools/ubuntu_dev_installer/Ubuntu_Btrfs_LU_Prep_NVMe.sh"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "path": "tools/ubuntu_dev_installer/Ubuntu_Btrfs_LU_Prep_NVMe.sh"
+   },
+   "defaults": {
+    "path": "tools/ubuntu_dev_installer/Ubuntu_Btrfs_LU_Prep_NVMe.sh"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "ubuntu_dev_open_packages": {
+  "en": {
+   "changed": {
+    "path": "tools/ubuntu_dev_installer/packages"
+   },
+   "defaults": {
+    "path": "tools/ubuntu_dev_installer/packages"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "path": "tools/ubuntu_dev_installer/packages"
+   },
+   "defaults": {
+    "path": "tools/ubuntu_dev_installer/packages"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "ubuntu_dev_open_readme_ru": {
+  "en": {
+   "changed": {
+    "path": "tools/ubuntu_dev_installer/README_RU.md"
+   },
+   "defaults": {
+    "path": "tools/ubuntu_dev_installer/README_RU.md"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "path": "tools/ubuntu_dev_installer/README_RU.md"
+   },
+   "defaults": {
+    "path": "tools/ubuntu_dev_installer/README_RU.md"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "virt_hyperv_disable": {
+  "en": {
+   "changed": {
+    "mode": "hyperv_disable"
+   },
+   "defaults": {
+    "mode": "hyperv_disable"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "hyperv_disable"
+   },
+   "defaults": {
+    "mode": "hyperv_disable"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "virt_hyperv_enable": {
+  "en": {
+   "changed": {
+    "mode": "hyperv_enable"
+   },
+   "defaults": {
+    "mode": "hyperv_enable"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "hyperv_enable"
+   },
+   "defaults": {
+    "mode": "hyperv_enable"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "virt_mode_coexist": {
+  "en": {
+   "changed": {
+    "mode": "mode_coexist"
+   },
+   "defaults": {
+    "mode": "mode_coexist"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "mode_coexist"
+   },
+   "defaults": {
+    "mode": "mode_coexist"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "virt_mode_hyperv": {
+  "en": {
+   "changed": {
+    "mode": "mode_hyperv"
+   },
+   "defaults": {
+    "mode": "mode_hyperv"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "mode_hyperv"
+   },
+   "defaults": {
+    "mode": "mode_hyperv"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "virt_mode_thirdparty": {
+  "en": {
+   "changed": {
+    "mode": "mode_thirdparty"
+   },
+   "defaults": {
+    "mode": "mode_thirdparty"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "mode_thirdparty"
+   },
+   "defaults": {
+    "mode": "mode_thirdparty"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "virt_optimization_status": {
+  "en": {
+   "changed": {
+    "mode": "optimization_status"
+   },
+   "defaults": {
+    "mode": "optimization_status"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "optimization_status"
+   },
+   "defaults": {
+    "mode": "optimization_status"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "virt_sandbox_disable": {
+  "en": {
+   "changed": {
+    "mode": "sandbox_disable"
+   },
+   "defaults": {
+    "mode": "sandbox_disable"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "sandbox_disable"
+   },
+   "defaults": {
+    "mode": "sandbox_disable"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "virt_sandbox_enable": {
+  "en": {
+   "changed": {
+    "mode": "sandbox_enable"
+   },
+   "defaults": {
+    "mode": "sandbox_enable"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "sandbox_enable"
+   },
+   "defaults": {
+    "mode": "sandbox_enable"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "virt_status": {
+  "en": {
+   "changed": {
+    "mode": "status"
+   },
+   "defaults": {
+    "mode": "status"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "status"
+   },
+   "defaults": {
+    "mode": "status"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "wifi_slot_connect_main": {
+  "en": {
+   "changed": {
+    "lan_adapter": "probe-b",
+    "mode": "connect",
+    "slot": "main",
+    "wifi_adapter": "probe-b"
+   },
+   "defaults": {
+    "lan_adapter": "",
+    "mode": "connect",
+    "slot": "main",
+    "wifi_adapter": ""
+   },
+   "values": {
+    "lan_adapter": "probe-b",
+    "wifi_adapter": "probe-b"
+   }
+  },
+  "ru": {
+   "changed": {
+    "lan_adapter": "probe-b",
+    "mode": "connect",
+    "slot": "main",
+    "wifi_adapter": "probe-b"
+   },
+   "defaults": {
+    "lan_adapter": "",
+    "mode": "connect",
+    "slot": "main",
+    "wifi_adapter": ""
+   },
+   "values": {
+    "lan_adapter": "probe-b",
+    "wifi_adapter": "probe-b"
+   }
+  },
+  "signature": [
+   "lan_adapter:select",
+   "wifi_adapter:select"
+  ]
+ },
+ "wifi_slot_connect_second": {
+  "en": {
+   "changed": {
+    "lan_adapter": "probe-b",
+    "mode": "connect",
+    "slot": "second",
+    "wifi_adapter": "probe-b"
+   },
+   "defaults": {
+    "lan_adapter": "",
+    "mode": "connect",
+    "slot": "second",
+    "wifi_adapter": ""
+   },
+   "values": {
+    "lan_adapter": "probe-b",
+    "wifi_adapter": "probe-b"
+   }
+  },
+  "ru": {
+   "changed": {
+    "lan_adapter": "probe-b",
+    "mode": "connect",
+    "slot": "second",
+    "wifi_adapter": "probe-b"
+   },
+   "defaults": {
+    "lan_adapter": "",
+    "mode": "connect",
+    "slot": "second",
+    "wifi_adapter": ""
+   },
+   "values": {
+    "lan_adapter": "probe-b",
+    "wifi_adapter": "probe-b"
+   }
+  },
+  "signature": [
+   "lan_adapter:select",
+   "wifi_adapter:select"
+  ]
+ },
+ "wifi_slot_forget_main": {
+  "en": {
+   "changed": {
+    "mode": "forget",
+    "slot": "main"
+   },
+   "defaults": {
+    "mode": "forget",
+    "slot": "main"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "forget",
+    "slot": "main"
+   },
+   "defaults": {
+    "mode": "forget",
+    "slot": "main"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "wifi_slot_forget_second": {
+  "en": {
+   "changed": {
+    "mode": "forget",
+    "slot": "second"
+   },
+   "defaults": {
+    "mode": "forget",
+    "slot": "second"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "forget",
+    "slot": "second"
+   },
+   "defaults": {
+    "mode": "forget",
+    "slot": "second"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "wifi_slot_save_main": {
+  "en": {
+   "changed": {
+    "mode": "save",
+    "slot": "main",
+    "wifi_main_password": "probe value",
+    "wifi_main_security": "wpa3",
+    "wifi_main_ssid": "probe value"
+   },
+   "defaults": {
+    "mode": "save",
+    "slot": "main",
+    "wifi_main_password": "",
+    "wifi_main_security": "wpa2",
+    "wifi_main_ssid": ""
+   },
+   "values": {
+    "wifi_main_password": "probe value",
+    "wifi_main_security": "wpa3",
+    "wifi_main_ssid": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "mode": "save",
+    "slot": "main",
+    "wifi_main_password": "probe value",
+    "wifi_main_security": "wpa3",
+    "wifi_main_ssid": "probe value"
+   },
+   "defaults": {
+    "mode": "save",
+    "slot": "main",
+    "wifi_main_password": "",
+    "wifi_main_security": "wpa2",
+    "wifi_main_ssid": ""
+   },
+   "values": {
+    "wifi_main_password": "probe value",
+    "wifi_main_security": "wpa3",
+    "wifi_main_ssid": "probe value"
+   }
+  },
+  "signature": [
+   "wifi_main_ssid:text",
+   "wifi_main_password:password",
+   "wifi_main_security:select"
+  ]
+ },
+ "wifi_slot_save_second": {
+  "en": {
+   "changed": {
+    "mode": "save",
+    "slot": "second",
+    "wifi_second_password": "probe value",
+    "wifi_second_security": "wpa3",
+    "wifi_second_ssid": "probe value"
+   },
+   "defaults": {
+    "mode": "save",
+    "slot": "second",
+    "wifi_second_password": "",
+    "wifi_second_security": "wpa2",
+    "wifi_second_ssid": ""
+   },
+   "values": {
+    "wifi_second_password": "probe value",
+    "wifi_second_security": "wpa3",
+    "wifi_second_ssid": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "mode": "save",
+    "slot": "second",
+    "wifi_second_password": "probe value",
+    "wifi_second_security": "wpa3",
+    "wifi_second_ssid": "probe value"
+   },
+   "defaults": {
+    "mode": "save",
+    "slot": "second",
+    "wifi_second_password": "",
+    "wifi_second_security": "wpa2",
+    "wifi_second_ssid": ""
+   },
+   "values": {
+    "wifi_second_password": "probe value",
+    "wifi_second_security": "wpa3",
+    "wifi_second_ssid": "probe value"
+   }
+  },
+  "signature": [
+   "wifi_second_ssid:text",
+   "wifi_second_password:password",
+   "wifi_second_security:select"
+  ]
+ },
+ "wifi_slot_status": {
+  "en": {
+   "changed": {
+    "mode": "status"
+   },
+   "defaults": {
+    "mode": "status"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "status"
+   },
+   "defaults": {
+    "mode": "status"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "windows_long_paths_enable": {
+  "en": {
+   "changed": {
+    "mode": "enable_windows"
+   },
+   "defaults": {
+    "mode": "enable_windows"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "enable_windows"
+   },
+   "defaults": {
+    "mode": "enable_windows"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "windows_long_paths_status": {
+  "en": {
+   "changed": {
+    "mode": "status"
+   },
+   "defaults": {
+    "mode": "status"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "mode": "status"
+   },
+   "defaults": {
+    "mode": "status"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "wsl_backup": {
+  "en": {
+   "changed": {
+    "action": "backup",
+    "backup_dir": "<root>\\input",
+    "format": "vhd",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "backup",
+    "backup_dir": "<root>\\input",
+    "format": "tar",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "backup_dir": "probe value",
+    "format": "vhd",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "action": "backup",
+    "backup_dir": "<root>\\input",
+    "format": "vhd",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "backup",
+    "backup_dir": "<root>\\input",
+    "format": "tar",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "backup_dir": "probe value",
+    "format": "vhd",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name:select",
+   "wsl_name_override:text",
+   "format:radio",
+   "backup_dir:folder"
+  ]
+ },
+ "wsl_clone": {
+  "en": {
+   "changed": {
+    "action": "clone",
+    "backup_dir": "<root>\\input",
+    "location": "<root>\\input",
+    "new_name": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "clone",
+    "backup_dir": "<root>\\input",
+    "location": "<root>\\input",
+    "new_name": "",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "backup_dir": "probe value",
+    "location": "probe value",
+    "new_name": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "action": "clone",
+    "backup_dir": "<root>\\input",
+    "location": "<root>\\input",
+    "new_name": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "clone",
+    "backup_dir": "<root>\\input",
+    "location": "<root>\\input",
+    "new_name": "",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "backup_dir": "probe value",
+    "location": "probe value",
+    "new_name": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name:select",
+   "wsl_name_override:text",
+   "new_name:text",
+   "location:folder",
+   "backup_dir:folder"
+  ]
+ },
+ "wsl_delete": {
+  "en": {
+   "changed": {
+    "action": "delete",
+    "force": true,
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "delete",
+    "force": true,
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "action": "delete",
+    "force": true,
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "delete",
+    "force": true,
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name:select",
+   "wsl_name_override:text"
+  ]
+ },
+ "wsl_enable_features": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "wsl_import_in_place": {
+  "en": {
+   "changed": {
+    "action": "importinplace",
+    "vhdx_path": "probe-b",
+    "vhdx_path_manual": "probe value",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "importinplace",
+    "vhdx_path": "",
+    "vhdx_path_manual": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "vhdx_path": "probe-b",
+    "vhdx_path_manual": "probe value",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "action": "importinplace",
+    "vhdx_path": "probe-b",
+    "vhdx_path_manual": "probe value",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "importinplace",
+    "vhdx_path": "",
+    "vhdx_path_manual": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "vhdx_path": "probe-b",
+    "vhdx_path_manual": "probe value",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name_override:text",
+   "vhdx_path:select",
+   "vhdx_path_manual:file"
+  ]
+ },
+ "wsl_install_distro": {
+  "en": {
+   "changed": {
+    "install_distro": "probe-b",
+    "install_distro_override": "probe value",
+    "install_distro_pins": "probe value",
+    "install_location": "<root>\\output",
+    "install_location_mode": "system",
+    "install_name": "probe value",
+    "no_launch": false
+   },
+   "defaults": {
+    "install_distro": "Ubuntu-26.04",
+    "install_distro_override": "",
+    "install_distro_pins": "",
+    "install_location": "<root>\\output",
+    "install_location_mode": "custom",
+    "install_name": "",
+    "no_launch": true
+   },
+   "values": {
+    "install_distro": "probe-b",
+    "install_distro_override": "probe value",
+    "install_distro_pins": "probe value",
+    "install_location": "probe value",
+    "install_location_mode": "system",
+    "install_name": "probe value",
+    "no_launch": false
+   }
+  },
+  "ru": {
+   "changed": {
+    "install_distro": "probe-b",
+    "install_distro_override": "probe value",
+    "install_distro_pins": "probe value",
+    "install_location": "<root>\\output",
+    "install_location_mode": "system",
+    "install_name": "probe value",
+    "no_launch": false
+   },
+   "defaults": {
+    "install_distro": "Ubuntu-26.04",
+    "install_distro_override": "",
+    "install_distro_pins": "",
+    "install_location": "<root>\\output",
+    "install_location_mode": "custom",
+    "install_name": "",
+    "no_launch": true
+   },
+   "values": {
+    "install_distro": "probe-b",
+    "install_distro_override": "probe value",
+    "install_distro_pins": "probe value",
+    "install_location": "probe value",
+    "install_location_mode": "system",
+    "install_name": "probe value",
+    "no_launch": false
+   }
+  },
+  "signature": [
+   "install_distro_pins:profile_buttons",
+   "install_distro:select",
+   "install_distro_override:text",
+   "install_name:text",
+   "install_location_mode:radio",
+   "install_location:folder",
+   "no_launch:checkbox"
+  ]
+ },
+ "wsl_install_from_file": {
+  "en": {
+   "changed": {
+    "install_image_file": "probe value",
+    "install_location": "<root>\\output",
+    "install_name": "probe value",
+    "no_launch": false
+   },
+   "defaults": {
+    "install_image_file": "",
+    "install_location": "<root>\\output",
+    "install_name": "",
+    "no_launch": true
+   },
+   "values": {
+    "install_image_file": "probe value",
+    "install_location": "probe value",
+    "install_name": "probe value",
+    "no_launch": false
+   }
+  },
+  "ru": {
+   "changed": {
+    "install_image_file": "probe value",
+    "install_location": "<root>\\output",
+    "install_name": "probe value",
+    "no_launch": false
+   },
+   "defaults": {
+    "install_image_file": "",
+    "install_location": "<root>\\output",
+    "install_name": "",
+    "no_launch": true
+   },
+   "values": {
+    "install_image_file": "probe value",
+    "install_location": "probe value",
+    "install_name": "probe value",
+    "no_launch": false
+   }
+  },
+  "signature": [
+   "install_image_file:file",
+   "install_name:text",
+   "install_location:folder",
+   "no_launch:checkbox"
+  ]
+ },
+ "wsl_linux_account": {
+  "en": {
+   "changed": {
+    "linux_add_sudo": false,
+    "linux_password": "probe value",
+    "linux_set_default_user": false,
+    "linux_set_password": false,
+    "linux_shell": "probe value",
+    "linux_username": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "linux_add_sudo": true,
+    "linux_password": "",
+    "linux_set_default_user": true,
+    "linux_set_password": true,
+    "linux_shell": "/bin/bash",
+    "linux_username": "",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "linux_add_sudo": false,
+    "linux_password": "probe value",
+    "linux_set_default_user": false,
+    "linux_set_password": false,
+    "linux_shell": "probe value",
+    "linux_username": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "linux_add_sudo": false,
+    "linux_password": "probe value",
+    "linux_set_default_user": false,
+    "linux_set_password": false,
+    "linux_shell": "probe value",
+    "linux_username": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "linux_add_sudo": true,
+    "linux_password": "",
+    "linux_set_default_user": true,
+    "linux_set_password": true,
+    "linux_shell": "/bin/bash",
+    "linux_username": "",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "linux_add_sudo": false,
+    "linux_password": "probe value",
+    "linux_set_default_user": false,
+    "linux_set_password": false,
+    "linux_shell": "probe value",
+    "linux_username": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name:select",
+   "wsl_name_override:text",
+   "linux_username:text",
+   "linux_password:password",
+   "linux_set_password:checkbox",
+   "linux_add_sudo:checkbox",
+   "linux_set_default_user:checkbox",
+   "linux_shell:text"
+  ]
+ },
+ "wsl_linux_apt_update": {
+  "en": {
+   "changed": {
+    "linux_username": "probe value",
+    "wsl_apt_custom_mirror": "probe value",
+    "wsl_apt_force_ipv4": false,
+    "wsl_apt_mirror": "custom",
+    "wsl_apt_network_repair": false,
+    "wsl_apt_retries": 5,
+    "wsl_apt_timeout": 21,
+    "wsl_apt_upgrade": "full-upgrade",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "linux_username": "",
+    "wsl_apt_custom_mirror": "",
+    "wsl_apt_force_ipv4": true,
+    "wsl_apt_mirror": "https_archive",
+    "wsl_apt_network_repair": true,
+    "wsl_apt_retries": 4,
+    "wsl_apt_timeout": 20,
+    "wsl_apt_upgrade": "none",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "linux_username": "probe value",
+    "wsl_apt_custom_mirror": "probe value",
+    "wsl_apt_force_ipv4": false,
+    "wsl_apt_mirror": "custom",
+    "wsl_apt_network_repair": false,
+    "wsl_apt_retries": 5,
+    "wsl_apt_timeout": 21,
+    "wsl_apt_upgrade": "full-upgrade",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "linux_username": "probe value",
+    "wsl_apt_custom_mirror": "probe value",
+    "wsl_apt_force_ipv4": false,
+    "wsl_apt_mirror": "custom",
+    "wsl_apt_network_repair": false,
+    "wsl_apt_retries": 5,
+    "wsl_apt_timeout": 21,
+    "wsl_apt_upgrade": "full-upgrade",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "linux_username": "",
+    "wsl_apt_custom_mirror": "",
+    "wsl_apt_force_ipv4": true,
+    "wsl_apt_mirror": "https_archive",
+    "wsl_apt_network_repair": true,
+    "wsl_apt_retries": 4,
+    "wsl_apt_timeout": 20,
+    "wsl_apt_upgrade": "none",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "linux_username": "probe value",
+    "wsl_apt_custom_mirror": "probe value",
+    "wsl_apt_force_ipv4": false,
+    "wsl_apt_mirror": "custom",
+    "wsl_apt_network_repair": false,
+    "wsl_apt_retries": 5,
+    "wsl_apt_timeout": 21,
+    "wsl_apt_upgrade": "full-upgrade",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name:select",
+   "wsl_name_override:text",
+   "linux_username:text",
+   "wsl_apt_upgrade:radio",
+   "wsl_apt_network_repair:checkbox",
+   "wsl_apt_force_ipv4:checkbox",
+   "wsl_apt_mirror:select",
+   "wsl_apt_custom_mirror:text",
+   "wsl_apt_retries:number",
+   "wsl_apt_timeout:number"
+  ]
+ },
+ "wsl_linux_dev_packages": {
+  "en": {
+   "changed": {
+    "linux_username": "probe value",
+    "wsl_apt_custom_mirror": "probe value",
+    "wsl_apt_force_ipv4": false,
+    "wsl_apt_mirror": "custom",
+    "wsl_apt_network_repair": false,
+    "wsl_apt_retries": 5,
+    "wsl_apt_timeout": 21,
+    "wsl_apt_update_first": false,
+    "wsl_flatpak_flathub": true,
+    "wsl_install_recommends": true,
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value",
+    "wsl_optional_packages": "probe value",
+    "wsl_packages_baseline": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_lab": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_media_cli": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_sync": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_selinux_permissive": true
+   },
+   "defaults": {
+    "linux_username": "",
+    "wsl_apt_custom_mirror": "",
+    "wsl_apt_force_ipv4": true,
+    "wsl_apt_mirror": "https_archive",
+    "wsl_apt_network_repair": true,
+    "wsl_apt_retries": 4,
+    "wsl_apt_timeout": 20,
+    "wsl_apt_update_first": true,
+    "wsl_flatpak_flathub": false,
+    "wsl_install_recommends": false,
+    "wsl_name": "",
+    "wsl_name_override": "",
+    "wsl_optional_packages": "",
+    "wsl_packages_baseline": [
+     "ca-certificates",
+     "curl",
+     "wget",
+     "rsync",
+     "zstd",
+     "git",
+     "git-lfs",
+     "jq",
+     "tree",
+     "ripgrep",
+     "fd-find",
+     "fzf",
+     "unzip",
+     "zip",
+     "7zip",
+     "htop",
+     "btop",
+     "ncdu",
+     "mc",
+     "far2l",
+     "micro",
+     "neovim",
+     "tmux",
+     "shellcheck",
+     "tree-sitter-cli",
+     "build-essential",
+     "gcc",
+     "g++",
+     "make",
+     "cmake",
+     "pkg-config",
+     "python3",
+     "python3-pip",
+     "python3-venv",
+     "pipx",
+     "openssh-client",
+     "rclone",
+     "net-tools",
+     "nmap",
+     "traceroute"
+    ],
+    "wsl_packages_lab": [],
+    "wsl_packages_media_cli": [],
+    "wsl_packages_sync": [],
+    "wsl_selinux_permissive": false
+   },
+   "values": {
+    "linux_username": "probe value",
+    "wsl_apt_custom_mirror": "probe value",
+    "wsl_apt_force_ipv4": false,
+    "wsl_apt_mirror": "custom",
+    "wsl_apt_network_repair": false,
+    "wsl_apt_retries": 5,
+    "wsl_apt_timeout": 21,
+    "wsl_apt_update_first": false,
+    "wsl_flatpak_flathub": true,
+    "wsl_install_recommends": true,
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value",
+    "wsl_optional_packages": "probe value",
+    "wsl_packages_baseline": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_lab": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_media_cli": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_sync": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_selinux_permissive": true
+   }
+  },
+  "ru": {
+   "changed": {
+    "linux_username": "probe value",
+    "wsl_apt_custom_mirror": "probe value",
+    "wsl_apt_force_ipv4": false,
+    "wsl_apt_mirror": "custom",
+    "wsl_apt_network_repair": false,
+    "wsl_apt_retries": 5,
+    "wsl_apt_timeout": 21,
+    "wsl_apt_update_first": false,
+    "wsl_flatpak_flathub": true,
+    "wsl_install_recommends": true,
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value",
+    "wsl_optional_packages": "probe value",
+    "wsl_packages_baseline": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_lab": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_media_cli": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_sync": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_selinux_permissive": true
+   },
+   "defaults": {
+    "linux_username": "",
+    "wsl_apt_custom_mirror": "",
+    "wsl_apt_force_ipv4": true,
+    "wsl_apt_mirror": "https_archive",
+    "wsl_apt_network_repair": true,
+    "wsl_apt_retries": 4,
+    "wsl_apt_timeout": 20,
+    "wsl_apt_update_first": true,
+    "wsl_flatpak_flathub": false,
+    "wsl_install_recommends": false,
+    "wsl_name": "",
+    "wsl_name_override": "",
+    "wsl_optional_packages": "",
+    "wsl_packages_baseline": [
+     "ca-certificates",
+     "curl",
+     "wget",
+     "rsync",
+     "zstd",
+     "git",
+     "git-lfs",
+     "jq",
+     "tree",
+     "ripgrep",
+     "fd-find",
+     "fzf",
+     "unzip",
+     "zip",
+     "7zip",
+     "htop",
+     "btop",
+     "ncdu",
+     "mc",
+     "far2l",
+     "micro",
+     "neovim",
+     "tmux",
+     "shellcheck",
+     "tree-sitter-cli",
+     "build-essential",
+     "gcc",
+     "g++",
+     "make",
+     "cmake",
+     "pkg-config",
+     "python3",
+     "python3-pip",
+     "python3-venv",
+     "pipx",
+     "openssh-client",
+     "rclone",
+     "net-tools",
+     "nmap",
+     "traceroute"
+    ],
+    "wsl_packages_lab": [],
+    "wsl_packages_media_cli": [],
+    "wsl_packages_sync": [],
+    "wsl_selinux_permissive": false
+   },
+   "values": {
+    "linux_username": "probe value",
+    "wsl_apt_custom_mirror": "probe value",
+    "wsl_apt_force_ipv4": false,
+    "wsl_apt_mirror": "custom",
+    "wsl_apt_network_repair": false,
+    "wsl_apt_retries": 5,
+    "wsl_apt_timeout": 21,
+    "wsl_apt_update_first": false,
+    "wsl_flatpak_flathub": true,
+    "wsl_install_recommends": true,
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value",
+    "wsl_optional_packages": "probe value",
+    "wsl_packages_baseline": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_lab": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_media_cli": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_packages_sync": [
+     "probe-a",
+     "probe-b"
+    ],
+    "wsl_selinux_permissive": true
+   }
+  },
+  "signature": [
+   "wsl_name:select",
+   "wsl_name_override:text",
+   "linux_username:text",
+   "wsl_packages_baseline:checkboxes",
+   "wsl_packages_media_cli:checkboxes",
+   "wsl_packages_sync:checkboxes",
+   "wsl_packages_lab:checkboxes",
+   "wsl_apt_update_first:checkbox",
+   "wsl_apt_network_repair:checkbox",
+   "wsl_apt_force_ipv4:checkbox",
+   "wsl_apt_mirror:select",
+   "wsl_apt_custom_mirror:text",
+   "wsl_apt_retries:number",
+   "wsl_apt_timeout:number",
+   "wsl_install_recommends:checkbox",
+   "wsl_selinux_permissive:checkbox",
+   "wsl_flatpak_flathub:checkbox",
+   "wsl_optional_packages:textarea"
+  ]
+ },
+ "wsl_list": {
+  "en": {
+   "changed": {
+    "action": "list"
+   },
+   "defaults": {
+    "action": "list"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "action": "list"
+   },
+   "defaults": {
+    "action": "list"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "wsl_list_online": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "wsl_mc_skin": {
+  "en": {
+   "changed": {
+    "linux_username": "probe value",
+    "mc_apply_skin": false,
+    "mc_skin": "audion256",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "linux_username": "",
+    "mc_apply_skin": true,
+    "mc_skin": "electricblue256",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "linux_username": "probe value",
+    "mc_apply_skin": false,
+    "mc_skin": "audion256",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "linux_username": "probe value",
+    "mc_apply_skin": false,
+    "mc_skin": "audion256",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "linux_username": "",
+    "mc_apply_skin": true,
+    "mc_skin": "electricblue256",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "linux_username": "probe value",
+    "mc_apply_skin": false,
+    "mc_skin": "audion256",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name:select",
+   "wsl_name_override:text",
+   "linux_username:text",
+   "mc_skin:radio",
+   "mc_apply_skin:checkbox"
+  ]
+ },
+ "wsl_micro_baseline": {
+  "en": {
+   "changed": {
+    "linux_username": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "linux_username": "",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "linux_username": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "linux_username": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "linux_username": "",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "linux_username": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name:select",
+   "wsl_name_override:text",
+   "linux_username:text"
+  ]
+ },
+ "wsl_move": {
+  "en": {
+   "changed": {
+    "action": "move",
+    "backup_dir": "<root>\\input",
+    "force": true,
+    "location": "<root>\\input",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "move",
+    "backup_dir": "<root>\\input",
+    "force": true,
+    "location": "<root>\\input",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "backup_dir": "probe value",
+    "location": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "action": "move",
+    "backup_dir": "<root>\\input",
+    "force": true,
+    "location": "<root>\\input",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "move",
+    "backup_dir": "<root>\\input",
+    "force": true,
+    "location": "<root>\\input",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "backup_dir": "probe value",
+    "location": "probe value",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name:select",
+   "wsl_name_override:text",
+   "location:folder",
+   "backup_dir:folder"
+  ]
+ },
+ "wsl_neovim_base": {
+  "en": {
+   "changed": {
+    "linux_username": "probe value",
+    "nvim_appname": "probe value",
+    "nvim_profile": "lazyvim",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "linux_username": "",
+    "nvim_appname": "audion-ide",
+    "nvim_profile": "lite",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "linux_username": "probe value",
+    "nvim_appname": "probe value",
+    "nvim_profile": "lazyvim",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "linux_username": "probe value",
+    "nvim_appname": "probe value",
+    "nvim_profile": "lazyvim",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "linux_username": "",
+    "nvim_appname": "audion-ide",
+    "nvim_profile": "lite",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "linux_username": "probe value",
+    "nvim_appname": "probe value",
+    "nvim_profile": "lazyvim",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name:select",
+   "wsl_name_override:text",
+   "linux_username:text",
+   "nvim_appname:text",
+   "nvim_profile:radio"
+  ]
+ },
+ "wsl_register_all_vhdx": {
+  "en": {
+   "changed": {
+    "dry_run": false,
+    "filter": "probe value",
+    "register_root": "<root>\\input"
+   },
+   "defaults": {
+    "dry_run": true,
+    "filter": "ext4.vhdx",
+    "register_root": "<root>\\input"
+   },
+   "values": {
+    "dry_run": false,
+    "filter": "probe value",
+    "register_root": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "dry_run": false,
+    "filter": "probe value",
+    "register_root": "<root>\\input"
+   },
+   "defaults": {
+    "dry_run": true,
+    "filter": "ext4.vhdx",
+    "register_root": "<root>\\input"
+   },
+   "values": {
+    "dry_run": false,
+    "filter": "probe value",
+    "register_root": "probe value"
+   }
+  },
+  "signature": [
+   "register_root:folder",
+   "filter:text",
+   "dry_run:checkbox"
+  ]
+ },
+ "wsl_restore_from_backup": {
+  "en": {
+   "changed": {
+    "action": "restorefrombackup",
+    "backup_file": "probe-b",
+    "backup_file_manual": "probe value",
+    "location": "<root>\\input",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "restorefrombackup",
+    "backup_file": "",
+    "backup_file_manual": "",
+    "location": "<root>\\input",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "backup_file": "probe-b",
+    "backup_file_manual": "probe value",
+    "location": "probe value",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "action": "restorefrombackup",
+    "backup_file": "probe-b",
+    "backup_file_manual": "probe value",
+    "location": "<root>\\input",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "restorefrombackup",
+    "backup_file": "",
+    "backup_file_manual": "",
+    "location": "<root>\\input",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "backup_file": "probe-b",
+    "backup_file_manual": "probe value",
+    "location": "probe value",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name_override:text",
+   "location:folder",
+   "backup_file:select",
+   "backup_file_manual:file"
+  ]
+ },
+ "wsl_shutdown": {
+  "en": {
+   "changed": {
+    "action": "shutdown"
+   },
+   "defaults": {
+    "action": "shutdown"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "action": "shutdown"
+   },
+   "defaults": {
+    "action": "shutdown"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "wsl_status": {
+  "en": {
+   "changed": {
+    "action": "status"
+   },
+   "defaults": {
+    "action": "status"
+   },
+   "values": {}
+  },
+  "ru": {
+   "changed": {
+    "action": "status"
+   },
+   "defaults": {
+    "action": "status"
+   },
+   "values": {}
+  },
+  "signature": []
+ },
+ "wsl_system_status": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ },
+ "wsl_terminate": {
+  "en": {
+   "changed": {
+    "action": "terminate",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "terminate",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "ru": {
+   "changed": {
+    "action": "terminate",
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   },
+   "defaults": {
+    "action": "terminate",
+    "wsl_name": "",
+    "wsl_name_override": ""
+   },
+   "values": {
+    "wsl_name": "probe-b",
+    "wsl_name_override": "probe value"
+   }
+  },
+  "signature": [
+   "wsl_name:select",
+   "wsl_name_override:text"
+  ]
+ },
+ "wsl_update_engine": {
+  "en": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "ru": {
+   "changed": {},
+   "defaults": {},
+   "values": {}
+  },
+  "signature": []
+ }
+}

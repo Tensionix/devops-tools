@@ -20,6 +20,7 @@ powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "Start-Proces
 exit /b 0
 
 :FindPowerShell
+if exist "%ROOT%..\..\App\AudionPs.exe" set "PWSH=%ROOT%..\..\App\AudionPs.exe"& goto Run
 if exist "%PWSH%" goto Run
 where pwsh.exe >nul 2>nul
 if errorlevel 1 goto TryWindowsPowerShell

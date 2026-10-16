@@ -1,0 +1,25 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261015121351
+Username: AUDION-CARBON\Audion
+RunAs User: AUDION-CARBON\Audion
+Configuration Name: 
+Machine: AUDION-CARBON (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Microsoft-Apps.ps1 -Provision -Target MediaPlayerLegacy -DryRun
+Process ID: 28760
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Log: E:\TOOLS\Audion DevOps Tools\system_core\association_defense\logs\2026-10-15_121351_776.AUDION-CARBON.Microsoft-Apps-Provision.log
+  Media Player Legacy: a component of Windows, it serves every profile - nothing to provision.
+Selected apps are provisioned for new user profiles.
+**********************
+Windows PowerShell transcript end
+End time: 20261015121351
+**********************

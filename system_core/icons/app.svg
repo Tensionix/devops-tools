@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" fill="none">
+  <title>Audion DevOps Tools</title>
+  <desc>Flat terminal and sea-green gear silhouettes with smooth gradients and an orange chevron accent. No shadows, bevels, highlights, or extruded edges.</desc>
+  <defs>
+    <linearGradient id="tile" x1="120" y1="0" x2="866" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#28374A"/><stop offset=".52" stop-color="#152233"/><stop offset="1" stop-color="#0A1421"/>
+    </linearGradient>
+<linearGradient id="metal" x1="194" y1="202" x2="740" y2="772" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/><stop offset=".48" stop-color="#E7EFF6"/><stop offset="1" stop-color="#9FB5C9"/>
+    </linearGradient>
+<linearGradient id="prompt" x1="264" y1="348" x2="498" y2="602" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#CFDFEC"/>
+    </linearGradient>
+<linearGradient id="copper" x1="586" y1="510" x2="870" y2="848" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#73C8C1"/><stop offset=".46" stop-color="#2E8E8A"/><stop offset="1" stop-color="#125052"/>
+    </linearGradient>
+<linearGradient id="warmAccent" x1="250" y1="340" x2="400" y2="610" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFC174"/><stop offset=".46" stop-color="#F39A4A"/><stop offset="1" stop-color="#D96B2D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="224" fill="url(#tile)"/>
+  <rect x="140" y="188" width="668" height="584" rx="76" fill="url(#metal)"/>
+  <rect x="184" y="232" width="580" height="496" rx="38" fill="url(#tile)"/>
+  <path d="M264 350L382 468L264 586" stroke="url(#warmAccent)" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M422 572H492" stroke="url(#prompt)" stroke-width="60" stroke-linecap="round"/>
+  <path id="gear" d="M865.663 640.679L911.913 647.916L911.913 704.084L865.663 711.321A146 146 0 0 1 849.146 751.196L876.733 789.016L837.016 828.733L799.196 801.146A146 146 0 0 1 759.321 817.663L752.084 863.913L695.916 863.913L688.679 817.663A146 146 0 0 1 648.804 801.146L610.984 828.733L571.267 789.016L598.854 751.196A146 146 0 0 1 582.337 711.321L536.087 704.084L536.087 647.916L582.337 640.679A146 146 0 0 1 598.854 600.804L571.267 562.984L610.984 523.267L648.804 550.854A146 146 0 0 1 688.679 534.337L695.916 488.087L752.084 488.087L759.321 534.337A146 146 0 0 1 799.196 550.854L837.016 523.267L876.733 562.984L849.146 600.804A146 146 0 0 1 865.663 640.679Z" fill="url(#copper)"/>
+  <circle cx="724" cy="676" r="78" fill="url(#tile)"/>
+</svg>

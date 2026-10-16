@@ -23,7 +23,8 @@ if errorlevel 1 (
 
 REM --- Pick PowerShell host: pwsh 7 preferred, fallback PS 5.1 --------------
 set "PSHOST="
-where pwsh >nul 2>&1 && set "PSHOST=pwsh"
+if exist "%~dp0..\..\App\AudionPs.exe" set "PSHOST=%~dp0..\..\App\AudionPs.exe"
+if not defined PSHOST where pwsh >nul 2>&1 && set "PSHOST=pwsh"
 if not defined PSHOST (
     where powershell >nul 2>&1 && set "PSHOST=powershell"
 )
@@ -43,7 +44,7 @@ if not exist "%PS1%" (
     exit /b 1
 )
 
-for /f "delims=" %%V in ('%PSHOST% -NoProfile -Command "$PSVersionTable.PSVersion.ToString()"') do set "PSVER=%%V"
+for /f "delims=" %%V in ('call "%PSHOST%" -NoProfile -Command "$PSVersionTable.PSVersion.ToString()"') do set "PSVER=%%V"
 
 :MENU
 cls
@@ -82,13 +83,13 @@ goto MENU
 :AUDIT
 echo.
 echo [Nuke] Running AUDIT (read-only)...
-%PSHOST% -NoProfile -ExecutionPolicy Bypass -File "%PS1%" -Mode Audit
+"%PSHOST%" -NoProfile -ExecutionPolicy Bypass -File "%PS1%" -Mode Audit
 goto AFTER
 
 :DRYRUN
 echo.
 echo [Nuke] Running DRY-RUN (no changes)...
-%PSHOST% -NoProfile -ExecutionPolicy Bypass -File "%PS1%" -Mode DryRun
+"%PSHOST%" -NoProfile -ExecutionPolicy Bypass -File "%PS1%" -Mode DryRun
 goto AFTER
 
 :NUKE
@@ -102,7 +103,7 @@ if /I not "%confirm%"=="NUKE" (
 )
 echo.
 echo [Nuke] Executing full nuke...
-%PSHOST% -NoProfile -ExecutionPolicy Bypass -File "%PS1%" -Mode Nuke
+"%PSHOST%" -NoProfile -ExecutionPolicy Bypass -File "%PS1%" -Mode Nuke
 goto AFTER
 
 :NUKE_KEEPWINGET
@@ -114,7 +115,7 @@ if /I not "%confirm%"=="NUKE" (
     goto AFTER
 )
 echo.
-%PSHOST% -NoProfile -ExecutionPolicy Bypass -File "%PS1%" -Mode Nuke -KeepWinget
+"%PSHOST%" -NoProfile -ExecutionPolicy Bypass -File "%PS1%" -Mode Nuke -KeepWinget
 goto AFTER
 
 :AFTER

@@ -1,6 +1,6 @@
 # Virtualization Mode Switcher — спецификация и код
 
-Статус: **реализовано**. Новая секция `Virtualization` рядом с `WSL Toolkit`.
+Статус: **реализовано**. В окне — страница `WSL И VM -> HYPER-V`.
 Решает конфликт «Hyper-V/WSL2 забирает VT-x → сторонняя быстрая VM (VMware/
 VirtualBox/эмуляторы) деградирует или не стартует», и обратный случай.
 
@@ -279,14 +279,14 @@ def virtualization_switch(context: JobContext) -> dict[str, object]:
 ## Проверка после правки
 
 ```cmd
-runtime\python.exe -m py_compile system_core\ui_nicegui\app.py system_core\services\devops_tools.py
-runtime\python.exe system_core\ui_nicegui\app.py --smoke
-runtime\python.exe system_core\ui_nicegui\app.py --host 127.0.0.1 --port 8092 --no-browser
+runtime\python.exe -m py_compile system_core\services\devops_tools.py
+runtime\python.exe -m pytest -q
+install\verify_portable_env.cmd
 ```
 
 Ручной обход:
 
-- секция `Виртуализация` стоит сразу после `WSL Toolkit`;
+- страница `HYPER-V` стоит в разделе `WSL И VM` после страниц WSL;
 - `Статус виртуализации` печатает hypervisorlaunchtype, таблицу фич, VBS/Core
   Isolation и интерпретированный режим;
 - `Режим: Сторонние VM` и `Режим: Hyper-V / WSL2` показывают confirm-плашку,
@@ -299,10 +299,8 @@ runtime\python.exe system_core\ui_nicegui\app.py --host 127.0.0.1 --port 8092 --
 - VBS/Core Isolation модуль только диагностирует. Если пользователь жалуется на
   медленную VM при `hypervisorlaunchtype=Off` — статус подскажет, что виноват
   включённый Core Isolation; его выключение остаётся ручным/отдельным.
-- `dangerous_operation_notes` в `app.py` дополнительно править не нужно: общий
-  confirm + `description_ru` уже несут предупреждение «что отвалится» и про reboot.
-- Доку добавить в список `Read first` (AGENTS.md / CLAUDE.md), если секция уходит
-  в постоянный состав.
+- Тексты подтверждения отдельно править не нужно: общий confirm + `description_ru`
+  уже несут предупреждение «что отвалится» и про reboot.
 
 ---
 
@@ -408,9 +406,9 @@ exit 0
 
 ```cmd
 runtime\python.exe -m py_compile system_core\services\devops_tools.py
-runtime\python.exe system_core\ui_nicegui\app.py --smoke
+devops_cli.cmd run --operation virt_optimization_status
 ```
 
-- `Виртуализация -> Статус оптимизации` печатает 5 блоков (Core Isolation, power
+- `WSL И VM -> HYPER-V -> Статус оптимизации` печатает 5 блоков (Core Isolation, power
   plan, Defender exclusions, .wslconfig, VHDX placement) с tip-строками;
 - команда `safe/readonly`, без confirm и без изменений системы.

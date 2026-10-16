@@ -16,7 +16,7 @@ set "LOGS=%PROJECT_ROOT%\logs"
 
 if not exist "%PS1%" goto missing_script
 
-set "PWSH=%PROJECT_ROOT%\system_core\powershell\pwsh.exe"
+set "PWSH=%PROJECT_ROOT%\App\AudionPs.exe"
 if exist "%PWSH%" goto run_audit
 
 set "PWSH=pwsh.exe"

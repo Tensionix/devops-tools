@@ -2,7 +2,7 @@
 
 Runbook для диагностики сети, backup/restore, proxy, Wi-Fi профилей, SMB-входа, адаптеров и быстрых LAN/Wi-Fi режимов.
 
-Полный список GUI-параметров смотри в `USER_GUIDE_RU.md` в блоках `Network Cleaner` и `Подключение и адаптеры`.
+Все поля операций — в справочнике команд `docs\COMMANDS_RU.md`; в окне Network Cleaner — `СЕТЬ -> РЕМОНТ`, Connectivity — `СЕТЬ -> ПОДКЛЮЧЕНИЕ` и `СЕТЬ -> WI-FI`.
 
 ## Граница Разделов
 

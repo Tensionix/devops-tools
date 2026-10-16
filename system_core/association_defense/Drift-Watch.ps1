@@ -43,11 +43,11 @@ $TaskName   = 'Audion-AssociationDriftWatch'
 $TaskFolder = '\Audion\'
 $SnapshotBrick = Join-Path $here 'Golden-Snapshot.ps1'
 
-# Resolve the host that the task should use: portable pwsh first, then system.
+# Resolve the host that the task should use: the PowerShell of the program first, then the system's.
 function Resolve-PwshForTask {
     $projectRoot = Get-AssociationDefenseProjectRoot -ScriptRoot $here
     $candidates = @(
-        (Join-Path $projectRoot 'system_core\powershell\pwsh.exe')
+        (Join-Path $projectRoot 'App\AudionPs.exe')
         (Get-Command pwsh.exe -ErrorAction SilentlyContinue).Source
         "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
     )

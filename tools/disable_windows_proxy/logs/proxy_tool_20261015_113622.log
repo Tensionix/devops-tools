@@ -1,0 +1,7 @@
+[2026-10-15 11:36:22] [INFO] Audion Windows Proxy Tool started. Action: Status
+[2026-10-15 11:36:22] [INFO] Project root: E:\TOOLS\Audion DevOps Tools\tools\disable_windows_proxy
+[2026-10-15 11:36:22] [INFO] Backup directory: E:\TOOLS\Audion DevOps Tools\tools\disable_windows_proxy\backup\proxy_20261015_113622
+[2026-10-15 11:36:22] [INFO] Log file: E:\TOOLS\Audion DevOps Tools\tools\disable_windows_proxy\logs\proxy_tool_20261015_113622.log
+[2026-10-15 11:36:22] [INFO] Current user WinINet proxy state:
+[2026-10-15 11:36:22] [INFO] WinHTTP proxy state:
+[2026-10-15 11:36:22] [INFO] Done.

@@ -14,7 +14,6 @@ set "RUNTIME_DIR=%ROOT%\runtime"
 set "WHEELHOUSE_DIR=%ROOT%\wheelhouse"
 set "REQ_FILE=%INSTALL_DIR%\requirements_full.in"
 set "DOCTOR=%ROOT%\system_core\doctor.py"
-set "GUI_APP=%ROOT%\system_core\ui_nicegui\app.py"
 set "GET_PIP=%DOWNLOAD_DIR%\get-pip.py"
 set "CMD_ENCODING=%INSTALL_DIR%\Check-CmdEncoding.cmd"
 
@@ -118,10 +117,6 @@ if errorlevel 1 goto ERR_INSTALL
 echo [7/7] Verifying environment...
 "%RUNTIME_DIR%\python.exe" "%DOCTOR%" --project-root "%ROOT%"
 if errorlevel 1 goto ERR_VERIFY
-if exist "%GUI_APP%" (
-  "%RUNTIME_DIR%\python.exe" "%GUI_APP%" --smoke
-  if errorlevel 1 goto ERR_VERIFY
-)
 
 echo.
 echo [SUCCESS] Portable environment is ready.

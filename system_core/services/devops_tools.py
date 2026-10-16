@@ -15,7 +15,6 @@ import re
 import shutil
 import socket
 import subprocess
-import sys
 import time
 import urllib.parse
 import urllib.request
@@ -131,13 +130,6 @@ def bundle_root(context: JobContext | Path | str) -> Path:
     return root.parent
 
 
-def tool_dir(context: JobContext | Path | str, name: str) -> Path:
-    path = bundle_root(context) / name
-    if not path.exists():
-        raise RuntimeError(f"Tool folder was not found: {path}")
-    return path
-
-
 def project_tool_dir(context: JobContext, name: str) -> Path:
     raw = str(name).strip().replace("\\", "/")
     if not raw:
@@ -177,9 +169,13 @@ def ensure_directory(path: Path, *, label: str = "Folder") -> None:
 
 
 def resolve_pwsh(root: Path | str | None = None) -> str:
+    """The PowerShell the scripts run with: the program's own App\\AudionPs.exe first, then the machine's.
+
+    Until 2.0.0 the program carried a portable pwsh in system_core\\powershell; App\\AudionPs.exe took its place.
+    """
     project_root = Path(root).resolve() if root else Path(__file__).resolve().parents[2]
     candidates = [
-        project_root / "system_core" / "powershell" / "pwsh.exe",
+        project_root / "App" / "AudionPs.exe",
         shutil.which("pwsh.exe"),
         shutil.which("powershell.exe"),
     ]
@@ -189,7 +185,7 @@ def resolve_pwsh(root: Path | str | None = None) -> str:
         path = Path(candidate) if not isinstance(candidate, Path) else candidate
         if path.exists():
             return str(path)
-    raise RuntimeError("PowerShell was not found: portable pwsh.exe, pwsh.exe, powershell.exe.")
+    raise RuntimeError("PowerShell was not found: App\\AudionPs.exe, pwsh.exe, powershell.exe.")
 
 
 def resolve_windows_powershell() -> str:
@@ -431,21 +427,6 @@ def run_ps_command(
     return run_process(context, command, cwd=cwd or context.paths.root, input_text=input_text, check=check, progress_seconds=progress_seconds)
 
 
-def run_cmd_file(
-    context: JobContext,
-    script: Path,
-    args: list[str] | None = None,
-    *,
-    cwd: Path | None = None,
-    check: bool = True,
-    progress_seconds: float = 600.0,
-) -> ProcessResult:
-    if not script.exists():
-        raise RuntimeError(f"CMD script was not found: {script}")
-    command = ["cmd.exe", "/d", "/c", "call", str(script), *(args or [])]
-    return run_process(context, command, cwd=cwd or script.parent, check=check, progress_seconds=progress_seconds)
-
-
 def _run_capture(command: list[str], *, cwd: Path | None = None, timeout: float = 8.0, check: bool = True) -> str:
     result = subprocess.run(
         command,
@@ -464,7 +445,9 @@ def _run_capture(command: list[str], *, cwd: Path | None = None, timeout: float 
     return text
 
 
-def _json_capture(root: Path, command_text: str, *, timeout: float = 8.0) -> Any:
+# A list read by PowerShell: Get-NetAdapter alone takes some 6 s in a cold PowerShell 7, and the
+# window reads the state of the machine meanwhile - 8 s gave up on the first list of a page.
+def _json_capture(root: Path, command_text: str, *, timeout: float = 20.0) -> Any:
     try:
         text = _run_capture(powershell_command(root, "-Command", command_text), cwd=root, timeout=timeout)
         if not text:
@@ -651,10 +634,10 @@ def default_apps_backup_xml_options(root: Path | str | None = None) -> list[dict
     project_root = Path(root).resolve() if root else Path(__file__).resolve().parents[2]
     backup_dir = project_root / "backup" / "default_apps"
     options: list[dict[str, str]] = [
-        _option("", "Select a backup XML...", "Выбрать backup XML...")
+        _option("", "Select a backup XML...", "Выбрать снимок XML...")
     ]
     if not backup_dir.exists():
-        return [*options, _option("", "No Default Apps Guard backups found", "Backup Default Apps Guard не найдены")]
+        return [*options, _option("", "No Default Apps Guard backups found", "Копий Default Apps Guard нет")]
 
     files = sorted(
         (path for path in backup_dir.glob("*.xml") if path.is_file()),
@@ -662,7 +645,7 @@ def default_apps_backup_xml_options(root: Path | str | None = None) -> list[dict
         reverse=True,
     )
     if not files:
-        return [*options, _option("", "No XML backups found", "XML backup не найдены")]
+        return [*options, _option("", "No XML backups found", "Снимков XML нет")]
 
     for path in files[:200]:
         stamp = ""
@@ -924,7 +907,7 @@ def wsl_backup_file_options(root: Path | str | None = None) -> list[dict[str, st
         if backup_root.exists():
             files.extend(path for path in backup_root.rglob("*") if path.suffix.lower() in {".tar", ".vhd", ".vhdx", ".wsl"})
     if not files:
-        return [_option("", "No WSL backup files found", "Файлы backup WSL не найдены")]
+        return [_option("", "No WSL backup files found", "Копий WSL нет")]
     files = sorted(files, key=lambda path: path.stat().st_mtime if path.exists() else 0, reverse=True)
     return [_option(path, str(path), str(path)) for path in files[:200]]
 
@@ -935,7 +918,7 @@ def vhdx_file_options(root: Path | str | None = None) -> list[dict[str, str]]:
         if wsl_root.exists():
             files.extend(path for path in wsl_root.rglob("*.vhdx") if path.is_file())
     if not files:
-        return [_option("", "No VHDX files found in WSL workspaces", "VHDX в WSL workspace не найдены")]
+        return [_option("", "No VHDX files found in WSL workspaces", "VHDX в папках WSL нет")]
     files = sorted(files, key=lambda path: path.stat().st_mtime if path.exists() else 0, reverse=True)
     return [_option(path, str(path), str(path)) for path in files[:200]]
 
@@ -1009,6 +992,9 @@ def disk_options(root: Path | str | None = None) -> list[dict[str, str]]:
     return options or [_option("", "No disks returned by Get-Disk", "Get-Disk не вернул диски")]
 
 
+_ADAPTER_STATUS_RU = {"Up": "подключён", "Disconnected": "отключён", "Disabled": "выключен", "Not Present": "нет в системе", "Down": "не работает"}
+
+
 def network_adapter_options(root: Path | str | None = None) -> list[dict[str, str]]:
     project_root = Path(root).resolve() if root else Path(__file__).resolve().parents[2]
     data = _json_capture(
@@ -1016,7 +1002,7 @@ def network_adapter_options(root: Path | str | None = None) -> list[dict[str, st
         (
             "$rows = Get-NetAdapter | Sort-Object Name | ForEach-Object { "
             "[pscustomobject]@{Name=$_.Name; Status=[string]$_.Status; LinkSpeed=[string]$_.LinkSpeed; "
-            "MacAddress=$_.MacAddress; InterfaceDescription=$_.InterfaceDescription} }; "
+            "MacAddress=$_.MacAddress; InterfaceDescription=$_.InterfaceDescription; Virtual=[bool]$_.Virtual} }; "
             "$rows | ConvertTo-Json -Compress"
         ),
     )
@@ -1030,9 +1016,38 @@ def network_adapter_options(root: Path | str | None = None) -> list[dict[str, st
         name = str(row.get("Name", "")).strip()
         if not name:
             continue
-        label = f"{name} | {row.get('Status', '')} | {row.get('LinkSpeed', '')} | {row.get('InterfaceDescription', '')}"
-        options.append(_option(name, label, label))
+        # The card says the adapter and how it stands; what it is - the description of its driver - is its tip.
+        # The physical adapters and the virtual ones (TAP, VPN tunnels, Bluetooth) stand apart: the window lays
+        # the groups side by side. The value is the name of the adapter, as it always was.
+        status = str(row.get("Status", ""))
+        label = f"{name} | {status} | {row.get('LinkSpeed', '')}"
+        label_ru = f"{name} | {_ADAPTER_STATUS_RU.get(status, status)} | {row.get('LinkSpeed', '')}"
+        option = _option(name, label, label_ru)
+        option["tooltip"] = str(row.get("InterfaceDescription", "") or "")
+        virtual = bool(row.get("Virtual"))
+        option["group"] = "Virtual" if virtual else "Physical"
+        option["group_ru"] = "Виртуальные" if virtual else "Физические"
+        options.append(option)
+    # The physical ones first, each group by name as before.
+    options.sort(key=lambda option: option["group"] != "Physical")
     return options or [_option("", "No adapters returned by Get-NetAdapter", "Get-NetAdapter не вернул адаптеры")]
+
+
+def cable_adapter_options(root: Path | str | None = None) -> list[dict[str, str]]:
+    """The adapters a cable route may take: every one but the wireless (the field "Cable adapter").
+
+    The list of all adapters put the Wi-Fi adapter of a laptop under "Cable adapter" (the review of 16.10.2026).
+    """
+    options = network_adapter_options(root)
+    if not any(option.get("value") for option in options):
+        return options
+
+    def wireless(option: dict[str, str]) -> bool:
+        text = f"{option.get('value', '')} {option.get('tooltip', '')}"
+        return bool(re.search(r"Wi-?Fi|WLAN|Wireless|802\.11|Bluetooth|Беспровод", text, re.IGNORECASE))
+
+    kept = [option for option in options if option.get("value") and not wireless(option)]
+    return kept or [_option("", "No cable adapters found", "Проводные адаптеры не найдены")]
 
 
 def wifi_adapter_options(root: Path | str | None = None) -> list[dict[str, str]]:
@@ -1077,7 +1092,39 @@ def wifi_profile_options(root: Path | str | None = None) -> list[dict[str, str]]
             profiles.append(name)
     if not profiles:
         return [_option("", "No Wi-Fi profiles found", "Wi-Fi профили не найдены")]
-    return [_option(name, name, name) for name in profiles]
+    # The profile a Wi-Fi interface is connected with now stands first and says so; it is not chosen for
+    # the field: an empty field means "every profile" to the status and the export.
+    connected: list[str] = []
+    try:
+        named, networks = connected_wifi_profiles(_run_capture(["netsh.exe", "wlan", "show", "interfaces"], timeout=8.0, check=False))
+        connected = [name for name in profiles if name in named] or [name for name in profiles if name in networks]
+    except Exception:  # noqa: BLE001 - the list stands without the mark when the interfaces cannot be read
+        connected = []
+    options = [_option(name, f"{name} - connected now", f"{name} — подключён сейчас") for name in connected]
+    options += [_option(name, name, name) for name in profiles if name not in connected]
+    return options
+
+
+def connected_wifi_profiles(text: str) -> tuple[list[str], list[str]]:
+    """What the Wi-Fi interfaces are connected with now, read from `netsh wlan show interfaces`.
+
+    A connected interface has a line "Profile : name" ("Профиль" in a Russian Windows) and a line
+    "SSID : name"; a disconnected one has neither. The profiles, then the networks, each once.
+    """
+    profiles: list[str] = []
+    networks: list[str] = []
+    for line in text.splitlines():
+        key, separator, value = line.partition(":")
+        if not separator:
+            continue
+        key, value = key.strip().casefold(), value.strip()
+        if not value:
+            continue
+        if key in ("profile", "профиль") and value not in profiles:
+            profiles.append(value)
+        elif key == "ssid" and value not in networks:
+            networks.append(value)
+    return profiles, networks
 
 
 def network_backup_snapshot_paths(root: Path | str | None = None) -> list[Path]:
@@ -1092,7 +1139,7 @@ def network_backup_snapshot_paths(root: Path | str | None = None) -> list[Path]:
 def network_backup_snapshot_options(root: Path | str | None = None) -> list[dict[str, str]]:
     snapshots = network_backup_snapshot_paths(root)
     if not snapshots:
-        return [_option("", "No Network Cleaner backups found", "Backup Network Cleaner не найдены")]
+        return [_option("", "No Network Cleaner backups found", "Копий Network Cleaner нет")]
     options: list[dict[str, str]] = []
     for path in snapshots[:100]:
         stamp = ""
@@ -1108,14 +1155,14 @@ def network_backup_snapshot_options(root: Path | str | None = None) -> list[dict
 def runtime_status(context: JobContext) -> dict[str, object]:
     context.log(f"Audion DevOps Tools root: {context.paths.root}")
     context.log(f"Bundle root: {bundle_root(context)}")
-    portable = context.paths.system_core / "powershell" / "pwsh.exe"
-    context.log(f"Portable PowerShell: {portable}")
-    context.log(f"Portable PowerShell exists: {portable.exists()}")
+    own = context.paths.root / "App" / "AudionPs.exe"
+    context.log(f"PowerShell of the program: {own}")
+    context.log(f"PowerShell of the program exists: {own.exists()}")
     resolved = resolve_pwsh(context.paths.root)
     context.log(f"Resolved PowerShell: {resolved}")
     run_process(context, [resolved, "--version"], cwd=context.paths.root, check=False, progress_seconds=10)
     context.progress(1.0)
-    return {"resolved": resolved, "portable_exists": portable.exists()}
+    return {"resolved": resolved, "own_exists": own.exists()}
 
 
 def _windows_long_paths_value() -> str:
@@ -1193,12 +1240,6 @@ Write-Host "Windows LongPathsEnabled: $value"
         "git_global_core_longpaths": git_global,
         "git_system_core_longpaths": git_system,
     }
-
-
-def install_portable_powershell(context: JobContext) -> dict[str, object]:
-    script = context.paths.root / "install" / "Install-Portable-PowerShell.cmd"
-    run_cmd_file(context, script, ["/NOPAUSE"], cwd=context.paths.root, progress_seconds=180.0)
-    return {"script": str(script)}
 
 
 def preflight_status(context: JobContext) -> dict[str, object]:
@@ -3533,7 +3574,11 @@ Write-Host ('Pre-patch hosts backup for exact depatch: ' + $PrePatchBackup)
 def bitrix_hosts(context: JobContext) -> dict[str, object]:
     params = context.operation.parameters
     mode = str(params.get("mode", "status")).strip() or "status"
-    host_name = str(params.get("host_name", "portal.itpgrad.ru")).strip() or "portal.itpgrad.ru"
+    host_name = str(params.get("host_name", "")).strip()
+    # No portal of its own: the name is the person's (the owner, 16.10.2026). Only the restore from the latest
+    # backup needs none; the rest stop here, before the UAC prompt, not in the elevated script.
+    if not host_name and mode.lower() != "restore":
+        raise RuntimeError("Host name is empty: enter the name of the portal in the field Host name.")
     ip_address = str(params.get("ip_address", "")).strip()
     custom_ports = normalize_port_list(params.get("bitrix_ports"), [443, 80])
     host_name, custom_ports = normalize_endpoint_and_ports(host_name, custom_ports)
@@ -3740,6 +3785,7 @@ def association_defense_script(context: JobContext, name: str) -> Path:
 MICROSOFT_APP_KEYS: tuple[str, ...] = (
     "ZuneMusic",
     "ZuneVideo",
+    "MediaPlayerLegacy",
     "Photos",
     "Clipchamp",
     "SoundRecorder",
@@ -3775,7 +3821,9 @@ MICROSOFT_APP_KEYS: tuple[str, ...] = (
 # reinstall-block brick knows about.
 APPLOCKER_APP_KEYS: tuple[str, ...] = ("Photos", "ZuneVideo", "ZuneMusic", "Clipchamp")
 
-MICROSOFT_APP_DEFAULT_KEYS: tuple[str, ...] = ("ZuneMusic", "ZuneVideo")
+# Everything that takes the pictures, the music and the videos (the owner, 15.10.2026: "everything that takes
+# them over must be ticked"): the viewer, the players, Windows Media Player Legacy, Paint and Snipping Tool.
+MICROSOFT_APP_DEFAULT_KEYS: tuple[str, ...] = ("Photos", "ZuneMusic", "ZuneVideo", "MediaPlayerLegacy", "Paint", "ScreenSketch")
 
 
 def normalize_microsoft_app_keys(raw: Any, *, default: tuple[str, ...] = MICROSOFT_APP_DEFAULT_KEYS) -> list[str]:
@@ -3789,6 +3837,10 @@ def normalize_microsoft_app_keys(raw: Any, *, default: tuple[str, ...] = MICROSO
             "films&tv": "ZuneVideo",
             "microsoft.zunemusic": "ZuneMusic",
             "microsoft.zunevideo": "ZuneVideo",
+            "wmp": "MediaPlayerLegacy",
+            "windows media player": "MediaPlayerLegacy",
+            "windows media player legacy": "MediaPlayerLegacy",
+            "media.windowsmediaplayer": "MediaPlayerLegacy",
             "microsoft.windows.photos": "Photos",
             "clipchamp.clipchamp": "Clipchamp",
             "microsoft.windowscamera": "Camera",
@@ -4207,16 +4259,17 @@ def driver_backup_options(root: Path | str | None = None) -> list[dict[str, str]
         {
             "value": "",
             "label": "Newest available driver backup",
-            "label_ru": "Самый свежий backup драйверов",
+            "label_ru": "Самая свежая копия драйверов",
         }
     ]
-    if not backup_root.exists():
-        return options
     backups = [
         item
-        for item in backup_root.iterdir()
+        for item in (backup_root.iterdir() if backup_root.exists() else ())
         if item.is_dir() and (item / "drivers").is_dir()
     ]
+    if not backups:
+        # The same empty choice, said as what it is: the window shows the only option as a note.
+        return [_option("", "No driver backups yet", "Копий драйверов пока нет")]
     backups.sort(key=lambda item: item.stat().st_mtime, reverse=True)
     for item in backups:
         stamp = datetime.fromtimestamp(item.stat().st_mtime).strftime("%Y-%m-%d %H:%M")
@@ -4498,7 +4551,8 @@ def ai_backup(context: JobContext) -> dict[str, object]:
     return {"mode": mode, "path": str(io_dir), "script": str(script)}
 
 
-def _chat_list_options(sessions_root: Path, transcript_size: Callable[[str], int], empty_ru: str) -> list[dict[str, Any]]:
+def _chat_list_options(sessions_root: Path, transcript_size: Callable[[str], int], empty_ru: str,
+                      empty_en: str = "No Claude app chats found") -> list[dict[str, Any]]:
     """Claude app chats as checkbox options: real title and date, grouped by project folder."""
     chats: list[dict[str, Any]] = []
     for path in sessions_root.rglob("local_*.json") if sessions_root.is_dir() else []:
@@ -4528,16 +4582,45 @@ def _chat_list_options(sessions_root: Path, transcript_size: Callable[[str], int
             }
         )
     if not chats:
-        return [_option("", "No Claude app chats found", empty_ru)]
+        return [_option("", empty_en, empty_ru)]
     chats.sort(key=lambda item: item["_sort"], reverse=True)
     for item in chats:
         item.pop("_sort")
     return chats
 
 
+def claude_app_sessions_root() -> Path:
+    """Where the Claude desktop app keeps its chat list (the same rule as Resolve-ClaudeAppSessions of AI-Backup.ps1).
+
+    The app of Microsoft Store keeps its AppData inside its package (%LOCALAPPDATA%\\Packages\\Claude_*\\LocalCache\\
+    Roaming\\Claude). On some machines Windows shows that folder under %APPDATA%\\Claude as well, on others it is only
+    in the package - and a list read from %APPDATA% alone is empty there. The folder that holds chats is taken, the
+    newer one when both do; with no chats anywhere, the folder of the package when the app of the Store is installed.
+    """
+    appdata = Path(os.environ.get("APPDATA") or Path.home() / "AppData" / "Roaming")
+    local = Path(os.environ.get("LOCALAPPDATA") or Path.home() / "AppData" / "Local")
+    packages = local / "Packages"
+    candidates = [package / "LocalCache" / "Roaming" / "Claude" / "claude-code-sessions"
+                  for package in sorted(packages.glob("Claude_*"))] if packages.is_dir() else []
+    plain = appdata / "Claude" / "claude-code-sessions"
+    candidates.append(plain)
+    best, best_time = None, -1.0
+    for candidate in candidates:
+        if not candidate.is_dir():
+            continue
+        times = [path.stat().st_mtime for path in candidate.rglob("local_*.json")]
+        if times and max(times) > best_time:
+            best, best_time = candidate, max(times)
+    if best is not None:
+        return best
+    for candidate in candidates:
+        if candidate != plain and candidate.parent.is_dir():
+            return candidate
+    return plain
+
+
 def ai_backup_live_chat_options(root: Path | str | None = None) -> list[dict[str, Any]]:
     """Chats of this PC's Claude app, for choosing what the backup carries."""
-    appdata = Path(os.environ.get("APPDATA") or Path.home() / "AppData" / "Roaming")
     claude_home = Path(os.environ.get("CLAUDE_CONFIG_DIR") or Path.home() / ".claude")
     projects = claude_home / "projects"
 
@@ -4546,7 +4629,9 @@ def ai_backup_live_chat_options(root: Path | str | None = None) -> list[dict[str
             return 0
         return sum(path.stat().st_size for path in projects.glob(f"*/{cli}.jsonl"))
 
-    return _chat_list_options(appdata / "Claude" / "claude-code-sessions", transcript_size, "Чаты приложения Claude не найдены")
+    sessions = claude_app_sessions_root()
+    return _chat_list_options(sessions, transcript_size, f"Чаты приложения Claude не найдены: {sessions}",
+                              f"No Claude app chats found: {sessions}")
 
 
 def ai_backup_bundle_chat_options(root: Path | str | None = None) -> list[dict[str, Any]]:
@@ -6954,36 +7039,6 @@ def ripgrep_status(context: JobContext) -> dict[str, object]:
         raise RuntimeError(f"Unexpected ripgrep version output: {version or '<empty>'}")
     context.log(f"Resolved ripgrep version: {version}")
     return {"rg": str(exe), "version": version}
-
-
-def docs_pdf_export(context: JobContext) -> dict[str, object]:
-    params = context.operation.parameters
-    mode = str(params.get("mode", "render")).strip().lower()
-    pdf_root = context.paths.root / "docs" / "PDF"
-    if mode == "open_folder":
-        open_path(context, pdf_root)
-        return {"folder": str(pdf_root)}
-
-    if mode not in {"render", "plan"}:
-        raise RuntimeError(f"Unsupported docs PDF mode: {mode}")
-
-    script = context.paths.system_core / "docs_pdf.py"
-    if not script.exists():
-        raise RuntimeError(f"Docs PDF wrapper was not found: {script}")
-    python_exe = context.paths.root / "runtime" / "python.exe"
-    python_cmd = str(python_exe if python_exe.exists() else Path(sys.executable))
-    theme = str(params.get("docs_pdf_theme", "both")).strip() or "both"
-    command = [python_cmd, str(script), "--theme", theme]
-    if mode == "plan":
-        command.append("--dry-run")
-    if not bool(params.get("docs_pdf_include_agent_instructions", True)):
-        command.append("--no-agent-instructions")
-
-    context.log(f"Docs PDF mode: {mode}")
-    context.log(f"Docs PDF root: {pdf_root}")
-    context.log(f"Docs PDF theme: {theme}")
-    result = run_process(context, command, cwd=context.paths.root, check=True, progress_seconds=900.0)
-    return {"mode": mode, "pdf_root": str(pdf_root), "exit_code": result.exit_code}
 
 
 def open_tool_folder(context: JobContext) -> dict[str, object]:

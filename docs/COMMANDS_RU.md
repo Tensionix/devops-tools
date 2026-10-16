@@ -9,25 +9,24 @@
 - [Среда выполнения и оболочка > Проверить Windows Long Paths](#среда-выполнения-и-оболочка--проверить-windows-long-paths)
 - [Среда выполнения и оболочка > Включить Windows Long Paths](#среда-выполнения-и-оболочка--включить-windows-long-paths)
 - [Среда выполнения и оболочка > Включить Git Long Paths](#среда-выполнения-и-оболочка--включить-git-long-paths)
-- [Среда выполнения и оболочка > Установить портативный PowerShell](#среда-выполнения-и-оболочка--установить-портативный-powershell)
-- [Browser Bookmarks Master > Статус](#browser-bookmarks-master--статус)
-- [Browser Bookmarks Master > Очистить локальный Favicons cache](#browser-bookmarks-master--очистить-локальный-favicons-cache)
-- [Browser Bookmarks Master > Экспорт эталона в Workbench TARGET](#browser-bookmarks-master--экспорт-эталона-в-workbench-target)
-- [Browser Bookmarks Master > Импорт эталона из Workbench SOURCE](#browser-bookmarks-master--импорт-эталона-из-workbench-source)
-- [Browser Bookmarks Master > Перенести эталон между браузерами](#browser-bookmarks-master--перенести-эталон-между-браузерами)
-- [Browser Bookmarks Master > Открыть локальные safety backups](#browser-bookmarks-master--открыть-локальные-safety-backups)
+- [Закладки браузеров > Статус](#закладки-браузеров--статус)
+- [Закладки браузеров > Очистить локальный кэш значков](#закладки-браузеров--очистить-локальный-кэш-значков)
+- [Закладки браузеров > Экспорт эталона в папку НАЗНАЧЕНИЕ](#закладки-браузеров--экспорт-эталона-в-папку-назначение)
+- [Закладки браузеров > Импорт эталона из папки ИСТОЧНИК](#закладки-браузеров--импорт-эталона-из-папки-источник)
+- [Закладки браузеров > Перенести эталон между браузерами](#закладки-браузеров--перенести-эталон-между-браузерами)
+- [Закладки браузеров > Открыть локальные страховочные копии](#закладки-браузеров--открыть-локальные-страховочные-копии)
 - [Очистка сети > Снимок статуса](#очистка-сети--снимок-статуса)
-- [Очистка сети > Полный backup сети](#очистка-сети--полный-backup-сети)
-- [Очистка сети > Полный backup + Wi-Fi ключи](#очистка-сети--полный-backup--wi-fi-ключи)
-- [Очистка сети > Восстановить backup сети > Восстановить последний backup](#очистка-сети--восстановить-backup-сети--восстановить-последний-backup)
-- [Очистка сети > Восстановить backup сети > Восстановить выбранный backup](#очистка-сети--восстановить-backup-сети--восстановить-выбранный-backup)
-- [Очистка сети > Профили ремонта > Легкий ремонт](#очистка-сети--профили-ремонта--легкий-ремонт)
+- [Очистка сети > Полная копия сети](#очистка-сети--полная-копия-сети)
+- [Очистка сети > Полная копия сети и ключи Wi-Fi](#очистка-сети--полная-копия-сети-и-ключи-wi-fi)
+- [Очистка сети > Восстановить сеть из копии > Восстановить последнюю копию](#очистка-сети--восстановить-сеть-из-копии--восстановить-последнюю-копию)
+- [Очистка сети > Восстановить сеть из копии > Восстановить выбранную копию](#очистка-сети--восстановить-сеть-из-копии--восстановить-выбранную-копию)
+- [Очистка сети > Профили ремонта > Лёгкий ремонт](#очистка-сети--профили-ремонта--лёгкий-ремонт)
 - [Очистка сети > Профили ремонта > Стандартный ремонт](#очистка-сети--профили-ремонта--стандартный-ремонт)
 - [Очистка сети > Профили ремонта > Жёсткий ремонт](#очистка-сети--профили-ремонта--жёсткий-ремонт)
 - [Очистка сети > Прокси > Статус прокси](#очистка-сети--прокси--статус-прокси)
 - [Очистка сети > Прокси > Отключить прокси пользователя](#очистка-сети--прокси--отключить-прокси-пользователя)
-- [Очистка сети > Прокси > Сбросить WinHTTP proxy](#очистка-сети--прокси--сбросить-winhttp-proxy)
-- [Очистка сети > Открыть backup](#очистка-сети--открыть-backup)
+- [Очистка сети > Прокси > Сбросить прокси WinHTTP](#очистка-сети--прокси--сбросить-прокси-winhttp)
+- [Очистка сети > Открыть копии](#очистка-сети--открыть-копии)
 - [DNS-доктор > Снимок состояния](#dns-доктор--снимок-состояния)
 - [DNS-доктор > Починить имена и значок](#dns-доктор--починить-имена-и-значок)
 - [DNS-доктор > Починить значок сети](#dns-доктор--починить-значок-сети)
@@ -64,26 +63,26 @@
 - [WSL Toolkit > Базовые и установка > Установить из файла образа](#wsl-toolkit--базовые-и-установка--установить-из-файла-образа)
 - [WSL Toolkit > Базовые и установка > Список установленных](#wsl-toolkit--базовые-и-установка--список-установленных)
 - [WSL Toolkit > Базовые и установка > Статус WSL](#wsl-toolkit--базовые-и-установка--статус-wsl)
-- [WSL Toolkit > Базовые и установка > Shutdown WSL](#wsl-toolkit--базовые-и-установка--shutdown-wsl)
-- [WSL Toolkit > Linux-конфигурация > Package update](#wsl-toolkit--linux-конфигурация--package-update)
+- [WSL Toolkit > Базовые и установка > Выключить WSL](#wsl-toolkit--базовые-и-установка--выключить-wsl)
+- [WSL Toolkit > Linux-конфигурация > Обновление пакетов](#wsl-toolkit--linux-конфигурация--обновление-пакетов)
 - [WSL Toolkit > Linux-конфигурация > Учётка Linux](#wsl-toolkit--linux-конфигурация--учётка-linux)
 - [WSL Toolkit > Linux-конфигурация > Dev-пакеты](#wsl-toolkit--linux-конфигурация--dev-пакеты)
-- [WSL Toolkit > Linux-конфигурация > Micro baseline](#wsl-toolkit--linux-конфигурация--micro-baseline)
-- [WSL Toolkit > Linux-конфигурация > MC skin](#wsl-toolkit--linux-конфигурация--mc-skin)
-- [WSL Toolkit > Linux-конфигурация > Neovim base](#wsl-toolkit--linux-конфигурация--neovim-base)
-- [WSL Toolkit > Ubuntu Dev Installer Kit > Открыть папку kit](#wsl-toolkit--ubuntu-dev-installer-kit--открыть-папку-kit)
+- [WSL Toolkit > Linux-конфигурация > Базовая настройка micro](#wsl-toolkit--linux-конфигурация--базовая-настройка-micro)
+- [WSL Toolkit > Linux-конфигурация > Оформление MC](#wsl-toolkit--linux-конфигурация--оформление-mc)
+- [WSL Toolkit > Linux-конфигурация > Базовая настройка Neovim](#wsl-toolkit--linux-конфигурация--базовая-настройка-neovim)
+- [WSL Toolkit > Ubuntu Dev Installer Kit > Открыть папку набора](#wsl-toolkit--ubuntu-dev-installer-kit--открыть-папку-набора)
 - [WSL Toolkit > Ubuntu Dev Installer Kit > Открыть README RU](#wsl-toolkit--ubuntu-dev-installer-kit--открыть-readme-ru)
-- [WSL Toolkit > Ubuntu Dev Installer Kit > Открыть Btrfs guide](#wsl-toolkit--ubuntu-dev-installer-kit--открыть-btrfs-guide)
-- [WSL Toolkit > Ubuntu Dev Installer Kit > Открыть installer script](#wsl-toolkit--ubuntu-dev-installer-kit--открыть-installer-script)
-- [WSL Toolkit > Ubuntu Dev Installer Kit > Открыть NVMe prep script](#wsl-toolkit--ubuntu-dev-installer-kit--открыть-nvme-prep-script)
+- [WSL Toolkit > Ubuntu Dev Installer Kit > Открыть руководство по Btrfs](#wsl-toolkit--ubuntu-dev-installer-kit--открыть-руководство-по-btrfs)
+- [WSL Toolkit > Ubuntu Dev Installer Kit > Открыть скрипт установщика](#wsl-toolkit--ubuntu-dev-installer-kit--открыть-скрипт-установщика)
+- [WSL Toolkit > Ubuntu Dev Installer Kit > Открыть скрипт подготовки NVMe](#wsl-toolkit--ubuntu-dev-installer-kit--открыть-скрипт-подготовки-nvme)
 - [WSL Toolkit > Ubuntu Dev Installer Kit > Открыть списки пакетов](#wsl-toolkit--ubuntu-dev-installer-kit--открыть-списки-пакетов)
 - [WSL Toolkit > Действия с дистрибутивом > Остановить дистрибутив](#wsl-toolkit--действия-с-дистрибутивом--остановить-дистрибутив)
-- [WSL Toolkit > Действия с дистрибутивом > Backup дистрибутива](#wsl-toolkit--действия-с-дистрибутивом--backup-дистрибутива)
+- [WSL Toolkit > Действия с дистрибутивом > Копия дистрибутива](#wsl-toolkit--действия-с-дистрибутивом--копия-дистрибутива)
 - [WSL Toolkit > Действия с дистрибутивом > Клонировать дистрибутив](#wsl-toolkit--действия-с-дистрибутивом--клонировать-дистрибутив)
 - [WSL Toolkit > Действия с дистрибутивом > Перенести дистрибутив](#wsl-toolkit--действия-с-дистрибутивом--перенести-дистрибутив)
 - [WSL Toolkit > Действия с дистрибутивом > Удалить дистрибутив](#wsl-toolkit--действия-с-дистрибутивом--удалить-дистрибутив)
-- [WSL Toolkit > Import и restore > Import VHDX in-place](#wsl-toolkit--import-и-restore--import-vhdx-in-place)
-- [WSL Toolkit > Import и restore > Restore из backup](#wsl-toolkit--import-и-restore--restore-из-backup)
+- [WSL Toolkit > Импорт и восстановление > Подключить VHDX на месте](#wsl-toolkit--импорт-и-восстановление--подключить-vhdx-на-месте)
+- [WSL Toolkit > Импорт и восстановление > Восстановить из копии](#wsl-toolkit--импорт-и-восстановление--восстановить-из-копии)
 - [WSL Toolkit > Регистрация VHDX пачкой > Зарегистрировать все VHDX](#wsl-toolkit--регистрация-vhdx-пачкой--зарегистрировать-все-vhdx)
 - [Виртуализация > Статус виртуализации](#виртуализация--статус-виртуализации)
 - [Виртуализация > Статус оптимизации](#виртуализация--статус-оптимизации)
@@ -94,10 +93,10 @@
 - [Виртуализация > Выключить Hyper-V](#виртуализация--выключить-hyper-v)
 - [Виртуализация > Включить Windows Sandbox](#виртуализация--включить-windows-sandbox)
 - [Виртуализация > Выключить Windows Sandbox](#виртуализация--выключить-windows-sandbox)
-- [Hosts и Bitrix > Найти текущий endpoint](#hosts-и-bitrix--найти-текущий-endpoint)
-- [Hosts и Bitrix > Статус / DNS / ports](#hosts-и-bitrix--статус--dns--ports)
-- [Hosts и Bitrix > Включить override](#hosts-и-bitrix--включить-override)
-- [Hosts и Bitrix > Выключить override](#hosts-и-bitrix--выключить-override)
+- [Hosts и Bitrix > Найти текущую точку](#hosts-и-bitrix--найти-текущую-точку)
+- [Hosts и Bitrix > Состояние / DNS / порты](#hosts-и-bitrix--состояние--dns--порты)
+- [Hosts и Bitrix > Включить подмену](#hosts-и-bitrix--включить-подмену)
+- [Hosts и Bitrix > Выключить подмену](#hosts-и-bitrix--выключить-подмену)
 - [Hosts и Bitrix > Восстановить hosts](#hosts-и-bitrix--восстановить-hosts)
 - [Приложения по умолчанию > Политика](#приложения-по-умолчанию--политика)
 - [Приложения по умолчанию > Microsoft](#приложения-по-умолчанию--microsoft)
@@ -106,58 +105,58 @@
 - [Приложения по умолчанию > Снимок](#приложения-по-умолчанию--снимок)
 - [Приложения по умолчанию > Группы](#приложения-по-умолчанию--группы)
 - [Приложения по умолчанию > Общий отчёт](#приложения-по-умолчанию--общий-отчёт)
-- [Hardware > Driver/Firmware Audit](#hardware--driverfirmware-audit)
-- [Hardware > Материалы Driver/Firmware Audit > Открыть папку аддона](#hardware--материалы-driverfirmware-audit--открыть-папку-аддона)
-- [Hardware > Материалы Driver/Firmware Audit > Открыть README](#hardware--материалы-driverfirmware-audit--открыть-readme)
-- [Hardware > Driver Update Blocker > Windows Update driver policy > Проверить защиту драйверов](#hardware--driver-update-blocker--windows-update-driver-policy--проверить-защиту-драйверов)
-- [Hardware > Driver Update Blocker > Windows Update driver policy > Блокировать драйверы Windows Update](#hardware--driver-update-blocker--windows-update-driver-policy--блокировать-драйверы-windows-update)
-- [Hardware > Driver Update Blocker > Windows Update driver policy > Разблокировать драйверы Windows Update](#hardware--driver-update-blocker--windows-update-driver-policy--разблокировать-драйверы-windows-update)
-- [Hardware > Driver Update Blocker > Windows Update driver policy > Открыть policy backups](#hardware--driver-update-blocker--windows-update-driver-policy--открыть-policy-backups)
-- [Hardware > Driver Update Blocker > HWID-защита драйвера устройства > Проверить текущий lock](#hardware--driver-update-blocker--hwid-защита-драйвера-устройства--проверить-текущий-lock)
-- [Hardware > Driver Update Blocker > HWID-защита драйвера устройства > 1. Разблокировать перед обновлением](#hardware--driver-update-blocker--hwid-защита-драйвера-устройства--1-разблокировать-перед-обновлением)
-- [Hardware > Driver Update Blocker > HWID-защита драйвера устройства > 2. Заблокировать после установки](#hardware--driver-update-blocker--hwid-защита-драйвера-устройства--2-заблокировать-после-установки)
-- [Hardware > Driver Update Blocker > Аварийный rank repair по HWID > Проверить rank target](#hardware--driver-update-blocker--аварийный-rank-repair-по-hwid--проверить-rank-target)
-- [Hardware > Driver Update Blocker > Аварийный rank repair по HWID > Починить driver rank по HWID](#hardware--driver-update-blocker--аварийный-rank-repair-по-hwid--починить-driver-rank-по-hwid)
-- [Hardware > Driver Update Blocker > NVIDIA driver install restrictions > Блокировать NVIDIA driver installs](#hardware--driver-update-blocker--nvidia-driver-install-restrictions--блокировать-nvidia-driver-installs)
-- [Hardware > Driver Update Blocker > NVIDIA driver install restrictions > Разблокировать NVIDIA driver installs](#hardware--driver-update-blocker--nvidia-driver-install-restrictions--разблокировать-nvidia-driver-installs)
-- [Hardware > Driver Update Blocker > Driver Store backups > Сохранить Driver Store manifest](#hardware--driver-update-blocker--driver-store-backups--сохранить-driver-store-manifest)
-- [Hardware > Driver Update Blocker > Driver Store backups > Экспортировать установленные драйверы](#hardware--driver-update-blocker--driver-store-backups--экспортировать-установленные-драйверы)
-- [Hardware > Driver Update Blocker > Driver Store backups > Восстановить экспортированные драйверы](#hardware--driver-update-blocker--driver-store-backups--восстановить-экспортированные-драйверы)
-- [Hardware > Driver Update Blocker > Driver Store backups > Открыть driver backups](#hardware--driver-update-blocker--driver-store-backups--открыть-driver-backups)
-- [Hardware > Driver Update Blocker > Открыть папку Driver Update Blocker](#hardware--driver-update-blocker--открыть-папку-driver-update-blocker)
-- [Hardware > NVIDIA HDMI/DP Audio > Статус NVIDIA audio](#hardware--nvidia-hdmidp-audio--статус-nvidia-audio)
-- [Hardware > NVIDIA HDMI/DP Audio > Экспортировать NVIDIA audio IDs](#hardware--nvidia-hdmidp-audio--экспортировать-nvidia-audio-ids)
-- [Hardware > NVIDIA HDMI/DP Audio > Отключить NVIDIA HDMI/DP audio](#hardware--nvidia-hdmidp-audio--отключить-nvidia-hdmidp-audio)
-- [Hardware > NVIDIA HDMI/DP Audio > Включить NVIDIA HDMI/DP audio](#hardware--nvidia-hdmidp-audio--включить-nvidia-hdmidp-audio)
-- [Hardware > NVIDIA HDMI/DP Audio > Policy-block NVIDIA HDMI/DP audio](#hardware--nvidia-hdmidp-audio--policy-block-nvidia-hdmidp-audio)
-- [Hardware > NVIDIA HDMI/DP Audio > Снять policy-block NVIDIA HDMI/DP audio](#hardware--nvidia-hdmidp-audio--снять-policy-block-nvidia-hdmidp-audio)
-- [Hardware > NVIDIA HDMI/DP Audio > Открыть NVIDIA audio output](#hardware--nvidia-hdmidp-audio--открыть-nvidia-audio-output)
-- [Hardware > NVIDIA HDMI/DP Audio > Открыть NVIDIA audio backup](#hardware--nvidia-hdmidp-audio--открыть-nvidia-audio-backup)
-- [Hardware > NVIDIA HDMI/DP Audio > Открыть папку NVIDIA audio tool](#hardware--nvidia-hdmidp-audio--открыть-папку-nvidia-audio-tool)
-- [Hardware > Накопители / дисковые процедуры > Инвентаризация дисков](#hardware--накопители--дисковые-процедуры--инвентаризация-дисков)
-- [Hardware > Накопители / дисковые процедуры > Детали выбранного диска](#hardware--накопители--дисковые-процедуры--детали-выбранного-диска)
-- [Hardware > Накопители / дисковые процедуры > Запустить SSD/NVMe wizard](#hardware--накопители--дисковые-процедуры--запустить-ssdnvme-wizard)
-- [Hardware > Накопители / дисковые процедуры > Открыть папку SSD/NVMe](#hardware--накопители--дисковые-процедуры--открыть-папку-ssdnvme)
-- [Hardware > Съёмные носители > Обнулить съёмный и сделать один раздел](#hardware--съёмные-носители--обнулить-съёмный-и-сделать-один-раздел)
-- [Hardware > Съёмные носители > Открыть папку съёмных носителей](#hardware--съёмные-носители--открыть-папку-съёмных-носителей)
-- [Сеть > Wi-Fi: статус / подключение > Раздача Wi-Fi](#сеть--wi-fi-статус--подключение--раздача-wi-fi)
-- [Hardware > Автозапуск > Что запускается само](#hardware--автозапуск--что-запускается-само)
-- [Hardware > Автозапуск > Открыть папку автозапуска](#hardware--автозапуск--открыть-папку-автозапуска)
-- [Hardware > Накопители / дисковые процедуры > Статус WinRE layout](#hardware--накопители--дисковые-процедуры--статус-winre-layout)
-- [Hardware > Накопители / дисковые процедуры > Запустить WinRE wizard](#hardware--накопители--дисковые-процедуры--запустить-winre-wizard)
+- [Железо > Аудит драйверов и прошивок](#железо--аудит-драйверов-и-прошивок)
+- [Железо > Материалы Driver/Firmware Audit > Открыть папку аддона](#железо--материалы-driverfirmware-audit--открыть-папку-аддона)
+- [Железо > Материалы Driver/Firmware Audit > Открыть README](#железо--материалы-driverfirmware-audit--открыть-readme)
+- [Железо > Запрет обновлений драйверов > Политика драйверов Windows Update > Проверить защиту драйверов](#железо--запрет-обновлений-драйверов--политика-драйверов-windows-update--проверить-защиту-драйверов)
+- [Железо > Запрет обновлений драйверов > Политика драйверов Windows Update > Блокировать драйверы Windows Update](#железо--запрет-обновлений-драйверов--политика-драйверов-windows-update--блокировать-драйверы-windows-update)
+- [Железо > Запрет обновлений драйверов > Политика драйверов Windows Update > Разблокировать драйверы Windows Update](#железо--запрет-обновлений-драйверов--политика-драйверов-windows-update--разблокировать-драйверы-windows-update)
+- [Железо > Запрет обновлений драйверов > Политика драйверов Windows Update > Открыть копии политики](#железо--запрет-обновлений-драйверов--политика-драйверов-windows-update--открыть-копии-политики)
+- [Железо > Запрет обновлений драйверов > HWID-защита драйвера устройства > Проверить текущий замок](#железо--запрет-обновлений-драйверов--hwid-защита-драйвера-устройства--проверить-текущий-замок)
+- [Железо > Запрет обновлений драйверов > HWID-защита драйвера устройства > 1. Разблокировать перед обновлением](#железо--запрет-обновлений-драйверов--hwid-защита-драйвера-устройства--1-разблокировать-перед-обновлением)
+- [Железо > Запрет обновлений драйверов > HWID-защита драйвера устройства > 2. Заблокировать после установки](#железо--запрет-обновлений-драйверов--hwid-защита-драйвера-устройства--2-заблокировать-после-установки)
+- [Железо > Запрет обновлений драйверов > Аварийный ремонт ранга по HWID > Проверить цель ранга](#железо--запрет-обновлений-драйверов--аварийный-ремонт-ранга-по-hwid--проверить-цель-ранга)
+- [Железо > Запрет обновлений драйверов > Аварийный ремонт ранга по HWID > Починить ранг драйвера по HWID](#железо--запрет-обновлений-драйверов--аварийный-ремонт-ранга-по-hwid--починить-ранг-драйвера-по-hwid)
+- [Железо > Запрет обновлений драйверов > Запрет установки драйверов NVIDIA > Запретить установку драйверов NVIDIA](#железо--запрет-обновлений-драйверов--запрет-установки-драйверов-nvidia--запретить-установку-драйверов-nvidia)
+- [Железо > Запрет обновлений драйверов > Запрет установки драйверов NVIDIA > Разрешить установку драйверов NVIDIA](#железо--запрет-обновлений-драйверов--запрет-установки-драйверов-nvidia--разрешить-установку-драйверов-nvidia)
+- [Железо > Запрет обновлений драйверов > Копии Driver Store > Сохранить опись Driver Store](#железо--запрет-обновлений-драйверов--копии-driver-store--сохранить-опись-driver-store)
+- [Железо > Запрет обновлений драйверов > Копии Driver Store > Экспортировать установленные драйверы](#железо--запрет-обновлений-драйверов--копии-driver-store--экспортировать-установленные-драйверы)
+- [Железо > Запрет обновлений драйверов > Копии Driver Store > Восстановить экспортированные драйверы](#железо--запрет-обновлений-драйверов--копии-driver-store--восстановить-экспортированные-драйверы)
+- [Железо > Запрет обновлений драйверов > Копии Driver Store > Открыть копии драйверов](#железо--запрет-обновлений-драйверов--копии-driver-store--открыть-копии-драйверов)
+- [Железо > Запрет обновлений драйверов > Открыть папку запрета обновлений драйверов](#железо--запрет-обновлений-драйверов--открыть-папку-запрета-обновлений-драйверов)
+- [Железо > NVIDIA HDMI/DP Audio > Статус звука NVIDIA](#железо--nvidia-hdmidp-audio--статус-звука-nvidia)
+- [Железо > NVIDIA HDMI/DP Audio > Экспортировать ID звука NVIDIA](#железо--nvidia-hdmidp-audio--экспортировать-id-звука-nvidia)
+- [Железо > NVIDIA HDMI/DP Audio > Отключить звук NVIDIA HDMI/DP](#железо--nvidia-hdmidp-audio--отключить-звук-nvidia-hdmidp)
+- [Железо > NVIDIA HDMI/DP Audio > Включить звук NVIDIA HDMI/DP](#железо--nvidia-hdmidp-audio--включить-звук-nvidia-hdmidp)
+- [Железо > NVIDIA HDMI/DP Audio > Запретить звук NVIDIA HDMI/DP политикой](#железо--nvidia-hdmidp-audio--запретить-звук-nvidia-hdmidp-политикой)
+- [Железо > NVIDIA HDMI/DP Audio > Снять запрет звука NVIDIA HDMI/DP](#железо--nvidia-hdmidp-audio--снять-запрет-звука-nvidia-hdmidp)
+- [Железо > NVIDIA HDMI/DP Audio > Открыть результаты звука NVIDIA](#железо--nvidia-hdmidp-audio--открыть-результаты-звука-nvidia)
+- [Железо > NVIDIA HDMI/DP Audio > Открыть копии звука NVIDIA](#железо--nvidia-hdmidp-audio--открыть-копии-звука-nvidia)
+- [Железо > NVIDIA HDMI/DP Audio > Открыть папку набора звука NVIDIA](#железо--nvidia-hdmidp-audio--открыть-папку-набора-звука-nvidia)
+- [Железо > Накопители / дисковые процедуры > Инвентаризация дисков](#железо--накопители--дисковые-процедуры--инвентаризация-дисков)
+- [Железо > Накопители / дисковые процедуры > Детали выбранного диска](#железо--накопители--дисковые-процедуры--детали-выбранного-диска)
+- [Железо > Накопители / дисковые процедуры > Запустить мастер SSD/NVMe](#железо--накопители--дисковые-процедуры--запустить-мастер-ssdnvme)
+- [Железо > Накопители / дисковые процедуры > Открыть папку SSD/NVMe](#железо--накопители--дисковые-процедуры--открыть-папку-ssdnvme)
+- [Железо > Накопители / дисковые процедуры > Обнулить съёмный и сделать один раздел](#железо--накопители--дисковые-процедуры--обнулить-съёмный-и-сделать-один-раздел)
+- [Железо > Накопители / дисковые процедуры > Открыть папку съёмных носителей](#железо--накопители--дисковые-процедуры--открыть-папку-съёмных-носителей)
+- [Подключение и адаптеры > Wi-Fi профили > Раздача Wi-Fi](#подключение-и-адаптеры--wi-fi-профили--раздача-wi-fi)
+- [Железо > Накопители / дисковые процедуры > Что запускается само](#железо--накопители--дисковые-процедуры--что-запускается-само)
+- [Железо > Накопители / дисковые процедуры > Открыть папку автозапуска](#железо--накопители--дисковые-процедуры--открыть-папку-автозапуска)
+- [Железо > Накопители / дисковые процедуры > Состояние разметки WinRE](#железо--накопители--дисковые-процедуры--состояние-разметки-winre)
+- [Железо > Накопители / дисковые процедуры > Запустить мастер WinRE](#железо--накопители--дисковые-процедуры--запустить-мастер-winre)
 - [OpenSSH KeyKit > Проверить связность доступов](#openssh-keykit--проверить-связность-доступов)
-- [OpenSSH KeyKit > Экспорт client SSH keys](#openssh-keykit--экспорт-client-ssh-keys)
-- [OpenSSH KeyKit > Экспорт client + server SSH keys](#openssh-keykit--экспорт-client--server-ssh-keys)
-- [OpenSSH KeyKit > Импорт client SSH keys](#openssh-keykit--импорт-client-ssh-keys)
-- [OpenSSH KeyKit > Импорт client + server SSH keys](#openssh-keykit--импорт-client--server-ssh-keys)
+- [OpenSSH KeyKit > Экспорт ключей SSH клиента](#openssh-keykit--экспорт-ключей-ssh-клиента)
+- [OpenSSH KeyKit > Экспорт ключей SSH клиента и сервера](#openssh-keykit--экспорт-ключей-ssh-клиента-и-сервера)
+- [OpenSSH KeyKit > Импорт ключей SSH клиента](#openssh-keykit--импорт-ключей-ssh-клиента)
+- [OpenSSH KeyKit > Импорт ключей SSH клиента и сервера](#openssh-keykit--импорт-ключей-ssh-клиента-и-сервера)
 - [OpenSSH KeyKit > Открыть папку скриптов KeyKit](#openssh-keykit--открыть-папку-скриптов-keykit)
 - [Бэкап AI CLI > Бэкап (экспорт)](#бэкап-ai-cli--бэкап-экспорт)
 - [Бэкап AI CLI > Восстановить (импорт)](#бэкап-ai-cli--восстановить-импорт)
 - [Бэкап AI CLI > Объединение памяти](#бэкап-ai-cli--объединение-памяти)
 - [Бэкап AI CLI > Открыть папку инструмента](#бэкап-ai-cli--открыть-папку-инструмента)
 - [Сертификаты (экспорт/импорт) > Статус сертификатов](#сертификаты-экспортимпорт--статус-сертификатов)
-- [Сертификаты (экспорт/импорт) > Экспорт personal ключей в PFX](#сертификаты-экспортимпорт--экспорт-personal-ключей-в-pfx)
-- [Сертификаты (экспорт/импорт) > Экспорт store в SST (публично)](#сертификаты-экспортимпорт--экспорт-store-в-sst-публично)
+- [Сертификаты (экспорт/импорт) > Экспорт личных ключей в PFX](#сертификаты-экспортимпорт--экспорт-личных-ключей-в-pfx)
+- [Сертификаты (экспорт/импорт) > Экспорт хранилища в SST (публично)](#сертификаты-экспортимпорт--экспорт-хранилища-в-sst-публично)
 - [Сертификаты (экспорт/импорт) > Импорт PFX](#сертификаты-экспортимпорт--импорт-pfx)
 - [Сертификаты (экспорт/импорт) > Импорт всех PFX из папки](#сертификаты-экспортимпорт--импорт-всех-pfx-из-папки)
 - [Сертификаты (экспорт/импорт) > Импорт сертификата / CA](#сертификаты-экспортимпорт--импорт-сертификата--ca)
@@ -178,26 +177,25 @@
 - [Переезд на новую машину > Экспорт переезда](#переезд-на-новую-машину--экспорт-переезда)
 - [Переезд на новую машину > Импорт переезда](#переезд-на-новую-машину--импорт-переезда)
 - [Переезд на новую машину > Открыть папку переезда](#переезд-на-новую-машину--открыть-папку-переезда)
-- [Утилиты > Документация PDF > Показать план PDF export](#утилиты--документация-pdf--показать-план-pdf-export)
-- [Утилиты > Документация PDF > Сгенерировать PDF документации](#утилиты--документация-pdf--сгенерировать-pdf-документации)
-- [Утилиты > Документация PDF > Открыть папку docs PDF](#утилиты--документация-pdf--открыть-папку-docs-pdf)
 - [Утилиты > Версия ripgrep](#утилиты--версия-ripgrep)
 - [Утилиты > Открыть папку утилиты](#утилиты--открыть-папку-утилиты)
 - [Обслуживание и очистка > Очистка Codex > Аудит Codex](#обслуживание-и-очистка--очистка-codex--аудит-codex)
 - [Обслуживание и очистка > Очистка Codex > Симуляция очистки Codex](#обслуживание-и-очистка--очистка-codex--симуляция-очистки-codex)
 - [Обслуживание и очистка > Очистка Codex > Сброс сессии Codex](#обслуживание-и-очистка--очистка-codex--сброс-сессии-codex)
-- [Обслуживание и очистка > Очистка Codex > Полная очистка Codex, сохранить CLI state](#обслуживание-и-очистка--очистка-codex--полная-очистка-codex-сохранить-cli-state)
+- [Обслуживание и очистка > Очистка Codex > Полная очистка Codex, сохранить состояние CLI](#обслуживание-и-очистка--очистка-codex--полная-очистка-codex-сохранить-состояние-cli)
 - [Обслуживание и очистка > Очистка Codex > Полная очистка Codex](#обслуживание-и-очистка--очистка-codex--полная-очистка-codex)
 - [Обслуживание и очистка > Очистка кэшей > Замерить кэши](#обслуживание-и-очистка--очистка-кэшей--замерить-кэши)
 - [Обслуживание и очистка > Очистка кэшей > Очистить кэши](#обслуживание-и-очистка--очистка-кэшей--очистить-кэши)
 - [Обслуживание и очистка > Очистка кэшей > Очистить кэши и пакеты NuGet](#обслуживание-и-очистка--очистка-кэшей--очистить-кэши-и-пакеты-nuget)
+- [Обслуживание и очистка > Очистка кэшей > Очистить временные файлы старше суток](#обслуживание-и-очистка--очистка-кэшей--очистить-временные-файлы-старше-суток)
+- [Обслуживание и очистка > Очистка кэшей > Очистить кэш Premiere](#обслуживание-и-очистка--очистка-кэшей--очистить-кэш-premiere)
 - [Обслуживание и очистка > Очистка кэшей > Убрать ИИ-модель Chrome](#обслуживание-и-очистка--очистка-кэшей--убрать-ии-модель-chrome)
 - [Обслуживание и очистка > Очистка кэшей > Вернуть ИИ-модель Chrome](#обслуживание-и-очистка--очистка-кэшей--вернуть-ии-модель-chrome)
 - [Обслуживание и очистка > Очистка Python > Аудит Python](#обслуживание-и-очистка--очистка-python--аудит-python)
 - [Обслуживание и очистка > Очистка Python > Симуляция очистки Python](#обслуживание-и-очистка--очистка-python--симуляция-очистки-python)
 - [Обслуживание и очистка > Очистка Python > Полная очистка Python](#обслуживание-и-очистка--очистка-python--полная-очистка-python)
-- [Обслуживание и очистка > Очистка Python > Очистка Python без winget uninstall](#обслуживание-и-очистка--очистка-python--очистка-python-без-winget-uninstall)
-- [Обслуживание и очистка > Очистить workspace](#обслуживание-и-очистка--очистить-workspace)
+- [Обслуживание и очистка > Очистка Python > Очистка Python без удаления через winget](#обслуживание-и-очистка--очистка-python--очистка-python-без-удаления-через-winget)
+- [Обслуживание и очистка > Очистить рабочую папку](#обслуживание-и-очистка--очистить-рабочую-папку)
 - [Обслуживание > Очистить I/O](#обслуживание--очистить-io)
 
 Полный перечень операций с параметрами. Читается по необходимости: когда нужно
@@ -216,7 +214,7 @@
 ### Среда выполнения и оболочка > Статус PowerShell
 
 - Operation id: `runtime_status`
-- Описание: Показать портативный/системный PowerShell и его версию.
+- Описание: Показать, каким PowerShell идут скрипты - App\AudionPs.exe программы или системным, - и его версию.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
@@ -241,96 +239,89 @@
 - Риск: kind=`dangerous`, risk_level=`user_write`
 - Параметры: нет.
 
-### Среда выполнения и оболочка > Установить портативный PowerShell
-
-- Operation id: `install_portable_powershell`
-- Описание: Скачать и установить pwsh.exe в system_core/powershell.
-- Риск: kind=`safe`, risk_level=`readonly`
-- Параметры: нет.
-
-### Browser Bookmarks Master > Статус
+### Закладки браузеров > Статус
 
 - Operation id: `browser_bookmarks_status`
-- Описание: Проверка без изменений: файлы выбранного профиля, состояние процесса и последний импортируемый backup из Workbench SOURCE. В GUI status можно запускать для одного или нескольких отмеченных браузеров.
+- Описание: Проверка без изменений: файлы выбранного профиля, состояние процесса и последний импортируемый backup из папки ИСТОЧНИК. В GUI status можно запускать для одного или нескольких отмеченных браузеров.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
   - `browser_profile` — **Браузер** (type=`select`, default=`chrome`).
-  - `backup_label` — **Имя backup** (type=`text`, default=`bookmarks_master`).
-  - `backup_version` — **Версия backup** (type=`text`, default=`auto`).
+  - `backup_label` — **Имя копии** (type=`text`, default=`bookmarks_master`).
+  - `backup_version` — **Версия копии** (type=`text`, default=`auto`).
   - `close_browser_process` — **Закрыть браузер перед операцией** (type=`checkbox`, default=true).
-  - `browser_profile_path` — **Папка профиля portable-браузера** (type=`folder`).
-  - `backup_source_path` — **Source backup папка Workbench** (type=`folder`).
-  - `backup_target_path` — **Target backup папка Workbench** (type=`folder`).
+  - `browser_profile_path` — **Папка профиля портативного браузера** (type=`folder`).
+  - `backup_source_path` — **Папка копии в ИСТОЧНИКЕ** (type=`folder`).
+  - `backup_target_path` — **Папка копии в НАЗНАЧЕНИИ** (type=`folder`).
 
-### Browser Bookmarks Master > Очистить локальный Favicons cache
+### Закладки браузеров > Очистить локальный кэш значков
 
 - Operation id: `browser_bookmarks_clear_favicons`
 - Описание: Создаёт rollback backup, закрывает отмеченные браузеры и удаляет Favicons с sidecar-файлами. Chrome создаёт пустую базу, но возвращает иконки лишь по мере посещения страниц.
 - Риск: kind=`dangerous`, risk_level=`user_write`
 - Параметры:
   - `browser_profile` — **Браузер** (type=`select`, default=`chrome`).
-  - `backup_label` — **Имя backup** (type=`text`, default=`bookmarks_master`).
-  - `backup_version` — **Версия backup** (type=`text`, default=`auto`).
+  - `backup_label` — **Имя копии** (type=`text`, default=`bookmarks_master`).
+  - `backup_version` — **Версия копии** (type=`text`, default=`auto`).
   - `close_browser_process` — **Закрыть браузер перед операцией** (type=`checkbox`, default=true).
-  - `browser_profile_path` — **Папка профиля portable-браузера** (type=`folder`).
-  - `backup_source_path` — **Source backup папка Workbench** (type=`folder`).
-  - `backup_target_path` — **Target backup папка Workbench** (type=`folder`).
+  - `browser_profile_path` — **Папка профиля портативного браузера** (type=`folder`).
+  - `backup_source_path` — **Папка копии в ИСТОЧНИКЕ** (type=`folder`).
+  - `backup_target_path` — **Папка копии в НАЗНАЧЕНИИ** (type=`folder`).
 
-### Browser Bookmarks Master > Экспорт эталона в Workbench TARGET
+### Закладки браузеров > Экспорт эталона в папку НАЗНАЧЕНИЕ
 
 - Operation id: `browser_bookmarks_export_master`
-- Описание: Закрывает выбранные браузеры и копирует Bookmarks, Favicons и доступные служебные sidecar-файлы Chromium в версионированные папки backup внутри Workbench TARGET.
+- Описание: Закрывает выбранные браузеры и копирует Bookmarks, Favicons и доступные служебные sidecar-файлы Chromium в версионированные папки backup внутри папки НАЗНАЧЕНИЕ.
 - Риск: kind=`dangerous`, risk_level=`secret_export`
 - Параметры:
   - `browser_profile` — **Браузер** (type=`select`, default=`chrome`).
-  - `backup_label` — **Имя backup** (type=`text`, default=`bookmarks_master`).
-  - `backup_version` — **Версия backup** (type=`text`, default=`auto`).
+  - `backup_label` — **Имя копии** (type=`text`, default=`bookmarks_master`).
+  - `backup_version` — **Версия копии** (type=`text`, default=`auto`).
   - `close_browser_process` — **Закрыть браузер перед операцией** (type=`checkbox`, default=true).
-  - `browser_profile_path` — **Папка профиля portable-браузера** (type=`folder`).
-  - `backup_source_path` — **Source backup папка Workbench** (type=`folder`).
-  - `backup_target_path` — **Target backup папка Workbench** (type=`folder`).
+  - `browser_profile_path` — **Папка профиля портативного браузера** (type=`folder`).
+  - `backup_source_path` — **Папка копии в ИСТОЧНИКЕ** (type=`folder`).
+  - `backup_target_path` — **Папка копии в НАЗНАЧЕНИИ** (type=`folder`).
 
-### Browser Bookmarks Master > Импорт эталона из Workbench SOURCE
+### Закладки браузеров > Импорт эталона из папки ИСТОЧНИК
 
 - Operation id: `browser_bookmarks_import_master`
 - Описание: Импортирует выбранный нативный backup или HTML во все отмеченные системные браузеры; portable-режим работает с одним точным профилем. Для каждого создаётся rollback.
 - Риск: kind=`dangerous`, risk_level=`destructive`
 - Параметры:
   - `browser_profile` — **Браузер** (type=`select`, default=`chrome`).
-  - `backup_label` — **Имя backup** (type=`text`, default=`bookmarks_master`).
-  - `backup_version` — **Версия backup** (type=`text`, default=`auto`).
+  - `backup_label` — **Имя копии** (type=`text`, default=`bookmarks_master`).
+  - `backup_version` — **Версия копии** (type=`text`, default=`auto`).
   - `close_browser_process` — **Закрыть браузер перед операцией** (type=`checkbox`, default=true).
-  - `browser_profile_path` — **Папка профиля portable-браузера** (type=`folder`).
-  - `backup_source_path` — **Source backup папка Workbench** (type=`folder`).
-  - `backup_target_path` — **Target backup папка Workbench** (type=`folder`).
+  - `browser_profile_path` — **Папка профиля портативного браузера** (type=`folder`).
+  - `backup_source_path` — **Папка копии в ИСТОЧНИКЕ** (type=`folder`).
+  - `backup_target_path` — **Папка копии в НАЗНАЧЕНИИ** (type=`folder`).
 
-### Browser Bookmarks Master > Перенести эталон между браузерами
+### Закладки браузеров > Перенести эталон между браузерами
 
 - Operation id: `browser_bookmarks_transfer_master`
 - Описание: Двухэтапный перенос: выгружает выбранный браузер-источник в project-local backup, затем импортирует этот backup в выбранные браузеры-приёмники с pre-import backup и очисткой Favicons.
 - Риск: kind=`dangerous`, risk_level=`destructive`
 - Параметры:
   - `browser_profile` — **Браузер** (type=`select`, default=`chrome`).
-  - `backup_label` — **Имя backup** (type=`text`, default=`bookmarks_master`).
-  - `backup_version` — **Версия backup** (type=`text`, default=`auto`).
+  - `backup_label` — **Имя копии** (type=`text`, default=`bookmarks_master`).
+  - `backup_version` — **Версия копии** (type=`text`, default=`auto`).
   - `close_browser_process` — **Закрыть браузер перед операцией** (type=`checkbox`, default=true).
-  - `browser_profile_path` — **Папка профиля portable-браузера** (type=`folder`).
-  - `backup_source_path` — **Source backup папка Workbench** (type=`folder`).
-  - `backup_target_path` — **Target backup папка Workbench** (type=`folder`).
+  - `browser_profile_path` — **Папка профиля портативного браузера** (type=`folder`).
+  - `backup_source_path` — **Папка копии в ИСТОЧНИКЕ** (type=`folder`).
+  - `backup_target_path` — **Папка копии в НАЗНАЧЕНИИ** (type=`folder`).
 
-### Browser Bookmarks Master > Открыть локальные safety backups
+### Закладки браузеров > Открыть локальные страховочные копии
 
 - Operation id: `browser_bookmarks_open_local_backup`
 - Описание: Открыть project-local Browser Bookmarks backup с pre-import snapshots.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
   - `browser_profile` — **Браузер** (type=`select`, default=`chrome`).
-  - `backup_label` — **Имя backup** (type=`text`, default=`bookmarks_master`).
-  - `backup_version` — **Версия backup** (type=`text`, default=`auto`).
+  - `backup_label` — **Имя копии** (type=`text`, default=`bookmarks_master`).
+  - `backup_version` — **Версия копии** (type=`text`, default=`auto`).
   - `close_browser_process` — **Закрыть браузер перед операцией** (type=`checkbox`, default=true).
-  - `browser_profile_path` — **Папка профиля portable-браузера** (type=`folder`).
-  - `backup_source_path` — **Source backup папка Workbench** (type=`folder`).
-  - `backup_target_path` — **Target backup папка Workbench** (type=`folder`).
+  - `browser_profile_path` — **Папка профиля портативного браузера** (type=`folder`).
+  - `backup_source_path` — **Папка копии в ИСТОЧНИКЕ** (type=`folder`).
+  - `backup_target_path` — **Папка копии в НАЗНАЧЕНИИ** (type=`folder`).
 
 ### Очистка сети > Снимок статуса
 
@@ -339,36 +330,36 @@
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Очистка сети > Полный backup сети
+### Очистка сети > Полная копия сети
 
 - Operation id: `network_backup`
 - Описание: Полный снимок Network Cleaner: сетевые адаптеры, IP/DNS, маршруты, прокси, Брандмауэр Защитника Windows, реестр и Wi-Fi XML без открытых ключей.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Очистка сети > Полный backup + Wi-Fi ключи
+### Очистка сети > Полная копия сети и ключи Wi-Fi
 
 - Operation id: `network_backup_wifi_keys`
 - Описание: Тот же полный снимок Network Cleaner плюс Wi-Fi XML с ключами открытым текстом. Для точечного переноса профилей используйте Wi-Fi профили.
 - Риск: kind=`dangerous`, risk_level=`secret_export`
 - Параметры: нет.
 
-### Очистка сети > Восстановить backup сети > Восстановить последний backup
+### Очистка сети > Восстановить сеть из копии > Восстановить последнюю копию
 
 - Operation id: `network_restore_latest`
 - Описание: Восстановить самый свежий снимок Network Cleaner. Сначала сохраняет текущее состояние, затем импортирует сохранённые данные реестра, сети, Брандмауэра Защитника Windows, hosts и Wi-Fi, где они доступны.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры: нет.
 
-### Очистка сети > Восстановить backup сети > Восстановить выбранный backup
+### Очистка сети > Восстановить сеть из копии > Восстановить выбранную копию
 
 - Operation id: `network_restore_selected`
 - Описание: Восстановить выбранный снимок Network Cleaner из backup-папки. Используй, когда последний backup не тот, к которому нужно вернуться.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
-  - `network_restore_snapshot` — **Backup сети** (type=`select`).
+  - `network_restore_snapshot` — **Копия сети** (type=`select`).
 
-### Очистка сети > Профили ремонта > Легкий ремонт
+### Очистка сети > Профили ремонта > Лёгкий ремонт
 
 - Operation id: `network_light_repair`
 - Описание: Самый мягкий ремонт: flush/register DNS, очистка ARP, обновление NetBIOS и DHCP renew только для подключённых DHCP-интерфейсов.
@@ -378,7 +369,7 @@
 ### Очистка сети > Профили ремонта > Стандартный ремонт
 
 - Operation id: `network_standard_repair`
-- Описание: Нормальная эскалация: сбрасывает Winsock, TCP/IP и WinHTTP proxy, затем обновляет DNS и ARP. После рекомендуется перезагрузка.
+- Описание: Нормальная эскалация: сбрасывает Winsock, TCP/IP и прокси WinHTTP, затем обновляет DNS и ARP. После рекомендуется перезагрузка.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры: нет.
 
@@ -392,7 +383,7 @@
 ### Очистка сети > Прокси > Статус прокси
 
 - Operation id: `network_proxy_status`
-- Описание: Показать параметры прокси текущего пользователя WinINet/System и системный WinHTTP proxy без изменений.
+- Описание: Показать параметры прокси текущего пользователя WinINet/System и системный прокси WinHTTP без изменений.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
@@ -403,14 +394,14 @@
 - Риск: kind=`dangerous`, risk_level=`user_write`
 - Параметры: нет.
 
-### Очистка сети > Прокси > Сбросить WinHTTP proxy
+### Очистка сети > Прокси > Сбросить прокси WinHTTP
 
 - Operation id: `network_proxy_reset_winhttp`
-- Описание: Сбрасывает системный WinHTTP proxy для служб и части системных инструментов. Не правит прокси браузера и текущего пользователя.
+- Описание: Сбрасывает системный прокси WinHTTP для служб и части системных инструментов. Не правит прокси браузера и текущего пользователя.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры: нет.
 
-### Очистка сети > Открыть backup
+### Очистка сети > Открыть копии
 
 - Operation id: `network_open_backup`
 - Описание: Открыть project-local backup Network Cleaner со снимками, restore manifests и run logs.
@@ -620,7 +611,7 @@
 - Риск: kind=`dangerous`, risk_level=`user_write`
 - Параметры:
   - `smb_login` — **Кэш SMB-входов** (type=`smb_login_cache`, default=`{computer: '', user: ''}`).
-  - `smb_open_explorer` — **Открыть Explorer после входа** (type=`checkbox`, default=true).
+  - `smb_open_explorer` — **Открыть Проводник после входа** (type=`checkbox`, default=true).
 
 ### Подключение и адаптеры > Действие адаптера
 
@@ -726,14 +717,14 @@
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### WSL Toolkit > Базовые и установка > Shutdown WSL
+### WSL Toolkit > Базовые и установка > Выключить WSL
 
 - Operation id: `wsl_shutdown`
 - Описание: Остановить все WSL-дистрибутивы.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры: нет.
 
-### WSL Toolkit > Linux-конфигурация > Package update
+### WSL Toolkit > Linux-конфигурация > Обновление пакетов
 
 - Operation id: `wsl_linux_apt_update`
 - Описание: Выполнить apt/dnf update metadata и при желании upgrade внутри выбранного WSL-дистрибутива.
@@ -742,15 +733,15 @@
   - `wsl_name` — **Дистрибутив** (type=`select`).
   - `wsl_name_override` — **Имя вручную** (type=`text`).
   - `linux_username` — **Linux-пользователь** (type=`text`).
-  - `wsl_apt_upgrade` — **Upgrade** (type=`radio`, default=`none`).
-    - Варианты: `none` — Только update; `upgrade` — Upgrade; `full-upgrade` — Full upgrade / sync
-  - `wsl_apt_network_repair` — **Устойчивый apt network mode** (type=`checkbox`, default=true).
-  - `wsl_apt_force_ipv4` — **Force IPv4 для apt** (type=`checkbox`, default=true).
-  - `wsl_apt_mirror` — **Ubuntu apt mirror** (type=`select`, default=`https_archive`).
-    - Варианты: `https_archive` — archive.ubuntu.com через HTTPS; `https_azure` — azure.archive.ubuntu.com через HTTPS; `https_kernel` — mirrors.edge.kernel.org через HTTPS; `https_yandex` — mirror.yandex.ru через HTTPS; `keep` — Оставить текущие sources; `custom` — Custom mirror
-  - `wsl_apt_custom_mirror` — **Custom apt mirror** (type=`text`).
-  - `wsl_apt_retries` — **APT retries** (type=`number`, default=`4`).
-  - `wsl_apt_timeout` — **APT timeout seconds** (type=`number`, default=`20`).
+  - `wsl_apt_upgrade` — **Режим обновления** (type=`radio`, default=`none`).
+    - Варианты: `none` — Только обновить списки; `upgrade` — Обновить пакеты; `full-upgrade` — Полное обновление / синхронизация
+  - `wsl_apt_network_repair` — **Устойчивый сетевой режим apt** (type=`checkbox`, default=true).
+  - `wsl_apt_force_ipv4` — **Только IPv4 для apt** (type=`checkbox`, default=true).
+  - `wsl_apt_mirror` — **Зеркало apt для Ubuntu** (type=`select`, default=`https_archive`).
+    - Варианты: `https_archive` — archive.ubuntu.com через HTTPS; `https_azure` — azure.archive.ubuntu.com через HTTPS; `https_kernel` — mirrors.edge.kernel.org через HTTPS; `https_yandex` — mirror.yandex.ru через HTTPS; `keep` — Оставить текущие источники; `custom` — Своё зеркало
+  - `wsl_apt_custom_mirror` — **Своё зеркало apt** (type=`text`).
+  - `wsl_apt_retries` — **Повторы apt** (type=`number`, default=`4`).
+  - `wsl_apt_timeout` — **Тайм-аут apt, секунд** (type=`number`, default=`20`).
 
 ### WSL Toolkit > Linux-конфигурация > Учётка Linux
 
@@ -764,8 +755,8 @@
   - `linux_password` — **Пароль** (type=`password`).
   - `linux_set_password` — **Задать пароль** (type=`checkbox`, default=true).
   - `linux_add_sudo` — **Добавить в sudo/wheel** (type=`checkbox`, default=true).
-  - `linux_set_default_user` — **Сделать WSL default user** (type=`checkbox`, default=true).
-  - `linux_shell` — **Shell** (type=`text`, default=`/bin/bash`).
+  - `linux_set_default_user` — **Сделать пользователем WSL по умолчанию** (type=`checkbox`, default=true).
+  - `linux_shell` — **Оболочка** (type=`text`, default=`/bin/bash`).
 
 ### WSL Toolkit > Linux-конфигурация > Dev-пакеты
 
@@ -776,27 +767,27 @@
   - `wsl_name` — **Дистрибутив** (type=`select`).
   - `wsl_name_override` — **Имя вручную** (type=`text`).
   - `linux_username` — **Linux-пользователь** (type=`text`).
-  - `wsl_packages_baseline` — **Baseline пакеты** (type=`checkboxes`, default=`[ca-certificates, curl, wget, rsync, zstd, git, git-lfs, jq, tree, ripgrep, fd-find,
+  - `wsl_packages_baseline` — **Базовые пакеты** (type=`checkboxes`, default=`[ca-certificates, curl, wget, rsync, zstd, git, git-lfs, jq, tree, ripgrep, fd-find,
   fzf, unzip, zip, 7zip, htop, btop, ncdu, mc, far2l, micro, neovim, tmux, shellcheck,
   tree-sitter-cli, build-essential, gcc, g++, make, cmake, pkg-config, python3, python3-pip,
   python3-venv, pipx, openssh-client, rclone, net-tools, nmap, traceroute]`).
-  - `wsl_packages_media_cli` — **Media CLI пакеты** (type=`checkboxes`, default=`[]`).
-  - `wsl_packages_sync` — **Sync/network пакеты** (type=`checkboxes`, default=`[]`).
-  - `wsl_packages_lab` — **Lab/container пакеты** (type=`checkboxes`, default=`[]`).
-  - `wsl_apt_update_first` — **Сначала обновить package metadata** (type=`checkbox`, default=true).
-  - `wsl_apt_network_repair` — **Устойчивый apt network mode** (type=`checkbox`, default=true).
-  - `wsl_apt_force_ipv4` — **Force IPv4 для apt** (type=`checkbox`, default=true).
-  - `wsl_apt_mirror` — **Ubuntu apt mirror** (type=`select`, default=`https_archive`).
-    - Варианты: `https_archive` — archive.ubuntu.com через HTTPS; `https_azure` — azure.archive.ubuntu.com через HTTPS; `https_kernel` — mirrors.edge.kernel.org через HTTPS; `https_yandex` — mirror.yandex.ru через HTTPS; `keep` — Оставить текущие sources; `custom` — Custom mirror
-  - `wsl_apt_custom_mirror` — **Custom apt mirror** (type=`text`).
-  - `wsl_apt_retries` — **APT retries** (type=`number`, default=`4`).
-  - `wsl_apt_timeout` — **APT timeout seconds** (type=`number`, default=`20`).
-  - `wsl_install_recommends` — **Ставить recommended packages** (type=`checkbox`, default=false).
+  - `wsl_packages_media_cli` — **Пакеты для медиа** (type=`checkboxes`, default=`[]`).
+  - `wsl_packages_sync` — **Пакеты синхронизации и сети** (type=`checkboxes`, default=`[]`).
+  - `wsl_packages_lab` — **Пакеты контейнеров** (type=`checkboxes`, default=`[]`).
+  - `wsl_apt_update_first` — **Сначала обновить списки пакетов** (type=`checkbox`, default=true).
+  - `wsl_apt_network_repair` — **Устойчивый сетевой режим apt** (type=`checkbox`, default=true).
+  - `wsl_apt_force_ipv4` — **Только IPv4 для apt** (type=`checkbox`, default=true).
+  - `wsl_apt_mirror` — **Зеркало apt для Ubuntu** (type=`select`, default=`https_archive`).
+    - Варианты: `https_archive` — archive.ubuntu.com через HTTPS; `https_azure` — azure.archive.ubuntu.com через HTTPS; `https_kernel` — mirrors.edge.kernel.org через HTTPS; `https_yandex` — mirror.yandex.ru через HTTPS; `keep` — Оставить текущие источники; `custom` — Своё зеркало
+  - `wsl_apt_custom_mirror` — **Своё зеркало apt** (type=`text`).
+  - `wsl_apt_retries` — **Повторы apt** (type=`number`, default=`4`).
+  - `wsl_apt_timeout` — **Тайм-аут apt, секунд** (type=`number`, default=`20`).
+  - `wsl_install_recommends` — **Ставить рекомендуемые пакеты** (type=`checkbox`, default=false).
   - `wsl_selinux_permissive` — **Усыпить SELinux (Fedora)** (type=`checkbox`, default=false).
-  - `wsl_flatpak_flathub` — **Flatpak + Flathub remote** (type=`checkbox`, default=false).
-  - `wsl_optional_packages` — **Опциональные пакеты** (type=`textarea`).
+  - `wsl_flatpak_flathub` — **Flatpak и источник Flathub** (type=`checkbox`, default=false).
+  - `wsl_optional_packages` — **Дополнительные пакеты** (type=`textarea`).
 
-### WSL Toolkit > Linux-конфигурация > Micro baseline
+### WSL Toolkit > Linux-конфигурация > Базовая настройка micro
 
 - Operation id: `wsl_micro_baseline`
 - Описание: Поставить Audion-настройки micro и keybindings для выбранного Linux-пользователя.
@@ -806,7 +797,7 @@
   - `wsl_name_override` — **Имя вручную** (type=`text`).
   - `linux_username` — **Linux-пользователь** (type=`text`).
 
-### WSL Toolkit > Linux-конфигурация > MC skin
+### WSL Toolkit > Linux-конфигурация > Оформление MC
 
 - Operation id: `wsl_mc_skin`
 - Описание: Поставить Audion skin для Midnight Commander и при желании сделать активным.
@@ -815,11 +806,11 @@
   - `wsl_name` — **Дистрибутив** (type=`select`).
   - `wsl_name_override` — **Имя вручную** (type=`text`).
   - `linux_username` — **Linux-пользователь** (type=`text`).
-  - `mc_skin` — **Skin** (type=`radio`, default=`electricblue256`).
+  - `mc_skin` — **Оформление** (type=`radio`, default=`electricblue256`).
     - Варианты: `electricblue256` — Electric Blue; `audion256` — Audion
-  - `mc_apply_skin` — **Сделать активным skin MC** (type=`checkbox`, default=true).
+  - `mc_apply_skin` — **Сделать оформление MC активным** (type=`checkbox`, default=true).
 
-### WSL Toolkit > Linux-конфигурация > Neovim base
+### WSL Toolkit > Linux-конфигурация > Базовая настройка Neovim
 
 - Operation id: `wsl_neovim_base`
 - Описание: Поставить Audion-профиль Neovim без AI-провайдеров.
@@ -832,7 +823,7 @@
   - `nvim_profile` — **Профиль** (type=`radio`, default=`lite`).
     - Варианты: `lite` — Lite; `lazyvim` — LazyVim
 
-### WSL Toolkit > Ubuntu Dev Installer Kit > Открыть папку kit
+### WSL Toolkit > Ubuntu Dev Installer Kit > Открыть папку набора
 
 - Operation id: `ubuntu_dev_open_folder`
 - Описание: Открыть tools/ubuntu_dev_installer.
@@ -846,21 +837,21 @@
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### WSL Toolkit > Ubuntu Dev Installer Kit > Открыть Btrfs guide
+### WSL Toolkit > Ubuntu Dev Installer Kit > Открыть руководство по Btrfs
 
 - Operation id: `ubuntu_dev_open_btrfs_guide`
 - Описание: Открыть Btrfs/Timeshift LiveUSB guide.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### WSL Toolkit > Ubuntu Dev Installer Kit > Открыть installer script
+### WSL Toolkit > Ubuntu Dev Installer Kit > Открыть скрипт установщика
 
 - Operation id: `ubuntu_dev_open_installer_script`
 - Описание: Открыть главный Ubuntu dev installer script из project-local kit.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### WSL Toolkit > Ubuntu Dev Installer Kit > Открыть NVMe prep script
+### WSL Toolkit > Ubuntu Dev Installer Kit > Открыть скрипт подготовки NVMe
 
 - Operation id: `ubuntu_dev_open_nvme_prep_script`
 - Описание: Открыть Btrfs/LUKS Ubuntu LiveUSB prep script из project-local kit.
@@ -883,7 +874,7 @@
   - `wsl_name` — **Дистрибутив** (type=`select`).
   - `wsl_name_override` — **Имя вручную** (type=`text`).
 
-### WSL Toolkit > Действия с дистрибутивом > Backup дистрибутива
+### WSL Toolkit > Действия с дистрибутивом > Копия дистрибутива
 
 - Operation id: `wsl_backup`
 - Описание: Экспортировать дистрибутив в tar или vhd.
@@ -893,7 +884,7 @@
   - `wsl_name_override` — **Имя вручную** (type=`text`).
   - `format` — **Формат** (type=`radio`, default=`tar`).
     - Варианты: `tar` — tar; `vhd` — vhd
-  - `backup_dir` — **Папка backup вручную** (type=`folder`).
+  - `backup_dir` — **Папка копии вручную** (type=`folder`).
 
 ### WSL Toolkit > Действия с дистрибутивом > Клонировать дистрибутив
 
@@ -905,7 +896,7 @@
   - `wsl_name_override` — **Имя вручную** (type=`text`).
   - `new_name` — **Новое имя** (type=`text`).
   - `location` — **Папка установки** (type=`folder`).
-  - `backup_dir` — **Временная папка backup** (type=`folder`).
+  - `backup_dir` — **Временная папка копии** (type=`folder`).
 
 ### WSL Toolkit > Действия с дистрибутивом > Перенести дистрибутив
 
@@ -916,7 +907,7 @@
   - `wsl_name` — **Дистрибутив** (type=`select`).
   - `wsl_name_override` — **Имя вручную** (type=`text`).
   - `location` — **Новая папка установки** (type=`folder`).
-  - `backup_dir` — **Временная папка backup** (type=`folder`).
+  - `backup_dir` — **Временная папка копии** (type=`folder`).
 
 ### WSL Toolkit > Действия с дистрибутивом > Удалить дистрибутив
 
@@ -927,7 +918,7 @@
   - `wsl_name` — **Дистрибутив** (type=`select`).
   - `wsl_name_override` — **Имя вручную** (type=`text`).
 
-### WSL Toolkit > Import и restore > Import VHDX in-place
+### WSL Toolkit > Импорт и восстановление > Подключить VHDX на месте
 
 - Operation id: `wsl_import_in_place`
 - Описание: Зарегистрировать существующий ext4.vhdx как WSL-дистрибутив.
@@ -937,7 +928,7 @@
   - `vhdx_path` — **VHDX файл** (type=`select`).
   - `vhdx_path_manual` — **VHDX файл вручную** (type=`file`).
 
-### WSL Toolkit > Import и restore > Restore из backup
+### WSL Toolkit > Импорт и восстановление > Восстановить из копии
 
 - Operation id: `wsl_restore_from_backup`
 - Описание: Импортировать tar/vhd/vhdx backup как WSL-дистрибутив.
@@ -945,8 +936,8 @@
 - Параметры:
   - `wsl_name_override` — **Имя дистрибутива** (type=`text`).
   - `location` — **Папка установки** (type=`folder`).
-  - `backup_file` — **Backup файл** (type=`select`).
-  - `backup_file_manual` — **Backup файл вручную** (type=`file`).
+  - `backup_file` — **Файл копии** (type=`select`).
+  - `backup_file_manual` — **Файл копии вручную** (type=`file`).
 
 ### WSL Toolkit > Регистрация VHDX пачкой > Зарегистрировать все VHDX
 
@@ -956,7 +947,7 @@
 - Параметры:
   - `register_root` — **Корень VHDX** (type=`folder`).
   - `filter` — **Фильтр файлов** (type=`text`, default=`ext4.vhdx`).
-  - `dry_run` — **Dry-run** (type=`checkbox`, default=true).
+  - `dry_run` — **Пробный запуск** (type=`checkbox`, default=true).
 
 ### Виртуализация > Статус виртуализации
 
@@ -1021,55 +1012,55 @@
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры: нет.
 
-### Hosts и Bitrix > Найти текущий endpoint
+### Hosts и Bitrix > Найти текущую точку
 
 - Operation id: `bitrix_detect_endpoint`
 - Описание: DNS-only lookup игнорирует старые hosts-записи, принимает только локальные/частные IP-адреса, сканирует порты-кандидаты и подставляет IP/ports в поля без изменения hosts.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
   - `hosts_presets` — **Пины** (type=`profile_buttons`).
-  - `host_name` — **Host name** (type=`text`, default=`portal.itpgrad.ru`).
-  - `ip_address` — **IP address** (type=`text`, default=`192.168.0.130`).
-  - `bitrix_ports` — **Ручные TCP ports** (type=`text`, default=`443`).
+  - `host_name` — **Имя узла** (type=`text`).
+  - `ip_address` — **IP-адрес** (type=`text`).
+  - `bitrix_ports` — **TCP-порты вручную** (type=`text`, default=`443`).
   - `bitrix_auto_scan_ports` — **Авто-скан открытых портов** (type=`checkbox`, default=true).
   - `bitrix_port_scan_candidates` — **Кандидаты портов** (type=`text`, default=`80,443,8080,8443,8890,8891,8892`).
 
-### Hosts и Bitrix > Статус / DNS / ports
+### Hosts и Bitrix > Состояние / DNS / порты
 
 - Operation id: `bitrix_status`
 - Описание: Показать hosts override, фактический resolved IP, DNS-ответ, авто-скан портов и TCP-проверку.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
   - `hosts_presets` — **Пины** (type=`profile_buttons`).
-  - `host_name` — **Host name** (type=`text`, default=`portal.itpgrad.ru`).
-  - `ip_address` — **IP address** (type=`text`, default=`192.168.0.130`).
-  - `bitrix_ports` — **Ручные TCP ports** (type=`text`, default=`443`).
+  - `host_name` — **Имя узла** (type=`text`).
+  - `ip_address` — **IP-адрес** (type=`text`).
+  - `bitrix_ports` — **TCP-порты вручную** (type=`text`, default=`443`).
   - `bitrix_auto_scan_ports` — **Авто-скан открытых портов** (type=`checkbox`, default=true).
   - `bitrix_port_scan_candidates` — **Кандидаты портов** (type=`text`, default=`80,443,8080,8443,8890,8891,8892`).
 
-### Hosts и Bitrix > Включить override
+### Hosts и Bitrix > Включить подмену
 
 - Operation id: `bitrix_enable`
 - Описание: Применить hosts override для host и IP; найденные/custom порты сохраняются в управляемом комментарии hosts.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
   - `hosts_presets` — **Пины** (type=`profile_buttons`).
-  - `host_name` — **Host name** (type=`text`, default=`portal.itpgrad.ru`).
-  - `ip_address` — **IP address** (type=`text`, default=`192.168.0.130`).
-  - `bitrix_ports` — **Ручные TCP ports** (type=`text`, default=`443`).
+  - `host_name` — **Имя узла** (type=`text`).
+  - `ip_address` — **IP-адрес** (type=`text`).
+  - `bitrix_ports` — **TCP-порты вручную** (type=`text`, default=`443`).
   - `bitrix_auto_scan_ports` — **Авто-скан открытых портов** (type=`checkbox`, default=true).
   - `bitrix_port_scan_candidates` — **Кандидаты портов** (type=`text`, default=`80,443,8080,8443,8890,8891,8892`).
 
-### Hosts и Bitrix > Выключить override
+### Hosts и Bitrix > Выключить подмену
 
 - Operation id: `bitrix_disable`
 - Описание: Побитовый depatch: восстановить точный pre-patch backup hosts, указанный в managed hosts line.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
   - `hosts_presets` — **Пины** (type=`profile_buttons`).
-  - `host_name` — **Host name** (type=`text`, default=`portal.itpgrad.ru`).
-  - `ip_address` — **IP address** (type=`text`, default=`192.168.0.130`).
-  - `bitrix_ports` — **Ручные TCP ports** (type=`text`, default=`443`).
+  - `host_name` — **Имя узла** (type=`text`).
+  - `ip_address` — **IP-адрес** (type=`text`).
+  - `bitrix_ports` — **TCP-порты вручную** (type=`text`, default=`443`).
   - `bitrix_auto_scan_ports` — **Авто-скан открытых портов** (type=`checkbox`, default=true).
   - `bitrix_port_scan_candidates` — **Кандидаты портов** (type=`text`, default=`80,443,8080,8443,8890,8891,8892`).
 
@@ -1080,9 +1071,9 @@
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
   - `hosts_presets` — **Пины** (type=`profile_buttons`).
-  - `host_name` — **Host name** (type=`text`, default=`portal.itpgrad.ru`).
-  - `ip_address` — **IP address** (type=`text`, default=`192.168.0.130`).
-  - `bitrix_ports` — **Ручные TCP ports** (type=`text`, default=`443`).
+  - `host_name` — **Имя узла** (type=`text`).
+  - `ip_address` — **IP-адрес** (type=`text`).
+  - `bitrix_ports` — **TCP-порты вручную** (type=`text`, default=`443`).
   - `bitrix_auto_scan_ports` — **Авто-скан открытых портов** (type=`checkbox`, default=true).
   - `bitrix_port_scan_candidates` — **Кандидаты портов** (type=`text`, default=`80,443,8080,8443,8890,8891,8892`).
 
@@ -1093,7 +1084,7 @@
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
   - `policy_action` — **Что сделать** (type=`radio`, default=`status`).
-    - Варианты: `status` — Проверить — чем сейчас открываются файлы; `snapshot` — Сохранить снимок текущего состояния; `export` — Экспортировать текущие ассоциации в эталон; `import` — Взять эталон из файла; `apply` — Закрепить сохранённые ассоциации; `remove` — Снять закрепление; `cleanup` — Убрать старые резервные копии; `open_profiles` — Открыть папку эталона; `open_policy` — Открыть папку закреплённого набора; `open_backups` — Открыть папку резервных копий
+    - Варианты: `apply` — Закрепить сохранённые ассоциации; `remove` — Снять закрепление; `status` — Проверить — чем сейчас открываются файлы; `snapshot` — Сохранить снимок текущего состояния; `export` — Экспортировать текущие ассоциации в эталон; `import` — Взять эталон из файла; `open_profiles` — Открыть папку эталона; `open_policy` — Открыть папку закреплённого набора; `open_backups` — Открыть папку резервных копий; `cleanup` — Убрать старые резервные копии
   - `profile_xml` — **Файл эталона** (type=`file`, default=`profiles\default_apps\AppAssociations.xml`).
   - `import_backup_xml` — **Сохранённый снимок** (type=`select`, default=``).
   - `import_profile_xml` — **Файл с другого компьютера** (type=`file`, default=``).
@@ -1120,9 +1111,9 @@
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
   - `apps_action` — **Что сделать** (type=`radio`, default=`status`).
-    - Варианты: `status` — Проверить — что стоит в системе; `remove` — Удалить отмеченные приложения; `keep_removed` — Удалить и держать удалёнными; `restore` — Вернуть приложения; `provision` — Починить для новых пользователей; `allow_back` — Перестать держать удалёнными; `rearm_check` — Проверить удержание сейчас; `open_logs` — Открыть папку удержания
-  - `apps` — **Приложения** (type=`checkboxes`, default=`[ZuneMusic, ZuneVideo]`).
-    - Варианты: `ZuneMusic` — Медиаплеер (Zune); `ZuneVideo` — Кино и ТВ (Zune); `Photos` — Фотографии; `Clipchamp` — Clipchamp; `SoundRecorder` — Запись голоса; `Camera` — Камера (нужна сканерам и QR); `Paint` — Paint (правка картинок); `ScreenSketch` — Ножницы (Win+Shift+S); `GamingApp` — Xbox; `XboxGamingOverlay` — Игровая панель Xbox; `XboxSpeechToTextOverlay` — Речевая панель Xbox; `XboxIdentityProvider` — Удостоверения Xbox (вход в играх); `SolitaireCollection` — Коллекция пасьянсов; `YourPhone` — Связь с телефоном; `People` — Люди; `Teams` — Microsoft Teams; `OutlookForWindows` — Outlook для Windows; `BingNews` — Новости; `BingWeather` — Погода; `Getstarted` — Советы; `FeedbackHub` — Центр отзывов; `WindowsMaps` — Карты; `Copilot` — Copilot; `StickyNotes` — Записки; `Todos` — To Do; `OneNote` — OneNote для Windows; `Whiteboard` — Доска; `PowerAutomateDesktop` — Power Automate; `QuickAssist` — Быстрая поддержка (удалённая помощь); `DevHome` — Dev Home; `Family` — Семья Microsoft
+    - Варианты: `remove` — Удалить отмеченные приложения; `keep_removed` — Удалить и держать удалёнными; `rearm_check` — Проверить удержание сейчас; `restore` — Вернуть приложения; `provision` — Починить для новых пользователей; `allow_back` — Перестать держать удалёнными; `status` — Проверить — что стоит в системе; `open_logs` — Открыть папку удержания
+  - `apps` — **Приложения** (type=`checkboxes`, default=`[Photos, ZuneMusic, ZuneVideo, MediaPlayerLegacy, Paint, ScreenSketch]`).
+    - Варианты: `Photos` — Фотографии — открывают картинки и видео; `ZuneMusic` — Медиаплеер — открывает музыку и видео; `ZuneVideo` — Кино и ТВ — открывает видео; `MediaPlayerLegacy` — Windows Media Player Legacy — старый плеер; `Paint` — Paint — забирает картинки, уйдёт и редактор; `ScreenSketch` — Ножницы — забирают картинки, уйдёт Win+Shift+S; `OutlookForWindows` — Outlook для Windows — почта, mailto, календарь; `Teams` — Microsoft Teams — звонки: tel, sip; `YourPhone` — Связь с телефоном — звонки и SMS; `Camera` — Камера — .jpg; нужна сканерам и QR; `Clipchamp` — Clipchamp — видеоредактор; `OneNote` — OneNote для Windows — свои заметки; `SoundRecorder` — Запись голоса; `GamingApp` — Xbox; `XboxGamingOverlay` — Игровая панель Xbox; `XboxSpeechToTextOverlay` — Речевая панель Xbox; `XboxIdentityProvider` — Удостоверения Xbox (вход в играх); `SolitaireCollection` — Коллекция пасьянсов; `People` — Люди; `BingNews` — Новости; `BingWeather` — Погода; `Getstarted` — Советы; `FeedbackHub` — Центр отзывов; `WindowsMaps` — Карты; `Copilot` — Copilot; `StickyNotes` — Записки; `Todos` — To Do; `Whiteboard` — Доска; `PowerAutomateDesktop` — Power Automate; `QuickAssist` — Быстрая поддержка (удалённая помощь); `DevHome` — Dev Home; `Family` — Семья Microsoft
   - `dry_run` — **Пробный запуск** (type=`checkbox`, default=true).
 
 ### Приложения по умолчанию > Edge
@@ -1133,7 +1124,7 @@
 - Параметры:
   - `edge_owned_now` — **Что сейчас закреплено за Edge** (type=`info_badges`).
   - `edge_action` — **Что сделать** (type=`radio`, default=`status`).
-    - Варианты: `status` — Проверить — что сейчас держит Edge; `apply` — Запретить Edge перетягивать ассоциации; `revert` — Вернуть Edge как было; `webview2` — Починить WebView2
+    - Варианты: `apply` — Запретить Edge перетягивать ассоциации; `revert` — Вернуть Edge как было; `webview2` — Починить WebView2; `status` — Проверить — что сейчас держит Edge
   - `edge_level` — **Насколько тихо** (type=`radio`, default=`calm`).
     - Варианты: `calm` — Спокойно — без навязывания и фона; `quiet` — Тихо — плюс боковые панели и лишнее
   - `dry_run` — **Пробный запуск** (type=`checkbox`, default=true).
@@ -1145,7 +1136,7 @@
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
   - `guard_action` — **Что сделать** (type=`radio`, default=`status`).
-    - Варианты: `status` — Проверить; `enable` — Включить; `disable` — Выключить; `run_check` — Проверить изменения прямо сейчас
+    - Варианты: `enable` — Включить; `disable` — Выключить; `status` — Проверить; `run_check` — Проверить изменения прямо сейчас
   - `guard_targets` — **Что включить** (type=`checkboxes`, default=`[Drift]`).
     - Варианты: `Drift` — Отслеживание смены ассоциаций; `Defender` — Исключения Defender для папок Audion
 
@@ -1184,7 +1175,7 @@
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > Driver/Firmware Audit
+### Железо > Аудит драйверов и прошивок
 
 - Operation id: `driver_firmware_audit`
 - Описание: Диагностический отчёт без изменений: проблемные устройства из Диспетчера устройств, BIOS/EC, firmware/UEFI resources и ключевые подписанные драйверы.
@@ -1192,267 +1183,267 @@
 - Параметры:
   - `output_dir` — **Папка отчёта** (type=`folder`, default=`logs`).
   - `json` — **Писать JSON** (type=`checkbox`, default=true).
-  - `csv` — **Писать CSV key drivers** (type=`checkbox`, default=true).
-  - `open_report` — **Открыть отчёт в Notepad** (type=`checkbox`, default=false).
+  - `csv` — **Писать CSV ключевых драйверов** (type=`checkbox`, default=true).
+  - `open_report` — **Открыть отчёт в Блокноте** (type=`checkbox`, default=false).
 
-### Hardware > Материалы Driver/Firmware Audit > Открыть папку аддона
+### Железо > Материалы Driver/Firmware Audit > Открыть папку аддона
 
 - Operation id: `driver_firmware_audit_open_folder`
 - Описание: Открыть tools/driver_firmware_audit.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > Материалы Driver/Firmware Audit > Открыть README
+### Железо > Материалы Driver/Firmware Audit > Открыть README
 
 - Operation id: `driver_firmware_audit_open_readme`
 - Описание: Открыть README аддона из project-local copy.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > Driver Update Blocker > Windows Update driver policy > Проверить защиту драйверов
+### Железо > Запрет обновлений драйверов > Политика драйверов Windows Update > Проверить защиту драйверов
 
 - Operation id: `driver_update_status`
 - Описание: Статус без изменений: Windows Update driver policy, параметры поиска драйверов, device metadata policy, DeviceInstall restrictions и текущие NVIDIA PCI устройства.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > Driver Update Blocker > Windows Update driver policy > Блокировать драйверы Windows Update
+### Железо > Запрет обновлений драйверов > Политика драйверов Windows Update > Блокировать драйверы Windows Update
 
 - Operation id: `driver_update_block_all`
 - Описание: Делает backup policy-ключей, ставит ExcludeWUDriversInQualityUpdate=1, выключает поиск драйверов через мастер установки оборудования и загрузку метаданных устройств, затем запускает gpupdate. Рекомендуется перезагрузка.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры: нет.
 
-### Hardware > Driver Update Blocker > Windows Update driver policy > Разблокировать драйверы Windows Update
+### Железо > Запрет обновлений драйверов > Политика драйверов Windows Update > Разблокировать драйверы Windows Update
 
 - Operation id: `driver_update_unblock_all`
 - Описание: Делает backup policy-ключей, удаляет значения блокировки драйверов Центра обновления Windows, возвращает обычное поведение driver search, затем запускает gpupdate. Рекомендуется перезагрузка.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры: нет.
 
-### Hardware > Driver Update Blocker > Windows Update driver policy > Открыть policy backups
+### Железо > Запрет обновлений драйверов > Политика драйверов Windows Update > Открыть копии политики
 
 - Operation id: `driver_update_open_policy_backups`
 - Описание: Открыть backups policy-ключей реестра, которые создаются перед block/unblock операциями.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > Driver Update Blocker > HWID-защита драйвера устройства > Проверить текущий lock
+### Железо > Запрет обновлений драйверов > HWID-защита драйвера устройства > Проверить текущий замок
 
 - Operation id: `hwid_driver_status`
 - Описание: Проверка без изменений: показывает, залочен ли этот HWID и какой драйвер сейчас best-ranked/installed.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
-  - `hwid_builtin_cache_pins` — **Preset** (type=`profile_buttons`).
+  - `hwid_builtin_cache_pins` — **Готовый набор** (type=`profile_buttons`).
   - `hwid_guard_identity_badges` — **Идентификация** (type=`info_badges`).
   - `target_hardware_ids` — **HWID для защиты** (type=`textarea`, default=`PCI\VEN_8086&DEV_46A8&SUBSYS_22E717AA
 `).
-  - `target_device_instance_id` — **Device Instance ID** (type=`text`).
-  - `hwid_retroactive` — **Retroactive block** (type=`checkbox`, default=false).
-  - `hwid_keep_global_wu_block` — **Оставить global WU driver block** (type=`checkbox`, default=false).
+  - `target_device_instance_id` — **ID экземпляра устройства** (type=`text`).
+  - `hwid_retroactive` — **Запрет и для уже установленных** (type=`checkbox`, default=false).
+  - `hwid_keep_global_wu_block` — **Оставить общий запрет драйверов WU** (type=`checkbox`, default=false).
 
-### Hardware > Driver Update Blocker > HWID-защита драйвера устройства > 1. Разблокировать перед обновлением
+### Железо > Запрет обновлений драйверов > HWID-защита драйвера устройства > 1. Разблокировать перед обновлением
 
 - Operation id: `hwid_driver_unblock`
 - Описание: Нажать перед установкой нужного manual/generic драйвера. Удаляет matching HWID locks, сохраняя чужие policy entries.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
-  - `hwid_builtin_cache_pins` — **Preset** (type=`profile_buttons`).
+  - `hwid_builtin_cache_pins` — **Готовый набор** (type=`profile_buttons`).
   - `hwid_guard_identity_badges` — **Идентификация** (type=`info_badges`).
   - `target_hardware_ids` — **HWID для защиты** (type=`textarea`, default=`PCI\VEN_8086&DEV_46A8&SUBSYS_22E717AA
 `).
-  - `target_device_instance_id` — **Device Instance ID** (type=`text`).
-  - `hwid_retroactive` — **Retroactive block** (type=`checkbox`, default=false).
-  - `hwid_keep_global_wu_block` — **Оставить global WU driver block** (type=`checkbox`, default=false).
+  - `target_device_instance_id` — **ID экземпляра устройства** (type=`text`).
+  - `hwid_retroactive` — **Запрет и для уже установленных** (type=`checkbox`, default=false).
+  - `hwid_keep_global_wu_block` — **Оставить общий запрет драйверов WU** (type=`checkbox`, default=false).
 
-### Hardware > Driver Update Blocker > HWID-защита драйвера устройства > 2. Заблокировать после установки
+### Железо > Запрет обновлений драйверов > HWID-защита драйвера устройства > 2. Заблокировать после установки
 
 - Operation id: `hwid_driver_block`
 - Описание: Нажать после установки и проверки нужного драйвера. Добавляет этот HWID в DenyDeviceIDs, чтобы Windows Driver Store/WU не подменил его молча.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
-  - `hwid_builtin_cache_pins` — **Preset** (type=`profile_buttons`).
+  - `hwid_builtin_cache_pins` — **Готовый набор** (type=`profile_buttons`).
   - `hwid_guard_identity_badges` — **Идентификация** (type=`info_badges`).
   - `target_hardware_ids` — **HWID для защиты** (type=`textarea`, default=`PCI\VEN_8086&DEV_46A8&SUBSYS_22E717AA
 `).
-  - `target_device_instance_id` — **Device Instance ID** (type=`text`).
-  - `hwid_retroactive` — **Retroactive block** (type=`checkbox`, default=false).
-  - `hwid_keep_global_wu_block` — **Оставить global WU driver block** (type=`checkbox`, default=false).
+  - `target_device_instance_id` — **ID экземпляра устройства** (type=`text`).
+  - `hwid_retroactive` — **Запрет и для уже установленных** (type=`checkbox`, default=false).
+  - `hwid_keep_global_wu_block` — **Оставить общий запрет драйверов WU** (type=`checkbox`, default=false).
 
-### Hardware > Driver Update Blocker > Аварийный rank repair по HWID > Проверить rank target
+### Железо > Запрет обновлений драйверов > Аварийный ремонт ранга по HWID > Проверить цель ранга
 
 - Operation id: `hwid_driver_rank_status`
 - Описание: Read-only проверка target: определяет устройство по HWID, показывает current signed driver data и pnputil driver/rank report.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
-  - `hwid_builtin_cache_pins` — **Preset** (type=`profile_buttons`).
-  - `hwid_repair_identity_badges` — **Repair markers** (type=`info_badges`).
+  - `hwid_builtin_cache_pins` — **Готовый набор** (type=`profile_buttons`).
+  - `hwid_repair_identity_badges` — **Метки ремонта** (type=`info_badges`).
   - `target_hardware_ids` — **HWID для ремонта** (type=`textarea`, default=`PCI\VEN_8086&DEV_46A8&SUBSYS_22E717AA
 `).
-  - `target_device_instance_id` — **Device Instance ID** (type=`text`).
-  - `bad_driver_version` — **Bad driver version** (type=`text`, default=`32.0.101.7026`).
-  - `target_driver_version` — **Target driver version** (type=`text`, default=`32.0.101.7085`).
-  - `target_inf_name_pattern` — **Target INF pattern** (type=`text`, default=`*.inf`).
-  - `target_inf_path` — **Target INF path** (type=`text`).
-  - `driver_rank_class` — **Driver class** (type=`text`, default=`Display`).
-  - `skip_current_version_check` — **Пропустить current version check** (type=`checkbox`, default=false).
-  - `allow_version_only_target_inf_fallback` — **Разрешить INF fallback только по версии** (type=`checkbox`, default=false).
+  - `target_device_instance_id` — **ID экземпляра устройства** (type=`text`).
+  - `bad_driver_version` — **Плохая версия драйвера** (type=`text`, default=`32.0.101.7026`).
+  - `target_driver_version` — **Нужная версия драйвера** (type=`text`, default=`32.0.101.7085`).
+  - `target_inf_name_pattern` — **Шаблон INF цели** (type=`text`, default=`*.inf`).
+  - `target_inf_path` — **Путь к INF цели** (type=`text`).
+  - `driver_rank_class` — **Класс драйвера** (type=`text`, default=`Display`).
+  - `skip_current_version_check` — **Не проверять текущую версию** (type=`checkbox`, default=false).
+  - `allow_version_only_target_inf_fallback` — **Разрешить запасной INF по одной версии** (type=`checkbox`, default=false).
   - `no_policy_block_after_repair` — **Не блокировать HWID после ремонта** (type=`checkbox`, default=false).
-  - `hwid_keep_global_wu_block` — **Оставить global WU driver block** (type=`checkbox`, default=false).
+  - `hwid_keep_global_wu_block` — **Оставить общий запрет драйверов WU** (type=`checkbox`, default=false).
 
-### Hardware > Driver Update Blocker > Аварийный rank repair по HWID > Починить driver rank по HWID
+### Железо > Запрет обновлений драйверов > Аварийный ремонт ранга по HWID > Починить ранг драйвера по HWID
 
 - Operation id: `hwid_driver_rank_repair`
 - Описание: Создаёт REG/JSON preflight backup, экспортирует старый package, удаляет bad current INF package, ставит target INF, делает rescan/restart устройства, затем применяет targeted HWID block. Используй только после проверки target.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
-  - `hwid_builtin_cache_pins` — **Preset** (type=`profile_buttons`).
-  - `hwid_repair_identity_badges` — **Repair markers** (type=`info_badges`).
+  - `hwid_builtin_cache_pins` — **Готовый набор** (type=`profile_buttons`).
+  - `hwid_repair_identity_badges` — **Метки ремонта** (type=`info_badges`).
   - `target_hardware_ids` — **HWID для ремонта** (type=`textarea`, default=`PCI\VEN_8086&DEV_46A8&SUBSYS_22E717AA
 `).
-  - `target_device_instance_id` — **Device Instance ID** (type=`text`).
-  - `bad_driver_version` — **Bad driver version** (type=`text`, default=`32.0.101.7026`).
-  - `target_driver_version` — **Target driver version** (type=`text`, default=`32.0.101.7085`).
-  - `target_inf_name_pattern` — **Target INF pattern** (type=`text`, default=`*.inf`).
-  - `target_inf_path` — **Target INF path** (type=`text`).
-  - `driver_rank_class` — **Driver class** (type=`text`, default=`Display`).
-  - `skip_current_version_check` — **Пропустить current version check** (type=`checkbox`, default=false).
-  - `allow_version_only_target_inf_fallback` — **Разрешить INF fallback только по версии** (type=`checkbox`, default=false).
+  - `target_device_instance_id` — **ID экземпляра устройства** (type=`text`).
+  - `bad_driver_version` — **Плохая версия драйвера** (type=`text`, default=`32.0.101.7026`).
+  - `target_driver_version` — **Нужная версия драйвера** (type=`text`, default=`32.0.101.7085`).
+  - `target_inf_name_pattern` — **Шаблон INF цели** (type=`text`, default=`*.inf`).
+  - `target_inf_path` — **Путь к INF цели** (type=`text`).
+  - `driver_rank_class` — **Класс драйвера** (type=`text`, default=`Display`).
+  - `skip_current_version_check` — **Не проверять текущую версию** (type=`checkbox`, default=false).
+  - `allow_version_only_target_inf_fallback` — **Разрешить запасной INF по одной версии** (type=`checkbox`, default=false).
   - `no_policy_block_after_repair` — **Не блокировать HWID после ремонта** (type=`checkbox`, default=false).
-  - `hwid_keep_global_wu_block` — **Оставить global WU driver block** (type=`checkbox`, default=false).
+  - `hwid_keep_global_wu_block` — **Оставить общий запрет драйверов WU** (type=`checkbox`, default=false).
 
-### Hardware > Driver Update Blocker > NVIDIA driver install restrictions > Блокировать NVIDIA driver installs
+### Железо > Запрет обновлений драйверов > Запрет установки драйверов NVIDIA > Запретить установку драйверов NVIDIA
 
 - Operation id: `nvidia_driver_block`
 - Описание: Находит текущие NVIDIA PCI устройства, пишет их Hardware IDs в Device Installation Restrictions и запускает gpupdate. Полезно после установки заведомо хорошего manual/NVCleanstall драйвера.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
-  - `include_compatible_ids` — **Добавить compatible IDs** (type=`checkbox`, default=false).
-  - `nvidia_retroactive` — **Retroactive block** (type=`checkbox`, default=false).
+  - `include_compatible_ids` — **Добавить совместимые ID** (type=`checkbox`, default=false).
+  - `nvidia_retroactive` — **Запрет и для уже установленных** (type=`checkbox`, default=false).
 
-### Hardware > Driver Update Blocker > NVIDIA driver install restrictions > Разблокировать NVIDIA driver installs
+### Железо > Запрет обновлений драйверов > Запрет установки драйверов NVIDIA > Разрешить установку драйверов NVIDIA
 
 - Operation id: `nvidia_driver_unblock`
 - Описание: Удаляет NVIDIA PCI IDs из Device Installation Restrictions, сохраняя не-NVIDIA entries в тех же policy lists.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
-  - `include_compatible_ids` — **Добавить compatible IDs** (type=`checkbox`, default=false).
-  - `nvidia_retroactive` — **Retroactive block** (type=`checkbox`, default=false).
+  - `include_compatible_ids` — **Добавить совместимые ID** (type=`checkbox`, default=false).
+  - `nvidia_retroactive` — **Запрет и для уже установленных** (type=`checkbox`, default=false).
 
-### Hardware > Driver Update Blocker > Driver Store backups > Сохранить Driver Store manifest
+### Железо > Запрет обновлений драйверов > Копии Driver Store > Сохранить опись Driver Store
 
 - Operation id: `driver_store_manifest`
 - Описание: Сохраняет отчёты pnputil, systeminfo и Get-WindowsDriver без экспорта driver packages.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
-  - `driver_backup_select` — **Driver backup** (type=`select`).
-  - `driver_backup_path` — **Backup folder вручную** (type=`folder`).
+  - `driver_backup_select` — **Копия драйверов** (type=`select`).
+  - `driver_backup_path` — **Папка копии вручную** (type=`folder`).
 
-### Hardware > Driver Update Blocker > Driver Store backups > Экспортировать установленные драйверы
+### Железо > Запрет обновлений драйверов > Копии Driver Store > Экспортировать установленные драйверы
 
 - Operation id: `driver_store_export`
 - Описание: Экспортирует текущие third-party drivers из Driver Store в timestamp backup через Export-WindowsDriver или DISM fallback.
 - Риск: kind=`safe`, risk_level=`project_write`
 - Параметры:
-  - `driver_backup_select` — **Driver backup** (type=`select`).
-  - `driver_backup_path` — **Backup folder вручную** (type=`folder`).
+  - `driver_backup_select` — **Копия драйверов** (type=`select`).
+  - `driver_backup_path` — **Папка копии вручную** (type=`folder`).
 
-### Hardware > Driver Update Blocker > Driver Store backups > Восстановить экспортированные драйверы
+### Железо > Запрет обновлений драйверов > Копии Driver Store > Восстановить экспортированные драйверы
 
 - Operation id: `driver_store_restore`
 - Описание: Запускает pnputil /add-driver по выбранному backup без интерактивных prompts. Используй backups с той же машины или очень близкого железа.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
-  - `driver_backup_select` — **Driver backup** (type=`select`).
-  - `driver_backup_path` — **Backup folder вручную** (type=`folder`).
+  - `driver_backup_select` — **Копия драйверов** (type=`select`).
+  - `driver_backup_path` — **Папка копии вручную** (type=`folder`).
 
-### Hardware > Driver Update Blocker > Driver Store backups > Открыть driver backups
+### Железо > Запрет обновлений драйверов > Копии Driver Store > Открыть копии драйверов
 
 - Operation id: `driver_store_open_backups`
 - Описание: Открыть папку экспортированных driver backups.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
-  - `driver_backup_select` — **Driver backup** (type=`select`).
-  - `driver_backup_path` — **Backup folder вручную** (type=`folder`).
+  - `driver_backup_select` — **Копия драйверов** (type=`select`).
+  - `driver_backup_path` — **Папка копии вручную** (type=`folder`).
 
-### Hardware > Driver Update Blocker > Открыть папку Driver Update Blocker
+### Железо > Запрет обновлений драйверов > Открыть папку запрета обновлений драйверов
 
 - Operation id: `driver_update_open_tool`
 - Описание: Открыть проектную PowerShell-папку модуля, которую используют GUI и project launchers.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > NVIDIA HDMI/DP Audio > Статус NVIDIA audio
+### Железо > NVIDIA HDMI/DP Audio > Статус звука NVIDIA
 
 - Operation id: `nvidia_audio_status`
 - Описание: Статус без изменений: найденные NVIDIA HDMI/DP audio devices, выбранные HDAUDIO Hardware IDs и текущие DeviceInstall policy entries.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > NVIDIA HDMI/DP Audio > Экспортировать NVIDIA audio IDs
+### Железо > NVIDIA HDMI/DP Audio > Экспортировать ID звука NVIDIA
 
 - Operation id: `nvidia_audio_export_ids`
 - Описание: Пишет device details и candidate IDs для policy-block в output-папку оригинальной утилиты.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > NVIDIA HDMI/DP Audio > Отключить NVIDIA HDMI/DP audio
+### Железо > NVIDIA HDMI/DP Audio > Отключить звук NVIDIA HDMI/DP
 
 - Operation id: `nvidia_audio_disable`
 - Описание: Отключает текущие matching NVIDIA HDMI/DP audio devices через Disable-PnpDevice. Обычные audio interfaces не трогает.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры: нет.
 
-### Hardware > NVIDIA HDMI/DP Audio > Включить NVIDIA HDMI/DP audio
+### Железо > NVIDIA HDMI/DP Audio > Включить звук NVIDIA HDMI/DP
 
 - Operation id: `nvidia_audio_enable`
 - Описание: Снова включает matching NVIDIA HDMI/DP audio devices. Если policy block активен, сначала сними policy.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры: нет.
 
-### Hardware > NVIDIA HDMI/DP Audio > Policy-block NVIDIA HDMI/DP audio
+### Железо > NVIDIA HDMI/DP Audio > Запретить звук NVIDIA HDMI/DP политикой
 
 - Operation id: `nvidia_audio_block_policy`
 - Описание: Делает backup DeviceInstall policy, добавляет только NVIDIA HDAUDIO codec IDs в DenyDeviceIDs, отключает matching devices и запускает PnP rescan.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры: нет.
 
-### Hardware > NVIDIA HDMI/DP Audio > Снять policy-block NVIDIA HDMI/DP audio
+### Железо > NVIDIA HDMI/DP Audio > Снять запрет звука NVIDIA HDMI/DP
 
 - Operation id: `nvidia_audio_unblock_policy`
 - Описание: Удаляет известные NVIDIA HDAUDIO IDs из DeviceInstall policy, запускает PnP rescan и пытается включить matching devices.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры: нет.
 
-### Hardware > NVIDIA HDMI/DP Audio > Открыть NVIDIA audio output
+### Железо > NVIDIA HDMI/DP Audio > Открыть результаты звука NVIDIA
 
 - Operation id: `nvidia_audio_open_output`
 - Описание: Открыть output-папку с экспортированными NVIDIA HDMI/DP audio device IDs.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > NVIDIA HDMI/DP Audio > Открыть NVIDIA audio backup
+### Железо > NVIDIA HDMI/DP Audio > Открыть копии звука NVIDIA
 
 - Operation id: `nvidia_audio_open_backup`
 - Описание: Открыть DeviceInstall policy backups, созданные перед изменениями NVIDIA audio policy.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > NVIDIA HDMI/DP Audio > Открыть папку NVIDIA audio tool
+### Железо > NVIDIA HDMI/DP Audio > Открыть папку набора звука NVIDIA
 
 - Operation id: `nvidia_audio_open_tool`
 - Описание: Открыть проектную папку NVIDIA HDMI/DP Audio module, которую используют GUI и project launchers.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > Накопители / дисковые процедуры > Инвентаризация дисков
+### Железо > Накопители / дисковые процедуры > Инвентаризация дисков
 
 - Operation id: `storage_inventory`
 - Описание: Сводка без изменений по Get-Disk/Get-Volume: номера дисков, размеры, буквы томов, файловая система и состояние.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > Накопители / дисковые процедуры > Детали выбранного диска
+### Железо > Накопители / дисковые процедуры > Детали выбранного диска
 
 - Operation id: `storage_disk_details`
 - Описание: Layout диска без изменений и разделы для выбранного номера диска перед ручной работой со storage.
@@ -1460,35 +1451,35 @@
 - Параметры:
   - `disk_number` — **Диск** (type=`select`).
 
-### Hardware > Накопители / дисковые процедуры > Запустить SSD/NVMe wizard
+### Железо > Накопители / дисковые процедуры > Запустить мастер SSD/NVMe
 
 - Operation id: `storage_ssd_reset_wizard`
 - Описание: Открыть оригинальный wizard во внешней консоли; destructive-действия всё равно требуют typed confirmations внутри него.
 - Риск: kind=`dangerous`, risk_level=`destructive`
 - Параметры: нет.
 
-### Hardware > Накопители / дисковые процедуры > Открыть папку SSD/NVMe
+### Железо > Накопители / дисковые процедуры > Открыть папку SSD/NVMe
 
 - Operation id: `storage_ssd_open_folder`
 - Описание: Открыть папку SSD/NVMe wizard с README, logs и original scripts; без изменений дисков.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > Съёмные носители > Обнулить съёмный и сделать один раздел
+### Железо > Накопители / дисковые процедуры > Обнулить съёмный и сделать один раздел
 
 - Operation id: `storage_removable_prepare`
 - Описание: Открыть инструмент во внешней консоли: покажет диски, спросит номер и объём выбранного как подтверждение, затем обнулит и отформатирует.
 - Риск: kind=`dangerous`, risk_level=`destructive`
 - Параметры: нет.
 
-### Hardware > Съёмные носители > Открыть папку съёмных носителей
+### Железо > Накопители / дисковые процедуры > Открыть папку съёмных носителей
 
 - Operation id: `storage_removable_open_folder`
 - Описание: Открыть папку disk-removable с README и сценариями; без изменений дисков.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Сеть > Wi-Fi: статус / подключение > Раздача Wi-Fi
+### Подключение и адаптеры > Wi-Fi профили > Раздача Wi-Fi
 
 - Operation id: `network_wifi_hotspot`
 - Описание: Показать, включить или выключить раздачу Wi-Fi — тот же переключатель, что в параметрах Windows. Имя сети и пароль остаются в параметрах Windows, здесь только подъём. При загрузке машины не поднимается: интерфейсу раздачи нужен вошедший пользователь.
@@ -1496,28 +1487,28 @@
 - Параметры:
   - `hotspot_action` — **Что сделать** (type=`select`, default=`status`). Варианты: `status` — Показать состояние; `on` — Включить раздачу; `off` — Выключить раздачу
 
-### Hardware > Автозапуск > Что запускается само
+### Железо > Накопители / дисковые процедуры > Что запускается само
 
 - Operation id: `startup_kit_open`
 - Описание: Открыть инструмент во внешней консоли: задачи планировщика со входом и загрузкой, обе папки автозагрузки, Run и RunOnce — одним списком, с задержками. Заводит записи, находит, что уже запускает ту же программу, и убирает пересечения.
 - Риск: kind=`dangerous`, risk_level=`modifies`
 - Параметры: нет.
 
-### Hardware > Автозапуск > Открыть папку автозапуска
+### Железо > Накопители / дисковые процедуры > Открыть папку автозапуска
 
 - Operation id: `startup_kit_open_folder`
 - Описание: Открыть папку startup_kit с README и сценариями; ничего не меняет.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > Накопители / дисковые процедуры > Статус WinRE layout
+### Железо > Накопители / дисковые процедуры > Состояние разметки WinRE
 
 - Operation id: `storage_winre_status`
 - Описание: Проверка без изменений: reagentc и layout системного диска, активная WinRE и соседние разделы.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
-### Hardware > Накопители / дисковые процедуры > Запустить WinRE wizard
+### Железо > Накопители / дисковые процедуры > Запустить мастер WinRE
 
 - Operation id: `storage_winre_wizard`
 - Описание: Отключает WinRE, удаляет раздел восстановления справа от C: и расширяет C: после подтверждения в проекте.
@@ -1532,73 +1523,73 @@
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
   - `ssh_root` — **Папка ключей** (type=`folder`, default=``).
-  - `profile_name` — **Machine/profile name** (type=`text`, default=``).
-  - `user_name` — **Windows user** (type=`text`, default=``).
+  - `profile_name` — **Имя машины или профиля** (type=`text`, default=``).
+  - `user_name` — **Пользователь Windows** (type=`text`, default=``).
   - `ssh_config_path` — **Файл ssh config для проверки** (type=`file`, default=``).
   - `rclone_config_path` — **Файл rclone.conf для проверки** (type=`file`, default=``).
   - `links_report_path` — **Сохранить отчёт в CSV** (type=`text`, default=``).
   - `fail_on_broken` — **Считать ошибкой отсутствующий путь** (type=`checkbox`, default=true).
-  - `snapshot` — **Snapshot для import** (type=`text`, default=``).
+  - `snapshot` — **Снимок для импорта** (type=`text`, default=``).
 
-### OpenSSH KeyKit > Экспорт client SSH keys
+### OpenSSH KeyKit > Экспорт ключей SSH клиента
 
 - Operation id: `ssh_keykit_export_client`
 - Описание: Экспортировать .ssh keys/config/known_hosts/authorized_keys текущего пользователя в output\ssh_keykit.
 - Риск: kind=`dangerous`, risk_level=`secret_export`
 - Параметры:
   - `ssh_root` — **Папка ключей** (type=`folder`, default=``).
-  - `profile_name` — **Machine/profile name** (type=`text`, default=``).
-  - `user_name` — **Windows user** (type=`text`, default=``).
+  - `profile_name` — **Имя машины или профиля** (type=`text`, default=``).
+  - `user_name` — **Пользователь Windows** (type=`text`, default=``).
   - `ssh_config_path` — **Файл ssh config для проверки** (type=`file`, default=``).
   - `rclone_config_path` — **Файл rclone.conf для проверки** (type=`file`, default=``).
   - `links_report_path` — **Сохранить отчёт в CSV** (type=`text`, default=``).
   - `fail_on_broken` — **Считать ошибкой отсутствующий путь** (type=`checkbox`, default=true).
-  - `snapshot` — **Snapshot для import** (type=`text`, default=``).
+  - `snapshot` — **Снимок для импорта** (type=`text`, default=``).
 
-### OpenSSH KeyKit > Экспорт client + server SSH keys
+### OpenSSH KeyKit > Экспорт ключей SSH клиента и сервера
 
 - Operation id: `ssh_keykit_export_all`
 - Описание: Экспортировать .ssh текущего пользователя плюс ProgramData\ssh host keys и sshd_config при запуске с правами администратора.
 - Риск: kind=`dangerous`, risk_level=`secret_export`
 - Параметры:
   - `ssh_root` — **Папка ключей** (type=`folder`, default=``).
-  - `profile_name` — **Machine/profile name** (type=`text`, default=``).
-  - `user_name` — **Windows user** (type=`text`, default=``).
+  - `profile_name` — **Имя машины или профиля** (type=`text`, default=``).
+  - `user_name` — **Пользователь Windows** (type=`text`, default=``).
   - `ssh_config_path` — **Файл ssh config для проверки** (type=`file`, default=``).
   - `rclone_config_path` — **Файл rclone.conf для проверки** (type=`file`, default=``).
   - `links_report_path` — **Сохранить отчёт в CSV** (type=`text`, default=``).
   - `fail_on_broken` — **Считать ошибкой отсутствующий путь** (type=`checkbox`, default=true).
-  - `snapshot` — **Snapshot для import** (type=`text`, default=``).
+  - `snapshot` — **Снимок для импорта** (type=`text`, default=``).
 
-### OpenSSH KeyKit > Импорт client SSH keys
+### OpenSSH KeyKit > Импорт ключей SSH клиента
 
 - Operation id: `ssh_keykit_import_client`
 - Описание: Отложить текущую .ssh копией .ssh.bak.timestamp, импортировать свежий/выбранный client snapshot из input и починить ACL закрытых ключей.
 - Риск: kind=`dangerous`, risk_level=`user_write`
 - Параметры:
   - `ssh_root` — **Папка ключей** (type=`folder`, default=``).
-  - `profile_name` — **Machine/profile name** (type=`text`, default=``).
-  - `user_name` — **Windows user** (type=`text`, default=``).
+  - `profile_name` — **Имя машины или профиля** (type=`text`, default=``).
+  - `user_name` — **Пользователь Windows** (type=`text`, default=``).
   - `ssh_config_path` — **Файл ssh config для проверки** (type=`file`, default=``).
   - `rclone_config_path` — **Файл rclone.conf для проверки** (type=`file`, default=``).
   - `links_report_path` — **Сохранить отчёт в CSV** (type=`text`, default=``).
   - `fail_on_broken` — **Считать ошибкой отсутствующий путь** (type=`checkbox`, default=true).
-  - `snapshot` — **Snapshot для import** (type=`text`, default=``).
+  - `snapshot` — **Снимок для импорта** (type=`text`, default=``).
 
-### OpenSSH KeyKit > Импорт client + server SSH keys
+### OpenSSH KeyKit > Импорт ключей SSH клиента и сервера
 
 - Operation id: `ssh_keykit_import_all`
 - Описание: Импортировать client keys плюс server host keys из input, починить ACL, перезапустить sshd и поставить startup type Automatic при запуске с правами администратора.
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
   - `ssh_root` — **Папка ключей** (type=`folder`, default=``).
-  - `profile_name` — **Machine/profile name** (type=`text`, default=``).
-  - `user_name` — **Windows user** (type=`text`, default=``).
+  - `profile_name` — **Имя машины или профиля** (type=`text`, default=``).
+  - `user_name` — **Пользователь Windows** (type=`text`, default=``).
   - `ssh_config_path` — **Файл ssh config для проверки** (type=`file`, default=``).
   - `rclone_config_path` — **Файл rclone.conf для проверки** (type=`file`, default=``).
   - `links_report_path` — **Сохранить отчёт в CSV** (type=`text`, default=``).
   - `fail_on_broken` — **Считать ошибкой отсутствующий путь** (type=`checkbox`, default=true).
-  - `snapshot` — **Snapshot для import** (type=`text`, default=``).
+  - `snapshot` — **Снимок для импорта** (type=`text`, default=``).
 
 ### OpenSSH KeyKit > Открыть папку скриптов KeyKit
 
@@ -1607,13 +1598,13 @@
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
   - `ssh_root` — **Папка ключей** (type=`folder`, default=``).
-  - `profile_name` — **Machine/profile name** (type=`text`, default=``).
-  - `user_name` — **Windows user** (type=`text`, default=``).
+  - `profile_name` — **Имя машины или профиля** (type=`text`, default=``).
+  - `user_name` — **Пользователь Windows** (type=`text`, default=``).
   - `ssh_config_path` — **Файл ssh config для проверки** (type=`file`, default=``).
   - `rclone_config_path` — **Файл rclone.conf для проверки** (type=`file`, default=``).
   - `links_report_path` — **Сохранить отчёт в CSV** (type=`text`, default=``).
   - `fail_on_broken` — **Считать ошибкой отсутствующий путь** (type=`checkbox`, default=true).
-  - `snapshot` — **Snapshot для import** (type=`text`, default=``).
+  - `snapshot` — **Снимок для импорта** (type=`text`, default=``).
 
 ### Бэкап AI CLI > Бэкап (экспорт)
 
@@ -1636,7 +1627,7 @@
   - `dry_run` — **Пробный запуск** (type=`checkbox`, default=true).
   - `import_chats` — **Чаты в бэкапе** (type=`multiselect`, default=все чаты бэкапа из input).
   - `allow_foreign_paths` — **Разрешить абсолютные пути другого ПК** (type=`checkbox`, default=false).
-  - `allow_legacy` — **Разрешить старый бэкап без manifest** (type=`checkbox`, default=false).
+  - `allow_legacy` — **Разрешить старый бэкап без описи** (type=`checkbox`, default=false).
 
 ### Бэкап AI CLI > Объединение памяти
 
@@ -1646,7 +1637,7 @@
 - Параметры:
   - `overwrite` — **Перезаписывать совпадения** (type=`checkbox`, default=false).
   - `dry_run` — **Пробный запуск** (type=`checkbox`, default=true).
-  - `allow_legacy` — **Разрешить старый бэкап без manifest** (type=`checkbox`, default=false).
+  - `allow_legacy` — **Разрешить старый бэкап без описи** (type=`checkbox`, default=false).
 
 ### Бэкап AI CLI > Открыть папку инструмента
 
@@ -1662,37 +1653,37 @@
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
   - `cert_store` — **Хранилище сертификатов** (type=`select`, default=`CurrentUser\My`).
-    - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Варианты: `CurrentUser\My` — My — личные; `CurrentUser\Root` — Root — доверенные корневые; `CurrentUser\CA` — CA — промежуточные; `LocalMachine\My` — My — личные; `LocalMachine\Root` — Root — доверенные корневые; `LocalMachine\CA` — CA — промежуточные
   - `cert_backup_dir` — **Папка сертификатов** (type=`folder`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
   - `import_file` — **Файл импорта (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Целевое хранилище импорта** (type=`select`, default=`CurrentUser\My`).
     - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
 
-### Сертификаты (экспорт/импорт) > Экспорт personal ключей в PFX
+### Сертификаты (экспорт/импорт) > Экспорт личных ключей в PFX
 
 - Operation id: `cert_export_pfx`
 - Описание: Экспорт сертификатов с экспортируемым закрытым ключом из выбранного store в password-protected .pfx в output\certificates. TPM-ключи пропускаются. Файлы СОДЕРЖАТ закрытые ключи.
 - Риск: kind=`dangerous`, risk_level=`secret_export`
 - Параметры:
   - `cert_store` — **Хранилище сертификатов** (type=`select`, default=`CurrentUser\My`).
-    - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Варианты: `CurrentUser\My` — My — личные; `CurrentUser\Root` — Root — доверенные корневые; `CurrentUser\CA` — CA — промежуточные; `LocalMachine\My` — My — личные; `LocalMachine\Root` — Root — доверенные корневые; `LocalMachine\CA` — CA — промежуточные
   - `cert_backup_dir` — **Папка сертификатов** (type=`folder`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
   - `import_file` — **Файл импорта (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Целевое хранилище импорта** (type=`select`, default=`CurrentUser\My`).
     - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
 
-### Сертификаты (экспорт/импорт) > Экспорт store в SST (публично)
+### Сертификаты (экспорт/импорт) > Экспорт хранилища в SST (публично)
 
 - Operation id: `cert_export_roots`
 - Описание: Экспорт публичных сертификатов выбранного store (без закрытых ключей) в .sst с timestamp в output\certificates.
 - Риск: kind=`safe`, risk_level=`project_write`
 - Параметры:
   - `cert_store` — **Хранилище сертификатов** (type=`select`, default=`CurrentUser\My`).
-    - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Варианты: `CurrentUser\My` — My — личные; `CurrentUser\Root` — Root — доверенные корневые; `CurrentUser\CA` — CA — промежуточные; `LocalMachine\My` — My — личные; `LocalMachine\Root` — Root — доверенные корневые; `LocalMachine\CA` — CA — промежуточные
   - `cert_backup_dir` — **Папка сертификатов** (type=`folder`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
   - `import_file` — **Файл импорта (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Целевое хранилище импорта** (type=`select`, default=`CurrentUser\My`).
     - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1704,9 +1695,9 @@
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
   - `cert_store` — **Хранилище сертификатов** (type=`select`, default=`CurrentUser\My`).
-    - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Варианты: `CurrentUser\My` — My — личные; `CurrentUser\Root` — Root — доверенные корневые; `CurrentUser\CA` — CA — промежуточные; `LocalMachine\My` — My — личные; `LocalMachine\Root` — Root — доверенные корневые; `LocalMachine\CA` — CA — промежуточные
   - `cert_backup_dir` — **Папка сертификатов** (type=`folder`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
   - `import_file` — **Файл импорта (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Целевое хранилище импорта** (type=`select`, default=`CurrentUser\My`).
     - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1718,9 +1709,9 @@
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
   - `cert_store` — **Хранилище сертификатов** (type=`select`, default=`CurrentUser\My`).
-    - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Варианты: `CurrentUser\My` — My — личные; `CurrentUser\Root` — Root — доверенные корневые; `CurrentUser\CA` — CA — промежуточные; `LocalMachine\My` — My — личные; `LocalMachine\Root` — Root — доверенные корневые; `LocalMachine\CA` — CA — промежуточные
   - `cert_backup_dir` — **Папка сертификатов** (type=`folder`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
   - `import_file` — **Файл импорта (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Целевое хранилище импорта** (type=`select`, default=`CurrentUser\My`).
     - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1732,9 +1723,9 @@
 - Риск: kind=`dangerous`, risk_level=`system_change`
 - Параметры:
   - `cert_store` — **Хранилище сертификатов** (type=`select`, default=`CurrentUser\My`).
-    - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Варианты: `CurrentUser\My` — My — личные; `CurrentUser\Root` — Root — доверенные корневые; `CurrentUser\CA` — CA — промежуточные; `LocalMachine\My` — My — личные; `LocalMachine\Root` — Root — доверенные корневые; `LocalMachine\CA` — CA — промежуточные
   - `cert_backup_dir` — **Папка сертификатов** (type=`folder`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
   - `import_file` — **Файл импорта (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Целевое хранилище импорта** (type=`select`, default=`CurrentUser\My`).
     - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1746,9 +1737,9 @@
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры:
   - `cert_store` — **Хранилище сертификатов** (type=`select`, default=`CurrentUser\My`).
-    - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Варианты: `CurrentUser\My` — My — личные; `CurrentUser\Root` — Root — доверенные корневые; `CurrentUser\CA` — CA — промежуточные; `LocalMachine\My` — My — личные; `LocalMachine\Root` — Root — доверенные корневые; `LocalMachine\CA` — CA — промежуточные
   - `cert_backup_dir` — **Папка сертификатов** (type=`folder`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
   - `import_file` — **Файл импорта (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Целевое хранилище импорта** (type=`select`, default=`CurrentUser\My`).
     - Варианты: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1863,7 +1854,7 @@
   - `migration_folder` — **Папка переезда** (type=`folder`, default=``).
   - `profile_name` — **Имя машины в названии папки** (type=`text`, default=``).
   - `user_name` — **Пользователь Windows** (type=`text`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
 
 ### Переезд на новую машину > Проверить доступы после переезда
 
@@ -1874,7 +1865,7 @@
   - `migration_folder` — **Папка переезда** (type=`folder`, default=``).
   - `profile_name` — **Имя машины в названии папки** (type=`text`, default=``).
   - `user_name` — **Пользователь Windows** (type=`text`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
 
 ### Переезд на новую машину > Экспорт переезда
 
@@ -1885,7 +1876,7 @@
   - `migration_folder` — **Папка переезда** (type=`folder`, default=``).
   - `profile_name` — **Имя машины в названии папки** (type=`text`, default=``).
   - `user_name` — **Пользователь Windows** (type=`text`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
 
 ### Переезд на новую машину > Импорт переезда
 
@@ -1896,7 +1887,7 @@
   - `migration_folder` — **Папка переезда** (type=`folder`, default=``).
   - `profile_name` — **Имя машины в названии папки** (type=`text`, default=``).
   - `user_name` — **Пользователь Windows** (type=`text`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
 
 ### Переезд на новую машину > Открыть папку переезда
 
@@ -1907,37 +1898,7 @@
   - `migration_folder` — **Папка переезда** (type=`folder`, default=``).
   - `profile_name` — **Имя машины в названии папки** (type=`text`, default=``).
   - `user_name` — **Пользователь Windows** (type=`text`, default=``).
-  - `pfx_password` — **Пароль PFX** (type=`text`, default=``).
-
-### Утилиты > Документация PDF > Показать план PDF export
-
-- Operation id: `docs_pdf_plan`
-- Описание: Dry run: показать Markdown-источники и целевые PDF без записи файлов.
-- Риск: kind=`safe`, risk_level=`readonly`
-- Параметры:
-  - `docs_pdf_theme` — **Тема** (type=`select`, default=`both`).
-    - Варианты: `both` — Обе: dark + light-sand; `dark` — Dark; `light-sand` — Light Sand
-  - `docs_pdf_include_agent_instructions` — **Включить agent instructions** (type=`checkbox`, default=true).
-
-### Утилиты > Документация PDF > Сгенерировать PDF документации
-
-- Operation id: `docs_pdf_render`
-- Описание: Сгенерировать PDF для root guides, docs\*.md, GitHub README и optional agent instructions в docs\PDF. Markdown остаётся source of truth.
-- Риск: kind=`safe`, risk_level=`project_write`
-- Параметры:
-  - `docs_pdf_theme` — **Тема** (type=`select`, default=`both`).
-    - Варианты: `both` — Обе: dark + light-sand; `dark` — Dark; `light-sand` — Light Sand
-  - `docs_pdf_include_agent_instructions` — **Включить agent instructions** (type=`checkbox`, default=true).
-
-### Утилиты > Документация PDF > Открыть папку docs PDF
-
-- Operation id: `docs_pdf_open`
-- Описание: Открыть docs\PDF.
-- Риск: kind=`safe`, risk_level=`readonly`
-- Параметры:
-  - `docs_pdf_theme` — **Тема** (type=`select`, default=`both`).
-    - Варианты: `both` — Обе: dark + light-sand; `dark` — Dark; `light-sand` — Light Sand
-  - `docs_pdf_include_agent_instructions` — **Включить agent instructions** (type=`checkbox`, default=true).
+  - `pfx_password` — **Пароль PFX** (type=`password`, default=``).
 
 ### Утилиты > Версия ripgrep
 
@@ -1976,7 +1937,7 @@
 - Риск: kind=`dangerous`, risk_level=`user_write`
 - Параметры: нет.
 
-### Обслуживание и очистка > Очистка Codex > Полная очистка Codex, сохранить CLI state
+### Обслуживание и очистка > Очистка Codex > Полная очистка Codex, сохранить состояние CLI
 
 - Operation id: `codex_nuke_keep_cli_state`
 - Описание: Удалить артефакты Codex Desktop, сохранив ~/.codex для Codex CLI state. Сначала используй аудит/dry-run и проверь scope очистки.
@@ -1993,14 +1954,14 @@
 ### Обслуживание и очистка > Очистка кэшей > Замерить кэши
 
 - Operation id: `cache_cleaner_audit`
-- Описание: Замерить pip, npm, NuGet, Temp старше суток и медиакэш Adobe; ничего не менять.
+- Описание: Замерить pip, npm, NuGet, Temp пользователя и Windows старше суток, сессии Claude Code, простоявшие сутки, и медиакэш Adobe; ничего не менять.
 - Риск: kind=`safe`, risk_level=`readonly`
 - Параметры: нет.
 
 ### Обслуживание и очистка > Очистка кэшей > Очистить кэши
 
 - Operation id: `cache_cleaner_clean`
-- Описание: Очистить pip, npm, http-кэш NuGet, Temp старше суток (занятые файлы остаются) и медиакэш Adobe (пропускается, пока открыты видеопрограммы Adobe).
+- Описание: Очистить pip, npm, http-кэш NuGet, Temp пользователя и Windows старше суток (занятые файлы остаются; Temp Windows - с правами администратора), сессии Claude Code, простоявшие сутки, и медиакэш Adobe (пропускается, пока открыты видеопрограммы Adobe).
 - Риск: kind=`dangerous`, risk_level=`user_write`
 - Параметры: нет.
 
@@ -2008,6 +1969,20 @@
 
 - Operation id: `cache_cleaner_clean_nuget`
 - Описание: То же, плюс ~/.nuget/packages: следующая сборка скачает все пакеты заново.
+- Риск: kind=`dangerous`, risk_level=`user_write`
+- Параметры: нет.
+
+### Обслуживание и очистка > Очистка кэшей > Очистить временные файлы старше суток
+
+- Operation id: `cache_cleaner_temp`
+- Описание: Очистить Temp пользователя и Temp Windows старше суток и сессии Claude Code, простоявшие сутки (%TEMP%\claude); рабочая сессия и занятые файлы остаются. Temp Windows требует прав администратора, без них пропускается.
+- Риск: kind=`dangerous`, risk_level=`user_write`
+- Параметры: нет.
+
+### Обслуживание и очистка > Очистка кэшей > Очистить кэш Premiere
+
+- Operation id: `cache_cleaner_adobe`
+- Описание: Очистить медиакэш Premiere Pro и других видеопрограмм Adobe: Media Cache Files, Media Cache, Peak Files - в обычном месте и там, куда его перенесли в настройках Premiere. Пропускается, пока открыты Premiere Pro, After Effects, Media Encoder или Audition.
 - Риск: kind=`dangerous`, risk_level=`user_write`
 - Параметры: нет.
 
@@ -2046,14 +2021,14 @@
 - Риск: kind=`dangerous`, risk_level=`destructive`
 - Параметры: нет.
 
-### Обслуживание и очистка > Очистка Python > Очистка Python без winget uninstall
+### Обслуживание и очистка > Очистка Python > Очистка Python без удаления через winget
 
 - Operation id: `python_nuke_keep_winget`
 - Описание: Запустить очистку Python, но пропустить winget uninstall pass. Всё равно чистит launchers/cache/env/PATH в выбранном scope; сначала используй аудит/dry-run.
 - Риск: kind=`dangerous`, risk_level=`destructive`
 - Параметры: нет.
 
-### Обслуживание и очистка > Очистить workspace
+### Обслуживание и очистка > Очистить рабочую папку
 
 - Operation id: `cleanup_workspace`
 - Описание: Удалить только файлы внутри управляемой папки workspace.

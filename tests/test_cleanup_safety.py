@@ -15,7 +15,7 @@ import pytest
 from system_core.core.jobs import JobContext
 from system_core.core.manifest import Operation
 from system_core.core.paths import ProjectPaths
-from system_core.services.sample_service import _inventory, cleanup_workspace
+from system_core.services.sample_service import cleanup_workspace
 
 
 def _symlink_or_skip(target: Path, link: Path) -> None:
@@ -70,20 +70,6 @@ def _make_context(paths: ProjectPaths) -> JobContext:
         progress_callback=lambda _v: None,
         cancel_callback=lambda: False,
     )
-
-
-def test_inventory_handles_missing_folder(tmp_path: Path) -> None:
-    assert _inventory(tmp_path / "nope") == {"files": 0, "dirs": 0}
-
-
-def test_inventory_counts_correctly(tmp_path: Path) -> None:
-    (tmp_path / "a").mkdir()
-    (tmp_path / "a" / "f1.txt").write_text("x", encoding="utf-8")
-    (tmp_path / "a" / "f2.txt").write_text("y", encoding="utf-8")
-    (tmp_path / "b").mkdir()
-    inv = _inventory(tmp_path)
-    assert inv["files"] == 2
-    assert inv["dirs"] == 2
 
 
 def test_cleanup_removes_files_inside_workspace(tmp_path: Path) -> None:

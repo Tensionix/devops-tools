@@ -30,14 +30,14 @@ if /I "%AUDION_UNATTENDED%"=="1" set "ASSUME_YES=1"
 if /I "%AUDION_NO_PAUSE%"=="1" set "NO_PAUSE=1"
 if "%ASSUME_YES%"=="1" set "PS_ARGS=-Yes"
 
-if exist "%~dp0..\system_core\powershell\pwsh.exe" set "PS_EXE=%~dp0..\system_core\powershell\pwsh.exe"
+if exist "%~dp0..\App\AudionPs.exe" set "PS_EXE=%~dp0..\App\AudionPs.exe"
 if not defined PS_EXE where pwsh.exe >nul 2>nul && set "PS_EXE=pwsh.exe"
 if not defined PS_EXE where powershell.exe >nul 2>nul && set "PS_EXE=powershell.exe"
 
 if not defined PS_EXE (
     echo [ERROR] PowerShell was not found.
-    echo [INFO] Expected portable path:
-    echo %~dp0..\system_core\powershell\pwsh.exe
+    echo [INFO] Expected the PowerShell of the program:
+    echo %~dp0..\App\AudionPs.exe
     if not defined AUDION_NO_PAUSE pause
     exit /b 1
 )

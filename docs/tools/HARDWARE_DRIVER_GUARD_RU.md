@@ -12,7 +12,7 @@ system_core\windows_driver_guard
 system_core\nvidia_audio
 ```
 
-GUI вызывает их через общий service layer, portable PowerShell и журнал операций DevOps Tools. Ручной CLI-доступ вынесен в `cli\launcher_hardware.cmd`; главный `launcher_project.cmd` и `launcher_project_ru.cmd` просто открывают этот модульный launcher.
+Окно вызывает их через общий service layer, PowerShell программы (`App\AudionPs.exe`) и журнал операций DevOps Tools. Ручной CLI-доступ вынесен в `cli\launcher_hardware.cmd`; главный `launcher_project.cmd` и `launcher_project_ru.cmd` просто открывают этот модульный launcher.
 
 CLI-слой намеренно короткий: это не полное воспроизведение старых TUI, а основные команды из прототипов на случай, если GUI не нужен или недоступен.
 
@@ -43,11 +43,11 @@ CLI-слой намеренно короткий: это не полное во�
 
 1. Поставить вручную нужный NVIDIA-драйвер.
 2. `Проверить защиту драйверов`.
-3. Оставить `Retroactive block` выключенным.
-4. `Блокировать NVIDIA driver installs`.
+3. Оставить `Запрет и для уже установленных` выключенным.
+4. `Запретить установку драйверов NVIDIA`.
 5. Reboot.
 
-`Retroactive block` опасен: Windows может применить запрет к уже установленным matching devices. Обычно он не нужен, если текущий драйвер уже рабочий.
+`Запрет и для уже установленных` опасен: Windows может применить запрет к уже установленным matching devices. Обычно он не нужен, если текущий драйвер уже рабочий.
 
 `Include compatible IDs` расширяет matching; включать только если Hardware IDs недостаточно.
 
@@ -80,7 +80,7 @@ PCI\VEN_8086&DEV_46A8&SUBSYS_22E717AA
 
 В GUI это разделено так:
 
-- обычная `HWID-защита драйвера устройства` показывает только информационный badge `Generic` и одно поле `HWID для защиты`;
+- обычная `HWID-защита драйвера устройства` показывает только информационный badge `Общий` и одно поле `HWID для защиты`;
 - аварийный `rank repair` дополнительно показывает warning badge `OEM REV alias ...&REV_0C`, потому что это признак уже пойманного OEM/REV-хвоста, который нужно учитывать при ремонте/cleanup.
 
 Эти Intel Iris Xe значения из исходного прототипа оставлены как встроенный protected cache: GUI показывает кнопку `Intel Iris Xe`, поле `HWID для защиты` заполнено recommended ID по умолчанию, а PowerShell-скрипты используют этот cache как fallback, если HWID не передан. Это не пользовательская история и не runtime cache, который можно случайно очистить через cleanup.
@@ -89,14 +89,14 @@ PCI\VEN_8086&DEV_46A8&SUBSYS_22E717AA
 
 Обычный порядок для осознанного обновления драйвера:
 
-1. `Проверить текущий lock`.
+1. `Проверить текущий замок`.
 2. `1. Разблокировать перед обновлением`.
 3. Поставить нужный manual/generic driver.
 4. Проверить, что нужная версия стала active/best-ranked.
 5. `2. Заблокировать после установки`.
 6. Reboot.
 
-По умолчанию targeted block снимает global `ExcludeWUDriversInQualityUpdate`, чтобы не держать всю систему в режиме полного запрета драйверов Windows Update. Если нужен старый глобальный guard, включить advanced option `Оставить global WU driver block`.
+По умолчанию targeted block снимает global `ExcludeWUDriversInQualityUpdate`, чтобы не держать всю систему в режиме полного запрета драйверов Windows Update. Если нужен старый глобальный guard, включить advanced option `Оставить общий запрет драйверов WU`.
 
 Для быстрого применения текущего Intel Iris Xe lock без GUI в корне проекта есть wrapper:
 
@@ -112,10 +112,10 @@ cli\Lock-Intel-IrisXe-HWID.cmd
 
 Скрипт:
 
-1. Находит present device по введённому HWID или использует вручную заданный `Device Instance ID`.
+1. Находит present device по введённому HWID или использует вручную заданный `ID экземпляра устройства`.
 2. Создаёт preflight backup bundle в `backup\driver_guard\rank_repair\RankRepair_...\preflight_backup`.
-3. Проверяет текущую версию драйвера против `Bad driver version`.
-4. Ищет target INF в Driver Store по `Target driver version` и HWID; при необходимости можно задать точный `Target INF path`.
+3. Проверяет текущую версию драйвера против `Плохая версия драйвера`.
+4. Ищет target INF в Driver Store по `Нужная версия драйвера` и HWID; при необходимости можно задать точный `Путь к INF цели`.
 5. Экспортирует старый INF package в `backup\driver_guard\rank_repair`.
 6. Удаляет old INF package через `pnputil /delete-driver ... /uninstall /force`.
 7. Ставит target INF через `pnputil /add-driver ... /install`.
@@ -145,13 +145,13 @@ Bad driver version:    32.0.101.7026
 Target driver version: 32.0.101.7085
 ```
 
-Rank repair - не обычный путь обновления. Для другого железа обязательно сначала выполнить `Проверить rank target`, убедиться в выбранном устройстве и версиях, затем при необходимости сузить `Target INF pattern` или указать `Target INF path`.
+Rank repair - не обычный путь обновления. Для другого железа обязательно сначала выполнить `Проверить цель ранга`, убедиться в выбранном устройстве и версиях, затем при необходимости сузить `Шаблон INF цели` или указать `Путь к INF цели`.
 
 По умолчанию repair теперь останавливается, если нашёл INF с нужной версией, но не нашёл внутри него указанный HWID. Expert fallback `Allow version-only INF fallback` нужен только после ручной проверки конкретного INF. Старый primary INF package должен успешно экспортироваться до `pnputil /delete-driver`; иначе destructive repair не продолжается.
 
 ## Driver Store Backups
 
-`Сохранить Driver Store manifest` сохраняет отчеты без экспорта driver packages в `backup\driver_guard\manifests`:
+`Сохранить опись Driver Store` сохраняет отчеты без экспорта driver packages в `backup\driver_guard\manifests`:
 
 - `pnputil /enum-drivers`;
 - `systeminfo`;
@@ -165,7 +165,7 @@ Rank repair - не обычный путь обновления. Для друг
 pnputil /add-driver "<backup>\drivers\*.inf" /subdirs /install
 ```
 
-В GUI restore не интерактивный: backup выбирается из dropdown. Пустой выбор означает самый свежий backup. Ручное поле `Backup folder вручную` можно использовать для папки с `drivers\` или INF-файлами.
+В GUI restore не интерактивный: backup выбирается из dropdown. Пустой выбор означает самый свежий backup. Ручное поле `Папка копии вручную` можно использовать для папки с `drivers\` или INF-файлами.
 
 Лучшее правило: восстанавливать драйверы с той же машины или очень близкого hardware profile.
 
@@ -175,13 +175,13 @@ pnputil /add-driver "<backup>\drivers\*.inf" /subdirs /install
 
 Мягкий режим:
 
-1. `Статус NVIDIA audio`.
-2. `Экспортировать NVIDIA audio IDs`.
-3. `Отключить NVIDIA HDMI/DP audio`.
+1. `Статус звука NVIDIA`.
+2. `Экспортировать ID звука NVIDIA`.
+3. `Отключить звук NVIDIA HDMI/DP`.
 
 Жесткий режим:
 
-1. `Policy-block NVIDIA HDMI/DP audio`.
+1. `Запретить звук NVIDIA HDMI/DP политикой`.
 2. Reboot.
 
 Для быстрого применения этого policy без GUI в корне проекта есть wrapper:

@@ -8,8 +8,8 @@ for %%I in ("%~dp0..") do set "BASE_DIR=%%~fI"
 if "%BASE_DIR:~-1%"=="\" set "BASE_DIR=%BASE_DIR:~0,-1%"
 cd /d "%BASE_DIR%"
 
-set "HOST_NAME=portal.itpgrad.ru"
-set "IP_ADDRESS=192.168.0.130"
+set "HOST_NAME="
+set "IP_ADDRESS="
 set "BITRIX_PORTS=443"
 set "SCAN_PORTS=80,443,8080,8443,8890,8891,8892"
 
@@ -19,7 +19,8 @@ echo ======================================================================
 echo   AUDION DEVOPS TOOLS - BITRIX HOSTS
 echo ======================================================================
 echo Root: %BASE_DIR%
-echo Current defaults: %HOST_NAME% -^> %IP_ADDRESS% ; ports %BITRIX_PORTS%
+echo Current values: host [%HOST_NAME%] -^> IP [%IP_ADDRESS%] ; ports %BITRIX_PORTS%
+if not defined HOST_NAME echo Host is not set: [6] sets host, IP and ports for this session.
 echo.
 echo [1] Detect current local endpoint
 echo [2] Status / DNS / ports

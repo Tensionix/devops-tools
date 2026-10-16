@@ -9,11 +9,10 @@
 - [Runtime and shell > Check Windows Long Paths](#runtime-and-shell--check-windows-long-paths)
 - [Runtime and shell > Enable Windows Long Paths](#runtime-and-shell--enable-windows-long-paths)
 - [Runtime and shell > Enable Git Long Paths](#runtime-and-shell--enable-git-long-paths)
-- [Runtime and shell > Install portable PowerShell](#runtime-and-shell--install-portable-powershell)
 - [Browser Bookmarks Master > Status](#browser-bookmarks-master--status)
 - [Browser Bookmarks Master > Clear local Favicons cache](#browser-bookmarks-master--clear-local-favicons-cache)
-- [Browser Bookmarks Master > Export master to Workbench TARGET](#browser-bookmarks-master--export-master-to-workbench-target)
-- [Browser Bookmarks Master > Import master from Workbench SOURCE](#browser-bookmarks-master--import-master-from-workbench-source)
+- [Browser Bookmarks Master > Export master to TARGET](#browser-bookmarks-master--export-master-to-target)
+- [Browser Bookmarks Master > Import master from SOURCE](#browser-bookmarks-master--import-master-from-source)
 - [Browser Bookmarks Master > Transfer master between browsers](#browser-bookmarks-master--transfer-master-between-browsers)
 - [Browser Bookmarks Master > Open local safety backups](#browser-bookmarks-master--open-local-safety-backups)
 - [Network Cleaner > Status snapshot](#network-cleaner--status-snapshot)
@@ -178,9 +177,6 @@
 - [Machine migration > Export the migration](#machine-migration--export-the-migration)
 - [Machine migration > Import the migration](#machine-migration--import-the-migration)
 - [Machine migration > Open migration folder](#machine-migration--open-migration-folder)
-- [Utilities > Documentation PDF > Preview PDF export plan](#utilities--documentation-pdf--preview-pdf-export-plan)
-- [Utilities > Documentation PDF > Generate docs PDFs](#utilities--documentation-pdf--generate-docs-pdfs)
-- [Utilities > Documentation PDF > Open docs PDF folder](#utilities--documentation-pdf--open-docs-pdf-folder)
 - [Utilities > ripgrep version](#utilities--ripgrep-version)
 - [Utilities > Open tool folder](#utilities--open-tool-folder)
 - [Maintenance & Cleanup > Codex Nuke > Codex Nuke audit](#maintenance--cleanup--codex-nuke--codex-nuke-audit)
@@ -191,14 +187,16 @@
 - [Maintenance & Cleanup > Cache Cleaner > Measure caches](#maintenance--cleanup--cache-cleaner--measure-caches)
 - [Maintenance & Cleanup > Cache Cleaner > Clear caches](#maintenance--cleanup--cache-cleaner--clear-caches)
 - [Maintenance & Cleanup > Cache Cleaner > Clear caches and NuGet packages](#maintenance--cleanup--cache-cleaner--clear-caches-and-nuget-packages)
+- [Maintenance & Cleanup > Cache Cleaner > Clear Temp older than 24 h](#maintenance--cleanup--cache-cleaner--clear-temp-older-than-24-h)
+- [Maintenance & Cleanup > Cache Cleaner > Clear Premiere cache](#maintenance--cleanup--cache-cleaner--clear-premiere-cache)
 - [Maintenance & Cleanup > Cache Cleaner > Remove Chrome AI model](#maintenance--cleanup--cache-cleaner--remove-chrome-ai-model)
 - [Maintenance & Cleanup > Cache Cleaner > Allow Chrome AI model again](#maintenance--cleanup--cache-cleaner--allow-chrome-ai-model-again)
 - [Maintenance & Cleanup > Python Nuke > Python Nuke audit](#maintenance--cleanup--python-nuke--python-nuke-audit)
 - [Maintenance & Cleanup > Python Nuke > Python Nuke dry run](#maintenance--cleanup--python-nuke--python-nuke-dry-run)
 - [Maintenance & Cleanup > Python Nuke > Python NUKE full](#maintenance--cleanup--python-nuke--python-nuke-full)
 - [Maintenance & Cleanup > Python Nuke > Python NUKE, keep winget](#maintenance--cleanup--python-nuke--python-nuke-keep-winget)
-- [Maintenance & Cleanup > Clear Workbench workspace](#maintenance--cleanup--clear-workbench-workspace)
-- [Maintenance > Clear Workbench I/O](#maintenance--clear-workbench-io)
+- [Maintenance & Cleanup > Clear workspace](#maintenance--cleanup--clear-workspace)
+- [Maintenance > Clear I/O](#maintenance--clear-io)
 
 The complete list of operations with their parameters. Read it when you need the
 exact operation name, its fields, or what it does to the system.
@@ -216,7 +214,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 ### Runtime and shell > PowerShell runtime status
 
 - Operation id: `runtime_status`
-- Description: Show portable/system PowerShell resolution and version.
+- Description: Show which PowerShell the scripts run with - App\AudionPs.exe of the program or the system one - and its version.
 - Risk: kind=`safe`, risk_level=`readonly`
 - Parameters: none.
 
@@ -241,17 +239,10 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`user_write`
 - Parameters: none.
 
-### Runtime and shell > Install portable PowerShell
-
-- Operation id: `install_portable_powershell`
-- Description: Download and install pwsh.exe into system_core/powershell.
-- Risk: kind=`safe`, risk_level=`readonly`
-- Parameters: none.
-
 ### Browser Bookmarks Master > Status
 
 - Operation id: `browser_bookmarks_status`
-- Description: Read-only check: selected browser profile files, process state and latest importable backup from Workbench SOURCE. GUI status can run for one or several checked browsers.
+- Description: Read-only check: selected browser profile files, process state and latest importable backup from SOURCE. GUI status can run for one or several checked browsers.
 - Risk: kind=`safe`, risk_level=`readonly`
 - Parameters:
   - `browser_profile` — **Browser** (type=`select`, default=`chrome`).
@@ -259,8 +250,8 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `backup_version` — **Backup version** (type=`text`, default=`auto`).
   - `close_browser_process` — **Close browser before file operation** (type=`checkbox`, default=true).
   - `browser_profile_path` — **Portable browser profile folder** (type=`folder`).
-  - `backup_source_path` — **Workbench source backup folder** (type=`folder`).
-  - `backup_target_path` — **Workbench target backup folder** (type=`folder`).
+  - `backup_source_path` — **SOURCE backup folder** (type=`folder`).
+  - `backup_target_path` — **TARGET backup folder** (type=`folder`).
 
 ### Browser Bookmarks Master > Clear local Favicons cache
 
@@ -273,13 +264,13 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `backup_version` — **Backup version** (type=`text`, default=`auto`).
   - `close_browser_process` — **Close browser before file operation** (type=`checkbox`, default=true).
   - `browser_profile_path` — **Portable browser profile folder** (type=`folder`).
-  - `backup_source_path` — **Workbench source backup folder** (type=`folder`).
-  - `backup_target_path` — **Workbench target backup folder** (type=`folder`).
+  - `backup_source_path` — **SOURCE backup folder** (type=`folder`).
+  - `backup_target_path` — **TARGET backup folder** (type=`folder`).
 
-### Browser Bookmarks Master > Export master to Workbench TARGET
+### Browser Bookmarks Master > Export master to TARGET
 
 - Operation id: `browser_bookmarks_export_master`
-- Description: Close selected browsers and copy Bookmarks, Favicons and available Chromium sidecar files into versioned backup folders under Workbench TARGET.
+- Description: Close selected browsers and copy Bookmarks, Favicons and available Chromium sidecar files into versioned backup folders under TARGET.
 - Risk: kind=`dangerous`, risk_level=`secret_export`
 - Parameters:
   - `browser_profile` — **Browser** (type=`select`, default=`chrome`).
@@ -287,10 +278,10 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `backup_version` — **Backup version** (type=`text`, default=`auto`).
   - `close_browser_process` — **Close browser before file operation** (type=`checkbox`, default=true).
   - `browser_profile_path` — **Portable browser profile folder** (type=`folder`).
-  - `backup_source_path` — **Workbench source backup folder** (type=`folder`).
-  - `backup_target_path` — **Workbench target backup folder** (type=`folder`).
+  - `backup_source_path` — **SOURCE backup folder** (type=`folder`).
+  - `backup_target_path` — **TARGET backup folder** (type=`folder`).
 
-### Browser Bookmarks Master > Import master from Workbench SOURCE
+### Browser Bookmarks Master > Import master from SOURCE
 
 - Operation id: `browser_bookmarks_import_master`
 - Description: Import an explicitly selected native backup or HTML file into all checked system browsers; portable mode uses one exact profile. Each target gets a rollback backup.
@@ -301,8 +292,8 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `backup_version` — **Backup version** (type=`text`, default=`auto`).
   - `close_browser_process` — **Close browser before file operation** (type=`checkbox`, default=true).
   - `browser_profile_path` — **Portable browser profile folder** (type=`folder`).
-  - `backup_source_path` — **Workbench source backup folder** (type=`folder`).
-  - `backup_target_path` — **Workbench target backup folder** (type=`folder`).
+  - `backup_source_path` — **SOURCE backup folder** (type=`folder`).
+  - `backup_target_path` — **TARGET backup folder** (type=`folder`).
 
 ### Browser Bookmarks Master > Transfer master between browsers
 
@@ -315,8 +306,8 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `backup_version` — **Backup version** (type=`text`, default=`auto`).
   - `close_browser_process` — **Close browser before file operation** (type=`checkbox`, default=true).
   - `browser_profile_path` — **Portable browser profile folder** (type=`folder`).
-  - `backup_source_path` — **Workbench source backup folder** (type=`folder`).
-  - `backup_target_path` — **Workbench target backup folder** (type=`folder`).
+  - `backup_source_path` — **SOURCE backup folder** (type=`folder`).
+  - `backup_target_path` — **TARGET backup folder** (type=`folder`).
 
 ### Browser Bookmarks Master > Open local safety backups
 
@@ -329,8 +320,8 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `backup_version` — **Backup version** (type=`text`, default=`auto`).
   - `close_browser_process` — **Close browser before file operation** (type=`checkbox`, default=true).
   - `browser_profile_path` — **Portable browser profile folder** (type=`folder`).
-  - `backup_source_path` — **Workbench source backup folder** (type=`folder`).
-  - `backup_target_path` — **Workbench target backup folder** (type=`folder`).
+  - `backup_source_path` — **SOURCE backup folder** (type=`folder`).
+  - `backup_target_path` — **TARGET backup folder** (type=`folder`).
 
 ### Network Cleaner > Status snapshot
 
@@ -1028,8 +1019,8 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`safe`, risk_level=`readonly`
 - Parameters:
   - `hosts_presets` — **Pins** (type=`profile_buttons`).
-  - `host_name` — **Host name** (type=`text`, default=`portal.itpgrad.ru`).
-  - `ip_address` — **IP address** (type=`text`, default=`192.168.0.130`).
+  - `host_name` — **Host name** (type=`text`).
+  - `ip_address` — **IP address** (type=`text`).
   - `bitrix_ports` — **Custom TCP ports** (type=`text`, default=`443`).
   - `bitrix_auto_scan_ports` — **Auto-scan open ports** (type=`checkbox`, default=true).
   - `bitrix_port_scan_candidates` — **Port scan candidates** (type=`text`, default=`80,443,8080,8443,8890,8891,8892`).
@@ -1041,8 +1032,8 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`safe`, risk_level=`readonly`
 - Parameters:
   - `hosts_presets` — **Pins** (type=`profile_buttons`).
-  - `host_name` — **Host name** (type=`text`, default=`portal.itpgrad.ru`).
-  - `ip_address` — **IP address** (type=`text`, default=`192.168.0.130`).
+  - `host_name` — **Host name** (type=`text`).
+  - `ip_address` — **IP address** (type=`text`).
   - `bitrix_ports` — **Custom TCP ports** (type=`text`, default=`443`).
   - `bitrix_auto_scan_ports` — **Auto-scan open ports** (type=`checkbox`, default=true).
   - `bitrix_port_scan_candidates` — **Port scan candidates** (type=`text`, default=`80,443,8080,8443,8890,8891,8892`).
@@ -1054,8 +1045,8 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`system_change`
 - Parameters:
   - `hosts_presets` — **Pins** (type=`profile_buttons`).
-  - `host_name` — **Host name** (type=`text`, default=`portal.itpgrad.ru`).
-  - `ip_address` — **IP address** (type=`text`, default=`192.168.0.130`).
+  - `host_name` — **Host name** (type=`text`).
+  - `ip_address` — **IP address** (type=`text`).
   - `bitrix_ports` — **Custom TCP ports** (type=`text`, default=`443`).
   - `bitrix_auto_scan_ports` — **Auto-scan open ports** (type=`checkbox`, default=true).
   - `bitrix_port_scan_candidates` — **Port scan candidates** (type=`text`, default=`80,443,8080,8443,8890,8891,8892`).
@@ -1067,8 +1058,8 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`system_change`
 - Parameters:
   - `hosts_presets` — **Pins** (type=`profile_buttons`).
-  - `host_name` — **Host name** (type=`text`, default=`portal.itpgrad.ru`).
-  - `ip_address` — **IP address** (type=`text`, default=`192.168.0.130`).
+  - `host_name` — **Host name** (type=`text`).
+  - `ip_address` — **IP address** (type=`text`).
   - `bitrix_ports` — **Custom TCP ports** (type=`text`, default=`443`).
   - `bitrix_auto_scan_ports` — **Auto-scan open ports** (type=`checkbox`, default=true).
   - `bitrix_port_scan_candidates` — **Port scan candidates** (type=`text`, default=`80,443,8080,8443,8890,8891,8892`).
@@ -1080,8 +1071,8 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`system_change`
 - Parameters:
   - `hosts_presets` — **Pins** (type=`profile_buttons`).
-  - `host_name` — **Host name** (type=`text`, default=`portal.itpgrad.ru`).
-  - `ip_address` — **IP address** (type=`text`, default=`192.168.0.130`).
+  - `host_name` — **Host name** (type=`text`).
+  - `ip_address` — **IP address** (type=`text`).
   - `bitrix_ports` — **Custom TCP ports** (type=`text`, default=`443`).
   - `bitrix_auto_scan_ports` — **Auto-scan open ports** (type=`checkbox`, default=true).
   - `bitrix_port_scan_candidates` — **Port scan candidates** (type=`text`, default=`80,443,8080,8443,8890,8891,8892`).
@@ -1093,7 +1084,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`system_change`
 - Parameters:
   - `policy_action` — **Action** (type=`radio`, default=`status`).
-    - Options: `status` — Check - show what opens what; `snapshot` — Save a snapshot of the current state; `export` — Make the current state the reference; `import` — Take the reference from a file; `apply` — Enable / repair the protection; `remove` — Turn the protection off; `cleanup` — Prune old backups; `open_profiles` — Open the reference folder; `open_policy` — Open the active policy folder; `open_backups` — Open the backup folder
+    - Options: `apply` — Enable / repair the protection; `remove` — Turn the protection off; `status` — Check - show what opens what; `snapshot` — Save a snapshot of the current state; `export` — Make the current state the reference; `import` — Take the reference from a file; `open_profiles` — Open the reference folder; `open_policy` — Open the active policy folder; `open_backups` — Open the backup folder; `cleanup` — Prune old backups
   - `profile_xml` — **Reference file** (type=`file`, default=`profiles\default_apps\AppAssociations.xml`).
   - `import_backup_xml` — **Saved snapshot** (type=`select`, default=``).
   - `import_profile_xml` — **File from another machine** (type=`file`, default=``).
@@ -1120,9 +1111,9 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`system_change`
 - Parameters:
   - `apps_action` — **Action** (type=`radio`, default=`status`).
-    - Options: `status` — Check - what is installed; `remove` — Remove selected apps; `keep_removed` — Remove and keep them removed; `restore` — Bring the apps back; `provision` — Repair for new profiles only; `allow_back` — Stop holding them removed; `rearm_check` — Run the re-apply check now; `open_logs` — Open the guard folder
-  - `apps` — **Applications** (type=`checkboxes`, default=`[ZuneMusic, ZuneVideo]`).
-    - Options: `ZuneMusic` — Media Player (Zune); `ZuneVideo` — Films & TV (Zune); `Photos` — Photos; `Clipchamp` — Clipchamp; `SoundRecorder` — Sound Recorder; `Camera` — Camera (used by scanners and QR flows); `Paint` — Paint (default for many image edits); `ScreenSketch` — Snipping Tool (Win+Shift+S); `GamingApp` — Xbox; `XboxGamingOverlay` — Xbox Game Bar; `XboxSpeechToTextOverlay` — Xbox speech overlay; `XboxIdentityProvider` — Xbox Identity Provider (games sign-in); `SolitaireCollection` — Solitaire Collection; `YourPhone` — Phone Link; `People` — People; `Teams` — Microsoft Teams; `OutlookForWindows` — Outlook for Windows; `BingNews` — News; `BingWeather` — Weather; `Getstarted` — Tips; `FeedbackHub` — Feedback Hub; `WindowsMaps` — Maps; `Copilot` — Copilot; `StickyNotes` — Sticky Notes; `Todos` — To Do; `OneNote` — OneNote for Windows; `Whiteboard` — Whiteboard; `PowerAutomateDesktop` — Power Automate; `QuickAssist` — Quick Assist (remote help); `DevHome` — Dev Home; `Family` — Microsoft Family
+    - Options: `remove` — Remove selected apps; `keep_removed` — Remove and keep them removed; `rearm_check` — Run the re-apply check now; `restore` — Bring the apps back; `provision` — Repair for new profiles only; `allow_back` — Stop holding them removed; `status` — Check - what is installed; `open_logs` — Open the guard folder
+  - `apps` — **Applications** (type=`checkboxes`, default=`[Photos, ZuneMusic, ZuneVideo, MediaPlayerLegacy, Paint, ScreenSketch]`).
+    - Options: `Photos` — Photos - opens pictures and videos; `ZuneMusic` — Media Player - opens music and videos; `ZuneVideo` — Films & TV - opens videos; `MediaPlayerLegacy` — Windows Media Player Legacy - the old player; `Paint` — Paint - takes pictures; the editor goes too; `ScreenSketch` — Snipping Tool - takes pictures; Win+Shift+S goes too; `OutlookForWindows` — Outlook for Windows - mail, mailto, calendar; `Teams` — Microsoft Teams - calls: tel, sip; `YourPhone` — Phone Link - calls and SMS; `Camera` — Camera - .jpg; scanners and QR need it; `Clipchamp` — Clipchamp - video editor; `OneNote` — OneNote for Windows - its notes; `SoundRecorder` — Sound Recorder; `GamingApp` — Xbox; `XboxGamingOverlay` — Xbox Game Bar; `XboxSpeechToTextOverlay` — Xbox speech overlay; `XboxIdentityProvider` — Xbox Identity Provider (games sign-in); `SolitaireCollection` — Solitaire Collection; `People` — People; `BingNews` — News; `BingWeather` — Weather; `Getstarted` — Tips; `FeedbackHub` — Feedback Hub; `WindowsMaps` — Maps; `Copilot` — Copilot; `StickyNotes` — Sticky Notes; `Todos` — To Do; `Whiteboard` — Whiteboard; `PowerAutomateDesktop` — Power Automate; `QuickAssist` — Quick Assist (remote help); `DevHome` — Dev Home; `Family` — Microsoft Family
   - `dry_run` — **Dry run** (type=`checkbox`, default=true).
 
 ### Default apps and Microsoft apps > Edge
@@ -1133,7 +1124,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Parameters:
   - `edge_owned_now` — **Что сейчас закреплено за Edge** (type=`info_badges`).
   - `edge_action` — **Action** (type=`radio`, default=`status`).
-    - Options: `status` — Check - what Edge is allowed to do; `apply` — Stop Edge from claiming associations; `revert` — Give Edge its freedom back; `webview2` — Repair WebView2 Runtime
+    - Options: `apply` — Stop Edge from claiming associations; `revert` — Give Edge its freedom back; `webview2` — Repair WebView2 Runtime; `status` — Check - what Edge is allowed to do
   - `edge_level` — **How far to go** (type=`radio`, default=`calm`).
     - Options: `calm` — Calm - stop the nagging and the background; `quiet` — Quiet - also turn off side panels and extras
   - `dry_run` — **Dry run** (type=`checkbox`, default=true).
@@ -1145,7 +1136,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`system_change`
 - Parameters:
   - `guard_action` — **Action** (type=`radio`, default=`status`).
-    - Options: `status` — Check; `enable` — Turn on; `disable` — Turn off; `run_check` — Check the defaults right now
+    - Options: `enable` — Turn on; `disable` — Turn off; `status` — Check; `run_check` — Check the defaults right now
   - `guard_targets` — **Targets** (type=`checkboxes`, default=`[Drift]`).
     - Options: `Drift` — Association change tracking; `Defender` — Defender exclusions for Audion folders
 
@@ -1662,9 +1653,9 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`safe`, risk_level=`readonly`
 - Parameters:
   - `cert_store` — **Certificate store** (type=`select`, default=`CurrentUser\My`).
-    - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Options: `CurrentUser\My` — My - personal; `CurrentUser\Root` — Root - trusted roots; `CurrentUser\CA` — CA - intermediate; `LocalMachine\My` — My - personal; `LocalMachine\Root` — Root - trusted roots; `LocalMachine\CA` — CA - intermediate
   - `cert_backup_dir` — **Certificates folder** (type=`folder`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
   - `import_file` — **Import file (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Import target store** (type=`select`, default=`CurrentUser\My`).
     - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1676,9 +1667,9 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`secret_export`
 - Parameters:
   - `cert_store` — **Certificate store** (type=`select`, default=`CurrentUser\My`).
-    - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Options: `CurrentUser\My` — My - personal; `CurrentUser\Root` — Root - trusted roots; `CurrentUser\CA` — CA - intermediate; `LocalMachine\My` — My - personal; `LocalMachine\Root` — Root - trusted roots; `LocalMachine\CA` — CA - intermediate
   - `cert_backup_dir` — **Certificates folder** (type=`folder`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
   - `import_file` — **Import file (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Import target store** (type=`select`, default=`CurrentUser\My`).
     - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1690,9 +1681,9 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`safe`, risk_level=`project_write`
 - Parameters:
   - `cert_store` — **Certificate store** (type=`select`, default=`CurrentUser\My`).
-    - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Options: `CurrentUser\My` — My - personal; `CurrentUser\Root` — Root - trusted roots; `CurrentUser\CA` — CA - intermediate; `LocalMachine\My` — My - personal; `LocalMachine\Root` — Root - trusted roots; `LocalMachine\CA` — CA - intermediate
   - `cert_backup_dir` — **Certificates folder** (type=`folder`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
   - `import_file` — **Import file (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Import target store** (type=`select`, default=`CurrentUser\My`).
     - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1704,9 +1695,9 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`system_change`
 - Parameters:
   - `cert_store` — **Certificate store** (type=`select`, default=`CurrentUser\My`).
-    - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Options: `CurrentUser\My` — My - personal; `CurrentUser\Root` — Root - trusted roots; `CurrentUser\CA` — CA - intermediate; `LocalMachine\My` — My - personal; `LocalMachine\Root` — Root - trusted roots; `LocalMachine\CA` — CA - intermediate
   - `cert_backup_dir` — **Certificates folder** (type=`folder`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
   - `import_file` — **Import file (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Import target store** (type=`select`, default=`CurrentUser\My`).
     - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1718,9 +1709,9 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`system_change`
 - Parameters:
   - `cert_store` — **Certificate store** (type=`select`, default=`CurrentUser\My`).
-    - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Options: `CurrentUser\My` — My - personal; `CurrentUser\Root` — Root - trusted roots; `CurrentUser\CA` — CA - intermediate; `LocalMachine\My` — My - personal; `LocalMachine\Root` — Root - trusted roots; `LocalMachine\CA` — CA - intermediate
   - `cert_backup_dir` — **Certificates folder** (type=`folder`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
   - `import_file` — **Import file (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Import target store** (type=`select`, default=`CurrentUser\My`).
     - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1732,9 +1723,9 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`system_change`
 - Parameters:
   - `cert_store` — **Certificate store** (type=`select`, default=`CurrentUser\My`).
-    - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Options: `CurrentUser\My` — My - personal; `CurrentUser\Root` — Root - trusted roots; `CurrentUser\CA` — CA - intermediate; `LocalMachine\My` — My - personal; `LocalMachine\Root` — Root - trusted roots; `LocalMachine\CA` — CA - intermediate
   - `cert_backup_dir` — **Certificates folder** (type=`folder`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
   - `import_file` — **Import file (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Import target store** (type=`select`, default=`CurrentUser\My`).
     - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1746,9 +1737,9 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`safe`, risk_level=`readonly`
 - Parameters:
   - `cert_store` — **Certificate store** (type=`select`, default=`CurrentUser\My`).
-    - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
+    - Options: `CurrentUser\My` — My - personal; `CurrentUser\Root` — Root - trusted roots; `CurrentUser\CA` — CA - intermediate; `LocalMachine\My` — My - personal; `LocalMachine\Root` — Root - trusted roots; `LocalMachine\CA` — CA - intermediate
   - `cert_backup_dir` — **Certificates folder** (type=`folder`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
   - `import_file` — **Import file (.pfx/.cer/.crt/.sst)** (type=`file`, default=``).
   - `import_store` — **Import target store** (type=`select`, default=`CurrentUser\My`).
     - Options: `CurrentUser\My` — CurrentUser\My (personal); `LocalMachine\My` — LocalMachine\My (personal); `CurrentUser\Root` — CurrentUser\Root (trusted roots); `LocalMachine\Root` — LocalMachine\Root (trusted roots); `CurrentUser\CA` — CurrentUser\CA (intermediate); `LocalMachine\CA` — LocalMachine\CA (intermediate)
@@ -1863,7 +1854,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `migration_folder` — **Migration folder** (type=`folder`, default=``).
   - `profile_name` — **Machine name for the folder** (type=`text`, default=``).
   - `user_name` — **Windows user** (type=`text`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
 
 ### Machine migration > Check access after a move
 
@@ -1874,7 +1865,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `migration_folder` — **Migration folder** (type=`folder`, default=``).
   - `profile_name` — **Machine name for the folder** (type=`text`, default=``).
   - `user_name` — **Windows user** (type=`text`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
 
 ### Machine migration > Export the migration
 
@@ -1885,7 +1876,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `migration_folder` — **Migration folder** (type=`folder`, default=``).
   - `profile_name` — **Machine name for the folder** (type=`text`, default=``).
   - `user_name` — **Windows user** (type=`text`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
 
 ### Machine migration > Import the migration
 
@@ -1896,7 +1887,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `migration_folder` — **Migration folder** (type=`folder`, default=``).
   - `profile_name` — **Machine name for the folder** (type=`text`, default=``).
   - `user_name` — **Windows user** (type=`text`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
 
 ### Machine migration > Open migration folder
 
@@ -1907,37 +1898,7 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
   - `migration_folder` — **Migration folder** (type=`folder`, default=``).
   - `profile_name` — **Machine name for the folder** (type=`text`, default=``).
   - `user_name` — **Windows user** (type=`text`, default=``).
-  - `pfx_password` — **PFX password** (type=`text`, default=``).
-
-### Utilities > Documentation PDF > Preview PDF export plan
-
-- Operation id: `docs_pdf_plan`
-- Description: Dry run: list Markdown sources and target PDF files without writing PDFs.
-- Risk: kind=`safe`, risk_level=`readonly`
-- Parameters:
-  - `docs_pdf_theme` — **Theme** (type=`select`, default=`both`).
-    - Options: `both` — Both: dark + light-sand; `dark` — Dark; `light-sand` — Light Sand
-  - `docs_pdf_include_agent_instructions` — **Include agent instructions** (type=`checkbox`, default=true).
-
-### Utilities > Documentation PDF > Generate docs PDFs
-
-- Operation id: `docs_pdf_render`
-- Description: Render root guides, docs\*.md, GitHub README files and optional agent instructions into docs\PDF. Markdown remains the source of truth.
-- Risk: kind=`safe`, risk_level=`project_write`
-- Parameters:
-  - `docs_pdf_theme` — **Theme** (type=`select`, default=`both`).
-    - Options: `both` — Both: dark + light-sand; `dark` — Dark; `light-sand` — Light Sand
-  - `docs_pdf_include_agent_instructions` — **Include agent instructions** (type=`checkbox`, default=true).
-
-### Utilities > Documentation PDF > Open docs PDF folder
-
-- Operation id: `docs_pdf_open`
-- Description: Open docs\PDF.
-- Risk: kind=`safe`, risk_level=`readonly`
-- Parameters:
-  - `docs_pdf_theme` — **Theme** (type=`select`, default=`both`).
-    - Options: `both` — Both: dark + light-sand; `dark` — Dark; `light-sand` — Light Sand
-  - `docs_pdf_include_agent_instructions` — **Include agent instructions** (type=`checkbox`, default=true).
+  - `pfx_password` — **PFX password** (type=`password`, default=``).
 
 ### Utilities > ripgrep version
 
@@ -1993,14 +1954,14 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 ### Maintenance & Cleanup > Cache Cleaner > Measure caches
 
 - Operation id: `cache_cleaner_audit`
-- Description: Measure pip, npm, NuGet, Temp older than 24 h and Adobe media cache; change nothing.
+- Description: Measure pip, npm, NuGet, Temp of the user and of Windows older than 24 h, Claude Code sessions idle for 24 h and Adobe media cache; change nothing.
 - Risk: kind=`safe`, risk_level=`readonly`
 - Parameters: none.
 
 ### Maintenance & Cleanup > Cache Cleaner > Clear caches
 
 - Operation id: `cache_cleaner_clean`
-- Description: Clear pip, npm, NuGet http cache, Temp older than 24 h (files in use stay) and Adobe media cache (skipped while Adobe video apps run).
+- Description: Clear pip, npm, NuGet http cache, Temp of the user and of Windows older than 24 h (files in use stay; the Windows Temp needs administrator rights), Claude Code sessions idle for 24 h and Adobe media cache (skipped while Adobe video apps run).
 - Risk: kind=`dangerous`, risk_level=`user_write`
 - Parameters: none.
 
@@ -2008,6 +1969,20 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 
 - Operation id: `cache_cleaner_clean_nuget`
 - Description: Same as Clear caches plus ~/.nuget/packages; the next build downloads every package again.
+- Risk: kind=`dangerous`, risk_level=`user_write`
+- Parameters: none.
+
+### Maintenance & Cleanup > Cache Cleaner > Clear Temp older than 24 h
+
+- Operation id: `cache_cleaner_temp`
+- Description: Clear the user Temp and the Windows Temp older than 24 h and the Claude Code sessions idle for 24 h (%TEMP%\claude); a session at work and the files in use stay. The Windows Temp needs administrator rights and is skipped without them.
+- Risk: kind=`dangerous`, risk_level=`user_write`
+- Parameters: none.
+
+### Maintenance & Cleanup > Cache Cleaner > Clear Premiere cache
+
+- Operation id: `cache_cleaner_adobe`
+- Description: Clear the media cache of Premiere Pro and the other Adobe video apps: Media Cache Files, Media Cache, Peak Files - in the usual place and where the preferences of Premiere moved it. Skipped while Premiere Pro, After Effects, Media Encoder or Audition runs.
 - Risk: kind=`dangerous`, risk_level=`user_write`
 - Parameters: none.
 
@@ -2053,14 +2028,14 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 - Risk: kind=`dangerous`, risk_level=`destructive`
 - Parameters: none.
 
-### Maintenance & Cleanup > Clear Workbench workspace
+### Maintenance & Cleanup > Clear workspace
 
 - Operation id: `cleanup_workspace`
 - Description: Delete only files inside the managed workspace folder.
 - Risk: kind=`dangerous`, risk_level=`destructive`
 - Parameters: none.
 
-### Maintenance > Clear Workbench I/O
+### Maintenance > Clear I/O
 
 - Operation id: `cleanup_input_output`
 - Description: Delete contents of managed input and output folders.

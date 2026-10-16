@@ -18,11 +18,10 @@ echo   AUDION DEVOPS TOOLS - РУССКИЙ ЛАУНЧЕР ПРОЕКТА
 echo ======================================================================
 echo Root: %BASE_DIR%
 echo.
-echo [1] Запустить GUI
+echo [1] Запустить окно
 echo [2] Проверить окружение
-echo [3] NiceGUI smoke
+echo [3] Самопроверка окна
 echo [4] Builder проекта
-echo [5] Tools/service launcher
 echo [6] WSL Toolkit launcher
 echo [7] Bitrix hosts launcher
 echo [8] Default Apps Guard launcher
@@ -33,31 +32,34 @@ echo [C] Открыть logs
 echo D - Codex cleanup
 echo E - Python cleanup
 echo F - Association Defense launcher
-echo G - Docs PDF export
 echo 0 - Exit
 echo.
-choice /C 123456789ABCDEFG0 /N /M "Выбор: "
-if errorlevel 17 exit /b 0
-if errorlevel 16 goto DOCS_PDF_MENU
-if errorlevel 15 goto ASSOCIATION_DEFENSE_MENU
-if errorlevel 14 goto PYTHON_CLEANUP_MENU
-if errorlevel 13 goto CODEX_CLEANUP_MENU
-if errorlevel 12 goto OPEN_LOGS
-if errorlevel 11 goto OPEN_DOCS
-if errorlevel 10 goto OPEN_ROOT
-if errorlevel 9 goto HARDWARE_MENU
-if errorlevel 8 goto DEFAULT_APPS_MENU
-if errorlevel 7 goto BITRIX_MENU
-if errorlevel 6 goto WSL_MENU
-if errorlevel 5 goto TOOLS
+choice /C 12346789ABCDEF0 /N /M "Выбор: "
+if errorlevel 15 exit /b 0
+if errorlevel 14 goto ASSOCIATION_DEFENSE_MENU
+if errorlevel 13 goto PYTHON_CLEANUP_MENU
+if errorlevel 12 goto CODEX_CLEANUP_MENU
+if errorlevel 11 goto OPEN_LOGS
+if errorlevel 10 goto OPEN_DOCS
+if errorlevel 9 goto OPEN_ROOT
+if errorlevel 8 goto HARDWARE_MENU
+if errorlevel 7 goto DEFAULT_APPS_MENU
+if errorlevel 6 goto BITRIX_MENU
+if errorlevel 5 goto WSL_MENU
 if errorlevel 4 goto BUILDER
-if errorlevel 3 goto GUI_SMOKE
+if errorlevel 3 goto WINDOW_CHECK
 if errorlevel 2 goto DOCTOR
 if errorlevel 1 goto GUI
 goto MAIN
 
+rem The window opens the way it opens everywhere: through Start.exe, which asks for the rights once.
 :GUI
-call "%BASE_DIR%\launcher_gui.cmd"
+if exist "%BASE_DIR%\Start.exe" (
+  start "" "%BASE_DIR%\Start.exe"
+) else (
+  echo [ОШИБКА] Рядом с проектом нет Start.exe: его делает install\Build-StartLauncher.cmd.
+  if not defined AUDION_NO_PAUSE pause
+)
 goto MAIN
 
 :DOCTOR
@@ -65,17 +67,32 @@ call :RUN_PY "%CORE_DIR%\doctor.py"
 if not defined AUDION_NO_PAUSE pause
 goto MAIN
 
-:GUI_SMOKE
-call :RUN_PY "%CORE_DIR%\ui_nicegui\app.py" --smoke
+rem The check of the built window without a screen: every place of an operation finds its operation
+rem and its fields in the manifest of this version.
+:WINDOW_CHECK
+if not exist "%BASE_DIR%\App\AudionDevOpsTools.exe" goto WINDOW_MISSING
+set "CHECK_FILE=%TEMP%\devops_tools_self_test_%RANDOM%%RANDOM%.txt"
+if exist "%CHECK_FILE%" del /f /q "%CHECK_FILE%" >nul 2>nul
+rem "start /wait": a windowed program is not waited for otherwise, and its exit code is lost.
+start "" /wait "%BASE_DIR%\App\AudionDevOpsTools.exe" --self-test --to "%CHECK_FILE%"
+set "CHECK_RC=%errorlevel%"
+if not exist "%CHECK_FILE%" goto WINDOW_CHECK_DONE
+rem find.exe of Windows by its path: with Git ahead in PATH "find" is GNU find, and it walks the whole drive.
+for /f %%N in ('%SystemRoot%\System32\findstr.exe /B /C:"ok " "%CHECK_FILE%" ^| %SystemRoot%\System32\find.exe /C /V ""') do echo [OK] Окно рисует манифест: пройдено проверок - %%N.
+%SystemRoot%\System32\findstr.exe /B /C:"FAIL" "%CHECK_FILE%"
+del /f /q "%CHECK_FILE%" >nul 2>nul
+:WINDOW_CHECK_DONE
+echo Код выхода: %CHECK_RC%
+if not defined AUDION_NO_PAUSE pause
+goto MAIN
+
+:WINDOW_MISSING
+echo [ОШИБКА] Окно не собрано: App\AudionDevOpsTools.exe. Его собирает install\Build-App.cmd.
 if not defined AUDION_NO_PAUSE pause
 goto MAIN
 
 :BUILDER
 call "%BASE_DIR%\builder_main.cmd"
-goto MAIN
-
-:TOOLS
-call "%BASE_DIR%\launcher_tools.cmd"
 goto MAIN
 
 :OPEN_ROOT
@@ -109,10 +126,6 @@ goto MAIN
 
 :ASSOCIATION_DEFENSE_MENU
 call "%BASE_DIR%\cli\launcher_association_defense.cmd"
-goto MAIN
-
-:DOCS_PDF_MENU
-call "%BASE_DIR%\cli\launcher_docs_pdf.cmd"
 goto MAIN
 
 :CODEX_CLEANUP_MENU

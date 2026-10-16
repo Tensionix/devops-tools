@@ -1,24 +1,28 @@
 {
   "project": "Audion DevOps Tools",
-  "source_file": "E:\\TOOLS\\PROJECTS\\_incoming_gpt_image_icons\\Сгенерированное изображение 2.png",
-  "pipeline": "GPT-Image bitmap candidate saved from UI, normalized to 1024 PNG and multi-size ICO",
+  "source_file": "E:\\TOOLS\\output\\audion-devops-tools-icon-final\\audion-devops-tools.svg",
+  "pipeline": "Vector SVG master (flat terminal, sea-green gear, orange chevron) exported to a 1024 PNG and a multi-size ICO; every frame decoded and matched",
   "sizes": {
+    "app.svg": "1024x1024 viewBox",
     "app.png": "1024x1024",
     "app.ico": [
       "16x16",
+      "20x20",
       "24x24",
       "32x32",
+      "40x40",
       "48x48",
       "64x64",
+      "96x96",
       "128x128",
       "256x256"
     ]
   },
+  "ico_sha256": "3289be589f167fc69e6a226f37fa01df8b7253f395e7ec9d3471e06f1b16e81f",
   "style_rules": [
-    "background #17212B",
-    "maximum 3 objects",
-    "no repeated objects",
-    "no text",
-    "bitmap-first"
+    "flat silhouettes with smooth gradients",
+    "no shadows, bevels, highlights or extruded edges",
+    "transparent corners, opaque interior",
+    "no text"
   ]
 }

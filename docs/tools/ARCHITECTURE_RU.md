@@ -20,12 +20,14 @@ Audion DevOps Tools - не generic Windows tuner и не debloater. Это proje
 ## Основные Файлы
 
 ```text
-config\tool_manifest.yaml          GUI command tree, fields, risk metadata
-config\gui_settings.yaml           startup GUI settings
-config\ui_colors.yaml              theme catalog
+Start.exe                         starts the window App\AudionDevOpsTools.exe
+App\                              the window and AudionPs.exe, the PowerShell of the program
+Source\                           the sources of the window (C#, Avalonia)
+devops_cli.cmd                    the console command behind every button
+config\tool_manifest.yaml          command tree, fields, risk metadata
+config\window_layout.yaml          sections, pages and cards of the window
 config\terminal_commands.json      terminal command cache
-system_core\ui_nicegui\app.py      NiceGUI UI
-system_core\ui_nicegui\window.py   pywebview wrapper
+system_core\cli.py                 the console command
 system_core\core\jobs.py           operation runner, terminal decoding
 system_core\core\paths.py          first-class project folders, including backup\
 system_core\services\devops_tools.py
@@ -48,24 +50,24 @@ GUI не должен содержать системную логику. Он �
 
 Не подключай старые соседние папки как runtime dependency. Исторические папки можно читать только для сравнения или восстановления по прямой просьбе.
 
-## GUI Boundary
+## Граница окна
 
-Текущий GUI построен на `operation_groups`.
+Окно на Avalonia (`Source\`) — лицо консольной команды `devops_cli.cmd`. Где стоит операция, говорит
+`config\window_layout.yaml`: раздел → страница → карточка (`op`, `switch`, `pick`, `guests`), рамка `block`,
+тон `tone`; что она делает — `operation_groups` манифеста.
 
 Правила:
 
-- root/child navigation остаётся внутри command area;
-- status, workspace controls и terminal остаются стабильными;
-- leaf command показывает параметры и финальные `Запустить` / `Назад`;
+- разделы, строки ИСТОЧНИК и НАЗНАЧЕНИЕ и терминал остаются на месте, меняется только страница;
 - поля берутся из YAML `fields`;
 - `fields.id` уникален по смыслу;
 - GUI не переписывает YAML runtime-значениями;
 - длинные/опасные описания идут в hint/tooltip, а не в название кнопки;
 - видимое описание команды компактное и может быть автоматически сжато до 1-2 строк, но tooltip и dangerous-confirmation сохраняют полный смысл;
 - `action_group` показывает логическую рамку вокруг пар/pipeline (`backup / restore`, `export / import`, `block / unblock`).
-- `action_tone` мягко кодирует силу конкретной кнопки цветовым акцентом: `friendly`, `medium`, `danger`. Акцент состоит из слабой заливки и читаемой обводки; это приборная подсказка, не замена `kind`, `risk_level` и подтверждений.
+- `tone: run` — главное действие рамки (залитая кнопка), `tone: burn` — удаляет; это приборная подсказка, не замена `kind`, `risk_level` и подтверждений.
 
-Подробно про дерево: `docs\GUI_TREE_REFACTOR_RU.md`.
+Подробно о раскладке — шапка `config\window_layout.yaml`.
 
 ## Risk Model
 
@@ -84,9 +86,7 @@ Dangerous CLI-запуск должен требовать `--yes-i-understand`.
 
 ## Документационная Модель
 
-`USER_GUIDE_RU.md` - полный пользовательский guide и parameter reference.
-
-PDF-копии пользовательских гайдов и инструкций генерируются через `cli\launcher_docs_pdf.cmd` / `system_core\docs_pdf.py` в `docs\PDF`. Dry-run автономен. Для реального рендера путь к внешнему `dev_markdown_pdf_engine.py` задаётся через `--engine`, `AUDION_MARKDOWN_PDF_ENGINE` или находится рядом с семейством проектов Audion; layout/theme общего engine остаются source of truth для PDF-оформления.
+`USER_GUIDE_RU.md` - пользовательский guide; `COMMANDS_RU.md` - каждая операция с её полями.
 
 Runbook-и в `docs` нужны для быстрого поиска и безопасного исполнения:
 
@@ -104,10 +104,8 @@ Runbook-и в `docs` нужны для быстрого поиска и безо
 
 Internal/dev docs:
 
-- `MANIFEST_REFERENCE_RU.md`;
-- `GUI_TREE_REFACTOR_RU.md`;
-- `SMOKE_TEST_CHECKLIST_RU.md`;
-- `KNOWN_PITFALLS_RU.md`;
+- `docs\SMOKE_TEST_RU.md`;
+- `SKILL.md` в корне;
 - `MEMORY.md`.
 
 ## Проверка После Правок
@@ -116,7 +114,7 @@ Internal/dev docs:
 
 ```cmd
 runtime\python.exe system_core\doctor.py
-runtime\python.exe -m py_compile system_core\ui_nicegui\app.py
+runtime\python.exe -m pytest -q
 ```
 
-Для GUI/layout изменений дополнительно использовать встроенный браузер и чеклист `docs\SMOKE_TEST_CHECKLIST_RU.md`.
+Для изменений окна — сборка `install\Build-App.cmd` и список проверок `docs\SMOKE_TEST_RU.md`.

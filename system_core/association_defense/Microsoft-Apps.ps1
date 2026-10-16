@@ -10,6 +10,18 @@
         Add-AppxPackage -Register <manifest> / -RegisterByFamilyName
         Add-AppxProvisionedPackage -Online (re-provisioning for new profiles)
 
+    One entry is no package but a component of Windows: Windows Media Player
+    Legacy, the feature on demand Media.WindowsMediaPlayer (Settings > System >
+    Optional features), with the documented DISM cmdlets:
+
+        Get-WindowsCapability -Online / Remove-WindowsCapability -Online
+        Add-WindowsCapability -Online (back from Windows Update)
+        Disable-/Enable-WindowsOptionalFeature WindowsMediaPlayer, on builds that
+        still carry it as an optional feature
+
+    The optional feature MediaPlayback (Media Features) is never touched: the
+    playback of many programs stands on it.
+
     Removing the installed package frees the file associations; removing the
     provisioned copy keeps new user profiles clean. Neither call survives a
     Windows feature update on its own - pair this brick with Appx-Rearm.ps1
@@ -57,6 +69,8 @@ if (-not (Test-Path $common)) {
 $AppCatalog = [ordered]@{
     'ZuneMusic'             = @{ Package = 'Microsoft.ZuneMusic';                        Family = 'media';  Title = 'Media Player (Zune)';        ProductId = '9WZDNCRFJ3PT' }
     'ZuneVideo'             = @{ Package = 'Microsoft.ZuneVideo';                        Family = 'media';  Title = 'Films & TV (Zune)';          ProductId = '9WZDNCRFJ3P2' }
+    # A component of Windows, not a package: it takes the audio and video files as the Zune pair does.
+    'MediaPlayerLegacy'     = @{ Component = 'Media.WindowsMediaPlayer'; Feature = 'WindowsMediaPlayer'; Program = 'Windows Media Player\wmplayer.exe'; Family = 'media';  Title = 'Media Player Legacy' }
     'Photos'                = @{ Package = 'Microsoft.Windows.Photos';                   Family = 'media';  Title = 'Photos';                     ProductId = '9WZDNCRFJBH4' }
     'Clipchamp'             = @{ Package = 'Clipchamp.Clipchamp';                        Family = 'media';  Title = 'Clipchamp';                  ProductId = '9P1J8S7CCWWT' }
     'SoundRecorder'         = @{ Package = 'Microsoft.WindowsSoundRecorder';             Family = 'media';  Title = 'Sound Recorder';             ProductId = '9WZDNCRFHWKN' }
@@ -178,6 +192,92 @@ function Test-PackageInstalled {
     return (@(Get-InstalledPackages -Name $Name).Count -gt 0)
 }
 
+function Test-IsComponent {
+    param([Parameter(Mandatory)][hashtable]$Entry)
+    return $Entry.ContainsKey('Component')
+}
+
+# The state of a component of Windows: the capability (only an elevated PowerShell can read it), the
+# old optional feature where a build still has it, and - when the capability cannot be read - whether
+# its program is on the disk.
+function Get-ComponentState {
+    param([Parameter(Mandatory)][hashtable]$Entry)
+    $capability = $null
+    $known = $true
+    try {
+        $capability = @(Get-WindowsCapability -Online -ErrorAction Stop |
+            Where-Object { $_.Name -like "$($Entry.Component)~*" }) | Select-Object -First 1
+    } catch {
+        $known = $false
+        Write-LimitedQueryWarning
+    }
+    $feature = Get-CimInstance -ClassName Win32_OptionalFeature -Filter ("Name='{0}'" -f $Entry.Feature) -ErrorAction SilentlyContinue
+    $installed = $false
+    if ($known) {
+        $installed = [bool]($capability -and [string]$capability.State -eq 'Installed')
+    } else {
+        foreach ($folder in @($env:ProgramFiles, ${env:ProgramFiles(x86)})) {
+            if ($folder -and (Test-Path -LiteralPath (Join-Path $folder $Entry.Program))) { $installed = $true }
+        }
+    }
+    return [pscustomobject]@{
+        Capability = $capability
+        Known      = $known
+        Installed  = $installed
+        Feature    = $feature
+        FeatureOn  = [bool]($feature -and [int]$feature.InstallState -eq 1)
+    }
+}
+
+$script:ComponentFailed = $false
+
+function Remove-TargetComponent {
+    param([Parameter(Mandatory)][hashtable]$Entry)
+    $state = Get-ComponentState -Entry $Entry
+    if (Test-DryRun -DryRun:$DryRun -Action "remove the Windows component $($Entry.Component) (installed=$($state.Installed), optional feature on=$($state.FeatureOn))") {
+        return
+    }
+    if (-not $state.Installed -and -not $state.FeatureOn) {
+        Write-Line "  $($Entry.Title): already absent." 'DarkGray'
+        return
+    }
+    Write-Line "Removing $($Entry.Title) ($($Entry.Component)) ..." 'Cyan'
+    $restart = $false
+    try {
+        if ($state.Installed -and $state.Capability) {
+            $done = Remove-WindowsCapability -Online -Name $state.Capability.Name -ErrorAction Stop
+            if ($done.RestartNeeded) { $restart = $true }
+        }
+        if ($state.FeatureOn) {
+            $done = Disable-WindowsOptionalFeature -Online -FeatureName $Entry.Feature -NoRestart -ErrorAction Stop
+            if ($done.RestartNeeded) { $restart = $true }
+        }
+    } catch {
+        Write-Line "  removal failed: $($_.Exception.Message)" 'Red'
+        $script:ComponentFailed = $true
+        return
+    }
+    if ($restart) { Write-Line "  a restart of Windows finishes the removal." 'DarkYellow' }
+}
+
+# Back from Windows Update: the capability is fetched again, the old optional feature switched on.
+function Restore-TargetComponent {
+    param([Parameter(Mandatory)][hashtable]$Entry)
+    $state = Get-ComponentState -Entry $Entry
+    try {
+        if (-not $state.Installed -and $state.Capability) {
+            Write-Line "  installing $($state.Capability.Name) from Windows Update ..." 'Cyan'
+            [void](Add-WindowsCapability -Online -Name $state.Capability.Name -ErrorAction Stop)
+        }
+        if ($state.Feature -and -not $state.FeatureOn) {
+            [void](Enable-WindowsOptionalFeature -Online -FeatureName $Entry.Feature -All -NoRestart -ErrorAction Stop)
+        }
+    } catch {
+        Write-Line "  restore failed: $($_.Exception.Message)" 'Yellow'
+    }
+    return (Get-ComponentState -Entry $Entry).Installed
+}
+
 function Show-Status {
     Write-Line "Microsoft inbox apps status" 'Cyan'
     Write-Line ("-" * 74)
@@ -188,6 +288,17 @@ function Show-Status {
         Write-Line ("[{0}]" -f $family.ToUpperInvariant()) 'DarkCyan'
         foreach ($key in $keys) {
             $entry = Get-CatalogEntry -Key $key
+            if (Test-IsComponent -Entry $entry) {
+                $state = Get-ComponentState -Entry $entry
+                $present = $state.Installed -or $state.FeatureOn
+                $instMark = if ($present) { 'INSTALLED' } else { 'absent' }
+                $what = "component $($entry.Component)"
+                if ($state.Feature) { $what += " + optional feature $($entry.Feature)" }
+                if (-not $state.Known) { $what += ' (read by its program on the disk)' }
+                $color = if ($present) { 'Yellow' } else { 'Green' }
+                Write-Host ("  {0,-22} {1,-12} {2,-13} {3}" -f $entry.Title, $instMark, 'n/a', $what) -ForegroundColor $color
+                continue
+            }
             $installed = @(Get-InstalledPackages -Name $entry.Package)
             $prov = @(Get-ProvisionedPackages -Name $entry.Package)
             $instMark = if ($installed.Count -gt 0) { 'INSTALLED' } else { 'absent' }
@@ -329,11 +440,15 @@ function Invoke-Remove {
         if ($entry.ContainsKey('Caution') -and $entry.Caution -and -not $DryRun) {
             Write-Line "NOTE: $($entry.Title) is used by other Windows workflows; removing it can break them." 'DarkYellow'
         }
-        Remove-TargetApp -Entry $entry
+        if (Test-IsComponent -Entry $entry) { Remove-TargetComponent -Entry $entry } else { Remove-TargetApp -Entry $entry }
     }
     if ($DryRun) {
         Write-Line "Dry-run complete. Nothing was removed." 'DarkCyan'
         return
+    }
+    if ($script:ComponentFailed) {
+        Write-Line "A component of Windows could not be removed: see above." 'Red'
+        exit 1
     }
     Write-Line "Selected apps removed (AllUsers + provisioned)." 'Green'
     Write-Line "Windows feature updates can restore them: enable Appx-Rearm.ps1 to re-apply after every build change." 'DarkGray'
@@ -344,6 +459,14 @@ function Invoke-Restore {
     $missing = 0
     foreach ($key in $SelectedKeys) {
         $entry = Get-CatalogEntry -Key $key
+        if (Test-IsComponent -Entry $entry) {
+            Write-Line "Restoring $($entry.Title) ($($entry.Component)) ..." 'Cyan'
+            if (-not (Restore-TargetComponent -Entry $entry)) {
+                Write-Line "  still absent: Settings > System > Optional features > Add a feature." 'Yellow'
+                $missing++
+            }
+            continue
+        }
         Write-Line "Restoring $($entry.Title) ($($entry.Package)) ..." 'Cyan'
         if (Test-PackageInstalled -Name $entry.Package) {
             Write-Line "  already installed." 'DarkGray'
@@ -374,6 +497,10 @@ function Invoke-Provision {
     $failed = 0
     foreach ($key in $SelectedKeys) {
         $entry = Get-CatalogEntry -Key $key
+        if (Test-IsComponent -Entry $entry) {
+            Write-Line "  $($entry.Title): a component of Windows, it serves every profile - nothing to provision." 'DarkGray'
+            continue
+        }
         Write-Line "Provisioning $($entry.Title) ($($entry.Package)) ..." 'Cyan'
         if (-not (Add-TargetProvisioning -Entry $entry)) { $failed++ }
     }

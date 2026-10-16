@@ -191,8 +191,6 @@ licenses/
 # No marker needed: these are never expected to exist in a fresh clone.
 node_modules/
 ._runtime/
-_pwsh_tmp/
-system_core/powershell/
 temp/
 tmp/
 backup/
@@ -218,3 +216,18 @@ config/rclone/
 # Generated documents: rebuilt by Audion Build PDF Render, shipped in archives.
 Docs/PDF/
 docs/PDF/
+
+# The window on Avalonia: its build output and the program built from it are not source.
+Source/bin/
+Source/obj/
+Source/Ps/bin/
+Source/Ps/obj/
+/App/
+# The rule `tools/` above hides a folder of that name at any depth: the generator of the signs of the window is source.
+!Source/Tools/
+# The window on Avalonia: its markup, its projects and what it draws are source, beside its code.
+!Source/**/*.axaml
+!Source/*.csproj
+!Source/Ps/*.csproj
+!Source/app.manifest
+!Source/Assets/**

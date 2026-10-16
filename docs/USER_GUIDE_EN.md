@@ -7,7 +7,7 @@
 - [Quick Start](#quick-start)
 - [The Central Rule](#the-central-rule)
 - [Risk and Confirmation](#risk-and-confirmation)
-- [Reading the Interface](#reading-the-interface)
+- [Reading the Window](#reading-the-window)
 - [Where the Working Data Lives](#where-the-working-data-lives)
 - [The Sections](#the-sections)
 - [The Terminal](#the-terminal)
@@ -20,34 +20,28 @@ what to read about each.
 ## Quick Start
 
 ```cmd
-launcher_gui.cmd
+Start.exe
 ```
 
-The window comes up as administrator — most operations need it: deployment
-servicing, Linux subsystem features, the `hosts` file, network adapters, default
-and driver policies, the recovery environment, disk work.
+`Start.exe` asks for administrator rights once — most operations need them:
+deployment servicing, Linux subsystem features, the `hosts` file, network
+adapters, default and driver policies, the recovery environment, disk work.
+Answering "no" opens the window without them: the rights badge shows it, and a
+click on it restarts the window with the rights.
 
-Read-only, without the elevation prompt:
+Without the question about the rights:
 
 ```cmd
 set AUDION_GUI_NO_ELEVATE=1
-launcher_gui.cmd
+Start.exe
 ```
-
-A different Python:
-
-```cmd
-set AUDION_GUI_PYTHON=C:\Path\To\python.exe
-launcher_gui.cmd
-```
-
-The window opens at `http://127.0.0.1:8092/`.
 
 ## The Central Rule
 
 **Every operation goes through the project's own means:**
 
 * the window;
+* the console command `devops_cli.cmd run --operation <operation>` — the same one behind the buttons of the window;
 * `launcher_*.cmd`;
 * `runtime\python.exe system_core\cli_operation.py <operation>`.
 
@@ -84,46 +78,35 @@ Dangerous operations need separate confirmation. Some external wizards also ask
 you to type a word. Built-in non-interactive operations must carry explicit
 project flags rather than hidden yes/no prompts.
 
-## Reading the Interface
+## Reading the Window
 
-The interface is deliberately hybrid. Command and parameter names stay English:
-they match the operation id, the log line, the Windows calls, and Microsoft's own
-documentation. The tooltip explains them in plain language.
+Six sections are the large buttons under the header: NETWORK, WSL & VM, DRIVERS,
+DEFAULT APPS, EXPORT & IMPORT, SYSTEM. Under a section stand a line on what it
+holds and the row of its pages. A page is cards of operations; the cards of one
+job share a frame.
 
-A typical trio:
-
-```
-button     Default Apps Guard · Enable / repair defaults protection
-tooltip    the Windows "Default apps" section, the AppAssociations.xml baseline,
-           the DefaultAssociationsConfiguration policy
-log        default_apps_apply_policy
-```
-
-The short name keeps technical precision; the tooltip explains what will actually
-change.
+The window speaks Russian or English: the RU/EN switch in the header. The
+visible label is short: its job is to help you decide in a couple of seconds. The
+tooltip of a button tells what exactly will change, the Windows terms, the risk
+and the way back; the confirmation of a dangerous operation shows the full text.
+The id of the operation is in the log — the console command runs it by that id.
 
 ### What the frames and colours mean
 
 The colouring here is instrument marking, not decoration.
 
-**A frame around a group** marks a pair or a lifecycle: backup and restore,
-export and import, block and unblock, capture and apply. The way back is always
-in view.
+**A frame around cards** means a pair or a lifecycle: backup and restore, export
+and import, block and unblock, capture and apply. The way back is always in view.
 
-| colour | meaning |
+| button | meaning |
 |---|---|
-| ordinary blue | entering a section — navigation, not an action |
-| green | gentle, read-only, status; or the deliberate undo half of a pair |
-| teal | an ordinary working change |
-| amber | strong intervention, a destructive action, or a secret export |
+| filled | the main action of its frame |
+| orange | removes or erases |
+| lit switch | the state the machine is in now |
+| plain | picks an option: runs nothing by itself |
 
 Colour does not replace the operation kind, the confirmation, or the log — it
-helps you read the character of neighbouring buttons inside one frame.
-
-A command's visible description is deliberately short: its job is to let you
-decide in a couple of seconds. The full explanation, the Windows terms, the risk,
-and the rollback live in the tooltip. The confirmation dialog for a dangerous
-operation shows the full text.
+helps read the character of neighbouring buttons within one frame at a glance.
 
 ### Stable word pairs
 
@@ -141,8 +124,9 @@ operation shows the full text.
 ## Where the Working Data Lives
 
 ```
-config\       command definitions, terminal history, window settings
-system_core\  services, the window, PowerShell modules, Linux subsystem assets
+App\          the window and the PowerShell of the program
+config\       command definitions, window layout, terminal history, window settings
+system_core\  services, PowerShell modules, Linux subsystem assets
 tools\        project utilities and wrappers
 profiles\     managed profiles, such as the associations baseline
 backup\       backups of system and user state
@@ -160,25 +144,19 @@ SSH material, virtualisation and `hosts` backups.
 
 ## The Sections
 
-Each section has its own document under `tools\` — the order of operations, the
-Windows specifics, and the traps.
+Each subsystem has its own document under `tools\` — the order of operations,
+Windows specifics, and pitfalls.
 
-| section | about | in detail |
+| section of the window | pages | details |
 |---|---|---|
-| Linux subsystem | features and updates, install from network or file, status, backup, clone, move, register disks | `tools\WSL_TOOLKIT_RU.md` |
-| Virtualisation | read-only status, Hyper-V or third-party mode, coexistence, toggles with a boot-config backup | `tools\VIRTUALIZATION_SWITCHER_RU.md` |
-| Networking | diagnostics, backup and restore, proxy | `tools\NETWORK_CONNECTIVITY_RU.md` |
-| Adapters and connections | adapters, sign-in to shared folders, Wi-Fi profiles, quick modes | `tools\NETWORK_CONNECTIVITY_RU.md` |
-| Hosts and Bitrix | address override, endpoint detection, name and port status, byte-exact restore | `tools\BITRIX_HOSTS_RU.md` |
-| Default apps | snapshot and comparison of defaults, policy protection | `tools\DEFAULT_APPS_GUARD_RU.md` |
-| Association defence | Microsoft built-in apps, reinstall blocking, change tracking | `tools\ASSOCIATION_DEFENSE_RU.md` |
-| Hardware and drivers | blocking drivers from updates, graphics restrictions, driver store backup, HDMI audio | `tools\HARDWARE_DRIVER_GUARD_RU.md` |
-| Disks | inventory, recovery environment, SSD wizard | `tools\STORAGE_DISK_PROCEDURES_RU.md` |
-| SSH keys | export and import | `tools\OPENSSH_KEYKIT_RU.md` |
-| Certificates | export and import, working with stores | `tools\CERTIFICATE_KEYKIT_RU.md` |
-| Browser bookmarks | building a master copy, merging, restoring | `tools\BROWSER_BOOKMARKS_MASTER_RU.md` |
-| Maintenance | project cleanup, assistant memory backup | `tools\MAINTENANCE_CLEANUP_RU.md` |
-| Migration | gathering every credential into one folder with an inventory | `tools\MIGRATION_RU.md` |
+| NETWORK | link, Wi-Fi, DNS, repair, hosts | `tools\NETWORK_CONNECTIVITY_RU.md`, `tools\DNS_DOCTOR_RU.md`, `tools\BITRIX_HOSTS_RU.md` |
+| WSL & VM | WSL, setup, distribution, Ubuntu, Hyper-V | `tools\WSL_TOOLKIT_RU.md`, `tools\VIRTUALIZATION_SWITCHER_RU.md` |
+| DRIVERS | Windows Update, HWID lock, NVIDIA, Driver Store, audit | `tools\HARDWARE_DRIVER_GUARD_RU.md` |
+| DEFAULT APPS | Microsoft, Edge, policy, watch, snapshot, groups, report | `tools\ASSOCIATION_DEFENSE_RU.md`, `tools\DEFAULT_APPS_GUARD_RU.md` |
+| EXPORT & IMPORT | bundle, SSH, certificates, access, fonts & shell, bookmarks, AI CLI | `tools\MIGRATION_RU.md`, `tools\OPENSSH_KEYKIT_RU.md`, `tools\CERTIFICATE_KEYKIT_RU.md`, `tools\BROWSER_BOOKMARKS_MASTER_RU.md` |
+| SYSTEM | environment, disks, cleanup, program | `tools\STORAGE_DISK_PROCEDURES_RU.md`, `tools\MAINTENANCE_CLEANUP_RU.md` |
+
+The subsystem documents are in Russian.
 
 Two short sequences are worth knowing by heart.
 
@@ -206,9 +184,8 @@ frequent ones.
 ## Checks
 
 ```bat
-runtime\python.exe -m py_compile system_core\ui_nicegui\app.py system_core\services\devops_tools.py system_core\core\jobs.py
-runtime\python.exe system_core\ui_nicegui\app.py --smoke
-runtime\python.exe system_core\doctor.py
+install\verify_portable_env.cmd
+runtime\python.exe -m pytest -q
 ```
 
 What is actually run before a release: the [checklist](SMOKE_TEST_RU.md) (Russian).
@@ -226,7 +203,6 @@ cli\launcher_bitrix.cmd
 cli\launcher_default_apps.cmd
 cli\launcher_association_defense.cmd
 cli\launcher_hardware.cmd
-cli\launcher_docs_pdf.cmd
 cli\launcher_codex_nuke.cmd
 cli\launcher_python_nuke.cmd
 ```
@@ -237,9 +213,16 @@ last two wrap the built-in cleanup tools with elevation and typed confirmation.
 ### Operations from the command line
 
 ```cmd
-runtime\python.exe system_core\cli_operation.py <operation>
+devops_cli.cmd describe
+devops_cli.cmd run --operation <operation> --set <field>=<value>
+devops_cli.cmd check --operation <operation>
 runtime\python.exe system_core\cli_operation.py <operation> --yes-i-understand
 ```
+
+`devops_cli.cmd` is the command behind the buttons of the window: `check` tells
+whether a form may run and what to ask before it, `run` runs it. The `cli\` menus go
+through `system_core\cli_operation.py`; a dangerous operation there needs an
+explicit flag.
 
 The full list of operations and their fields is the
 [command reference](COMMANDS_EN.md). It is generated from
@@ -256,17 +239,16 @@ cleanup_project.cmd /DRYRUN /Y    show the plan, delete nothing
 cleanup_project.cmd /BACKUP       the backup folder only, with its own prompt
 ```
 
-Cleanup keeps scripts, configuration, documentation, licences, and the folder
-structure. It removes what was generated or downloaded: the runtime, the package
+Cleanup keeps scripts, configuration, documentation, licences, the built window,
+and the folder structure. It removes what was generated or downloaded: the runtime, the package
 store, builds, downloads, bundled binaries, logs, reports, working-folder
 contents, and caches. Neighbouring tools are untouched.
 
-### Workbench naming
+### Working folders
 
-One shared vocabulary across all Audion projects: **Source**, **Add file…**,
-**Target**, **Reset**, **Delete**, **List**. In Russian: **Источник**, **Добавить
-файл…**, **Назначение**, **Сбросить**, **Удалить**, **Список**.
-
-`Reset` restores the project folders and deletes no files. `Delete` clears the
-current source and target only after confirmation. The words `Destination`,
-`Clear`, «Цель», and «Очистить» are not used for these controls.
+Two rows sit above the terminal. **SOURCE** is where imports read from: keys,
+certificates, Wi-Fi profiles, copies; until another is chosen it is the `input`
+folder. **TARGET** is where exports, backups and reports go; until another is
+chosen it is the `output` folder. Both rows remember earlier and pinned folders;
+the source row takes a network folder `\\SERVER\Share\Folder`. An export of keys and
+passwords is a secret: keep it as a key.

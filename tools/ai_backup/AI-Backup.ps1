@@ -461,7 +461,7 @@ function Test-ForeignPaths([object]$Manifest) {
 function Resolve-ImportDestination([string]$Relative) {
     $path = $Relative.Replace('\', '/')
     if ($path.Equals('claude.json', [System.StringComparison]::OrdinalIgnoreCase)) { return $script:ClaudeStateFile }
-    # Only the chat list goes back into %APPDATA%\Claude, never the app's other files.
+    # Only the chat list goes back into the folder of the Claude app, never the app's other files.
     if ($path -match '(?i)^claude_app/claude-code-sessions/(.+)$') {
         return Join-Path $script:ClaudeAppSessions (Resolve-ChatFolder $Matches[1]).Replace('/', '\')
     }
@@ -599,7 +599,37 @@ $script:ClaudeStateFile = Join-Path $script:UserProfile '.claude.json'
 $script:CodexHome = Resolve-AbsolutePath $env:CODEX_HOME (Join-Path $script:UserProfile '.codex') (Get-Location).Path
 $script:CodexSqliteHome = Read-CodexSqliteHome $script:CodexHome
 $script:AppData = if ($env:APPDATA) { [System.IO.Path]::GetFullPath($env:APPDATA) } else { [Environment]::GetFolderPath('ApplicationData') }
-$script:ClaudeAppSessions = Join-Path $script:AppData 'Claude\claude-code-sessions'
+# The chat list of the Claude desktop app. The app of Microsoft Store keeps its AppData inside its package
+# (%LOCALAPPDATA%\Packages\Claude_*\LocalCache\Roaming\Claude); on some machines Windows shows that folder under
+# %APPDATA%\Claude as well, on others it is only in the package. The folder that holds chats is taken - the newer one
+# when both do; with no chats anywhere, the folder of the package when the app of the Store is installed. The same
+# rule as claude_app_sessions_root() of system_core\services\devops_tools.py, which lists the chats for the window.
+function Resolve-ClaudeAppSessions {
+    $plain = Join-Path $script:AppData 'Claude\claude-code-sessions'
+    $localAppData = if ($env:LOCALAPPDATA) { [System.IO.Path]::GetFullPath($env:LOCALAPPDATA) } else { [Environment]::GetFolderPath('LocalApplicationData') }
+    $packages = Join-Path $localAppData 'Packages'
+    $candidates = @()
+    if (Test-Path -LiteralPath $packages -PathType Container) {
+        foreach ($package in @(Get-ChildItem -LiteralPath $packages -Directory -Filter 'Claude_*' -ErrorAction SilentlyContinue | Sort-Object Name)) {
+            $candidates += (Join-Path $package.FullName 'LocalCache\Roaming\Claude\claude-code-sessions')
+        }
+    }
+    $candidates += $plain
+    $best = $null
+    $bestTime = [datetime]::MinValue
+    foreach ($candidate in $candidates) {
+        if (-not (Test-Path -LiteralPath $candidate -PathType Container)) { continue }
+        $newest = Get-ChildItem -LiteralPath $candidate -Recurse -File -Filter 'local_*.json' -ErrorAction SilentlyContinue |
+            Sort-Object LastWriteTimeUtc -Descending | Select-Object -First 1
+        if ($newest -and $newest.LastWriteTimeUtc -gt $bestTime) { $best = $candidate; $bestTime = $newest.LastWriteTimeUtc }
+    }
+    if ($best) { return $best }
+    foreach ($candidate in $candidates) {
+        if ($candidate -ne $plain -and (Test-Path -LiteralPath (Split-Path -Parent $candidate) -PathType Container)) { return $candidate }
+    }
+    return $plain
+}
+$script:ClaudeAppSessions = Resolve-ClaudeAppSessions
 
 if (-not $Mode) {
     $answer = Read-Host 'Режим: [E] экспорт / [I] импорт-восстановление / [M] слияние памяти'

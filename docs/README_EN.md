@@ -13,7 +13,7 @@
   - [Maintenance](#maintenance)
   - [Verification](#verification)
   - [Structure](#structure)
-  - [Workbench Naming](#workbench-naming)
+  - [Working Folders](#working-folders)
   - [Microsoft Documentation Behind It](#microsoft-documentation-behind-it)
 
 A portable shell for precise operations on Windows: the Linux subsystem,
@@ -81,7 +81,7 @@ when explicitly asked.
 | Associations | snapshot and comparison of defaults, policy protection, Microsoft built-in apps — remove, restore, keep removed — reinstall blocking, change tracking |
 | Hardware and drivers | blocking drivers from updates, graphics driver restrictions, driver store backup, HDMI and DisplayPort audio, disk inventory, recovery environment, SSD wizard |
 | Keys | export and import of SSH keys and certificates, gathering every credential into one folder with an inventory, moving to a new machine |
-| Maintenance | backup of command-assistant memory, documentation export, shortcuts, bundled file search |
+| Maintenance | backup of command-assistant memory, cache cleanup, shortcuts, bundled file search |
 
 ## Next
 
@@ -95,12 +95,32 @@ when explicitly asked.
 ### Running
 
 ```bat
-launcher_gui.cmd
+Start.exe
 ```
 
-An ordinary launch raises the whole window as administrator — needed for
-deployment, the `hosts` file, network adapters, disk work, and Linux subsystem
-setup.
+`Start.exe` asks for administrator rights once — deployment, the `hosts` file,
+network adapters, disk work and Linux subsystem setup need them. Answering "no"
+opens the window without them: the rights badge in the machine row shows it, a
+click on it restarts the window with the rights, and an operation that needs them
+asks Windows for them itself.
+
+Without the question about the rights:
+
+```bat
+set AUDION_GUI_NO_ELEVATE=1
+Start.exe
+```
+
+Every button of the window is an operation of the console command, and it can be
+run from the command line:
+
+```bat
+devops_cli.cmd describe                          sections, operations and fields (JSON)
+devops_cli.cmd run --operation dns_status        an operation, output to the console
+devops_cli.cmd check --operation <operation>     whether it may run, and what to ask first
+devops_cli.cmd options --operation <operation> --field <field>
+devops_cli.cmd version
+```
 
 Individual entry points for one section:
 
@@ -110,18 +130,10 @@ cli\launcher_bitrix.cmd
 cli\launcher_default_apps.cmd
 cli\launcher_association_defense.cmd
 cli\launcher_hardware.cmd
-cli\launcher_docs_pdf.cmd
 ```
 
 They go through the same manifest and service layer as the window, so behaviour
 matches.
-
-Read-only, without the elevation prompt:
-
-```bat
-set AUDION_GUI_NO_ELEVATE=1
-launcher_gui.cmd
-```
 
 ### Maintenance
 
@@ -131,48 +143,50 @@ cleanup_project.cmd               careful cleanup
 cleanup_project.cmd /DRYRUN /Y    show the plan, delete nothing
 ```
 
-Cleanup keeps scripts, configuration, documentation, licences, and the folders
-themselves. It removes what was generated or downloaded: the runtime, the wheel
-store, builds, downloads, logs, reports, working-folder contents, and caches.
+Cleanup keeps scripts, configuration, documentation, licences, the built window,
+and the folders themselves. It removes what was generated or downloaded: the
+runtime, the wheel store, builds, downloads, logs, reports, working-folder
+contents, and caches.
 
 ### Verification
 
 ```bat
-runtime\python.exe -m py_compile system_core\ui_nicegui\app.py system_core\services\devops_tools.py system_core\core\jobs.py
-runtime\python.exe system_core\ui_nicegui\app.py --smoke
-runtime\python.exe system_core\doctor.py
+install\verify_portable_env.cmd              environment, console command, built window
+runtime\python.exe -m pytest -q              tests
+runtime\python.exe system_core\doctor.py     the environment alone
 ```
+
+The window is built from `Source\` by `install\Build-App.cmd`; it needs the .NET 10 SDK.
 
 ### Structure
 
 ```
-config\tool_manifest.yaml      command tree, fields, risk metadata
-config\gui_settings.yaml       window settings at startup
-config\ui_colors.yaml          theme catalogue
-system_core\ui_nicegui\        the window
+Start.exe                      starts the window
+App\                           the window and the PowerShell of the program (AudionPs.exe)
+Source\                        the sources of the window
+devops_cli.cmd                 the console command
+config\tool_manifest.yaml      operation tree, fields, risk metadata
+config\window_layout.yaml      sections and pages of the window
+system_core\cli.py             the console command: operations of the manifest
 system_core\core\jobs.py       operation runner, output decoding
 system_core\services\          system actions
-system_core\cli_operation.py   running an operation from the command line
+system_core\cli_operation.py   operations for the cli\ menus
 tools\                         project-local utilities
 backup\                        snapshots and rollback data
 logs\                          operation logs
 ```
 
 **The service boundary.** The window holds no system logic: it collects
-parameters, shows risk and confirmation, and calls the operation through the
-manifest and service layer. System actions live in services, project modules, and
-project scripts; operation definitions live in `tool_manifest.yaml`.
+parameters, shows risk and confirmation, and starts the operation through the
+console command. System actions live in services, project modules, and project
+scripts; operation definitions live in `tool_manifest.yaml`.
 
-### Workbench Naming
+### Working Folders
 
-One shared vocabulary across all Audion projects. The buttons are always named the
-same: **Source**, **Add file…**, **Target**, **Reset**, **Delete**, **List**. In
-Russian: **Источник**, **Добавить файл…**, **Назначение**, **Сбросить**,
-**Удалить**, **Список**.
-
-`Reset` restores the project folders and deletes no files. `Delete` clears the
-current source and target only after confirmation. The words `Destination`,
-`Clear`, «Цель», and «Очистить» are not used for these controls.
+Two rows sit above the terminal. **SOURCE** is where imports read from: keys,
+certificates, Wi-Fi profiles, copies; until another is chosen it is the `input`
+folder. **TARGET** is where exports, backups and reports go; until another is
+chosen it is the `output` folder. Both rows remember earlier and pinned folders.
 
 ### Microsoft Documentation Behind It
 

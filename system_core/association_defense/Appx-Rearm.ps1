@@ -11,6 +11,14 @@
     changes or a removed package reappears. Everything is done with documented
     Appx cmdlets and Task Scheduler - no protected-state hacks.
 
+    The task runs as SYSTEM, so it never runs anything a user can change. -Enable
+    locks %ProgramData%\Audion\AppxGuard (owner Administrators; SYSTEM and
+    Administrators may write, Users may only read), puts a copy of the three
+    scripts the task needs into its bin folder and points the task at that copy,
+    run by the built-in Windows PowerShell 5.1 of System32 - the PowerShell the
+    Appx cmdlets are meant for. The scripts of the program folder are never run
+    by the task: any user may write there.
+
     Operations:
         -Status   Show the task, the stored app list and the last check result.
         -Enable   Store -Target and register/replace the re-apply task.
@@ -48,6 +56,10 @@ $StateDir   = Join-Path $env:ProgramData 'Audion\AppxGuard'
 $TargetFile = Join-Path $StateDir 'targets.txt'
 $BuildFile  = Join-Path $StateDir 'last_build.txt'
 $RearmLog   = Join-Path $StateDir 'rearm.log'
+# The protected copy the task runs, and what it runs it with.
+$GuardBin   = Join-Path $StateDir 'bin'
+$GuardFiles = @('Appx-Rearm.ps1', '_Common.ps1', 'Microsoft-Apps.ps1')
+$TaskHost   = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
 
 function Get-WindowsBuildTag {
     try {
@@ -86,17 +98,63 @@ function Write-RearmLog {
     Write-Host $Text
 }
 
-function Resolve-PwshForTask {
-    $projectRoot = Get-AssociationDefenseProjectRoot -ScriptRoot $here
-    $candidates = @(
-        (Join-Path $projectRoot 'system_core\powershell\pwsh.exe')
-        (Get-Command pwsh.exe -ErrorAction SilentlyContinue).Source
-        "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
-    )
-    foreach ($candidate in $candidates) {
-        if ($candidate -and (Test-Path $candidate)) { return $candidate }
+# The state folder belongs to the machine: owner Administrators, SYSTEM and Administrators may
+# write, Users may read. A fresh security descriptor replaces whatever the folder had - a folder a
+# user created first (ProgramData lets any user create one) is taken over, not trusted.
+function Lock-GuardFolder {
+    if (-not (Test-Path -LiteralPath $StateDir)) {
+        New-Item -ItemType Directory -Path $StateDir -Force | Out-Null
     }
-    return "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
+    $admins = New-Object System.Security.Principal.SecurityIdentifier 'S-1-5-32-544'
+    $acl = New-Object System.Security.AccessControl.DirectorySecurity
+    $acl.SetOwner($admins)
+    $acl.SetAccessRuleProtection($true, $false)
+    $inherit = [System.Security.AccessControl.InheritanceFlags]'ContainerInherit, ObjectInherit'
+    $none = [System.Security.AccessControl.PropagationFlags]::None
+    foreach ($pair in @(@('S-1-5-18', 'FullControl'), @('S-1-5-32-544', 'FullControl'), @('S-1-5-32-545', 'ReadAndExecute'))) {
+        $sid = New-Object System.Security.Principal.SecurityIdentifier $pair[0]
+        $acl.AddAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule($sid, $pair[1], $inherit, $none, 'Allow')))
+    }
+    try {
+        Set-Acl -LiteralPath $StateDir -AclObject $acl -ErrorAction Stop
+    } catch {
+        # A folder whose owner shut the administrators out: they take it over first.
+        & takeown.exe /F $StateDir /A /R /D Y | Out-Null
+        Set-Acl -LiteralPath $StateDir -AclObject $acl -ErrorAction Stop
+    }
+    # What lies inside takes the rights of the folder and the same owner: no file keeps a right of its own.
+    $children = Join-Path $StateDir '*'
+    if (Get-ChildItem -LiteralPath $StateDir -Force -ErrorAction SilentlyContinue) {
+        & icacls.exe $children /setowner '*S-1-5-32-544' /T /C /Q | Out-Null
+        & icacls.exe $children /reset /T /C /Q | Out-Null
+    }
+}
+
+# The copy of the scripts the task runs. Everything in the bin folder but the logs of earlier runs goes
+# every time: no script a user may have put there before the folder was locked survives.
+function Install-GuardCopy {
+    if (Test-Path -LiteralPath $GuardBin) {
+        Get-ChildItem -LiteralPath $GuardBin -Force | Where-Object { $_.Name -ne 'logs' } | Remove-Item -Recurse -Force -ErrorAction Stop
+    } else {
+        New-Item -ItemType Directory -Path $GuardBin -Force | Out-Null
+    }
+    foreach ($name in $GuardFiles) {
+        $source = Join-Path $here $name
+        if (-not (Test-Path -LiteralPath $source)) { throw "$name not found next to this script." }
+        Copy-Item -LiteralPath $source -Destination (Join-Path $GuardBin $name) -Force -ErrorAction Stop
+    }
+}
+
+# Whether the copy the task runs is the same as the scripts of the program: after an update of the
+# program the task keeps the old copy until -Enable runs again.
+function Test-GuardCopyCurrent {
+    foreach ($name in $GuardFiles) {
+        $copy = Join-Path $GuardBin $name
+        $source = Join-Path $here $name
+        if (-not (Test-Path -LiteralPath $copy) -or -not (Test-Path -LiteralPath $source)) { return $false }
+        if ((Get-FileHash -LiteralPath $copy -Algorithm SHA256).Hash -ne (Get-FileHash -LiteralPath $source -Algorithm SHA256).Hash) { return $false }
+    }
+    return $true
 }
 
 function Show-Status {
@@ -122,6 +180,19 @@ function Show-Status {
     } else {
         Write-Line "Task installed: $($task.TaskName)" 'Green'
         Write-Line "  State    : $($task.State)"
+        $action = @($task.Actions)[0]
+        $taskScript = Join-Path $GuardBin 'Appx-Rearm.ps1'
+        Write-Line "  Host     : $($action.Execute)"
+        if ($action.Execute -ne $TaskHost -or [string]$action.Arguments -notlike "*$taskScript*") {
+            # A task of an earlier version runs the scripts of the program folder, perhaps with a PowerShell that is gone.
+            Write-Line "  The task runs an unprotected copy or a PowerShell that may be gone. Run -Enable again." 'Yellow'
+        } elseif (-not (Test-Path -LiteralPath $action.Execute)) {
+            Write-Line "  The PowerShell of the task is missing. Run -Enable again." 'Yellow'
+        } elseif (-not (Test-GuardCopyCurrent)) {
+            Write-Line "  The protected copy differs from the scripts of the program. Run -Enable again to refresh it." 'Yellow'
+        } else {
+            Write-Line "  Script   : $taskScript (protected copy, current)" 'DarkGray'
+        }
         $info = Get-ScheduledTaskInfo -TaskName $TaskName -TaskPath $TaskFolder -ErrorAction SilentlyContinue
         if ($info) {
             Write-Line "  Last run : $($info.LastRunTime)"
@@ -156,11 +227,18 @@ function Enable-Guard {
         Write-Line "ERROR: no apps given. Pass -Target with the apps that must stay removed." 'Red'
         exit 2
     }
-    Set-StoredTargets -Items $items
+    if (-not (Test-Path -LiteralPath $TaskHost)) {
+        Write-Line "ERROR: Windows PowerShell 5.1 not found: $TaskHost" 'Red'
+        exit 2
+    }
 
-    $pwsh = Resolve-PwshForTask
-    $argString = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$($MyInvocation.MyCommand.Path)`" -RunCheck"
-    $action = New-ScheduledTaskAction -Execute $pwsh -Argument $argString
+    Lock-GuardFolder
+    Set-StoredTargets -Items $items
+    Install-GuardCopy
+
+    $taskScript = Join-Path $GuardBin 'Appx-Rearm.ps1'
+    $argString = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$taskScript`" -RunCheck"
+    $action = New-ScheduledTaskAction -Execute $TaskHost -Argument $argString
     $triggers = @(
         New-ScheduledTaskTrigger -AtStartup
         New-ScheduledTaskTrigger -Daily -At '03:30'
@@ -176,7 +254,8 @@ function Enable-Guard {
         -Description 'Audion: re-apply the Microsoft in-box app removal after Windows feature updates.' `
         -Force | Out-Null
 
-    Write-Line "Appx Rearm ENABLED. Host: $pwsh" 'Green'
+    Write-Line "Appx Rearm ENABLED. Host: $TaskHost" 'Green'
+    Write-Line "  Script: $taskScript (protected copy: only Administrators and SYSTEM may change it)" 'DarkGray'
     Write-Line ("  Apps kept removed: {0}" -f ($items -join ', '))
     Write-Line "  Runs at startup and daily; re-applies only the stored list." 'DarkGray'
 }
@@ -189,6 +268,10 @@ function Disable-Guard {
         return
     }
     Unregister-ScheduledTask -TaskName $TaskName -TaskPath $TaskFolder -Confirm:$false -ErrorAction SilentlyContinue
+    # The copy existed for the task alone; the logs of its runs stay.
+    foreach ($name in $GuardFiles) {
+        Remove-Item -LiteralPath (Join-Path $GuardBin $name) -Force -ErrorAction SilentlyContinue
+    }
     Write-Line "Appx Rearm DISABLED (task removed). Stored app list was kept." 'Yellow'
 }
 

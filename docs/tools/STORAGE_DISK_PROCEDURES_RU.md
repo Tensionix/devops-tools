@@ -2,7 +2,7 @@
 
 Runbook для disk inventory, SSD/NVMe wizard launcher и WinRE extend.
 
-Полный список GUI-параметров смотри в `USER_GUIDE_RU.md` в блоках `Storage / Disk Procedures` и `Справочник параметров -> Hardware -> Накопители`.
+Все поля операций — в справочнике команд `docs\COMMANDS_RU.md`; в окне это `СИСТЕМА -> ДИСКИ`.
 
 ## Главное Правило
 

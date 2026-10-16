@@ -22,7 +22,8 @@ from system_core.services import devops_tools as devops
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 TOOL_ROOT = PROJECT_ROOT / "tools" / "ai_backup"
 SCRIPT = TOOL_ROOT / "AI-Backup.ps1"
-PWSH = PROJECT_ROOT / "system_core" / "powershell" / "pwsh.exe"
+# The PowerShell of the program, the one the wrappers and the window run the kit with.
+PWSH = PROJECT_ROOT / "App" / "AudionPs.exe"
 PYTHON = PROJECT_ROOT / "runtime" / "python.exe"
 
 KEEP_CLI = "11111111-1111-1111-1111-111111111111"
@@ -103,6 +104,8 @@ def tool_env(profile: dict[str, Path]) -> dict[str, str]:
             "CODEX_HOME": str(profile["codex"]),
             "CODEX_SQLITE_HOME": str(profile["sqlite"]),
             "APPDATA": str(profile["appdata"]),
+            # No package of the Claude app of Microsoft Store on the stand: the chats of this PC stay out of a test.
+            "LOCALAPPDATA": str(profile["user"] / "AppData" / "Local"),
             "AUDION_GUI_PYTHON": str(PYTHON),
             "AUDION_NO_PAUSE": "1",
         }
@@ -471,6 +474,7 @@ def test_gui_service_hands_the_ticked_chats_over_as_a_file(service_project: Path
 def test_chat_options_show_real_titles_grouped_by_folder(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     profile = make_profile(tmp_path / "live")
     monkeypatch.setenv("APPDATA", str(profile["appdata"]))
+    monkeypatch.setenv("LOCALAPPDATA", str(profile["user"] / "AppData" / "Local"))
     monkeypatch.setenv("CLAUDE_CONFIG_DIR", str(profile["claude"]))
     options = devops.ai_backup_live_chat_options()
     assert {option["value"] for option in options} == {"local_keep", "local_skip"}
@@ -494,6 +498,23 @@ def test_chat_options_show_real_titles_grouped_by_folder(tmp_path: Path, monkeyp
     (project / "input" / "manifest.json").unlink()
     shutil.rmtree(project / "input" / "claude_app")
     assert devops.ai_backup_bundle_chat_options(project)[0]["value"] == ""
+
+
+def test_chat_list_is_found_in_the_package_of_the_store_app(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    # The Claude app of Microsoft Store may keep its chats only inside its package; %APPDATA%\\Claude has none.
+    local = tmp_path / "Local"
+    sessions = local / "Packages" / "Claude_pzs8sxrjxfjjc" / "LocalCache" / "Roaming" / "Claude" / "claude-code-sessions" / "a" / "w"
+    sessions.mkdir(parents=True)
+    (sessions / "local_store.json").write_text(json.dumps({"title": "store chat"}), encoding="utf-8")
+    monkeypatch.setenv("APPDATA", str(tmp_path / "Roaming"))
+    monkeypatch.setenv("LOCALAPPDATA", str(local))
+    assert devops.claude_app_sessions_root() == sessions.parents[1]
+    assert [option["value"] for option in devops.ai_backup_live_chat_options()] == ["local_store"]
+
+    # Nothing anywhere: the empty list says where it looked.
+    shutil.rmtree(local / "Packages")
+    options = devops.ai_backup_live_chat_options()
+    assert options[0]["value"] == "" and str(tmp_path / "Roaming") in options[0]["label_ru"]
 
 
 def test_gui_service_rejects_unknown_mode(service_project: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -521,7 +542,8 @@ def test_manifest_scopes_fields_to_the_relevant_operation() -> None:
 def test_wrappers_use_project_powershell_and_propagate_exit_code() -> None:
     for name in ("backup.cmd", "restore.cmd", "merge.cmd"):
         text = (TOOL_ROOT / "wrappers" / name).read_text(encoding="utf-8")
-        assert "%PROJECT%\\system_core\\powershell\\pwsh.exe" in text
+        assert "%PROJECT%\\App\\AudionPs.exe" in text
+        assert "system_core\\powershell" not in text
         assert "S:\\Audion" not in text
         assert "E:\\Audion" not in text
         assert "exit /b %EXIT_CODE%" in text

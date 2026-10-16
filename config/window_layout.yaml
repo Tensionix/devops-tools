@@ -1,0 +1,746 @@
+# Where every operation stands in the window on Avalonia.
+#
+# config\tool_manifest.yaml says what an operation is: its service, its fields, its texts. This
+# file says where it stands: a section (a large button under the header), a page of the section
+# (the row under the sections), a card of the page. The console command hands it to the window with
+# `describe`; how it is read - system_core\core\window_layout.py.
+#
+#   cards:   `op` - an operation with its form; `guests` - operations whose buttons stand in the
+#            same card and read the same fields;
+#            `switch` - a row of operations, each bringing the machine into one state (`is`); the one
+#            the machine is in now is lit (`state` names what is read: system_core\services\machine_state.py);
+#            `pick` - a row choosing the operation the one run button of the card starts
+#   block:   the frame a card stands in, with its neighbours of the same name
+#   tone:    "run" - the main action of its block, a filled button; "burn" - it removes
+#   form:    "none" - the operation runs on its defaults, its fields are not drawn
+#   state:   true - the page has switches: the window asks `devops_cli.cmd state --page <id>`
+#   shared:  the fields whose value is one for the whole window - what a person picks about the
+#            machine once; every other field belongs to its page
+#   about:   the line under a section, and the second line of the tooltip of a page. Every section
+#            has its line and at least two pages - the owner, 15.10.2026
+#
+# An operation of the manifest that stands nowhere here must be named in `folders`, `pending` or
+# `retired` - tests\test_window_layout.py checks it.
+
+sections:
+  - id: network
+    title: "NETWORK"
+    title_ru: "СЕТЬ"
+    about: "Internet link, Wi-Fi, DNS, repair, hosts"
+    about_ru: "Выход в интернет, Wi-Fi, DNS, ремонт, hosts"
+    icon: network
+    pages:
+      - id: link
+        title: "LINK"
+        title_ru: "ПОДКЛЮЧЕНИЕ"
+        about: "Which way the internet goes: the cable or one of two Wi-Fi networks; adapters and Windows sharing"
+        about_ru: "Каким путём идёт интернет: провод или одна из двух сетей Wi-Fi; адаптеры и общий доступ Windows"
+        icon: cable
+        state: true
+        # The Wi-Fi adapter is chosen on the page WI-FI: its value is one for the whole window.
+        away: [wifi_adapter]
+        cards:
+          - switch: internet
+            block: "Internet"
+            block_ru: "Выход в интернет"
+            icon: router
+            options:
+              - {op: internet_via_cable, is: cable, title: "CABLE", title_ru: "ПРОВОД", icon: cable}
+              - {op: wifi_slot_connect_main, is: main, title: "WI-FI MAIN", title_ru: "WI-FI MAIN", icon: wifi}
+              - {op: wifi_slot_connect_second, is: second, title: "WI-FI SECOND", title_ru: "WI-FI SECOND", icon: wifi}
+            guests:
+              - {op: wifi_slot_status, icon: scan-search}
+          - op: wifi_slot_save_main
+            block: "Wi-Fi slots"
+            block_ru: "Слоты Wi-Fi"
+            title: "WI-FI MAIN"
+            title_ru: "WI-FI MAIN"
+            icon: save
+            tone: run
+            guests:
+              - {op: wifi_slot_forget_main, icon: trash-2, tone: burn}
+          - op: wifi_slot_save_second
+            block: "Wi-Fi slots"
+            block_ru: "Слоты Wi-Fi"
+            title: "WI-FI SECOND"
+            title_ru: "WI-FI SECOND"
+            icon: save
+            tone: run
+            guests:
+              - {op: wifi_slot_forget_second, icon: trash-2, tone: burn}
+          - {op: network_lan_wifi_switch, block: "LAN / Wi-Fi", block_ru: "LAN / Wi-Fi", icon: arrow-left-right, tone: run}
+          - {op: network_wifi_sticky_pair, block: "LAN / Wi-Fi", block_ru: "LAN / Wi-Fi", icon: link}
+          - {op: network_adapter_apply, block: "Adapter", block_ru: "Адаптер", icon: plug, tone: run}
+          - {op: smb_network_login, block: "Windows sharing", block_ru: "Общий доступ Windows", icon: folder-symlink, tone: run}
+
+      - id: wifi
+        title: "WI-FI"
+        title_ru: "WI-FI"
+        about: "Wi-Fi profiles: status, connection, hotspot, export and import"
+        about_ru: "Профили Wi-Fi: статус, подключение, раздача, экспорт и импорт"
+        icon: wifi
+        cards:
+          - op: network_wifi_status
+            block: "Status and connection"
+            block_ru: "Статус и подключение"
+            icon: scan-search
+            guests:
+              - {op: network_wifi_connect, icon: plug-zap, tone: run}
+          - {op: network_wifi_connection_mode, block: "Status and connection", block_ru: "Статус и подключение", icon: settings-2}
+          - {op: network_wifi_hotspot, block: "Hotspot", block_ru: "Раздача", icon: radio-tower, tone: run}
+          - {op: network_wifi_export, block: "Export / import", block_ru: "Экспорт / импорт", icon: upload, tone: run}
+          - pick: wifi_import
+            block: "Export / import"
+            block_ru: "Экспорт / импорт"
+            icon: download
+            tone: run
+            options:
+              - {op: network_wifi_import_file, title: "FROM A FILE", title_ru: "ИЗ ФАЙЛА", icon: file}
+              - {op: network_wifi_import_folder, title: "FROM A FOLDER", title_ru: "ИЗ ПАПКИ", icon: folder}
+
+      - id: dns
+        title: "DNS"
+        title_ru: "DNS"
+        about: "Who resolves names on this machine and who says there is internet"
+        about_ru: "Кто разрешает имена на этой машине и кто говорит, что интернет есть"
+        icon: globe
+        state: true
+        cards:
+          - {op: dns_status, block: "Snapshot", block_ru: "Снимок", icon: scan-search}
+          - switch: resolver
+            block: "Resolver"
+            block_ru: "Резолвер"
+            icon: server
+            options:
+              - {op: dns_use_auto, is: auto, title: "FROM THE ROUTER (DHCP)", title_ru: "ОТ РОУТЕРА (DHCP)", icon: router}
+              - {op: dns_use_router, is: router, title: "ROUTER", title_ru: "РОУТЕР", icon: router}
+              - {op: dns_use_cloudflare, is: cloudflare, title: "CLOUDFLARE", title_ru: "CLOUDFLARE", icon: cloud}
+              - {op: dns_use_google, is: google, title: "GOOGLE", title_ru: "GOOGLE", icon: globe}
+              - {op: dns_use_quad9, is: quad9, title: "QUAD9", title_ru: "QUAD9", icon: shield}
+              - {op: dns_use_yandex, is: yandex, title: "YANDEX", title_ru: "ЯНДЕКС", icon: globe}
+              - {op: dns_use_adguard, is: adguard, title: "ADGUARD", title_ru: "ADGUARD", icon: shield-check}
+          - op: dns_repair
+            block: "Repair"
+            block_ru: "Починка"
+            icon: wrench
+            tone: run
+            guests:
+              - {op: dns_fix_icon, icon: wifi}
+
+      - id: repair
+        title: "REPAIR"
+        title_ru: "РЕМОНТ"
+        about: "A snapshot and a backup of the network, its restore, three strengths of repair, the proxy"
+        about_ru: "Снимок и копия сети, восстановление, три силы ремонта, прокси"
+        icon: wrench
+        cards:
+          - {op: network_status, block: "Snapshot", block_ru: "Снимок", icon: scan-search}
+          - op: network_backup
+            block: "Backup"
+            block_ru: "Резервная копия"
+            icon: archive
+            tone: run
+            guests:
+              - {op: network_backup_wifi_keys, icon: key-round}
+              - {op: network_open_backup, icon: folder-open}
+          - pick: network_restore
+            block: "Restore"
+            block_ru: "Восстановление"
+            icon: rotate-ccw
+            tone: run
+            options:
+              - {op: network_restore_latest, title: "THE LATEST", title_ru: "ПОСЛЕДНИЙ", icon: history}
+              - {op: network_restore_selected, title: "THE ONE CHOSEN", title_ru: "ВЫБРАННЫЙ", icon: list}
+          - op: network_light_repair
+            block: "Repair"
+            block_ru: "Ремонт"
+            icon: wrench
+            guests:
+              - {op: network_standard_repair, icon: wrench}
+              - {op: network_nuclear_repair, icon: bomb}
+          - op: network_proxy_status
+            block: "Proxy"
+            block_ru: "Прокси"
+            icon: scan-search
+            guests:
+              - {op: network_proxy_disable_user, icon: power-off}
+              - {op: network_proxy_reset_winhttp, icon: rotate-ccw}
+
+      - id: hosts
+        title: "HOSTS"
+        title_ru: "HOSTS"
+        about: "A site name pointed to an address in the local network through the hosts file, and back"
+        about_ru: "Имя сайта на адрес в локальной сети через файл hosts и обратно"
+        icon: file-cog
+        state: true
+        cards:
+          - op: bitrix_detect_endpoint
+            block: "Check"
+            block_ru: "Проверка"
+            icon: radar
+            guests:
+              - {op: bitrix_status, icon: scan-search}
+          - switch: hosts_override
+            block: "Override"
+            block_ru: "Подмена"
+            icon: file-cog
+            options:
+              - {op: bitrix_enable, is: "on", title: "ON", title_ru: "ВКЛЮЧЕНА", icon: toggle-right}
+              - {op: bitrix_disable, is: "off", title: "OFF", title_ru: "ВЫКЛЮЧЕНА", icon: toggle-left}
+          - {op: bitrix_restore, block: "Roll back", block_ru: "Откат", icon: history}
+
+  - id: wsl
+    title: "WSL & VM"
+    title_ru: "WSL И VM"
+    about: "WSL, Ubuntu on a disk, the hypervisor, the sandbox"
+    about_ru: "WSL, Ubuntu на диск, гипервизор, песочница"
+    icon: box
+    pages:
+      - id: wsl
+        title: "WSL"
+        title_ru: "WSL"
+        about: "The engine of WSL, the distributions there are and their install"
+        about_ru: "Движок WSL, какие дистрибутивы есть и их установка"
+        icon: terminal
+        cards:
+          - op: wsl_system_status
+            block: "Engine"
+            block_ru: "Движок"
+            icon: scan-search
+            guests:
+              - {op: wsl_enable_features, icon: power, tone: run}
+              - {op: wsl_update_engine, icon: refresh-cw}
+              - {op: wsl_shutdown, icon: square}
+          - op: wsl_status
+            block: "What there is"
+            block_ru: "Что есть"
+            icon: list
+            guests:
+              - {op: wsl_list, icon: list}
+              - {op: wsl_list_online, icon: cloud}
+          - {op: wsl_install_distro, block: "Install", block_ru: "Установка", icon: download, tone: run}
+          - {op: wsl_install_from_file, block: "From an image file", block_ru: "Из файла образа", icon: file-down, tone: run}
+
+      - id: setup
+        title: "SETUP"
+        title_ru: "НАСТРОЙКА"
+        about: "Inside a distribution: packages, the account, developer packages, the shell"
+        about_ru: "Внутри дистрибутива: пакеты, учётка, пакеты разработчика, оболочка"
+        icon: settings-2
+        cards:
+          - {op: wsl_linux_apt_update, block: "Packages", block_ru: "Пакеты", icon: refresh-cw, tone: run}
+          - {op: wsl_linux_account, block: "Account", block_ru: "Учётка", icon: user, tone: run}
+          - {op: wsl_linux_dev_packages, block: "Developer packages", block_ru: "Dev-пакеты", icon: package, tone: run}
+          - {op: wsl_micro_baseline, block: "Shell", block_ru: "Оболочка", icon: file-code}
+          - {op: wsl_mc_skin, block: "Shell", block_ru: "Оболочка", icon: palette}
+          - {op: wsl_neovim_base, block: "Shell", block_ru: "Оболочка", icon: code}
+
+      - id: distro
+        title: "DISTRIBUTION"
+        title_ru: "ДИСТРИБУТИВ"
+        about: "A distribution: stop it, copy, clone, move, restore, register, delete"
+        about_ru: "Дистрибутив: остановить, копия, клон, перенос, восстановление, регистрация, удаление"
+        icon: hard-drive
+        cards:
+          - {op: wsl_terminate, block: "Work", block_ru: "Работа", icon: square}
+          - {op: wsl_backup, block: "Copy", block_ru: "Копия", icon: archive, tone: run}
+          - {op: wsl_clone, block: "Clone and move", block_ru: "Клон и перенос", icon: copy}
+          - {op: wsl_move, block: "Clone and move", block_ru: "Клон и перенос", icon: move, tone: burn}
+          - {op: wsl_import_in_place, block: "Restore", block_ru: "Восстановление", icon: hard-drive-download}
+          - {op: wsl_restore_from_backup, block: "Restore", block_ru: "Восстановление", icon: rotate-ccw, tone: run}
+          - {op: wsl_register_all_vhdx, block: "Restore", block_ru: "Восстановление", icon: layers}
+          - {op: wsl_delete, block: "Delete", block_ru: "Удаление", icon: trash-2, tone: burn}
+
+      - id: ubuntu
+        title: "UBUNTU"
+        title_ru: "UBUNTU"
+        about: "Ubuntu Dev Installer Kit: Ubuntu on a disk of its own beside Windows"
+        about_ru: "Ubuntu Dev Installer Kit: Ubuntu на свой диск рядом с Windows"
+        icon: disc
+        cards:
+          - op: ubuntu_dev_open_folder
+            block: "Ubuntu Dev Installer Kit"
+            block_ru: "Ubuntu Dev Installer Kit"
+            icon: folder-open
+            guests:
+              - {op: ubuntu_dev_open_readme_ru, icon: book-open}
+              - {op: ubuntu_dev_open_btrfs_guide, icon: book}
+              - {op: ubuntu_dev_open_installer_script, icon: file-code}
+              - {op: ubuntu_dev_open_nvme_prep_script, icon: file-code}
+              - {op: ubuntu_dev_open_packages, icon: list}
+
+      - id: hyperv
+        title: "HYPER-V"
+        title_ru: "HYPER-V"
+        about: "The mode of the hypervisor, Hyper-V and Windows Sandbox; they change after a restart"
+        about_ru: "Режим гипервизора, Hyper-V и Windows Sandbox; меняются после перезагрузки"
+        icon: server
+        state: true
+        cards:
+          - op: virt_status
+            block: "State"
+            block_ru: "Состояние"
+            icon: scan-search
+            guests:
+              - {op: virt_optimization_status, icon: gauge}
+          - switch: hypervisor
+            block: "Hypervisor mode"
+            block_ru: "Режим гипервизора"
+            icon: server
+            options:
+              - {op: virt_mode_hyperv, is: hyperv, title: "HYPER-V / WSL2", title_ru: "HYPER-V / WSL2", icon: server}
+              - {op: virt_mode_thirdparty, is: thirdparty, title: "THIRD-PARTY VM", title_ru: "СТОРОННИЕ VM", icon: box}
+              - {op: virt_mode_coexist, is: coexist, title: "COEXISTENCE (WHP)", title_ru: "СОСУЩЕСТВОВАНИЕ (WHP)", icon: combine}
+          - switch: hyperv_feature
+            block: "Windows components"
+            block_ru: "Компоненты Windows"
+            title: "Hyper-V"
+            title_ru: "Hyper-V"
+            icon: server
+            options:
+              - {op: virt_hyperv_enable, is: "on", title: "ON", title_ru: "ВКЛ", icon: toggle-right}
+              - {op: virt_hyperv_disable, is: "off", title: "OFF", title_ru: "ВЫКЛ", icon: toggle-left}
+          - switch: sandbox_feature
+            block: "Windows components"
+            block_ru: "Компоненты Windows"
+            title: "Windows Sandbox"
+            title_ru: "Windows Sandbox"
+            icon: box
+            options:
+              - {op: virt_sandbox_enable, is: "on", title: "ON", title_ru: "ВКЛ", icon: toggle-right}
+              - {op: virt_sandbox_disable, is: "off", title: "OFF", title_ru: "ВЫКЛ", icon: toggle-left}
+
+  - id: drivers
+    title: "DRIVERS"
+    title_ru: "ДРАЙВЕРЫ"
+    about: "Windows Update, locks, NVIDIA, Driver Store"
+    about_ru: "Windows Update, замки, NVIDIA, Driver Store"
+    icon: circuit-board
+    pages:
+      - id: wu
+        title: "WINDOWS UPDATE"
+        title_ru: "WINDOWS UPDATE"
+        about: "Whether Windows Update may install drivers on this machine"
+        about_ru: "Может ли Windows Update ставить драйверы на эту машину"
+        icon: refresh-cw
+        state: true
+        cards:
+          - {op: driver_update_status, block: "Drivers from Windows Update", block_ru: "Драйверы из Windows Update", icon: scan-search}
+          - switch: wu_drivers
+            block: "Drivers from Windows Update"
+            block_ru: "Драйверы из Windows Update"
+            icon: shield
+            options:
+              - {op: driver_update_unblock_all, is: allowed, title: "ALLOWED", title_ru: "РАЗРЕШЕНЫ", icon: lock-open}
+              - {op: driver_update_block_all, is: blocked, title: "BLOCKED", title_ru: "ЗАБЛОКИРОВАНЫ", icon: lock}
+          - op: driver_update_open_policy_backups
+            block: "Folders"
+            block_ru: "Папки"
+            icon: folder-open
+            guests:
+              - {op: driver_update_open_tool, icon: folder}
+
+      - id: hwid
+        title: "HWID LOCK"
+        title_ru: "ЗАМОК HWID"
+        about: "A device whose driver Windows must not replace: take the lock off, update, put it back"
+        about_ru: "Устройство, чей драйвер Windows не должна менять: снять замок, обновить, поставить обратно"
+        icon: lock
+        cards:
+          - op: hwid_driver_status
+            block: "Update a driver under the lock"
+            block_ru: "Обновить драйвер под замком"
+            icon: scan-search
+            guests:
+              - {op: hwid_driver_unblock, icon: lock-open}
+              - {op: hwid_driver_block, icon: lock, tone: run}
+          - op: hwid_driver_rank_status
+            block: "Emergency rank repair"
+            block_ru: "Аварийный ремонт ранга"
+            icon: scan-search
+            guests:
+              - {op: hwid_driver_rank_repair, icon: wrench, tone: run}
+
+      - id: nvidia
+        title: "NVIDIA"
+        title_ru: "NVIDIA"
+        about: "Whether NVIDIA drivers may be installed; the sound of HDMI and DisplayPort"
+        about_ru: "Можно ли ставить драйверы NVIDIA; звук HDMI и DisplayPort"
+        icon: gpu
+        state: true
+        cards:
+          - switch: nvidia_install
+            block: "Driver installs"
+            block_ru: "Установка драйверов"
+            icon: shield
+            options:
+              - {op: nvidia_driver_unblock, is: allowed, title: "ALLOWED", title_ru: "РАЗРЕШЕНА", icon: lock-open}
+              - {op: nvidia_driver_block, is: blocked, title: "BLOCKED", title_ru: "ЗАБЛОКИРОВАНА", icon: lock}
+          - op: nvidia_audio_status
+            block: "HDMI / DP sound"
+            block_ru: "Звук HDMI / DP"
+            icon: scan-search
+            guests:
+              - {op: nvidia_audio_export_ids, icon: upload}
+          - switch: nvidia_audio_device
+            block: "HDMI / DP sound"
+            block_ru: "Звук HDMI / DP"
+            title: "Device"
+            title_ru: "Устройство"
+            icon: speaker
+            options:
+              - {op: nvidia_audio_enable, is: "on", title: "ON", title_ru: "ВКЛ", icon: volume-2}
+              - {op: nvidia_audio_disable, is: "off", title: "OFF", title_ru: "ВЫКЛ", icon: volume-x}
+          - switch: nvidia_audio_policy
+            block: "HDMI / DP sound"
+            block_ru: "Звук HDMI / DP"
+            title: "Policy"
+            title_ru: "Политика"
+            icon: shield
+            options:
+              - {op: nvidia_audio_unblock_policy, is: none, title: "NO BAN", title_ru: "ЗАПРЕТА НЕТ", icon: lock-open}
+              - {op: nvidia_audio_block_policy, is: banned, title: "BANNED", title_ru: "ЗАПРЕЩЁН", icon: lock}
+          - op: nvidia_audio_open_output
+            block: "Folders"
+            block_ru: "Папки"
+            icon: folder-open
+            guests:
+              - {op: nvidia_audio_open_backup, icon: folder-open}
+              - {op: nvidia_audio_open_tool, icon: folder}
+
+      - id: store
+        title: "DRIVER STORE"
+        title_ru: "DRIVER STORE"
+        about: "The drivers installed on this machine: a list, an export, a restore"
+        about_ru: "Драйверы, стоящие на этой машине: список, экспорт, восстановление"
+        icon: package
+        cards:
+          - op: driver_store_export
+            block: "Driver Store"
+            block_ru: "Driver Store"
+            icon: upload
+            tone: run
+            guests:
+              - {op: driver_store_manifest, icon: file-text}
+              - {op: driver_store_restore, icon: download}
+              - {op: driver_store_open_backups, icon: folder-open}
+
+      - id: audit
+        title: "AUDIT"
+        title_ru: "АУДИТ"
+        about: "A report of the drivers and firmware of this machine"
+        about_ru: "Отчёт о драйверах и прошивках этой машины"
+        icon: clipboard-check
+        cards:
+          - {op: driver_firmware_audit, block: "Driver / Firmware Audit", block_ru: "Аудит драйверов и прошивок", icon: clipboard-check, tone: run}
+          - op: driver_firmware_audit_open_folder
+            block: "Materials"
+            block_ru: "Материалы"
+            icon: folder-open
+            guests:
+              - {op: driver_firmware_audit_open_readme, icon: book-open}
+
+  - id: defaults
+    title: "DEFAULT APPS"
+    title_ru: "АССОЦИАЦИИ"
+    about: "Default apps, Edge, the apps of Microsoft"
+    about_ru: "Приложения по умолчанию, Edge, приложения Microsoft"
+    icon: link
+    pages:
+      # What matters most first: the apps of Microsoft that take the files away, then Edge, then the policy that pins the rest.
+      - {id: microsoft, title: "MICROSOFT", title_ru: "MICROSOFT", icon: layout-grid,
+         about: "The built-in apps of Microsoft: remove, keep removed, bring back", about_ru: "Встроенные приложения Microsoft: удалить, держать удалёнными, вернуть",
+         cards: [{op: default_apps_microsoft, icon: play, tone: run}]}
+      - {id: edge, title: "EDGE", title_ru: "EDGE", icon: globe,
+         about: "Edge keeps away from the associations of other browsers", about_ru: "Edge не перетягивает ассоциации других браузеров",
+         cards: [{op: default_apps_edge, icon: play, tone: run}]}
+      - {id: policy, title: "POLICY", title_ru: "ПОЛИТИКА", icon: shield-check,
+         about: "The reference of the defaults and the policy that holds it", about_ru: "Эталон приложений по умолчанию и политика, которая его держит",
+         cards: [{op: default_apps_policy, icon: play, tone: run}]}
+      - {id: watch, title: "WATCH", title_ru: "ОТСЛЕЖИВАНИЕ", icon: eye,
+         about: "A watch on changes of the associations", about_ru: "Слежение за сменой ассоциаций",
+         cards: [{op: default_apps_watch, icon: play, tone: run}]}
+      - {id: snapshot, title: "SNAPSHOT", title_ru: "СНИМОК", icon: camera,
+         about: "The associations of this machine saved and compared", about_ru: "Ассоциации этой машины: сохранить и сравнить",
+         cards: [{op: default_apps_snapshot, icon: play, tone: run}]}
+      - {id: groups, title: "GROUPS", title_ru: "ГРУППЫ", icon: folders,
+         about: "The associations by the kind of file: photo, sound, video, documents", about_ru: "Ассоциации по виду файлов: фото, звук, видео, документы",
+         cards: [{op: default_apps_groups, icon: play, tone: run}]}
+      - {id: overview, title: "REPORT", title_ru: "ОТЧЁТ", icon: file-text,
+         about: "One report of everything above", about_ru: "Один отчёт обо всём выше",
+         cards: [{op: default_apps_overview, block: "Summary", block_ru: "Сводка", icon: file-text, tone: run}]}
+
+  - id: transfer
+    title: "EXPORT & IMPORT"
+    title_ru: "ЭКСПОРТ И ИМПОРТ"
+    about: "Keys, certificates, access, fonts, bookmarks, AI CLI"
+    about_ru: "Ключи, сертификаты, доступы, шрифты, закладки, AI CLI"
+    icon: arrow-left-right
+    pages:
+      - id: bundle
+        title: "BUNDLE"
+        title_ru: "КОМПЛЕКТ"
+        about: "Everything the pages of this section move, in one folder with an inventory"
+        about_ru: "Всё, что переносят страницы раздела, одной папкой с описью"
+        icon: package
+        cards:
+          - op: migration_plan
+            block: "Contents"
+            block_ru: "Состав"
+            icon: list
+            guests:
+              - {op: migration_verify, icon: check-check}
+          - op: migration_export
+            block: "Bundle"
+            block_ru: "Комплект"
+            icon: upload
+            tone: run
+            guests:
+              - {op: migration_import, icon: download}
+              - {op: migration_open_folder, icon: folder-open}
+
+      - id: ssh
+        title: "SSH"
+        title_ru: "SSH"
+        about: "The keys of OpenSSH: of the client and of the server"
+        about_ru: "Ключи OpenSSH: клиента и сервера"
+        icon: key-round
+        cards:
+          - {op: ssh_keykit_check_links, block: "Check", block_ru: "Проверка", icon: scan-search}
+          - op: ssh_keykit_export_client
+            block: "Keys"
+            block_ru: "Ключи"
+            icon: upload
+            tone: run
+            guests:
+              - {op: ssh_keykit_export_all, icon: upload}
+              - {op: ssh_keykit_import_client, icon: download}
+              - {op: ssh_keykit_import_all, icon: download}
+              - {op: ssh_keykit_open_folder, icon: folder-open}
+
+      - id: certs
+        title: "CERTIFICATES"
+        title_ru: "СЕРТИФИКАТЫ"
+        about: "The certificates of Windows: PFX with their keys, SST, a CA"
+        about_ru: "Сертификаты Windows: PFX с ключами, SST, удостоверяющие центры"
+        icon: award
+        cards:
+          - {op: cert_status, block: "Check", block_ru: "Проверка", icon: scan-search}
+          - op: cert_export_pfx
+            block: "Export"
+            block_ru: "Экспорт"
+            icon: upload
+            tone: run
+            guests:
+              - {op: cert_export_roots, icon: upload}
+          - op: cert_import_pfx
+            block: "Import"
+            block_ru: "Импорт"
+            icon: download
+            tone: run
+            guests:
+              - {op: cert_import_pfx_folder, icon: folder-down}
+              - {op: cert_import_cert, icon: download}
+          - {op: cert_open_folder, block: "Folders", block_ru: "Папки", icon: folder-open}
+
+      - id: access
+        title: "ACCESS"
+        title_ru: "ДОСТУПЫ"
+        about: "The files the configuration of ssh and rclone names: keys, known_hosts, certificates"
+        about_ru: "Файлы, названные в конфигурации ssh и rclone: ключи, known_hosts, сертификаты"
+        icon: folder-key
+        cards:
+          - {op: access_status, block: "Check", block_ru: "Проверка", icon: scan-search}
+          - op: access_export
+            block: "Access"
+            block_ru: "Доступы"
+            icon: upload
+            tone: run
+            guests:
+              - {op: access_import, icon: download}
+
+      - id: fonts
+        title: "FONTS & SHELL"
+        title_ru: "ШРИФТЫ И ОБОЛОЧКА"
+        about: "The fonts of this user, Windows Terminal and the profile of PowerShell"
+        about_ru: "Шрифты пользователя, Windows Terminal и профиль PowerShell"
+        icon: type
+        cards:
+          - op: fonts_status
+            block: "Fonts"
+            block_ru: "Шрифты"
+            icon: scan-search
+            guests:
+              - {op: fonts_export, icon: upload, tone: run}
+              - {op: fonts_import, icon: download}
+              - {op: fonts_open_folder, icon: folder-open}
+          - op: shell_status
+            block: "Shell"
+            block_ru: "Оболочка"
+            icon: scan-search
+            guests:
+              - {op: shell_export, icon: upload, tone: run}
+              - {op: shell_import, icon: download}
+              - {op: shell_open_folder, icon: folder-open}
+
+      - id: bookmarks
+        title: "BOOKMARKS"
+        title_ru: "ЗАКЛАДКИ"
+        about: "The bookmarks of Chromium browsers: a reference, its export and import, a transfer"
+        about_ru: "Закладки браузеров Chromium: эталон, его экспорт и импорт, перенос между браузерами"
+        icon: bookmark
+        cards:
+          - pick: bookmarks
+            block: "Bookmarks"
+            block_ru: "Закладки"
+            icon: bookmark
+            tone: run
+            options:
+              - {op: browser_bookmarks_status, title: "STATUS", title_ru: "СТАТУС", icon: scan-search}
+              - {op: browser_bookmarks_export_master, title: "EXPORT THE REFERENCE", title_ru: "ЭКСПОРТ ЭТАЛОНА", icon: upload}
+              - {op: browser_bookmarks_import_master, title: "IMPORT THE REFERENCE", title_ru: "ИМПОРТ ЭТАЛОНА", icon: download, tone: burn}
+              - {op: browser_bookmarks_transfer_master, title: "TRANSFER", title_ru: "ПЕРЕНОС", icon: arrow-left-right, tone: burn}
+            guests:
+              - {op: browser_bookmarks_clear_favicons, icon: eraser}
+              - {op: browser_bookmarks_open_local_backup, icon: folder-open}
+
+      - id: ai
+        title: "AI CLI"
+        title_ru: "AI CLI"
+        about: "Claude Code and Codex: a backup, a restore, chat by chat; the memory merged"
+        about_ru: "Claude Code и Codex: бэкап и восстановление, чаты поштучно; объединение памяти"
+        icon: bot
+        cards:
+          - {op: ai_backup_export, block: "Backup", block_ru: "Бэкап", icon: upload, tone: run}
+          - {op: ai_backup_import, block: "Restore", block_ru: "Восстановление", icon: download, tone: run}
+          - op: ai_backup_merge
+            block: "Memory"
+            block_ru: "Память"
+            icon: merge
+            guests:
+              - {op: ai_backup_open, icon: folder-open}
+
+  - id: system
+    title: "SYSTEM"
+    title_ru: "СИСТЕМА"
+    about: "Environment, disks, cleanup, the program"
+    about_ru: "Среда, диски, очистка, программа"
+    icon: monitor-cog
+    pages:
+      - id: env
+        title: "ENVIRONMENT"
+        title_ru: "СРЕДА"
+        about: "A snapshot of the machine, the long paths of Windows and Git, what starts by itself"
+        about_ru: "Снимок машины, длинные пути Windows и Git, что запускается само"
+        icon: gauge
+        cards:
+          - op: preflight_status
+            block: "Machine snapshot"
+            block_ru: "Снимок машины"
+            icon: scan-search
+            tone: run
+            guests:
+              - {op: runtime_status, icon: terminal}
+          - op: windows_long_paths_status
+            block: "Long paths"
+            block_ru: "Длинные пути"
+            icon: scan-search
+            guests:
+              - {op: windows_long_paths_enable, icon: check}
+              - {op: git_long_paths_enable, icon: git-branch}
+          - op: startup_kit_open
+            block: "Startup"
+            block_ru: "Автозапуск"
+            icon: rocket
+            guests:
+              - {op: startup_kit_open_folder, icon: folder-open}
+
+      - id: disks
+        title: "DISKS"
+        title_ru: "ДИСКИ"
+        about: "The disks of this machine, an SSD or NVMe reset, a removable disk, the WinRE partition"
+        about_ru: "Диски машины, сброс SSD и NVMe, съёмный носитель, раздел WinRE"
+        icon: hard-drive
+        cards:
+          - {op: storage_inventory, block: "Disks", block_ru: "Диски", icon: list}
+          - {op: storage_disk_details, block: "Disks", block_ru: "Диски", icon: scan-search}
+          - op: storage_ssd_reset_wizard
+            block: "SSD / NVMe"
+            block_ru: "SSD / NVMe"
+            icon: eraser
+            tone: burn
+            guests:
+              - {op: storage_ssd_open_folder, icon: folder-open}
+          - op: storage_removable_prepare
+            block: "Removable"
+            block_ru: "Съёмные"
+            icon: usb
+            tone: burn
+            guests:
+              - {op: storage_removable_open_folder, icon: folder-open}
+          - {op: storage_winre_status, block: "WinRE", block_ru: "WinRE", icon: scan-search}
+          - {op: storage_winre_wizard, block: "WinRE", block_ru: "WinRE", icon: wrench, tone: burn}
+
+      - id: cleanup
+        title: "CLEANUP"
+        title_ru: "ОЧИСТКА"
+        about: "Codex, caches, Python: an audit first, then what is removed"
+        about_ru: "Codex, кэши, Python: сначала замер, затем удаление"
+        icon: eraser
+        cards:
+          - op: codex_nuke_audit
+            block: "Codex"
+            block_ru: "Codex"
+            icon: scan-search
+            guests:
+              - {op: codex_nuke_dryrun, icon: flask-conical}
+              - {op: codex_nuke_session_reset, icon: rotate-ccw}
+              - {op: codex_nuke_keep_cli_state, icon: trash-2, tone: burn}
+              - {op: codex_nuke_full, icon: trash-2, tone: burn}
+          - op: cache_cleaner_audit
+            block: "Caches"
+            block_ru: "Кэши"
+            icon: scan-search
+            guests:
+              - {op: cache_cleaner_clean, icon: eraser, tone: run}
+              - {op: cache_cleaner_clean_nuget, icon: eraser}
+              - {op: cache_cleaner_temp, icon: hourglass}
+              - {op: cache_cleaner_adobe, icon: clapperboard}
+              - {op: cache_cleaner_chrome_model, icon: brain}
+              - {op: cache_cleaner_chrome_undo, icon: undo-2}
+          - op: python_nuke_audit
+            block: "Python"
+            block_ru: "Python"
+            icon: scan-search
+            guests:
+              - {op: python_nuke_dryrun, icon: flask-conical}
+              - {op: python_nuke_full, icon: trash-2, tone: burn}
+              - {op: python_nuke_keep_winget, icon: trash-2, tone: burn}
+          - {op: cleanup_workspace, block: "Working folder", block_ru: "Рабочая папка", icon: trash-2, tone: burn}
+
+      - id: program
+        title: "PROGRAM"
+        title_ru: "ПРОГРАММА"
+        about: "The folders of its tools and ripgrep"
+        about_ru: "Папки утилит и ripgrep"
+        icon: book-open
+        cards:
+          - {op: open_tool_folder, block: "Folders of the tools", block_ru: "Папки утилит", icon: folder-open, tone: run}
+          - {op: ripgrep_status, block: "ripgrep", block_ru: "ripgrep", icon: search}
+
+# What a person picks about the machine once: the adapters, the Wi-Fi profile, the distribution.
+shared:
+  - lan_adapter
+  - wifi_adapter
+  - wifi_profile
+  - wsl_name
+  - linux_username
+
+# The operations of the working folders of the program: beside the rows SOURCE and TARGET. They work
+# on input and output of the program itself, whatever folders the rows show.
+folders:
+  - {op: cleanup_input_output, icon: trash-2, tone: burn}
+
+# Operations of the manifest the window does not carry.
+retired: []
+pending: {}

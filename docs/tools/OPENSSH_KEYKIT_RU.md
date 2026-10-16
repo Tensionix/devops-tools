@@ -2,7 +2,7 @@
 
 Runbook для экспорта и импорта OpenSSH client и server material.
 
-Полный список GUI-параметров смотри в `USER_GUIDE_RU.md` в блоке `Справочник параметров -> Ключи, шрифты и настройки Windows -> OpenSSH KeyKit`.
+Все поля операций — в справочнике команд `docs\COMMANDS_RU.md`; в окне это `ЭКСПОРТ И ИМПОРТ -> SSH`.
 
 ## Две Двери
 

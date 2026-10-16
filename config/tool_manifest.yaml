@@ -25,8 +25,8 @@ operation_groups:
   - id: runtime
     title: "Runtime and shell"
     title_ru: "Среда выполнения и оболочка"
-    description: "Portable PowerShell, GUI runtime, and launcher checks."
-    description_ru: "Портативный PowerShell, среда GUI и проверки оболочки."
+    description: "Environment snapshot, the PowerShell the scripts run with, Windows and Git long paths."
+    description_ru: "Снимок среды, PowerShell, которым идут скрипты, длинные пути Windows и Git."
     surface: "os"
     section: "os_core"
     children:
@@ -43,8 +43,8 @@ operation_groups:
       - id: runtime_status
         title: "PowerShell runtime status"
         title_ru: "Статус PowerShell"
-        description: "Show portable/system PowerShell resolution and version."
-        description_ru: "Показать портативный/системный PowerShell и его версию."
+        description: "Show which PowerShell the scripts run with - App\\AudionPs.exe of the program or the system one - and its version."
+        description_ru: "Показать, каким PowerShell идут скрипты - App\\AudionPs.exe программы или системным, - и его версию."
         service: "system_core.services.devops_tools:runtime_status"
         kind: "safe"
         action_group: "Environment diagnostics"
@@ -89,20 +89,10 @@ operation_groups:
         action_group_tone: "neutral"
         parameters:
           mode: "enable_git"
-      - id: install_portable_powershell
-        title: "Install portable PowerShell"
-        title_ru: "Установить портативный PowerShell"
-        description: "Download and install pwsh.exe into system_core/powershell."
-        description_ru: "Скачать и установить pwsh.exe в system_core/powershell."
-        service: "system_core.services.devops_tools:install_portable_powershell"
-        kind: "safe"
-        action_group: "Portable shell"
-        action_group_ru: "Портативная оболочка"
-        action_group_tone: "neutral"
 
   - id: browser_bookmarks_master
     title: "Browser Bookmarks Master"
-    title_ru: "Browser Bookmarks Master"
+    title_ru: "Закладки браузеров"
     description: "Chromium bookmark export/import/transfer with multi-browser system selection, portable profiles, native backups and HTML import."
     description_ru: "Экспорт/импорт/перенос закладок Chromium: чекбоксы системных браузеров, portable-профили, нативные backup-папки и HTML."
     surface: "os"
@@ -121,7 +111,7 @@ operation_groups:
         type: "text"
         group: "target"
         label: "Backup label"
-        label_ru: "Имя backup"
+        label_ru: "Имя копии"
         default: "bookmarks_master"
         placeholder: "bookmarks_master"
         hint: "Used only in the backup folder name. Required files stay canonical: Bookmarks and Favicons; Chromium sidecars are copied when present."
@@ -130,9 +120,10 @@ operation_groups:
         type: "text"
         group: "target"
         label: "Backup version"
-        label_ru: "Версия backup"
+        label_ru: "Версия копии"
         default: "auto"
         placeholder: "auto or v01"
+        placeholder_ru: "auto или v01"
         hint: "Folder suffix only. Empty/auto picks the next free vNN; an occupied explicit version is bumped instead of overwritten."
         hint_ru: "Только суффикс папки. Пусто/auto выбирает следующий свободный vNN; занятая явная версия повышается, а не перезаписывается."
       - id: close_browser_process
@@ -147,7 +138,7 @@ operation_groups:
         type: "folder"
         group: "advanced"
         label: "Portable browser profile folder"
-        label_ru: "Папка профиля portable-браузера"
+        label_ru: "Папка профиля портативного браузера"
         advanced: true
         placeholder: "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default"
         hint: "Choose the exact profile folder containing Bookmarks for a portable or custom browser. Leave empty for standard auto-detection. The browser EXE folder alone is not enough."
@@ -155,17 +146,17 @@ operation_groups:
       - id: backup_source_path
         type: "folder"
         group: "source"
-        label: "Workbench source backup folder"
-        label_ru: "Source backup папка Workbench"
-        hint: "Hidden route field: filled from current Workbench SOURCE. Use it for import/status, including UNC network paths."
-        hint_ru: "Скрытое route-поле: берётся из текущего Workbench SOURCE. Используется для import/status, включая UNC-сетевые пути."
+        label: "SOURCE backup folder"
+        label_ru: "Папка копии в ИСТОЧНИКЕ"
+        hint: "Hidden route field: filled from current SOURCE. Use it for import/status, including UNC network paths."
+        hint_ru: "Скрытое route-поле: берётся из текущей строки ИСТОЧНИК. Используется для import/status, включая UNC-сетевые пути."
       - id: backup_target_path
         type: "folder"
         group: "target"
-        label: "Workbench target backup folder"
-        label_ru: "Target backup папка Workbench"
-        hint: "Hidden route field: filled from current Workbench TARGET. Use it for export/status, including UNC network paths."
-        hint_ru: "Скрытое route-поле: берётся из текущего Workbench TARGET. Используется для export/status, включая UNC-сетевые пути."
+        label: "TARGET backup folder"
+        label_ru: "Папка копии в НАЗНАЧЕНИИ"
+        hint: "Hidden route field: filled from current TARGET. Use it for export/status, including UNC network paths."
+        hint_ru: "Скрытое route-поле: берётся из текущей строки НАЗНАЧЕНИЕ. Используется для export/status, включая UNC-сетевые пути."
     children:
       - id: browser_bookmarks_status
         title: "Status"
@@ -174,8 +165,8 @@ operation_groups:
         action_group_ru: "Проверка"
         action_group_tone: "neutral"
         action_tone: "friendly"
-        description: "Read-only check: selected browser profile files, process state and latest importable backup from Workbench SOURCE. GUI status can run for one or several checked browsers."
-        description_ru: "Проверка без изменений: файлы выбранного профиля, состояние процесса и последний импортируемый backup из Workbench SOURCE. В GUI status можно запускать для одного или нескольких отмеченных браузеров."
+        description: "Read-only check: selected browser profile files, process state and latest importable backup from SOURCE. GUI status can run for one or several checked browsers."
+        description_ru: "Проверка без изменений: файлы выбранного профиля, состояние процесса и последний импортируемый backup из папки ИСТОЧНИК. В GUI status можно запускать для одного или нескольких отмеченных браузеров."
         service: "system_core.services.devops_tools:browser_bookmarks_master"
         kind: "safe"
         risk_level: "readonly"
@@ -183,7 +174,7 @@ operation_groups:
           mode: "status"
       - id: browser_bookmarks_clear_favicons
         title: "Clear local Favicons cache"
-        title_ru: "Очистить локальный Favicons cache"
+        title_ru: "Очистить локальный кэш значков"
         action_group: "Repair local cache"
         action_group_ru: "Ремонт локального cache"
         action_group_tone: "neutral"
@@ -196,22 +187,22 @@ operation_groups:
         parameters:
           mode: "clear_favicons"
       - id: browser_bookmarks_export_master
-        title: "Export master to Workbench TARGET"
-        title_ru: "Экспорт эталона в Workbench TARGET"
+        title: "Export master to TARGET"
+        title_ru: "Экспорт эталона в папку НАЗНАЧЕНИЕ"
         action_group: "Master state"
         action_group_ru: "Эталон: export / import"
         action_group_tone: "neutral"
         action_tone: "medium"
-        description: "Close selected browsers and copy Bookmarks, Favicons and available Chromium sidecar files into versioned backup folders under Workbench TARGET."
-        description_ru: "Закрывает выбранные браузеры и копирует Bookmarks, Favicons и доступные служебные sidecar-файлы Chromium в версионированные папки backup внутри Workbench TARGET."
+        description: "Close selected browsers and copy Bookmarks, Favicons and available Chromium sidecar files into versioned backup folders under TARGET."
+        description_ru: "Закрывает выбранные браузеры и копирует Bookmarks, Favicons и доступные служебные sidecar-файлы Chromium в версионированные папки backup внутри папки НАЗНАЧЕНИЕ."
         service: "system_core.services.devops_tools:browser_bookmarks_master"
         kind: "dangerous"
         risk_level: "secret_export"
         parameters:
           mode: "export_master"
       - id: browser_bookmarks_import_master
-        title: "Import master from Workbench SOURCE"
-        title_ru: "Импорт эталона из Workbench SOURCE"
+        title: "Import master from SOURCE"
+        title_ru: "Импорт эталона из папки ИСТОЧНИК"
         action_group: "Master state"
         action_group_ru: "Эталон: export / import"
         action_group_tone: "neutral"
@@ -239,7 +230,7 @@ operation_groups:
           mode: "transfer_master"
       - id: browser_bookmarks_open_local_backup
         title: "Open local safety backups"
-        title_ru: "Открыть локальные safety backups"
+        title_ru: "Открыть локальные страховочные копии"
         action_group: "Folders"
         action_group_ru: "Папки"
         action_group_tone: "neutral"
@@ -273,7 +264,7 @@ operation_groups:
           mode: "Status"
       - id: network_backup
         title: "Backup network state"
-        title_ru: "Полный backup сети"
+        title_ru: "Полная копия сети"
         action_group: "Network backup / restore"
         action_group_ru: "Backup / restore сети"
         action_group_tone: "neutral"
@@ -286,7 +277,7 @@ operation_groups:
           mode: "Backup"
       - id: network_backup_wifi_keys
         title: "Backup with Wi-Fi keys"
-        title_ru: "Полный backup + Wi-Fi ключи"
+        title_ru: "Полная копия сети и ключи Wi-Fi"
         action_group: "Network backup / restore"
         action_group_ru: "Backup / restore сети"
         action_group_tone: "neutral"
@@ -300,7 +291,7 @@ operation_groups:
           mode: "BackupWithWiFiKeys"
       - id: network_restore
         title: "Restore network backup"
-        title_ru: "Восстановить backup сети"
+        title_ru: "Восстановить сеть из копии"
         action_group: "Network backup / restore"
         action_group_ru: "Backup / restore сети"
         action_group_tone: "neutral"
@@ -310,7 +301,7 @@ operation_groups:
         children:
           - id: network_restore_latest
             title: "Restore latest"
-            title_ru: "Восстановить последний backup"
+            title_ru: "Восстановить последнюю копию"
             action_group: "Restore target"
             action_group_ru: "Restore: последний / выбранный"
             action_group_tone: "neutral"
@@ -324,7 +315,7 @@ operation_groups:
               restore_mode: "latest"
           - id: network_restore_selected
             title: "Restore selected"
-            title_ru: "Восстановить выбранный backup"
+            title_ru: "Восстановить выбранную копию"
             action_group: "Restore target"
             action_group_ru: "Restore: последний / выбранный"
             action_group_tone: "neutral"
@@ -340,7 +331,7 @@ operation_groups:
               - id: network_restore_snapshot
                 type: "select"
                 label: "Network backup"
-                label_ru: "Backup сети"
+                label_ru: "Копия сети"
                 options_source: "system_core.services.devops_tools:network_backup_snapshot_options"
                 cache_seconds: 20
                 searchable: true
@@ -357,7 +348,7 @@ operation_groups:
         children:
           - id: network_light_repair
             title: "Light repair"
-            title_ru: "Легкий ремонт"
+            title_ru: "Лёгкий ремонт"
             action_group: "Repair escalation"
             action_group_ru: "Repair: мягкий / обычный / сильный"
             action_group_tone: "neutral"
@@ -377,7 +368,7 @@ operation_groups:
             action_group_tone: "neutral"
             action_tone: "medium"
             description: "Normal escalation: resets Winsock, TCP/IP and WinHTTP proxy, then refreshes DNS and ARP. Reboot is recommended afterwards."
-            description_ru: "Нормальная эскалация: сбрасывает Winsock, TCP/IP и WinHTTP proxy, затем обновляет DNS и ARP. После рекомендуется перезагрузка."
+            description_ru: "Нормальная эскалация: сбрасывает Winsock, TCP/IP и прокси WinHTTP, затем обновляет DNS и ARP. После рекомендуется перезагрузка."
             service: "system_core.services.devops_tools:network_cleaner"
             kind: "dangerous"
             risk_level: "system_change"
@@ -413,7 +404,7 @@ operation_groups:
             action_group_ru: "Проверка"
             action_group_tone: "neutral"
             description: "Show current-user WinINet/System proxy and machine-level WinHTTP proxy without changing them."
-            description_ru: "Показать параметры прокси текущего пользователя WinINet/System и системный WinHTTP proxy без изменений."
+            description_ru: "Показать параметры прокси текущего пользователя WinINet/System и системный прокси WinHTTP без изменений."
             service: "system_core.services.devops_tools:windows_proxy_tool"
             kind: "safe"
             parameters:
@@ -433,12 +424,12 @@ operation_groups:
               action: "DisableUserProxy"
           - id: network_proxy_reset_winhttp
             title: "Reset WinHTTP proxy"
-            title_ru: "Сбросить WinHTTP proxy"
+            title_ru: "Сбросить прокси WinHTTP"
             action_group: "Proxy cleanup"
             action_group_ru: "Proxy cleanup / reset"
             action_group_tone: "neutral"
             description: "Resets machine-level WinHTTP proxy used by services and some system tools. Does not edit browser/user proxy settings."
-            description_ru: "Сбрасывает системный WinHTTP proxy для служб и части системных инструментов. Не правит прокси браузера и текущего пользователя."
+            description_ru: "Сбрасывает системный прокси WinHTTP для служб и части системных инструментов. Не правит прокси браузера и текущего пользователя."
             service: "system_core.services.devops_tools:windows_proxy_tool"
             kind: "dangerous"
             risk_level: "system_change"
@@ -446,7 +437,7 @@ operation_groups:
               action: "ResetWinHttp"
       - id: network_open_backup
         title: "Open backup folder"
-        title_ru: "Открыть backup"
+        title_ru: "Открыть копии"
         action_group: "Backup folders"
         action_group_ru: "Папки backup"
         action_group_tone: "neutral"
@@ -625,6 +616,7 @@ operation_groups:
             label: "Manual profile"
             label_ru: "Профиль вручную"
             placeholder: "SSID/profile name"
+            placeholder_ru: "SSID или имя профиля"
             advanced: true
             hint: "Overrides the dropdown value when filled."
             hint_ru: "Если заполнено, заменяет выбор из списка."
@@ -844,7 +836,7 @@ operation_groups:
                 type: "select"
                 label: "Cable adapter"
                 label_ru: "Проводной адаптер"
-                options_source: "system_core.services.devops_tools:network_adapter_options"
+                options_source: "system_core.services.devops_tools:cable_adapter_options"
                 cache_seconds: 20
                 searchable: true
                 advanced: true
@@ -880,7 +872,7 @@ operation_groups:
                 type: "select"
                 label: "Cable adapter"
                 label_ru: "Проводной адаптер"
-                options_source: "system_core.services.devops_tools:network_adapter_options"
+                options_source: "system_core.services.devops_tools:cable_adapter_options"
                 cache_seconds: 20
                 searchable: true
                 advanced: true
@@ -916,7 +908,7 @@ operation_groups:
                 type: "select"
                 label: "Cable adapter"
                 label_ru: "Проводной адаптер"
-                options_source: "system_core.services.devops_tools:network_adapter_options"
+                options_source: "system_core.services.devops_tools:cable_adapter_options"
                 cache_seconds: 20
                 searchable: true
                 advanced: true
@@ -1068,7 +1060,7 @@ operation_groups:
           - id: smb_open_explorer
             type: "checkbox"
             label: "Open Explorer after login"
-            label_ru: "Открыть Explorer после входа"
+            label_ru: "Открыть Проводник после входа"
             default: true
       - id: network_adapter_apply
         title: "Adapter action"
@@ -1121,7 +1113,7 @@ operation_groups:
             type: "select"
             label: "LAN adapter"
             label_ru: "LAN адаптер"
-            options_source: "system_core.services.devops_tools:network_adapter_options"
+            options_source: "system_core.services.devops_tools:cable_adapter_options"
             cache_seconds: 20
             searchable: true
           - id: wifi_adapter
@@ -1185,7 +1177,7 @@ operation_groups:
             type: "text"
             label: "Auto profile manually"
             label_ru: "Авто-профиль вручную"
-            placeholder: "BASE_Master"
+            placeholder: "Home-WiFi"
             advanced: true
           - id: manual_wifi_profile
             type: "select"
@@ -1198,7 +1190,7 @@ operation_groups:
             type: "text"
             label: "Manual profile manually"
             label_ru: "Ручной профиль вручную"
-            placeholder: "BASE_Master_TTK_Wi-Fi"
+            placeholder: "Office-WiFi"
             advanced: true
           - id: wifi_adapter
             type: "select"
@@ -1360,6 +1352,7 @@ operation_groups:
                 label: "Install folder"
                 label_ru: "Папка установки"
                 placeholder: "Default: bundle WSL\\VHDX\\<distro>"
+                placeholder_ru: "Пусто - WSL\\VHDX\\<дистрибутив> набора"
                 hint: "Destination folder for the new WSL instance, not a source folder."
                 hint_ru: "Куда установить новый WSL-дистрибутив; это не папка-источник."
               - id: no_launch
@@ -1394,6 +1387,7 @@ operation_groups:
                 label: "Install folder"
                 label_ru: "Папка установки"
                 placeholder: "Default: bundle WSL\\VHDX\\<name>"
+                placeholder_ru: "Пусто - WSL\\VHDX\\<имя> набора"
                 hint: "Destination folder for the new WSL instance, not a source folder."
                 hint_ru: "Куда установить новый WSL-дистрибутив; это не папка-источник."
               - id: no_launch
@@ -1427,7 +1421,7 @@ operation_groups:
               action: "status"
           - id: wsl_shutdown
             title: "Shutdown WSL"
-            title_ru: "Shutdown WSL"
+            title_ru: "Выключить WSL"
             action_group: "Runtime control"
             action_group_ru: "Runtime control"
             action_group_tone: "neutral"
@@ -1472,7 +1466,7 @@ operation_groups:
         children:
           - id: wsl_linux_apt_update
             title: "Package update"
-            title_ru: "Package update"
+            title_ru: "Обновление пакетов"
             description: "Run apt/dnf package metadata update and optionally upgrade packages inside the selected WSL distro."
             description_ru: "Выполнить apt/dnf update metadata и при желании upgrade внутри выбранного WSL-дистрибутива."
             service: "system_core.services.devops_tools:wsl_linux_apt_update"
@@ -1482,35 +1476,35 @@ operation_groups:
               - id: wsl_apt_upgrade
                 type: "radio"
                 label: "Upgrade"
-                label_ru: "Upgrade"
+                label_ru: "Режим обновления"
                 default: "none"
                 options:
                   - value: "none"
                     label: "Update only"
-                    label_ru: "Только update"
+                    label_ru: "Только обновить списки"
                   - value: "upgrade"
                     label: "Upgrade"
-                    label_ru: "Upgrade"
+                    label_ru: "Обновить пакеты"
                   - value: "full-upgrade"
                     label: "Full upgrade / sync"
-                    label_ru: "Full upgrade / sync"
+                    label_ru: "Полное обновление / синхронизация"
               - id: wsl_apt_network_repair
                 type: "checkbox"
                 label: "Resilient apt network mode"
-                label_ru: "Устойчивый apt network mode"
+                label_ru: "Устойчивый сетевой режим apt"
                 default: true
                 hint: "Writes Audion apt timeout/retry settings and can switch Ubuntu sources to HTTPS."
                 hint_ru: "Пишет Audion apt timeout/retry settings и может перевести Ubuntu sources на HTTPS."
               - id: wsl_apt_force_ipv4
                 type: "checkbox"
                 label: "Force IPv4 for apt"
-                label_ru: "Force IPv4 для apt"
+                label_ru: "Только IPv4 для apt"
                 default: true
                 advanced: true
               - id: wsl_apt_mirror
                 type: "select"
                 label: "Ubuntu apt mirror"
-                label_ru: "Ubuntu apt mirror"
+                label_ru: "Зеркало apt для Ubuntu"
                 default: "https_archive"
                 advanced: true
                 options:
@@ -1528,26 +1522,26 @@ operation_groups:
                     label_ru: "mirror.yandex.ru через HTTPS"
                   - value: "keep"
                     label: "Keep current sources"
-                    label_ru: "Оставить текущие sources"
+                    label_ru: "Оставить текущие источники"
                   - value: "custom"
                     label: "Custom mirror"
-                    label_ru: "Custom mirror"
+                    label_ru: "Своё зеркало"
               - id: wsl_apt_custom_mirror
                 type: "text"
                 label: "Custom apt mirror"
-                label_ru: "Custom apt mirror"
+                label_ru: "Своё зеркало apt"
                 placeholder: "https://mirror.example.org/ubuntu"
                 advanced: true
               - id: wsl_apt_retries
                 type: "number"
                 label: "APT retries"
-                label_ru: "APT retries"
+                label_ru: "Повторы apt"
                 default: 4
                 advanced: true
               - id: wsl_apt_timeout
                 type: "number"
                 label: "APT timeout seconds"
-                label_ru: "APT timeout seconds"
+                label_ru: "Тайм-аут apt, секунд"
                 default: 20
                 advanced: true
           - id: wsl_linux_account
@@ -1578,12 +1572,12 @@ operation_groups:
               - id: linux_set_default_user
                 type: "checkbox"
                 label: "Set as WSL default user"
-                label_ru: "Сделать WSL default user"
+                label_ru: "Сделать пользователем WSL по умолчанию"
                 default: true
               - id: linux_shell
                 type: "text"
                 label: "Shell"
-                label_ru: "Shell"
+                label_ru: "Оболочка"
                 default: "/bin/bash"
                 advanced: true
           - id: wsl_linux_dev_packages
@@ -1598,7 +1592,7 @@ operation_groups:
               - id: wsl_packages_baseline
                 type: "checkboxes"
                 label: "Baseline packages"
-                label_ru: "Baseline пакеты"
+                label_ru: "Базовые пакеты"
                 default:
                   - "ca-certificates"
                   - "curl"
@@ -1646,7 +1640,7 @@ operation_groups:
               - id: wsl_packages_media_cli
                 type: "checkboxes"
                 label: "Media CLI packages"
-                label_ru: "Media CLI пакеты"
+                label_ru: "Пакеты для медиа"
                 default: []
                 options_source: "system_core.services.devops_tools:wsl_media_cli_package_options"
                 cache_seconds: 3600
@@ -1654,7 +1648,7 @@ operation_groups:
               - id: wsl_packages_sync
                 type: "checkboxes"
                 label: "Sync/network packages"
-                label_ru: "Sync/network пакеты"
+                label_ru: "Пакеты синхронизации и сети"
                 default: []
                 options_source: "system_core.services.devops_tools:wsl_sync_package_options"
                 cache_seconds: 3600
@@ -1662,7 +1656,7 @@ operation_groups:
               - id: wsl_packages_lab
                 type: "checkboxes"
                 label: "Lab/container packages"
-                label_ru: "Lab/container пакеты"
+                label_ru: "Пакеты контейнеров"
                 default: []
                 options_source: "system_core.services.devops_tools:wsl_lab_package_options"
                 cache_seconds: 3600
@@ -1670,25 +1664,25 @@ operation_groups:
               - id: wsl_apt_update_first
                 type: "checkbox"
                 label: "Update package metadata first"
-                label_ru: "Сначала обновить package metadata"
+                label_ru: "Сначала обновить списки пакетов"
                 default: true
               - id: wsl_apt_network_repair
                 type: "checkbox"
                 label: "Resilient apt network mode"
-                label_ru: "Устойчивый apt network mode"
+                label_ru: "Устойчивый сетевой режим apt"
                 default: true
                 hint: "Writes Audion apt timeout/retry settings and can switch Ubuntu sources to HTTPS."
                 hint_ru: "Пишет Audion apt timeout/retry settings и может перевести Ubuntu sources на HTTPS."
               - id: wsl_apt_force_ipv4
                 type: "checkbox"
                 label: "Force IPv4 for apt"
-                label_ru: "Force IPv4 для apt"
+                label_ru: "Только IPv4 для apt"
                 default: true
                 advanced: true
               - id: wsl_apt_mirror
                 type: "select"
                 label: "Ubuntu apt mirror"
-                label_ru: "Ubuntu apt mirror"
+                label_ru: "Зеркало apt для Ubuntu"
                 default: "https_archive"
                 advanced: true
                 options:
@@ -1706,32 +1700,32 @@ operation_groups:
                     label_ru: "mirror.yandex.ru через HTTPS"
                   - value: "keep"
                     label: "Keep current sources"
-                    label_ru: "Оставить текущие sources"
+                    label_ru: "Оставить текущие источники"
                   - value: "custom"
                     label: "Custom mirror"
-                    label_ru: "Custom mirror"
+                    label_ru: "Своё зеркало"
               - id: wsl_apt_custom_mirror
                 type: "text"
                 label: "Custom apt mirror"
-                label_ru: "Custom apt mirror"
+                label_ru: "Своё зеркало apt"
                 placeholder: "https://mirror.example.org/ubuntu"
                 advanced: true
               - id: wsl_apt_retries
                 type: "number"
                 label: "APT retries"
-                label_ru: "APT retries"
+                label_ru: "Повторы apt"
                 default: 4
                 advanced: true
               - id: wsl_apt_timeout
                 type: "number"
                 label: "APT timeout seconds"
-                label_ru: "APT timeout seconds"
+                label_ru: "Тайм-аут apt, секунд"
                 default: 20
                 advanced: true
               - id: wsl_install_recommends
                 type: "checkbox"
                 label: "Install recommended packages"
-                label_ru: "Ставить recommended packages"
+                label_ru: "Ставить рекомендуемые пакеты"
                 default: false
                 advanced: true
               - id: wsl_selinux_permissive
@@ -1744,20 +1738,21 @@ operation_groups:
               - id: wsl_flatpak_flathub
                 type: "checkbox"
                 label: "Flatpak + Flathub remote"
-                label_ru: "Flatpak + Flathub remote"
+                label_ru: "Flatpak и источник Flathub"
                 default: false
                 hint: "Installs Flatpak and adds the system Flathub remote. Does not install GUI apps."
                 hint_ru: "Ставит Flatpak и добавляет системный remote Flathub. GUI-приложения не устанавливает."
               - id: wsl_optional_packages
                 type: "textarea"
                 label: "Optional packages"
-                label_ru: "Опциональные пакеты"
+                label_ru: "Дополнительные пакеты"
                 placeholder: "one package per line, or separated by spaces"
+                placeholder_ru: "по пакету в строке или через пробел"
                 hint: "Package names only; unknown packages are skipped after apt/dnf check."
                 hint_ru: "Только имена пакетов; неизвестные будут пропущены после apt/dnf check."
           - id: wsl_micro_baseline
             title: "Micro baseline"
-            title_ru: "Micro baseline"
+            title_ru: "Базовая настройка micro"
             description: "Install Audion micro settings and keybindings for the selected Linux user."
             description_ru: "Поставить Audion-настройки micro и keybindings для выбранного Linux-пользователя."
             service: "system_core.services.devops_tools:wsl_micro_baseline"
@@ -1765,7 +1760,7 @@ operation_groups:
             risk_level: "user_write"
           - id: wsl_mc_skin
             title: "MC skin"
-            title_ru: "MC skin"
+            title_ru: "Оформление MC"
             description: "Install Audion Midnight Commander skin and optionally set it active."
             description_ru: "Поставить Audion skin для Midnight Commander и при желании сделать активным."
             service: "system_core.services.devops_tools:wsl_mc_skin"
@@ -1775,7 +1770,7 @@ operation_groups:
               - id: mc_skin
                 type: "radio"
                 label: "Skin"
-                label_ru: "Skin"
+                label_ru: "Оформление"
                 default: "electricblue256"
                 options:
                   - value: "electricblue256"
@@ -1787,11 +1782,11 @@ operation_groups:
               - id: mc_apply_skin
                 type: "checkbox"
                 label: "Set as active MC skin"
-                label_ru: "Сделать активным skin MC"
+                label_ru: "Сделать оформление MC активным"
                 default: true
           - id: wsl_neovim_base
             title: "Neovim base"
-            title_ru: "Neovim base"
+            title_ru: "Базовая настройка Neovim"
             description: "Install an Audion Neovim profile without AI providers."
             description_ru: "Поставить Audion-профиль Neovim без AI-провайдеров."
             service: "system_core.services.devops_tools:wsl_neovim_base"
@@ -1830,7 +1825,7 @@ operation_groups:
         children:
           - id: ubuntu_dev_open_folder
             title: "Open kit folder"
-            title_ru: "Открыть папку kit"
+            title_ru: "Открыть папку набора"
             description: "Open tools/ubuntu_dev_installer."
             description_ru: "Открыть tools/ubuntu_dev_installer."
             service: "system_core.services.devops_tools:open_tool_folder"
@@ -1848,7 +1843,7 @@ operation_groups:
               path: "tools/ubuntu_dev_installer/README_RU.md"
           - id: ubuntu_dev_open_btrfs_guide
             title: "Open Btrfs guide"
-            title_ru: "Открыть Btrfs guide"
+            title_ru: "Открыть руководство по Btrfs"
             description: "Open the Btrfs/Timeshift LiveUSB guide."
             description_ru: "Открыть Btrfs/Timeshift LiveUSB guide."
             service: "system_core.services.devops_tools:open_project_path"
@@ -1857,7 +1852,7 @@ operation_groups:
               path: "tools/ubuntu_dev_installer/Btrfs_Timeshift_Ubuntu_LiveUSB_Guide_RU.md"
           - id: ubuntu_dev_open_installer_script
             title: "Open installer script"
-            title_ru: "Открыть installer script"
+            title_ru: "Открыть скрипт установщика"
             description: "Open the main Ubuntu dev installer script from the project-local kit."
             description_ru: "Открыть главный Ubuntu dev installer script из project-local kit."
             service: "system_core.services.devops_tools:open_project_path"
@@ -1866,7 +1861,7 @@ operation_groups:
               path: "tools/ubuntu_dev_installer/Run-Ubuntu-Dev-Create-Installer.sh"
           - id: ubuntu_dev_open_nvme_prep_script
             title: "Open NVMe prep script"
-            title_ru: "Открыть NVMe prep script"
+            title_ru: "Открыть скрипт подготовки NVMe"
             description: "Open the Btrfs/LUKS Ubuntu LiveUSB prep script from the project-local kit."
             description_ru: "Открыть Btrfs/LUKS Ubuntu LiveUSB prep script из project-local kit."
             service: "system_core.services.devops_tools:open_project_path"
@@ -1922,7 +1917,7 @@ operation_groups:
               action: "terminate"
           - id: wsl_backup
             title: "Backup distro"
-            title_ru: "Backup дистрибутива"
+            title_ru: "Копия дистрибутива"
             action_group: "Backup"
             action_group_ru: "Backup дистрибутива"
             action_group_tone: "neutral"
@@ -1950,8 +1945,9 @@ operation_groups:
               - id: backup_dir
                 type: "folder"
                 label: "Backup folder override"
-                label_ru: "Папка backup вручную"
+                label_ru: "Папка копии вручную"
                 placeholder: "Leave empty for bundle WSL\\Backup"
+                placeholder_ru: "Пусто - WSL\\Backup набора"
                 advanced: true
           - id: wsl_clone
             title: "Clone distro"
@@ -1981,8 +1977,9 @@ operation_groups:
               - id: backup_dir
                 type: "folder"
                 label: "Temp backup folder"
-                label_ru: "Временная папка backup"
+                label_ru: "Временная папка копии"
                 placeholder: "Leave empty for bundle WSL\\Backup\\_temp"
+                placeholder_ru: "Пусто - WSL\\Backup\\_temp набора"
                 advanced: true
           - id: wsl_move
             title: "Move distro"
@@ -2008,8 +2005,9 @@ operation_groups:
               - id: backup_dir
                 type: "folder"
                 label: "Temp backup folder"
-                label_ru: "Временная папка backup"
+                label_ru: "Временная папка копии"
                 placeholder: "Leave empty for bundle WSL\\Backup\\_temp"
+                placeholder_ru: "Пусто - WSL\\Backup\\_temp набора"
                 advanced: true
           - id: wsl_delete
             title: "Delete distro"
@@ -2028,7 +2026,7 @@ operation_groups:
               force: true
       - id: wsl_import_restore
         title: "Import and restore"
-        title_ru: "Import и restore"
+        title_ru: "Импорт и восстановление"
         action_group: "Distro lifecycle"
         action_group_ru: "Жизненный цикл дистрибутива"
         action_group_tone: "neutral"
@@ -2037,7 +2035,7 @@ operation_groups:
         children:
           - id: wsl_import_in_place
             title: "Import VHDX in place"
-            title_ru: "Import VHDX in-place"
+            title_ru: "Подключить VHDX на месте"
             action_group: "Import / restore"
             action_group_ru: "Import / restore"
             action_group_tone: "neutral"
@@ -2071,7 +2069,7 @@ operation_groups:
                 hint_ru: "Если заполнено, заменяет выбор из списка."
           - id: wsl_restore_from_backup
             title: "Restore from backup"
-            title_ru: "Restore из backup"
+            title_ru: "Восстановить из копии"
             action_group: "Import / restore"
             action_group_ru: "Import / restore"
             action_group_tone: "neutral"
@@ -2097,14 +2095,14 @@ operation_groups:
               - id: backup_file
                 type: "select"
                 label: "Backup file"
-                label_ru: "Backup файл"
+                label_ru: "Файл копии"
                 options_source: "system_core.services.devops_tools:wsl_backup_file_options"
                 cache_seconds: 30
                 searchable: true
               - id: backup_file_manual
                 type: "file"
                 label: "Manual backup file"
-                label_ru: "Backup файл вручную"
+                label_ru: "Файл копии вручную"
                 advanced: true
                 hint: "Overrides the dropdown value when filled."
                 hint_ru: "Если заполнено, заменяет выбор из списка."
@@ -2134,6 +2132,7 @@ operation_groups:
                 label: "VHDX root"
                 label_ru: "Корень VHDX"
                 placeholder: "Leave empty for bundle WSL\\VHDX"
+                placeholder_ru: "Пусто - WSL\\VHDX набора"
                 hint: "The tool scans recursively for ext4.vhdx."
                 hint_ru: "Инструмент рекурсивно ищет ext4.vhdx."
               - id: filter
@@ -2145,7 +2144,7 @@ operation_groups:
               - id: dry_run
                 type: "checkbox"
                 label: "Dry run"
-                label_ru: "Dry-run"
+                label_ru: "Пробный запуск"
                 default: true
                 hint: "Disable only when the preview is correct."
                 hint_ru: "Снимайте только когда preview выглядит правильно."
@@ -2298,13 +2297,6 @@ operation_groups:
         label: "Pins"
         label_ru: "Пины"
         presets:
-          - id: bitrix_default
-            label: "Bitrix default"
-            label_ru: "Bitrix default"
-            values:
-              host_name: "portal.itpgrad.ru"
-              ip_address: "192.168.0.130"
-              bitrix_ports: "443"
           - id: clear_ip
             label: "Clear IP"
             label_ru: "Очистить IP"
@@ -2313,17 +2305,17 @@ operation_groups:
       - id: host_name
         type: "text"
         label: "Host name"
-        label_ru: "Host name"
-        default: "portal.itpgrad.ru"
+        label_ru: "Имя узла"
+        placeholder: "portal.example.com"
       - id: ip_address
         type: "text"
         label: "IP address"
-        label_ru: "IP address"
-        default: "192.168.0.130"
+        label_ru: "IP-адрес"
+        placeholder: "192.168.0.10"
       - id: bitrix_ports
         type: "text"
         label: "Custom TCP ports"
-        label_ru: "Ручные TCP ports"
+        label_ru: "TCP-порты вручную"
         default: "443"
         hint: "Manual ports to keep in the Bitrix profile. If host/IP contains :port, that port is also added here."
         hint_ru: "Ручные порты для Bitrix-профиля. Если host/IP содержит :port, этот порт тоже попадёт сюда."
@@ -2346,7 +2338,7 @@ operation_groups:
     children:
       - id: bitrix_detect_endpoint
         title: "Detect current endpoint"
-        title_ru: "Найти текущий endpoint"
+        title_ru: "Найти текущую точку"
         action_group: "Inspect"
         action_group_ru: "Проверка"
         action_group_tone: "neutral"
@@ -2359,7 +2351,7 @@ operation_groups:
           mode: "detect"
       - id: bitrix_status
         title: "Status / DNS / ports"
-        title_ru: "Статус / DNS / ports"
+        title_ru: "Состояние / DNS / порты"
         action_group: "Inspect"
         action_group_ru: "Проверка"
         action_group_tone: "neutral"
@@ -2372,7 +2364,7 @@ operation_groups:
           mode: "status"
       - id: bitrix_enable
         title: "Enable override"
-        title_ru: "Включить override"
+        title_ru: "Включить подмену"
         action_group: "Hosts override"
         action_group_ru: "Hosts override: включить / откатить"
         action_group_tone: "neutral"
@@ -2386,7 +2378,7 @@ operation_groups:
           mode: "enable"
       - id: bitrix_disable
         title: "Disable override"
-        title_ru: "Выключить override"
+        title_ru: "Выключить подмену"
         action_group: "Hosts override"
         action_group_ru: "Hosts override: включить / откатить"
         action_group_tone: "neutral"
@@ -2442,65 +2434,11 @@ operation_groups:
             label_ru: "Что сделать"
             default: "status"
             options:
-              - value: "status"
-                label: "Check - show what opens what"
-                label_ru: "Проверить — чем сейчас открываются файлы"
-                icon: "fact_check"
-                tone: "friendly"
-                pair: "Inspect"
-                pair_ru: "Проверка"
-                summary: "Read-only report; nothing is changed."
-                summary_ru: "Только смотрит и ничего не меняет."
-                hint: "Shows the program behind each tracked file type and protocol, and whether the saved set is currently enforced."
-                hint_ru: |
-                  Показывает, какая программа открывает каждый тип файла и ссылок, и включена ли защита выбранного набора.
-                  Ничего не меняет: можно запускать в любой момент.
-                  Технически: сравнивает HKCU UserChoice, эталонный XML и активный policy XML, показывает редакцию Windows и подсказки UCPD.
-              - value: "snapshot"
-                label: "Save a snapshot of the current state"
-                label_ru: "Сохранить снимок текущего состояния"
-                icon: "photo_camera"
-                tone: "friendly"
-                pair: "Snapshot"
-                pair_ru: "Снимок"
-                summary: "Timestamped copy in the project backup folder."
-                summary_ru: "Копия с датой в папке резервных копий проекта."
-                hint: "Writes the current defaults to a timestamped backup without touching the managed reference."
-                hint_ru: |
-                  Записывает нынешний набор программ по умолчанию в файл с датой — на случай, если захочется вернуться.
-                  Управляемый эталон при этом не меняется.
-                  Технически: DISM export текущих ассоциаций в backup\default_apps с .note.txt.
-              - value: "export"
-                label: "Make the current state the reference"
-                label_ru: "Экспортировать текущие ассоциации в эталон"
-                icon: "bookmark_added"
-                tone: "medium"
-                pair: "Reference"
-                pair_ru: "Эталон"
-                summary: "Current defaults become the set that will be enforced."
-                summary_ru: "Текущий набор становится тем, который будет закрепляться."
-                hint: "Replaces the managed reference with the current defaults; enforcement still needs the Enable action."
-                hint_ru: |
-                  Сначала настройте программы по умолчанию так, как вам нужно, затем нажмите это — набор станет эталоном.
-                  Сам по себе он ещё ничего не закрепляет: для этого есть «Закрепить набор».
-                  Технически: перезапись profiles\default_apps\AppAssociations.xml плюс timestamp backup.
-              - value: "import"
-                label: "Take the reference from a file"
-                label_ru: "Взять эталон из файла"
-                icon: "file_upload"
-                tone: "medium"
-                pair: "Reference"
-                pair_ru: "Эталон"
-                summary: "Load a saved snapshot or a file from another machine."
-                summary_ru: "Загружает сохранённый снимок или файл с другой машины."
-                hint: "Validates the XML, backs up the previous reference and copies the new one in."
-                hint_ru: |
-                  Берёт готовый набор — свой прежний снимок или файл с другого компьютера — и делает его эталоном.
-                  Предыдущий эталон сохраняется в резервной копии.
-                  Технически: проверка DISM AppAssociations XML и копирование в profiles\default_apps.
               - value: "apply"
                 label: "Enable / repair the protection"
                 label_ru: "Закрепить сохранённые ассоциации"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 icon: "lock"
                 tone: "danger"
                 pair: "Protection"
@@ -2515,6 +2453,8 @@ operation_groups:
               - value: "remove"
                 label: "Turn the protection off"
                 label_ru: "Снять закрепление"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 icon: "lock_open"
                 tone: "medium"
                 pair: "Protection"
@@ -2525,22 +2465,75 @@ operation_groups:
                 hint_ru: |
                   Отключает автоматический возврат набора. То, что сейчас открывает файлы, останется прежним — просто перестанет восстанавливаться.
                   Технически: backup и удаление HKLM DefaultAssociationsConfiguration, затем gpupdate.
-              - value: "cleanup"
-                label: "Prune old backups"
-                label_ru: "Убрать старые резервные копии"
-                icon: "delete_sweep"
-                tone: "danger"
-                pair: "Backups"
-                pair_ru: "Резервные копии"
-                summary: "Deletes unnamed timestamp backups older than the retention window."
-                summary_ru: "Удаляет безымянные копии старше заданного срока."
-                hint: "Named backups, manual files and .note.txt sidecars are always kept. Dry run is on by default."
+              - value: "status"
+                label: "Check - show what opens what"
+                label_ru: "Проверить — чем сейчас открываются файлы"
+                group: "Look and save - Windows stays as it is"
+                group_ru: "Смотрят и сохраняют — Windows не меняют"
+                icon: "fact_check"
+                tone: "friendly"
+                pair: "Inspect"
+                pair_ru: "Проверка"
+                summary: "Read-only report; nothing is changed."
+                summary_ru: "Только смотрит и ничего не меняет."
+                hint: "Shows the program behind each tracked file type and protocol, and whether the saved set is currently enforced."
                 hint_ru: |
-                  Чистит только автоматические копии с датой, которые старше указанного срока хранения.
-                  Копии с вашей меткой, ручные файлы и заметки .note.txt не трогает. По умолчанию включён пробный запуск.
+                  Показывает, какая программа открывает каждый тип файла и ссылок, и включена ли защита выбранного набора.
+                  Ничего не меняет: можно запускать в любой момент.
+                  Технически: сравнивает HKCU UserChoice, эталонный XML и активный policy XML, показывает редакцию Windows и подсказки UCPD.
+              - value: "snapshot"
+                label: "Save a snapshot of the current state"
+                label_ru: "Сохранить снимок текущего состояния"
+                group: "Look and save - Windows stays as it is"
+                group_ru: "Смотрят и сохраняют — Windows не меняют"
+                icon: "photo_camera"
+                tone: "friendly"
+                pair: "Snapshot"
+                pair_ru: "Снимок"
+                summary: "Timestamped copy in the project backup folder."
+                summary_ru: "Копия с датой в папке резервных копий проекта."
+                hint: "Writes the current defaults to a timestamped backup without touching the managed reference."
+                hint_ru: |
+                  Записывает нынешний набор программ по умолчанию в файл с датой — на случай, если захочется вернуться.
+                  Управляемый эталон при этом не меняется.
+                  Технически: DISM export текущих ассоциаций в backup\default_apps с .note.txt.
+              - value: "export"
+                label: "Make the current state the reference"
+                label_ru: "Экспортировать текущие ассоциации в эталон"
+                group: "Look and save - Windows stays as it is"
+                group_ru: "Смотрят и сохраняют — Windows не меняют"
+                icon: "bookmark_added"
+                tone: "medium"
+                pair: "Reference"
+                pair_ru: "Эталон"
+                summary: "Current defaults become the set that will be enforced."
+                summary_ru: "Текущий набор становится тем, который будет закрепляться."
+                hint: "Replaces the managed reference with the current defaults; enforcement still needs the Enable action."
+                hint_ru: |
+                  Сначала настройте программы по умолчанию так, как вам нужно, затем нажмите это — набор станет эталоном.
+                  Сам по себе он ещё ничего не закрепляет: для этого есть «Закрепить набор».
+                  Технически: перезапись profiles\default_apps\AppAssociations.xml плюс timestamp backup.
+              - value: "import"
+                label: "Take the reference from a file"
+                label_ru: "Взять эталон из файла"
+                group: "Look and save - Windows stays as it is"
+                group_ru: "Смотрят и сохраняют — Windows не меняют"
+                icon: "file_upload"
+                tone: "medium"
+                pair: "Reference"
+                pair_ru: "Эталон"
+                summary: "Load a saved snapshot or a file from another machine."
+                summary_ru: "Загружает сохранённый снимок или файл с другой машины."
+                hint: "Validates the XML, backs up the previous reference and copies the new one in."
+                hint_ru: |
+                  Берёт готовый набор — свой прежний снимок или файл с другого компьютера — и делает его эталоном.
+                  Предыдущий эталон сохраняется в резервной копии.
+                  Технически: проверка DISM AppAssociations XML и копирование в profiles\default_apps.
               - value: "open_profiles"
                 label: "Open the reference folder"
                 label_ru: "Открыть папку эталона"
+                group: "Folders and copies"
+                group_ru: "Папки и копии"
                 icon: "folder_open"
                 tone: "friendly"
                 pair: "Folders"
@@ -2554,6 +2547,8 @@ operation_groups:
               - value: "open_policy"
                 label: "Open the active policy folder"
                 label_ru: "Открыть папку закреплённого набора"
+                group: "Folders and copies"
+                group_ru: "Папки и копии"
                 icon: "folder_special"
                 tone: "friendly"
                 pair: "Folders"
@@ -2567,6 +2562,8 @@ operation_groups:
               - value: "open_backups"
                 label: "Open the backup folder"
                 label_ru: "Открыть папку резервных копий"
+                group: "Folders and copies"
+                group_ru: "Папки и копии"
                 icon: "inventory_2"
                 tone: "friendly"
                 pair: "Folders"
@@ -2577,6 +2574,21 @@ operation_groups:
                 hint_ru: |
                   Открывает папку, куда складываются снимки и копии значений реестра.
                   Технически: backup\default_apps.
+              - value: "cleanup"
+                label: "Prune old backups"
+                label_ru: "Убрать старые резервные копии"
+                group: "Folders and copies"
+                group_ru: "Папки и копии"
+                icon: "delete_sweep"
+                tone: "danger"
+                pair: "Backups"
+                pair_ru: "Резервные копии"
+                summary: "Deletes unnamed timestamp backups older than the retention window."
+                summary_ru: "Удаляет безымянные копии старше заданного срока."
+                hint: "Named backups, manual files and .note.txt sidecars are always kept. Dry run is on by default."
+                hint_ru: |
+                  Чистит только автоматические копии с датой, которые старше указанного срока хранения.
+                  Копии с вашей меткой, ручные файлы и заметки .note.txt не трогает. По умолчанию включён пробный запуск.
             hint: "Everything here works on one saved set of default programs: look at it, save it, replace it, enforce it."
             hint_ru: |
               Все действия крутятся вокруг одного сохранённого набора программ по умолчанию: посмотреть, сохранить, заменить, закрепить.
@@ -2983,23 +2995,11 @@ operation_groups:
             label_ru: "Что сделать"
             default: "status"
             options:
-              - value: "status"
-                label: "Check - what is installed"
-                label_ru: "Проверить — что стоит в системе"
-                icon: "fact_check"
-                tone: "friendly"
-                pair: "Inspect"
-                pair_ru: "Проверка"
-                summary: "Read-only list per app; nothing is changed."
-                summary_ru: "Только показывает состояние каждого приложения."
-                hint: "Shows installed / provisioned state per app plus the re-apply task state."
-                hint_ru: |
-                  Показывает по каждому отмеченному приложению: стоит ли оно сейчас и будет ли ставиться новым пользователям.
-                  Заодно показывает, включено ли автоматическое повторное удаление после обновлений.
-                  Технически: Get-AppxPackage -AllUsers, Get-AppxProvisionedPackage -Online, состояние задачи Audion-AppxRearm.
               - value: "remove"
                 label: "Remove selected apps"
                 label_ru: "Удалить отмеченные приложения"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 icon: "delete_sweep"
                 tone: "medium"
                 pair: "Removal"
@@ -3014,6 +3014,8 @@ operation_groups:
               - value: "keep_removed"
                 label: "Remove and keep them removed"
                 label_ru: "Удалить и держать удалёнными"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 icon: "shield"
                 tone: "danger"
                 pair: "Removal"
@@ -3025,9 +3027,26 @@ operation_groups:
                   Убирает отмеченные приложения и запоминает решение: после крупного обновления Windows они будут удалены снова автоматически.
                   Это то, что нужно, если приложения возвращаются сами и снова перехватывают ваши файлы.
                   Технически: удаление пакетов, запрещающие правила AppLocker для упакованных приложений (там, где редакция позволяет) и плановая задача Audion-AppxRearm при старте системы.
+              - value: "rearm_check"
+                label: "Run the re-apply check now"
+                label_ru: "Проверить удержание сейчас"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
+                icon: "play_circle"
+                tone: "medium"
+                pair: "Locks"
+                pair_ru: "Замки"
+                summary: "Runs the scheduled check immediately."
+                summary_ru: "Запускает плановую проверку немедленно."
+                hint: "Compares the current Windows build with the stored one and re-applies the removal if needed."
+                hint_ru: |
+                  Не дожидаясь перезагрузки, проверяет, не вернулись ли удалённые приложения, и убирает их снова.
+                  Технически: Appx-Rearm.ps1 -RunCheck.
               - value: "restore"
                 label: "Bring the apps back"
                 label_ru: "Вернуть приложения"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 icon: "restore"
                 tone: "friendly"
                 pair: "Restore"
@@ -3042,6 +3061,8 @@ operation_groups:
               - value: "provision"
                 label: "Repair for new profiles only"
                 label_ru: "Починить для новых пользователей"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 icon: "person_add"
                 tone: "friendly"
                 pair: "Restore"
@@ -3055,6 +3076,8 @@ operation_groups:
               - value: "allow_back"
                 label: "Stop holding them removed"
                 label_ru: "Перестать держать удалёнными"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 icon: "lock_open"
                 tone: "friendly"
                 pair: "Locks"
@@ -3066,22 +3089,27 @@ operation_groups:
                   Снимает удержание: Windows больше не будет удалять эти приложения автоматически.
                   Сами приложения при этом обратно не ставятся — для этого есть «Вернуть приложения».
                   Технически: удаление задачи Audion-AppxRearm и правил AppLocker, созданных Audion.
-              - value: "rearm_check"
-                label: "Run the re-apply check now"
-                label_ru: "Проверить удержание сейчас"
-                icon: "play_circle"
-                tone: "medium"
-                pair: "Locks"
-                pair_ru: "Замки"
-                summary: "Runs the scheduled check immediately."
-                summary_ru: "Запускает плановую проверку немедленно."
-                hint: "Compares the current Windows build with the stored one and re-applies the removal if needed."
+              - value: "status"
+                label: "Check - what is installed"
+                label_ru: "Проверить — что стоит в системе"
+                group: "Look and open"
+                group_ru: "Смотрят и открывают"
+                icon: "fact_check"
+                tone: "friendly"
+                pair: "Inspect"
+                pair_ru: "Проверка"
+                summary: "Read-only list per app; nothing is changed."
+                summary_ru: "Только показывает состояние каждого приложения."
+                hint: "Shows installed / provisioned state per app plus the re-apply task state."
                 hint_ru: |
-                  Не дожидаясь перезагрузки, проверяет, не вернулись ли удалённые приложения, и убирает их снова.
-                  Технически: Appx-Rearm.ps1 -RunCheck.
+                  Показывает по каждому отмеченному приложению: стоит ли оно сейчас и будет ли ставиться новым пользователям.
+                  Заодно показывает, включено ли автоматическое повторное удаление после обновлений.
+                  Технически: Get-AppxPackage -AllUsers, Get-AppxProvisionedPackage -Online, состояние задачи Audion-AppxRearm.
               - value: "open_logs"
                 label: "Open the guard folder"
                 label_ru: "Открыть папку удержания"
+                group: "Look and open"
+                group_ru: "Смотрят и открывают"
                 icon: "folder_open"
                 tone: "friendly"
                 pair: "Locks"
@@ -3095,31 +3123,32 @@ operation_groups:
             hint: "Pick the apps below first; every action works on the selected ones only."
             hint_ru: |
               Сначала отметьте приложения ниже — действие всегда применяется только к отмеченным.
-              По умолчанию отмечены Медиаплеер и «Кино и ТВ»: именно они чаще всего перехватывают музыку и видео.
+              По умолчанию отмечено всё, что забирает картинки, музыку и видео; остальное можно удалить по желанию.
           - id: apps
             type: "checkboxes"
             display: "chips"
+            group_blocks: true
             span: "full"
             group: "apps"
             label: "Applications"
             label_ru: "Приложения"
             min_selected: 1
-            default: ["ZuneMusic", "ZuneVideo"]
+            default: ["Photos", "ZuneMusic", "ZuneVideo", "MediaPlayerLegacy", "Paint", "ScreenSketch"]
             hint: "Only apps Microsoft itself lists as removable are here."
             hint_ru: |
               Здесь только те приложения, которые Microsoft сама разрешает удалять из «Установленных приложений».
               Системные компоненты (Магазин, оболочка, Защитник) в список не входят.
             selection_presets:
-              - label: "Zune pair"
-                label_ru: "Пара Zune"
+              - label: "What takes files"
+                label_ru: "Перехватчики"
                 mode: "default"
-                hint: "Media Player and Films & TV."
-                hint_ru: "Медиаплеер и «Кино и ТВ»."
-              - label: "Media"
-                label_ru: "Медиа"
-                values: ["ZuneMusic", "ZuneVideo", "Photos", "Clipchamp", "SoundRecorder"]
-                hint: "Media and photo apps without Camera, Paint and Snipping Tool."
-                hint_ru: "Медиа и фото без Камеры, Paint и Ножниц."
+                hint: "Everything that takes the pictures, the music and the videos."
+                hint_ru: "Всё, что забирает картинки, музыку и видео."
+              - label: "Mail and calls"
+                label_ru: "Почта и звонки"
+                values: ["OutlookForWindows", "Teams", "YourPhone"]
+                hint: "Outlook, Teams and Phone Link: mail, calls and messages."
+                hint_ru: "Outlook, Teams и «Связь с телефоном»: почта, звонки и сообщения."
               - label: "Xbox"
                 label_ru: "Xbox"
                 values: ["GamingApp", "XboxGamingOverlay", "XboxSpeechToTextOverlay", "SolitaireCollection"]
@@ -3137,89 +3166,137 @@ operation_groups:
                 label_ru: "Все"
                 mode: "all"
             group_accents:
-              "Media and photos": "#f472b6"
-              Games: "#4ade80"
-              Communication: "#38bdf8"
-              "News and promo": "#fbbf24"
-              "Notes and tools": "#a78bfa"
+              "Take the pictures, the music and the videos": "#f472b6"
+              "Take the mail, the calls and the messages": "#38bdf8"
+              "Open files of their own": "#a78bfa"
+              "Take nothing of yours - extras": "#fbbf24"
             options:
-              - value: "ZuneMusic"
-                label: "Media Player (Zune)"
-                label_ru: "Медиаплеер (Zune)"
-                group: "Media and photos"
-                group_ru: "Медиа и фото"
-                hint: "Microsoft.ZuneMusic - the default player for audio files."
+              - value: "Photos"
+                label: "Photos - opens pictures and videos"
+                label_ru: "Фотографии — открывают картинки и видео"
+                group: "Take the pictures, the music and the videos"
+                group_ru: "Забирают картинки, музыку и видео"
+                hint: "Microsoft.Windows.Photos - the viewer Windows opens pictures and videos with."
                 hint_ru: |
-                  Штатный проигрыватель музыки, который перехватывает аудиофайлы.
+                  Просмотрщик, которым Windows открывает картинки и видео.
+                  Технически: Microsoft.Windows.Photos.
+              - value: "ZuneMusic"
+                label: "Media Player - opens music and videos"
+                label_ru: "Медиаплеер — открывает музыку и видео"
+                group: "Take the pictures, the music and the videos"
+                group_ru: "Забирают картинки, музыку и видео"
+                hint: "Microsoft.ZuneMusic - the player Windows opens music and videos with."
+                hint_ru: |
+                  Плеер, которым Windows открывает музыку и видео.
                   Технически: Microsoft.ZuneMusic.
               - value: "ZuneVideo"
-                label: "Films & TV (Zune)"
-                label_ru: "Кино и ТВ (Zune)"
-                group: "Media and photos"
-                group_ru: "Медиа и фото"
-                hint: "Microsoft.ZuneVideo - the default player for video files."
+                label: "Films & TV - opens videos"
+                label_ru: "Кино и ТВ — открывает видео"
+                group: "Take the pictures, the music and the videos"
+                group_ru: "Забирают картинки, музыку и видео"
+                hint: "Microsoft.ZuneVideo - the player Windows opens videos with."
                 hint_ru: |
-                  Штатный проигрыватель видео, который перехватывает видеофайлы.
+                  Плеер, которым Windows открывает видео.
                   Технически: Microsoft.ZuneVideo.
-              - value: "Photos"
-                label: "Photos"
-                label_ru: "Фотографии"
-                group: "Media and photos"
-                group_ru: "Медиа и фото"
-                hint: "Microsoft.Windows.Photos - the default image viewer."
+              - value: "MediaPlayerLegacy"
+                label: "Windows Media Player Legacy - the old player"
+                label_ru: "Windows Media Player Legacy — старый плеер"
+                group: "Take the pictures, the music and the videos"
+                group_ru: "Забирают картинки, музыку и видео"
+                hint: |
+                  A component of Windows, not an app: Settings > System > Optional features. It takes the audio and video files as well.
+                  Removed with Remove-WindowsCapability, brought back from Windows Update. Media Features (MediaPlayback) stay.
+                  Technically: Media.WindowsMediaPlayer.
                 hint_ru: |
-                  Штатный просмотрщик изображений.
-                  Технически: Microsoft.Windows.Photos.
-              - value: "Clipchamp"
-                label: "Clipchamp"
-                label_ru: "Clipchamp"
-                group: "Media and photos"
-                group_ru: "Медиа и фото"
-                hint: "Clipchamp.Clipchamp - video editor."
+                  Компонент Windows, а не приложение: «Параметры» → «Система» → «Необязательные компоненты». Тоже перехватывает аудио и видео.
+                  Удаляется через Remove-WindowsCapability, возвращается с Windows Update. «Компоненты для работы с мультимедиа» не трогаются.
+                  Технически: Media.WindowsMediaPlayer.
+              - value: "Paint"
+                label: "Paint - takes pictures; the editor goes too"
+                label_ru: "Paint — забирает картинки, уйдёт и редактор"
+                group: "Take the pictures, the music and the videos"
+                group_ru: "Забирают картинки, музыку и видео"
+                hint: "Microsoft.Paint declares 42 kinds of pictures: .png .jpg .gif .bmp .tif .webp .heic .avif .ico and more. The editor goes with it."
                 hint_ru: |
-                  Видеоредактор Microsoft.
-                  Технически: Clipchamp.Clipchamp.
-              - value: "SoundRecorder"
-                label: "Sound Recorder"
-                label_ru: "Запись голоса"
-                group: "Media and photos"
-                group_ru: "Медиа и фото"
-                hint: "Microsoft.WindowsSoundRecorder."
+                  Объявляет 42 вида картинок: .png .jpg .gif .bmp .tif .webp .heic .avif .ico и другие. Вместе с ним уйдёт и редактор.
+                  Технически: Microsoft.Paint.
+              - value: "ScreenSketch"
+                label: "Snipping Tool - takes pictures; Win+Shift+S goes too"
+                label_ru: "Ножницы — забирают картинки, уйдёт Win+Shift+S"
+                group: "Take the pictures, the music and the videos"
+                group_ru: "Забирают картинки, музыку и видео"
+                hint: "Microsoft.ScreenSketch declares 58 kinds of pictures, the raw files of cameras among them (.cr2 .nef .arw .dng). Screenshots by Win+Shift+S go with it."
                 hint_ru: |
-                  Приложение записи звука.
-                  Технически: Microsoft.WindowsSoundRecorder.
+                  Объявляют 58 видов картинок, в том числе RAW с камер (.cr2 .nef .arw .dng). Вместе с ними уйдут снимки экрана по Win+Shift+S.
+                  Технически: Microsoft.ScreenSketch.
+              - value: "OutlookForWindows"
+                label: "Outlook for Windows - mail, mailto, calendar"
+                label_ru: "Outlook для Windows — почта, mailto, календарь"
+                group: "Take the mail, the calls and the messages"
+                group_ru: "Забирают почту, звонки и сообщения"
+                hint: "Microsoft.OutlookForWindows takes the links mailto: and webcal: and the files .eml .msg .ics .oft."
+                hint_ru: |
+                  Забирает ссылки mailto: и webcal: и файлы .eml .msg .ics .oft.
+                  Технически: Microsoft.OutlookForWindows.
+              - value: "Teams"
+                label: "Microsoft Teams - calls: tel, sip"
+                label_ru: "Microsoft Teams — звонки: tel, sip"
+                group: "Take the mail, the calls and the messages"
+                group_ru: "Забирают почту, звонки и сообщения"
+                hint: "MSTeams takes the links tel:, sip:, callto: and im:."
+                hint_ru: |
+                  Забирает ссылки tel:, sip:, callto: и im:.
+                  Технически: MSTeams.
+              - value: "YourPhone"
+                label: "Phone Link - calls and SMS"
+                label_ru: "Связь с телефоном — звонки и SMS"
+                group: "Take the mail, the calls and the messages"
+                group_ru: "Забирают почту, звонки и сообщения"
+                hint: "Microsoft.YourPhone takes the links tel: and sms:."
+                hint_ru: |
+                  Забирает ссылки tel: и sms:.
+                  Технически: Microsoft.YourPhone.
               - value: "Camera"
-                label: "Camera (used by scanners and QR flows)"
-                label_ru: "Камера (нужна сканерам и QR)"
-                group: "Media and photos"
-                group_ru: "Медиа и фото"
+                label: "Camera - .jpg; scanners and QR need it"
+                label_ru: "Камера — .jpg; нужна сканерам и QR"
+                group: "Open files of their own"
+                group_ru: "Открывают свои файлы"
                 hint: "Microsoft.WindowsCamera - keep it if webcam or scanner workflows depend on it."
                 hint_ru: |
                   Оставьте, если пользуетесь веб-камерой, сканером или QR-сценариями — они зовут именно её.
                   Технически: Microsoft.WindowsCamera.
-              - value: "Paint"
-                label: "Paint (default for many image edits)"
-                label_ru: "Paint (правка картинок)"
-                group: "Media and photos"
-                group_ru: "Медиа и фото"
-                hint: "Microsoft.Paint - other apps call it for quick edits."
+              - value: "Clipchamp"
+                label: "Clipchamp - video editor"
+                label_ru: "Clipchamp — видеоредактор"
+                group: "Open files of their own"
+                group_ru: "Открывают свои файлы"
+                hint: "Clipchamp.Clipchamp - video editor."
                 hint_ru: |
-                  Другие программы вызывают Paint для быстрой правки изображений.
-                  Технически: Microsoft.Paint.
-              - value: "ScreenSketch"
-                label: "Snipping Tool (Win+Shift+S)"
-                label_ru: "Ножницы (Win+Shift+S)"
-                group: "Media and photos"
-                group_ru: "Медиа и фото"
-                hint: "Microsoft.ScreenSketch - removing it breaks the screenshot shortcut."
+                  Видеоредактор Microsoft.
+                  Технически: Clipchamp.Clipchamp.
+              - value: "OneNote"
+                label: "OneNote for Windows - its notes"
+                label_ru: "OneNote для Windows — свои заметки"
+                group: "Open files of their own"
+                group_ru: "Открывают свои файлы"
+                hint: "Microsoft.Office.OneNote - the Store edition."
                 hint_ru: |
-                  Без него перестанет работать снимок экрана по Win+Shift+S.
-                  Технически: Microsoft.ScreenSketch.
+                  Магазинная версия OneNote; установку Office не трогает.
+                  Технически: Microsoft.Office.OneNote.
+              - value: "SoundRecorder"
+                label: "Sound Recorder"
+                label_ru: "Запись голоса"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
+                hint: "Microsoft.WindowsSoundRecorder."
+                hint_ru: |
+                  Приложение записи звука.
+                  Технически: Microsoft.WindowsSoundRecorder.
               - value: "GamingApp"
                 label: "Xbox"
                 label_ru: "Xbox"
-                group: "Games"
-                group_ru: "Игры"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.GamingApp."
                 hint_ru: |
                   Приложение Xbox и Game Pass.
@@ -3227,8 +3304,8 @@ operation_groups:
               - value: "XboxGamingOverlay"
                 label: "Xbox Game Bar"
                 label_ru: "Игровая панель Xbox"
-                group: "Games"
-                group_ru: "Игры"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.XboxGamingOverlay - the Win+G overlay."
                 hint_ru: |
                   Панель по Win+G с записью экрана и виджетами.
@@ -3236,8 +3313,8 @@ operation_groups:
               - value: "XboxSpeechToTextOverlay"
                 label: "Xbox speech overlay"
                 label_ru: "Речевая панель Xbox"
-                group: "Games"
-                group_ru: "Игры"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.XboxSpeechToTextOverlay."
                 hint_ru: |
                   Субтитры игрового чата.
@@ -3245,8 +3322,8 @@ operation_groups:
               - value: "XboxIdentityProvider"
                 label: "Xbox Identity Provider (games sign-in)"
                 label_ru: "Удостоверения Xbox (вход в играх)"
-                group: "Games"
-                group_ru: "Игры"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.XboxIdentityProvider - many games sign in through it."
                 hint_ru: |
                   Через него игры входят в учётную запись Xbox — без него часть игр не запустится.
@@ -3254,71 +3331,44 @@ operation_groups:
               - value: "SolitaireCollection"
                 label: "Solitaire Collection"
                 label_ru: "Коллекция пасьянсов"
-                group: "Games"
-                group_ru: "Игры"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.MicrosoftSolitaireCollection."
                 hint_ru: |
                   Набор пасьянсов с рекламой.
                   Технически: Microsoft.MicrosoftSolitaireCollection.
-              - value: "YourPhone"
-                label: "Phone Link"
-                label_ru: "Связь с телефоном"
-                group: "Communication"
-                group_ru: "Связь"
-                hint: "Microsoft.YourPhone."
-                hint_ru: |
-                  Связь Windows с телефоном (звонки, сообщения, фото).
-                  Технически: Microsoft.YourPhone.
               - value: "People"
                 label: "People"
                 label_ru: "Люди"
-                group: "Communication"
-                group_ru: "Связь"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.People."
                 hint_ru: |
                   Адресная книга Windows.
                   Технически: Microsoft.People.
-              - value: "Teams"
-                label: "Microsoft Teams"
-                label_ru: "Microsoft Teams"
-                group: "Communication"
-                group_ru: "Связь"
-                hint: "MSTeams - the Store version, not a corporate installation."
-                hint_ru: |
-                  Магазинная версия Teams, которая ставится вместе с Windows. Корпоративной установки не касается.
-                  Технически: MSTeams.
-              - value: "OutlookForWindows"
-                label: "Outlook for Windows"
-                label_ru: "Outlook для Windows"
-                group: "Communication"
-                group_ru: "Связь"
-                hint: "Microsoft.OutlookForWindows - the new mail app."
-                hint_ru: |
-                  Новое почтовое приложение, пришедшее на смену «Почте».
-                  Технически: Microsoft.OutlookForWindows.
               - value: "BingNews"
                 label: "News"
                 label_ru: "Новости"
-                group: "News and promo"
-                group_ru: "Новости и промо"
-                hint: "Microsoft.BingNews."
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
+                hint: "Microsoft.BingNews keeps only links of its own (bingnews:, msnnews:): it takes none of your files or links."
                 hint_ru: |
-                  Лента новостей MSN.
+                  Держит только свои ссылки (bingnews:, msnnews:) — ваших файлов и ссылок не забирает.
                   Технически: Microsoft.BingNews.
               - value: "BingWeather"
                 label: "Weather"
                 label_ru: "Погода"
-                group: "News and promo"
-                group_ru: "Новости и промо"
-                hint: "Microsoft.BingWeather - the widget board can use it."
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
+                hint: "Microsoft.BingWeather keeps only links of its own (bingweather:, msnweather:): it takes none of your files or links."
                 hint_ru: |
-                  Погода MSN; её данные показывает панель виджетов.
+                  Держит только свои ссылки (bingweather:, msnweather:) — ваших файлов и ссылок не забирает.
                   Технически: Microsoft.BingWeather.
               - value: "Getstarted"
                 label: "Tips"
                 label_ru: "Советы"
-                group: "News and promo"
-                group_ru: "Новости и промо"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.Getstarted."
                 hint_ru: |
                   Всплывающие советы Windows.
@@ -3326,8 +3376,8 @@ operation_groups:
               - value: "FeedbackHub"
                 label: "Feedback Hub"
                 label_ru: "Центр отзывов"
-                group: "News and promo"
-                group_ru: "Новости и промо"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.WindowsFeedbackHub."
                 hint_ru: |
                   Отправка отзывов в Microsoft.
@@ -3335,8 +3385,8 @@ operation_groups:
               - value: "WindowsMaps"
                 label: "Maps"
                 label_ru: "Карты"
-                group: "News and promo"
-                group_ru: "Новости и промо"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.WindowsMaps."
                 hint_ru: |
                   Карты Windows.
@@ -3344,8 +3394,8 @@ operation_groups:
               - value: "Copilot"
                 label: "Copilot"
                 label_ru: "Copilot"
-                group: "News and promo"
-                group_ru: "Новости и промо"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.Copilot - the standalone app, not the taskbar entry point."
                 hint_ru: |
                   Отдельное приложение Copilot.
@@ -3353,8 +3403,8 @@ operation_groups:
               - value: "StickyNotes"
                 label: "Sticky Notes"
                 label_ru: "Записки"
-                group: "Notes and tools"
-                group_ru: "Заметки и утилиты"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.MicrosoftStickyNotes."
                 hint_ru: |
                   Экранные записки.
@@ -3362,26 +3412,17 @@ operation_groups:
               - value: "Todos"
                 label: "To Do"
                 label_ru: "To Do"
-                group: "Notes and tools"
-                group_ru: "Заметки и утилиты"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.Todos."
                 hint_ru: |
                   Списки задач Microsoft To Do.
                   Технически: Microsoft.Todos.
-              - value: "OneNote"
-                label: "OneNote for Windows"
-                label_ru: "OneNote для Windows"
-                group: "Notes and tools"
-                group_ru: "Заметки и утилиты"
-                hint: "Microsoft.Office.OneNote - the Store edition."
-                hint_ru: |
-                  Магазинная версия OneNote; установку Office не трогает.
-                  Технически: Microsoft.Office.OneNote.
               - value: "Whiteboard"
                 label: "Whiteboard"
                 label_ru: "Доска"
-                group: "Notes and tools"
-                group_ru: "Заметки и утилиты"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.Whiteboard."
                 hint_ru: |
                   Совместная доска для рисования.
@@ -3389,8 +3430,8 @@ operation_groups:
               - value: "PowerAutomateDesktop"
                 label: "Power Automate"
                 label_ru: "Power Automate"
-                group: "Notes and tools"
-                group_ru: "Заметки и утилиты"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.PowerAutomateDesktop."
                 hint_ru: |
                   Настольный конструктор автоматизаций.
@@ -3398,8 +3439,8 @@ operation_groups:
               - value: "QuickAssist"
                 label: "Quick Assist (remote help)"
                 label_ru: "Быстрая поддержка (удалённая помощь)"
-                group: "Notes and tools"
-                group_ru: "Заметки и утилиты"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "MicrosoftCorporationII.QuickAssist - keep it if you receive remote support."
                 hint_ru: |
                   Оставьте, если вам иногда помогают удалённо через «Быструю поддержку».
@@ -3407,8 +3448,8 @@ operation_groups:
               - value: "DevHome"
                 label: "Dev Home"
                 label_ru: "Dev Home"
-                group: "Notes and tools"
-                group_ru: "Заметки и утилиты"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "Microsoft.Windows.DevHome."
                 hint_ru: |
                   Панель разработчика Windows.
@@ -3416,8 +3457,8 @@ operation_groups:
               - value: "Family"
                 label: "Microsoft Family"
                 label_ru: "Семья Microsoft"
-                group: "Notes and tools"
-                group_ru: "Заметки и утилиты"
+                group: "Take nothing of yours - extras"
+                group_ru: "Ничего вашего не забирают — лишнее"
                 hint: "MicrosoftCorporationII.MicrosoftFamily."
                 hint_ru: |
                   Родительский контроль и семейные настройки.
@@ -3447,7 +3488,7 @@ operation_groups:
           - id: edge_owned_now
             type: "info_badges"
             span: "full"
-            group: "action"
+            group: "now"
             label: "Что сейчас закреплено за Edge"
             label_ru: "Что сейчас закреплено за Edge"
             options_source: "system_core.services.devops_tools:edge_association_badges"
@@ -3466,23 +3507,11 @@ operation_groups:
             label_ru: "Что сделать"
             default: "status"
             options:
-              - value: "status"
-                label: "Check - what Edge is allowed to do"
-                label_ru: "Проверить — что сейчас держит Edge"
-                icon: "fact_check"
-                tone: "friendly"
-                pair: "Inspect"
-                pair_ru: "Проверка"
-                summary: "Shows which link and file types Edge owns right now."
-                summary_ru: "Показывает, какие ссылки и типы файлов сейчас забрал себе Edge."
-                hint: "Lists the current owner of http, https, .htm, .html, .pdf, .svg and .webp, plus every managed policy value and the WebView2 version."
-                hint_ru: |
-                  Показывает построчно, чем сейчас открываются ссылки, .html, .pdf, .svg — и подсвечивает то, что забрал себе Edge.
-                  Ниже — что Edge сейчас разрешено (навязываться, работать в фоне, показывать промо) и установлен ли WebView2.
-                  Технически: HKCU UserChoice по наблюдаемым типам, значения HKLM Policies\Microsoft\Edge и EdgeUpdate, версия WebView2 Runtime, задачи MicrosoftEdge*.
               - value: "apply"
                 label: "Stop Edge from claiming associations"
                 label_ru: "Запретить Edge перетягивать ассоциации"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 icon: "volume_off"
                 tone: "medium"
                 pair: "Apply"
@@ -3498,6 +3527,8 @@ operation_groups:
               - value: "revert"
                 label: "Give Edge its freedom back"
                 label_ru: "Вернуть Edge как было"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 icon: "undo"
                 tone: "friendly"
                 pair: "Apply"
@@ -3511,6 +3542,8 @@ operation_groups:
               - value: "webview2"
                 label: "Repair WebView2 Runtime"
                 label_ru: "Починить WebView2"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 icon: "healing"
                 tone: "medium"
                 pair: "WebView2"
@@ -3522,6 +3555,22 @@ operation_groups:
                   Нужно, если программы с интерфейсом на WebView2 перестали открываться: панели, установщики, часть приложений Microsoft и сторонних.
                   Если компонент уже установлен, ничего не делает и просто показывает версию.
                   Технически: официальный Evergreen bootstrapper MicrosoftEdgeWebView2Setup.exe с go.microsoft.com, установка в тихом режиме.
+              - value: "status"
+                label: "Check - what Edge is allowed to do"
+                label_ru: "Проверить — что сейчас держит Edge"
+                group: "Look"
+                group_ru: "Смотрят"
+                icon: "fact_check"
+                tone: "friendly"
+                pair: "Inspect"
+                pair_ru: "Проверка"
+                summary: "Shows which link and file types Edge owns right now."
+                summary_ru: "Показывает, какие ссылки и типы файлов сейчас забрал себе Edge."
+                hint: "Lists the current owner of http, https, .htm, .html, .pdf, .svg and .webp, plus every managed policy value and the WebView2 version."
+                hint_ru: |
+                  Показывает построчно, чем сейчас открываются ссылки, .html, .pdf, .svg — и подсвечивает то, что забрал себе Edge.
+                  Ниже — что Edge сейчас разрешено (навязываться, работать в фоне, показывать промо) и установлен ли WebView2.
+                  Технически: HKCU UserChoice по наблюдаемым типам, значения HKLM Policies\Microsoft\Edge и EdgeUpdate, версия WebView2 Runtime, задачи MicrosoftEdge*.
             hint: "Edge is never uninstalled here - it is calmed down so your own browser keeps the file types."
             hint_ru: |
               Раздел не удаляет Edge и не ломает его: браузер остаётся рабочим и обновляемым.
@@ -3578,20 +3627,11 @@ operation_groups:
             label_ru: "Что сделать"
             default: "status"
             options:
-              - value: "status"
-                label: "Check"
-                label_ru: "Проверить"
-                tone: "friendly"
-                pair: "Inspect"
-                pair_ru: "Проверка"
-                summary: "Read-only state of the selected items."
-                summary_ru: "Только состояние выбранных пунктов."
-                hint: "Shows whether the watcher task and the exclusions are in place."
-                hint_ru: |
-                  Показывает, работает ли предупреждение о смене программ по умолчанию и какие исключения Defender добавлены.
               - value: "enable"
                 label: "Turn on"
                 label_ru: "Включить"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 tone: "medium"
                 pair: "Targets"
                 pair_ru: "Пункты"
@@ -3603,6 +3643,8 @@ operation_groups:
               - value: "disable"
                 label: "Turn off"
                 label_ru: "Выключить"
+                group: "Change Windows"
+                group_ru: "Меняют Windows"
                 tone: "medium"
                 pair: "Targets"
                 pair_ru: "Пункты"
@@ -3611,9 +3653,24 @@ operation_groups:
                 hint: "Nothing outside the Audion-managed entries is touched."
                 hint_ru: |
                   Убирает только то, что добавил Audion. Чужие исключения и задачи не трогает.
+              - value: "status"
+                label: "Check"
+                label_ru: "Проверить"
+                group: "Look"
+                group_ru: "Смотрят"
+                tone: "friendly"
+                pair: "Inspect"
+                pair_ru: "Проверка"
+                summary: "Read-only state of the selected items."
+                summary_ru: "Только состояние выбранных пунктов."
+                hint: "Shows whether the watcher task and the exclusions are in place."
+                hint_ru: |
+                  Показывает, работает ли предупреждение о смене программ по умолчанию и какие исключения Defender добавлены.
               - value: "run_check"
                 label: "Check the defaults right now"
                 label_ru: "Проверить изменения прямо сейчас"
+                group: "Look"
+                group_ru: "Смотрят"
                 tone: "friendly"
                 pair: "Watcher"
                 pair_ru: "Наблюдатель"
@@ -3936,7 +3993,7 @@ operation_groups:
 
   - id: hardware
     title: "Hardware"
-    title_ru: "Hardware"
+    title_ru: "Железо"
     description: "Driver update guard, NVIDIA install restrictions, NVIDIA HDMI/DP audio control, and disk procedures."
     description_ru: "Защита драйверов, NVIDIA install restrictions, контроль NVIDIA HDMI/DP Audio и дисковые процедуры Windows."
     surface: "device"
@@ -3945,7 +4002,7 @@ operation_groups:
     children:
       - id: driver_firmware_audit
         title: "Driver/Firmware Audit"
-        title_ru: "Driver/Firmware Audit"
+        title_ru: "Аудит драйверов и прошивок"
         description: "Read-only Windows diagnostic report for problem devices, BIOS/EC, firmware resources and key signed drivers."
         description_ru: "Диагностический отчёт без изменений: проблемные устройства из Диспетчера устройств, BIOS/EC, firmware/UEFI resources и ключевые подписанные драйверы."
         section: "device_diagnostics"
@@ -3970,13 +4027,13 @@ operation_groups:
             type: "checkbox"
             group: "options"
             label: "Write key-driver CSV"
-            label_ru: "Писать CSV key drivers"
+            label_ru: "Писать CSV ключевых драйверов"
             default: true
           - id: open_report
             type: "checkbox"
             group: "options"
             label: "Open report in Notepad"
-            label_ru: "Открыть отчёт в Notepad"
+            label_ru: "Открыть отчёт в Блокноте"
             default: false
         parameters:
           output_dir: "logs"
@@ -4012,7 +4069,7 @@ operation_groups:
 
       - id: driver_update_blocker
         title: "Driver Update Blocker"
-        title_ru: "Driver Update Blocker"
+        title_ru: "Запрет обновлений драйверов"
         description: "Policy-level guard against Windows Update driver replacement, plus Driver Store backup/restore helpers."
         description_ru: "Policy-защита от подмены драйверов через Центр обновления Windows плюс backup/restore Driver Store."
         section: "device_drivers"
@@ -4020,7 +4077,7 @@ operation_groups:
         children:
           - id: driver_update_policy
             title: "Windows Update driver policy"
-            title_ru: "Windows Update driver policy"
+            title_ru: "Политика драйверов Windows Update"
             description: "Check, enable, or remove the policy that excludes drivers from Windows Update quality updates."
             description_ru: "Проверить, включить или снять policy, которая исключает драйверы из обновлений качества Windows."
             children:
@@ -4066,7 +4123,7 @@ operation_groups:
                   mode: "unblock_all"
               - id: driver_update_open_policy_backups
                 title: "Open policy backups"
-                title_ru: "Открыть policy backups"
+                title_ru: "Открыть копии политики"
                 action_group: "Policy backups"
                 action_group_ru: "Policy backups"
                 action_group_tone: "neutral"
@@ -4085,9 +4142,9 @@ operation_groups:
             fields:
               - id: hwid_builtin_cache_pins
                 type: "profile_buttons"
-                group: "target"
+                group: "device"
                 label: "Preset"
-                label_ru: "Preset"
+                label_ru: "Готовый набор"
                 hint: "Restores the built-in Intel Iris Xe HWID. The REV alias is kept internally for status/unblock cleanup."
                 hint_ru: "Возвращает встроенный Intel Iris Xe HWID. REV alias хранится внутри для status/unblock cleanup."
                 presets:
@@ -4099,22 +4156,22 @@ operation_groups:
                         PCI\VEN_8086&DEV_46A8&SUBSYS_22E717AA
               - id: hwid_guard_identity_badges
                 type: "info_badges"
-                group: "target"
+                group: "device"
                 label: "Driver identity"
                 label_ru: "Идентификация"
                 hint: "Informational only. The lock target stays in the HWID field below."
                 hint_ru: "Только информация. Лочится HWID из поля ниже."
                 items:
                   - label: "Generic"
-                    label_ru: "Generic"
+                    label_ru: "Общий"
                     pair: "Lock target"
-                    pair_ru: "Lock target"
+                    pair_ru: "Цель замка"
                     tone: "lock"
                     summary: "OEM SUBSYS HWID, no REV"
                     summary_ru: "OEM SUBSYS HWID, без REV"
               - id: target_hardware_ids
                 type: "textarea"
-                group: "target"
+                group: "device"
                 label: "HWID to protect"
                 label_ru: "HWID для защиты"
                 default: |
@@ -4124,9 +4181,9 @@ operation_groups:
                 hint_ru: "Для текущей Intel Iris Xe оставь как есть. Нужен один OEM-specific SUBSYS HWID; REV alias обрабатывается внутри."
               - id: target_device_instance_id
                 type: "text"
-                group: "target"
+                group: "device"
                 label: "Device Instance ID"
-                label_ru: "Device Instance ID"
+                label_ru: "ID экземпляра устройства"
                 advanced: true
                 hint: "Optional. Used only for status/rank report when auto-detection is ambiguous."
                 hint_ru: "Опционально. Нужен только для status/rank report, если auto-detection неоднозначен."
@@ -4134,7 +4191,7 @@ operation_groups:
                 type: "checkbox"
                 group: "options"
                 label: "Retroactive block"
-                label_ru: "Retroactive block"
+                label_ru: "Запрет и для уже установленных"
                 default: false
                 hint: "Dangerous: Windows may remove or disable already installed matching devices."
                 hint_ru: "Опасно: Windows может удалить или выключить уже установленные matching devices."
@@ -4142,7 +4199,7 @@ operation_groups:
                 type: "checkbox"
                 group: "options"
                 label: "Keep global WU driver block"
-                label_ru: "Оставить global WU driver block"
+                label_ru: "Оставить общий запрет драйверов WU"
                 default: false
                 advanced: true
                 hint: "Default removes ExcludeWUDriversInQualityUpdate after the targeted HWID policy is written."
@@ -4150,7 +4207,7 @@ operation_groups:
             children:
               - id: hwid_driver_status
                 title: "Check current lock"
-                title_ru: "Проверить текущий lock"
+                title_ru: "Проверить текущий замок"
                 action_group: "Driver update workflow"
                 action_group_ru: "Сценарий обновления драйвера"
                 action_group_tone: "neutral"
@@ -4192,15 +4249,15 @@ operation_groups:
 
           - id: hwid_driver_rank_repair_tools
             title: "Emergency rank repair by HWID"
-            title_ru: "Аварийный rank repair по HWID"
+            title_ru: "Аварийный ремонт ранга по HWID"
             description: "Use only when the system already picked the wrong OEM driver and normal unblock/install/block was not enough. Creates a REG/JSON preflight backup before destructive steps."
             description_ru: "Использовать только если система уже выбрала неправильный OEM-драйвер и обычного unblock/install/block не хватило. Перед опасными шагами создаёт REG/JSON preflight backup."
             fields:
               - id: hwid_builtin_cache_pins
                 type: "profile_buttons"
-                group: "target"
+                group: "device"
                 label: "Preset"
-                label_ru: "Preset"
+                label_ru: "Готовый набор"
                 hint: "Restores the built-in Intel Iris Xe HWID. The REV alias is kept internally for status/unblock cleanup."
                 hint_ru: "Возвращает встроенный Intel Iris Xe HWID. REV alias хранится внутри для status/unblock cleanup."
                 presets:
@@ -4212,29 +4269,29 @@ operation_groups:
                         PCI\VEN_8086&DEV_46A8&SUBSYS_22E717AA
               - id: hwid_repair_identity_badges
                 type: "info_badges"
-                group: "target"
+                group: "device"
                 label: "Repair markers"
-                label_ru: "Repair markers"
+                label_ru: "Метки ремонта"
                 hint: "Informational only. Generic is the intended lock target; OEM REV is the cleanup alias from the old stuck state."
                 hint_ru: "Только информация. Generic - целевой lock target; OEM REV - cleanup alias от старого зависшего состояния."
                 items:
                   - label: "Generic"
-                    label_ru: "Generic"
+                    label_ru: "Общий"
                     pair: "Target"
-                    pair_ru: "Target"
+                    pair_ru: "Цель"
                     tone: "lock"
                     summary: "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA"
                     summary_ru: "PCI\\VEN_8086&DEV_46A8&SUBSYS_22E717AA"
                   - label: "OEM REV alias"
-                    label_ru: "OEM REV alias"
+                    label_ru: "Псевдоним OEM REV"
                     pair: "Repair cleanup"
-                    pair_ru: "Repair cleanup"
+                    pair_ru: "Чистка при ремонте"
                     tone: "oem-tail"
                     summary: "...&REV_0C"
                     summary_ru: "...&REV_0C"
               - id: target_hardware_ids
                 type: "textarea"
-                group: "target"
+                group: "device"
                 label: "HWID to repair"
                 label_ru: "HWID для ремонта"
                 default: |
@@ -4244,9 +4301,9 @@ operation_groups:
                 hint_ru: "Для текущей Intel Iris Xe оставь как есть. Этот раздел не нужен для обычного планового обновления драйвера."
               - id: target_device_instance_id
                 type: "text"
-                group: "target"
+                group: "device"
                 label: "Device Instance ID"
-                label_ru: "Device Instance ID"
+                label_ru: "ID экземпляра устройства"
                 advanced: true
                 hint: "Optional override when the Hardware ID matches more than one present device."
                 hint_ru: "Опциональный override, если Hardware ID совпал с несколькими present devices."
@@ -4254,7 +4311,7 @@ operation_groups:
                 type: "text"
                 group: "versions"
                 label: "Bad driver version"
-                label_ru: "Bad driver version"
+                label_ru: "Плохая версия драйвера"
                 default: "32.0.101.7026"
                 hint: "Current unwanted version expected before repair. Disable the version check in Advanced to bypass."
                 hint_ru: "Текущая нежелательная версия перед ремонтом. В Advanced можно отключить проверку версии."
@@ -4262,7 +4319,7 @@ operation_groups:
                 type: "text"
                 group: "versions"
                 label: "Target driver version"
-                label_ru: "Target driver version"
+                label_ru: "Нужная версия драйвера"
                 default: "32.0.101.7085"
                 hint: "Desired driver version already present or extracted into DriverStore."
                 hint_ru: "Нужная версия драйвера, уже установленная или распакованная в DriverStore."
@@ -4270,7 +4327,7 @@ operation_groups:
                 type: "text"
                 group: "advanced"
                 label: "Target INF pattern"
-                label_ru: "Target INF pattern"
+                label_ru: "Шаблон INF цели"
                 default: "*.inf"
                 advanced: true
                 hint: "Optional DriverStore search narrowing, for example iigd_dch.inf."
@@ -4279,7 +4336,7 @@ operation_groups:
                 type: "text"
                 group: "advanced"
                 label: "Target INF path"
-                label_ru: "Target INF path"
+                label_ru: "Путь к INF цели"
                 advanced: true
                 hint: "Optional exact INF path. When filled, it overrides DriverStore search."
                 hint_ru: "Опциональный точный путь к INF. Если заполнен, заменяет поиск в DriverStore."
@@ -4287,7 +4344,7 @@ operation_groups:
                 type: "text"
                 group: "advanced"
                 label: "Driver class"
-                label_ru: "Driver class"
+                label_ru: "Класс драйвера"
                 default: "Display"
                 advanced: true
                 hint: "Used for pnputil before/after reports only."
@@ -4296,7 +4353,7 @@ operation_groups:
                 type: "checkbox"
                 group: "advanced"
                 label: "Skip current version check"
-                label_ru: "Пропустить current version check"
+                label_ru: "Не проверять текущую версию"
                 default: false
                 advanced: true
                 hint: "Expert mode: continue even when the current driver version is not the Bad driver version."
@@ -4305,7 +4362,7 @@ operation_groups:
                 type: "checkbox"
                 group: "advanced"
                 label: "Allow version-only INF fallback"
-                label_ru: "Разрешить INF fallback только по версии"
+                label_ru: "Разрешить запасной INF по одной версии"
                 default: false
                 advanced: true
                 hint: "Expert mode: if no INF contains the supplied HWID, allow choosing the newest INF with the target version anyway."
@@ -4323,7 +4380,7 @@ operation_groups:
                 type: "checkbox"
                 group: "advanced"
                 label: "Keep global WU driver block"
-                label_ru: "Оставить global WU driver block"
+                label_ru: "Оставить общий запрет драйверов WU"
                 default: false
                 advanced: true
                 hint: "Default removes ExcludeWUDriversInQualityUpdate after the targeted HWID policy is written."
@@ -4331,7 +4388,7 @@ operation_groups:
             children:
               - id: hwid_driver_rank_status
                 title: "Check rank target"
-                title_ru: "Проверить rank target"
+                title_ru: "Проверить цель ранга"
                 action_group: "HWID rank repair"
                 action_group_ru: "HWID rank repair"
                 action_group_tone: "neutral"
@@ -4344,7 +4401,7 @@ operation_groups:
                   mode: "repair_rank_hwid_status"
               - id: hwid_driver_rank_repair
                 title: "Repair driver rank by HWID"
-                title_ru: "Починить driver rank по HWID"
+                title_ru: "Починить ранг драйвера по HWID"
                 action_group: "HWID rank repair"
                 action_group_ru: "HWID rank repair"
                 action_group_tone: "neutral"
@@ -4359,7 +4416,7 @@ operation_groups:
 
           - id: nvidia_driver_restrictions
             title: "NVIDIA driver install restrictions"
-            title_ru: "NVIDIA driver install restrictions"
+            title_ru: "Запрет установки драйверов NVIDIA"
             description: "Optional Device Installation Restrictions for currently present NVIDIA PCI devices. Safer default is non-retroactive."
             description_ru: "Опциональные Device Installation Restrictions для текущих NVIDIA PCI устройств. Более безопасный default: без retroactive block."
             fields:
@@ -4367,7 +4424,7 @@ operation_groups:
                 type: "checkbox"
                 group: "options"
                 label: "Include compatible IDs"
-                label_ru: "Добавить compatible IDs"
+                label_ru: "Добавить совместимые ID"
                 default: false
                 hint: "Wider NVIDIA match. Leave off unless Hardware IDs alone are not enough."
                 hint_ru: "Более широкий NVIDIA match. Оставь выключенным, если Hardware IDs хватает."
@@ -4375,14 +4432,14 @@ operation_groups:
                 type: "checkbox"
                 group: "options"
                 label: "Retroactive block"
-                label_ru: "Retroactive block"
+                label_ru: "Запрет и для уже установленных"
                 default: false
                 hint: "Dangerous: Windows may remove or disable already installed matching NVIDIA devices."
                 hint_ru: "Опасно: Windows может удалить или выключить уже установленные совпадающие NVIDIA устройства."
             children:
               - id: nvidia_driver_block
                 title: "Block NVIDIA driver installs"
-                title_ru: "Блокировать NVIDIA driver installs"
+                title_ru: "Запретить установку драйверов NVIDIA"
                 action_group: "NVIDIA restrictions"
                 action_group_ru: "NVIDIA restrictions: block / unblock"
                 action_group_tone: "neutral"
@@ -4396,7 +4453,7 @@ operation_groups:
                   mode: "block_nvidia"
               - id: nvidia_driver_unblock
                 title: "Unblock NVIDIA driver installs"
-                title_ru: "Разблокировать NVIDIA driver installs"
+                title_ru: "Разрешить установку драйверов NVIDIA"
                 action_group: "NVIDIA restrictions"
                 action_group_ru: "NVIDIA restrictions: block / unblock"
                 action_group_tone: "neutral"
@@ -4411,7 +4468,7 @@ operation_groups:
 
           - id: driver_store_backups
             title: "Driver Store backups"
-            title_ru: "Driver Store backups"
+            title_ru: "Копии Driver Store"
             description: "Backup, export, and restore INF-based third-party drivers from the Windows Driver Store."
             description_ru: "Backup, export и restore INF-based third-party драйверов из Windows Driver Store."
             fields:
@@ -4419,7 +4476,7 @@ operation_groups:
                 type: "select"
                 group: "source"
                 label: "Driver backup"
-                label_ru: "Driver backup"
+                label_ru: "Копия драйверов"
                 options_source: "system_core.services.devops_tools:driver_backup_options"
                 cache_seconds: 20
                 searchable: true
@@ -4429,13 +4486,13 @@ operation_groups:
                 type: "folder"
                 group: "source"
                 label: "Manual backup folder"
-                label_ru: "Backup folder вручную"
+                label_ru: "Папка копии вручную"
                 hint: "Optional override: folder containing drivers\\ or INF files."
                 hint_ru: "Опциональный override: папка с drivers\\ или INF-файлами."
             children:
               - id: driver_store_manifest
                 title: "Save Driver Store manifest"
-                title_ru: "Сохранить Driver Store manifest"
+                title_ru: "Сохранить опись Driver Store"
                 action_group: "Driver Store backup / export / restore"
                 action_group_ru: "Driver Store: backup / export / restore"
                 action_group_tone: "neutral"
@@ -4476,7 +4533,7 @@ operation_groups:
                   mode: "restore_drivers"
               - id: driver_store_open_backups
                 title: "Open driver backups"
-                title_ru: "Открыть driver backups"
+                title_ru: "Открыть копии драйверов"
                 action_group: "Driver Store folders"
                 action_group_ru: "Driver Store folders"
                 action_group_tone: "neutral"
@@ -4489,7 +4546,7 @@ operation_groups:
 
           - id: driver_update_open_tool
             title: "Open Driver Update Blocker folder"
-            title_ru: "Открыть папку Driver Update Blocker"
+            title_ru: "Открыть папку запрета обновлений драйверов"
             action_group: "Folders"
             action_group_ru: "Папки"
             action_group_tone: "neutral"
@@ -4509,7 +4566,7 @@ operation_groups:
         children:
           - id: nvidia_audio_status
             title: "NVIDIA audio status"
-            title_ru: "Статус NVIDIA audio"
+            title_ru: "Статус звука NVIDIA"
             action_group: "Inspect / export IDs"
             action_group_ru: "Проверка / export IDs"
             action_group_tone: "neutral"
@@ -4522,7 +4579,7 @@ operation_groups:
               mode: "status"
           - id: nvidia_audio_export_ids
             title: "Export NVIDIA audio IDs"
-            title_ru: "Экспортировать NVIDIA audio IDs"
+            title_ru: "Экспортировать ID звука NVIDIA"
             action_group: "Inspect / export IDs"
             action_group_ru: "Проверка / export IDs"
             action_group_tone: "neutral"
@@ -4535,7 +4592,7 @@ operation_groups:
               mode: "export_ids"
           - id: nvidia_audio_disable
             title: "Disable NVIDIA HDMI/DP audio"
-            title_ru: "Отключить NVIDIA HDMI/DP audio"
+            title_ru: "Отключить звук NVIDIA HDMI/DP"
             action_group: "Device state"
             action_group_ru: "Device state: disable / enable"
             action_group_tone: "neutral"
@@ -4549,7 +4606,7 @@ operation_groups:
               mode: "disable"
           - id: nvidia_audio_enable
             title: "Enable NVIDIA HDMI/DP audio"
-            title_ru: "Включить NVIDIA HDMI/DP audio"
+            title_ru: "Включить звук NVIDIA HDMI/DP"
             action_group: "Device state"
             action_group_ru: "Device state: disable / enable"
             action_group_tone: "neutral"
@@ -4563,7 +4620,7 @@ operation_groups:
               mode: "enable"
           - id: nvidia_audio_block_policy
             title: "Block NVIDIA HDMI/DP audio policy"
-            title_ru: "Policy-block NVIDIA HDMI/DP audio"
+            title_ru: "Запретить звук NVIDIA HDMI/DP политикой"
             action_group: "Policy layer"
             action_group_ru: "Policy: block / unblock"
             action_group_tone: "neutral"
@@ -4577,7 +4634,7 @@ operation_groups:
               mode: "block_policy"
           - id: nvidia_audio_unblock_policy
             title: "Unblock NVIDIA HDMI/DP audio policy"
-            title_ru: "Снять policy-block NVIDIA HDMI/DP audio"
+            title_ru: "Снять запрет звука NVIDIA HDMI/DP"
             action_group: "Policy layer"
             action_group_ru: "Policy: block / unblock"
             action_group_tone: "neutral"
@@ -4591,7 +4648,7 @@ operation_groups:
               mode: "unblock_policy"
           - id: nvidia_audio_open_output
             title: "Open NVIDIA audio output"
-            title_ru: "Открыть NVIDIA audio output"
+            title_ru: "Открыть результаты звука NVIDIA"
             action_group: "Folders"
             action_group_ru: "Папки"
             action_group_tone: "neutral"
@@ -4603,7 +4660,7 @@ operation_groups:
               mode: "open_output"
           - id: nvidia_audio_open_backup
             title: "Open NVIDIA audio backup"
-            title_ru: "Открыть NVIDIA audio backup"
+            title_ru: "Открыть копии звука NVIDIA"
             action_group: "Folders"
             action_group_ru: "Папки"
             action_group_tone: "neutral"
@@ -4615,7 +4672,7 @@ operation_groups:
               mode: "open_backup"
           - id: nvidia_audio_open_tool
             title: "Open NVIDIA audio tool folder"
-            title_ru: "Открыть папку NVIDIA audio tool"
+            title_ru: "Открыть папку набора звука NVIDIA"
             action_group: "Folders"
             action_group_ru: "Папки"
             action_group_tone: "neutral"
@@ -4662,7 +4719,7 @@ operation_groups:
                 searchable: true
           - id: storage_ssd_reset_wizard
             title: "Launch SSD/NVMe wizard"
-            title_ru: "Запустить SSD/NVMe wizard"
+            title_ru: "Запустить мастер SSD/NVMe"
             description: "Open the original wizard in an external console; destructive actions still require its own typed confirmations."
             description_ru: "Открыть оригинальный wizard во внешней консоли; destructive-действия всё равно требуют typed confirmations внутри него."
             service: "system_core.services.devops_tools:run_ssd_reset_wizard"
@@ -4731,7 +4788,7 @@ operation_groups:
               folder: "tools/startup_kit"
           - id: storage_winre_status
             title: "WinRE layout status"
-            title_ru: "Статус WinRE layout"
+            title_ru: "Состояние разметки WinRE"
             description: "Read-only reagentc and OS disk layout check: shows active WinRE location and adjacent partitions."
             description_ru: "Проверка без изменений: reagentc и layout системного диска, активная WinRE и соседние разделы."
             service: "system_core.services.devops_tools:winre_status"
@@ -4741,7 +4798,7 @@ operation_groups:
             action_group_tone: "neutral"
           - id: storage_winre_wizard
             title: "Run WinRE extend wizard"
-            title_ru: "Запустить WinRE wizard"
+            title_ru: "Запустить мастер WinRE"
             description: "Disable WinRE, delete the recovery partition to the right of C:, and extend C: after project confirmation."
             description_ru: "Отключает WinRE, удаляет раздел восстановления справа от C: и расширяет C: после подтверждения в проекте."
             service: "system_core.services.devops_tools:run_winre_wizard"
@@ -4775,20 +4832,21 @@ operation_groups:
         label_ru: "Папка ключей"
         default: ""
         placeholder: "export: output\\ssh_keykit / import: input"
+        placeholder_ru: "выгрузка: output\\ssh_keykit / загрузка: input"
         hint: "Empty lets the operation choose: export writes to output\\ssh_keykit, import reads from input. A path here replaces both."
         hint_ru: "Пусто — папку выбирает операция: экспорт пишет в output\\ssh_keykit, импорт читает из input. Указанный путь заменяет обе."
       - id: profile_name
         type: "text"
         section: "advanced"
         label: "Machine/profile name"
-        label_ru: "Machine/profile name"
+        label_ru: "Имя машины или профиля"
         default: ""
         placeholder: "COMPUTERNAME"
       - id: user_name
         type: "text"
         section: "advanced"
         label: "Windows user"
-        label_ru: "Windows user"
+        label_ru: "Пользователь Windows"
         default: ""
         placeholder: "USERNAME"
       - id: ssh_config_path
@@ -4806,7 +4864,7 @@ operation_groups:
         label: "rclone config to check"
         label_ru: "Файл rclone.conf для проверки"
         default: ""
-        placeholder: "%APPDATA%\rclone\rclone.conf"
+        placeholder: "%APPDATA%\\rclone\\rclone.conf"
         hint: "Empty value checks the current user's rclone config."
         hint_ru: "Пустое значение проверяет rclone.conf текущего пользователя."
       - id: links_report_path
@@ -4829,7 +4887,7 @@ operation_groups:
         type: "text"
         section: "advanced"
         label: "Snapshot for import"
-        label_ru: "Snapshot для import"
+        label_ru: "Снимок для импорта"
         default: ""
         hint: "Empty value imports the newest snapshot for the selected profile/user."
         hint_ru: "Пустое значение импортирует самый свежий snapshot для выбранного profile/user."
@@ -4845,7 +4903,7 @@ operation_groups:
           mode: "check_links"
       - id: ssh_keykit_export_client
         title: "Export client SSH keys"
-        title_ru: "Экспорт client SSH keys"
+        title_ru: "Экспорт ключей SSH клиента"
         action_group: "SSH keys export / import"
         action_group_ru: "SSH keys: export / import"
         action_group_tone: "neutral"
@@ -4859,7 +4917,7 @@ operation_groups:
           mode: "export_client"
       - id: ssh_keykit_export_all
         title: "Export client + server SSH keys"
-        title_ru: "Экспорт client + server SSH keys"
+        title_ru: "Экспорт ключей SSH клиента и сервера"
         action_group: "SSH keys export / import"
         action_group_ru: "SSH keys: export / import"
         action_group_tone: "neutral"
@@ -4873,7 +4931,7 @@ operation_groups:
           mode: "export_all"
       - id: ssh_keykit_import_client
         title: "Import client SSH keys"
-        title_ru: "Импорт client SSH keys"
+        title_ru: "Импорт ключей SSH клиента"
         action_group: "SSH keys export / import"
         action_group_ru: "SSH keys: export / import"
         action_group_tone: "neutral"
@@ -4887,7 +4945,7 @@ operation_groups:
           mode: "import_client"
       - id: ssh_keykit_import_all
         title: "Import client + server SSH keys"
-        title_ru: "Импорт client + server SSH keys"
+        title_ru: "Импорт ключей SSH клиента и сервера"
         action_group: "SSH keys export / import"
         action_group_ru: "SSH keys: export / import"
         action_group_tone: "neutral"
@@ -5026,7 +5084,7 @@ operation_groups:
           - id: allow_legacy
             type: "checkbox"
             label: "Allow legacy bundle without manifest"
-            label_ru: "Разрешить старый бэкап без manifest"
+            label_ru: "Разрешить старый бэкап без описи"
             default: false
             advanced: true
         parameters:
@@ -5057,7 +5115,7 @@ operation_groups:
           - id: allow_legacy
             type: "checkbox"
             label: "Allow legacy bundle without manifest"
-            label_ru: "Разрешить старый бэкап без manifest"
+            label_ru: "Разрешить старый бэкап без описи"
             default: false
             advanced: true
         parameters:
@@ -5088,17 +5146,35 @@ operation_groups:
         default: "CurrentUser\\My"
         options:
           - value: "CurrentUser\\My"
-            label: "CurrentUser\\My (personal)"
-          - value: "LocalMachine\\My"
-            label: "LocalMachine\\My (personal)"
+            label: "My - personal"
+            label_ru: "My — личные"
+            group: "This user - CurrentUser"
+            group_ru: "Пользователь — CurrentUser"
           - value: "CurrentUser\\Root"
-            label: "CurrentUser\\Root (trusted roots)"
-          - value: "LocalMachine\\Root"
-            label: "LocalMachine\\Root (trusted roots)"
+            label: "Root - trusted roots"
+            label_ru: "Root — доверенные корневые"
+            group: "This user - CurrentUser"
+            group_ru: "Пользователь — CurrentUser"
           - value: "CurrentUser\\CA"
-            label: "CurrentUser\\CA (intermediate)"
+            label: "CA - intermediate"
+            label_ru: "CA — промежуточные"
+            group: "This user - CurrentUser"
+            group_ru: "Пользователь — CurrentUser"
+          - value: "LocalMachine\\My"
+            label: "My - personal"
+            label_ru: "My — личные"
+            group: "The computer - LocalMachine"
+            group_ru: "Компьютер — LocalMachine"
+          - value: "LocalMachine\\Root"
+            label: "Root - trusted roots"
+            label_ru: "Root — доверенные корневые"
+            group: "The computer - LocalMachine"
+            group_ru: "Компьютер — LocalMachine"
           - value: "LocalMachine\\CA"
-            label: "LocalMachine\\CA (intermediate)"
+            label: "CA - intermediate"
+            label_ru: "CA — промежуточные"
+            group: "The computer - LocalMachine"
+            group_ru: "Компьютер — LocalMachine"
       - id: cert_backup_dir
         type: "folder"
         workbench_route: false
@@ -5110,7 +5186,7 @@ operation_groups:
         hint: "Where export writes: empty means output\\certificates. Import takes the file named in Advanced, not this folder."
         hint_ru: "Куда пишет экспорт: пусто — output\\certificates. Импорт берёт файл, указанный в Advanced, а не эту папку."
       - id: pfx_password
-        type: "text"
+        type: "password"
         section: "advanced"
         label: "PFX password"
         label_ru: "Пароль PFX"
@@ -5133,17 +5209,35 @@ operation_groups:
         default: "CurrentUser\\My"
         options:
           - value: "CurrentUser\\My"
-            label: "CurrentUser\\My (personal)"
-          - value: "LocalMachine\\My"
-            label: "LocalMachine\\My (personal)"
+            label: "My - personal"
+            label_ru: "My — личные"
+            group: "This user - CurrentUser"
+            group_ru: "Пользователь — CurrentUser"
           - value: "CurrentUser\\Root"
-            label: "CurrentUser\\Root (trusted roots)"
-          - value: "LocalMachine\\Root"
-            label: "LocalMachine\\Root (trusted roots)"
+            label: "Root - trusted roots"
+            label_ru: "Root — доверенные корневые"
+            group: "This user - CurrentUser"
+            group_ru: "Пользователь — CurrentUser"
           - value: "CurrentUser\\CA"
-            label: "CurrentUser\\CA (intermediate)"
+            label: "CA - intermediate"
+            label_ru: "CA — промежуточные"
+            group: "This user - CurrentUser"
+            group_ru: "Пользователь — CurrentUser"
+          - value: "LocalMachine\\My"
+            label: "My - personal"
+            label_ru: "My — личные"
+            group: "The computer - LocalMachine"
+            group_ru: "Компьютер — LocalMachine"
+          - value: "LocalMachine\\Root"
+            label: "Root - trusted roots"
+            label_ru: "Root — доверенные корневые"
+            group: "The computer - LocalMachine"
+            group_ru: "Компьютер — LocalMachine"
           - value: "LocalMachine\\CA"
-            label: "LocalMachine\\CA (intermediate)"
+            label: "CA - intermediate"
+            label_ru: "CA — промежуточные"
+            group: "The computer - LocalMachine"
+            group_ru: "Компьютер — LocalMachine"
     children:
       - id: cert_status
         title: "Certificate status"
@@ -5160,7 +5254,7 @@ operation_groups:
           mode: "status"
       - id: cert_export_pfx
         title: "Export personal keys to PFX"
-        title_ru: "Экспорт personal ключей в PFX"
+        title_ru: "Экспорт личных ключей в PFX"
         action_group: "Certificates export / import"
         action_group_ru: "Certificates: export / import"
         action_group_tone: "neutral"
@@ -5174,7 +5268,7 @@ operation_groups:
           mode: "export_pfx"
       - id: cert_export_roots
         title: "Export store to SST (public)"
-        title_ru: "Экспорт store в SST (публично)"
+        title_ru: "Экспорт хранилища в SST (публично)"
         action_group: "Certificates export / import"
         action_group_ru: "Certificates: export / import"
         action_group_tone: "neutral"
@@ -5257,6 +5351,7 @@ operation_groups:
         label_ru: "Папка шрифтов"
         default: ""
         placeholder: "export: output\\fonts / import: input"
+        placeholder_ru: "выгрузка: output\\fonts / загрузка: input"
         hint: "Empty lets the operation choose: collecting goes to output\\fonts, installing reads input."
         hint_ru: "Пусто — папку выбирает операция: сборка идёт в output\\fonts, установка читает input."
       - id: include_system
@@ -5338,6 +5433,7 @@ operation_groups:
         label_ru: "Папка среды оболочки"
         default: ""
         placeholder: "export: output\\shell / import: input"
+        placeholder_ru: "выгрузка: output\\shell / загрузка: input"
         hint: "Empty lets the operation choose: collecting goes to output\\shell, restoring reads input."
         hint_ru: "Пусто — папку выбирает операция: сборка идёт в output\\shell, восстановление читает input."
     children:
@@ -5411,6 +5507,7 @@ operation_groups:
         label_ru: "Папка доступов"
         default: ""
         placeholder: "export: output\\access / import: input"
+        placeholder_ru: "выгрузка: output\\access / загрузка: input"
         hint: "Empty lets the operation choose: collecting goes to output\\access, laying out reads input."
         hint_ru: "Пусто — папку выбирает операция: сборка идёт в output\\access, раскладка читает input."
       - id: access_key_root
@@ -5438,7 +5535,7 @@ operation_groups:
         label: "rclone config"
         label_ru: "Файл rclone.conf"
         default: ""
-        placeholder: "%APPDATA%\rclone\rclone.conf"
+        placeholder: "%APPDATA%\\rclone\\rclone.conf"
         hint: "Empty uses the current user's rclone config."
         hint_ru: "Пустое значение берёт rclone.conf текущего пользователя."
     children:
@@ -5500,6 +5597,7 @@ operation_groups:
         label_ru: "Папка переезда"
         default: ""
         placeholder: "export: output\\migration / import: input"
+        placeholder_ru: "выгрузка: output\\migration / загрузка: input"
         hint: "Empty lets the operation choose: collecting goes to output\\migration, unpacking reads the newest migration in input."
         hint_ru: "Пусто — папку выбирает операция: сборка идёт в output\\migration, развёртывание читает самый свежий переезд в input."
       - id: profile_name
@@ -5521,7 +5619,7 @@ operation_groups:
         hint: "Empty uses the current user."
         hint_ru: "Пустое значение берёт текущего пользователя."
       - id: pfx_password
-        type: "text"
+        type: "password"
         section: "advanced"
         label: "PFX password"
         label_ru: "Пароль PFX"
@@ -5599,72 +5697,11 @@ operation_groups:
   - id: utilities
     title: "Utilities"
     title_ru: "Утилиты"
-    description: "Small project-local utilities: documentation PDF, the bundled ripgrep and folder shortcuts."
-    description_ru: "Мелкие project-local утилиты: PDF документации, встроенный ripgrep и ярлыки папок."
+    description: "Small project-local utilities: the bundled ripgrep and folder shortcuts."
+    description_ru: "Мелкие project-local утилиты: встроенный ripgrep и ярлыки папок."
     surface: "os"
     section: "os_workspace"
     children:
-      - id: docs_pdf
-        title: "Documentation PDF"
-        title_ru: "Документация PDF"
-        description: "Render project Markdown guides and instructions into docs\\PDF using the Audion Office OCR AI PDF engine."
-        description_ru: "Сгенерировать PDF для Markdown-гайдов и инструкций проекта в docs\\PDF через PDF-engine Audion Office OCR AI."
-        fields:
-          - id: docs_pdf_theme
-            type: "select"
-            group: "options"
-            label: "Theme"
-            label_ru: "Тема"
-            default: "both"
-            options:
-              - value: "both"
-                label: "Both: dark + light-sand"
-                label_ru: "Обе: dark + light-sand"
-              - value: "dark"
-                label: "Dark"
-                label_ru: "Dark"
-              - value: "light-sand"
-                label: "Light Sand"
-                label_ru: "Light Sand"
-          - id: docs_pdf_include_agent_instructions
-            type: "checkbox"
-            section: "advanced"
-            label: "Include agent instructions"
-            label_ru: "Включить agent instructions"
-            default: true
-            hint: "Include AGENTS.md and CLAUDE.md together with user guides and docs."
-            hint_ru: "Добавить AGENTS.md и CLAUDE.md к пользовательским гайдам и docs."
-        children:
-          - id: docs_pdf_plan
-            title: "Preview PDF export plan"
-            title_ru: "Показать план PDF export"
-            description: "Dry run: list Markdown sources and target PDF files without writing PDFs."
-            description_ru: "Dry run: показать Markdown-источники и целевые PDF без записи файлов."
-            service: "system_core.services.devops_tools:docs_pdf_export"
-            kind: "safe"
-            risk_level: "readonly"
-            parameters:
-              mode: "plan"
-          - id: docs_pdf_render
-            title: "Generate docs PDFs"
-            title_ru: "Сгенерировать PDF документации"
-            description: "Render root guides, docs\\*.md, GitHub README files and optional agent instructions into docs\\PDF. Markdown remains the source of truth."
-            description_ru: "Сгенерировать PDF для root guides, docs\\*.md, GitHub README и optional agent instructions в docs\\PDF. Markdown остаётся source of truth."
-            service: "system_core.services.devops_tools:docs_pdf_export"
-            kind: "safe"
-            risk_level: "project_write"
-            parameters:
-              mode: "render"
-          - id: docs_pdf_open
-            title: "Open docs PDF folder"
-            title_ru: "Открыть папку docs PDF"
-            description: "Open docs\\PDF."
-            description_ru: "Открыть docs\\PDF."
-            service: "system_core.services.devops_tools:docs_pdf_export"
-            kind: "safe"
-            parameters:
-              mode: "open_folder"
-
       - id: ripgrep_status
         title: "ripgrep version"
         title_ru: "Версия ripgrep"
@@ -5777,7 +5814,7 @@ operation_groups:
               mode: "SessionReset"
           - id: codex_nuke_keep_cli_state
             title: "Codex NUKE, keep CLI state"
-            title_ru: "Полная очистка Codex, сохранить CLI state"
+            title_ru: "Полная очистка Codex, сохранить состояние CLI"
             action_group: "Codex cleanup ladder"
             action_group_ru: "Codex: audit / dry-run / reset / nuke"
             action_group_tone: "neutral"
@@ -5809,8 +5846,8 @@ operation_groups:
       - id: runtime_cache_cleaner
         title: "Cache Cleaner"
         title_ru: "Очистка кэшей"
-        description: "Free the system drive from caches that rebuild themselves: pip, npm, NuGet, Temp, Adobe media cache, Chrome on-device AI model."
-        description_ru: "Освободить системный диск от кэшей, которые программы сами наполнят снова: pip, npm, NuGet, Temp, медиакэш Adobe, локальная ИИ-модель Chrome."
+        description: "Free the system drive from caches that rebuild themselves: pip, npm, NuGet, Temp of the user and of Windows, sessions of Claude Code, Adobe media cache, Chrome on-device AI model."
+        description_ru: "Освободить системный диск от кэшей, которые программы сами наполнят снова: pip, npm, NuGet, Temp пользователя и Windows, сессии Claude Code, медиакэш Adobe, локальная ИИ-модель Chrome."
         children:
           - id: cache_cleaner_audit
             title: "Measure caches"
@@ -5819,8 +5856,8 @@ operation_groups:
             action_group_ru: "Кэши: замер / очистка / модель Chrome"
             action_group_tone: "neutral"
             action_tone: "friendly"
-            description: "Measure pip, npm, NuGet, Temp older than 24 h and Adobe media cache; change nothing."
-            description_ru: "Замерить pip, npm, NuGet, Temp старше суток и медиакэш Adobe; ничего не менять."
+            description: "Measure pip, npm, NuGet, Temp of the user and of Windows older than 24 h, Claude Code sessions idle for 24 h and Adobe media cache; change nothing."
+            description_ru: "Замерить pip, npm, NuGet, Temp пользователя и Windows старше суток, сессии Claude Code, простоявшие сутки, и медиакэш Adobe; ничего не менять."
             service: "system_core.services.devops_tools:cache_cleaner"
             kind: "safe"
             risk_level: "readonly"
@@ -5833,8 +5870,8 @@ operation_groups:
             action_group_ru: "Кэши: замер / очистка / модель Chrome"
             action_group_tone: "neutral"
             action_tone: "medium"
-            description: "Clear pip, npm, NuGet http cache, Temp older than 24 h (files in use stay) and Adobe media cache (skipped while Adobe video apps run)."
-            description_ru: "Очистить pip, npm, http-кэш NuGet, Temp старше суток (занятые файлы остаются) и медиакэш Adobe (пропускается, пока открыты видеопрограммы Adobe)."
+            description: "Clear pip, npm, NuGet http cache, Temp of the user and of Windows older than 24 h (files in use stay; the Windows Temp needs administrator rights), Claude Code sessions idle for 24 h and Adobe media cache (skipped while Adobe video apps run)."
+            description_ru: "Очистить pip, npm, http-кэш NuGet, Temp пользователя и Windows старше суток (занятые файлы остаются; Temp Windows - с правами администратора), сессии Claude Code, простоявшие сутки, и медиакэш Adobe (пропускается, пока открыты видеопрограммы Adobe)."
             service: "system_core.services.devops_tools:cache_cleaner"
             kind: "dangerous"
             risk_level: "user_write"
@@ -5855,6 +5892,36 @@ operation_groups:
             parameters:
               mode: "Clean"
               NuGetPackages: true
+          - id: cache_cleaner_temp
+            title: "Clear Temp older than 24 h"
+            title_ru: "Очистить временные файлы старше суток"
+            action_group: "Cache cleanup"
+            action_group_ru: "Кэши: замер / очистка / модель Chrome"
+            action_group_tone: "neutral"
+            action_tone: "medium"
+            description: "Clear the user Temp and the Windows Temp older than 24 h and the Claude Code sessions idle for 24 h (%TEMP%\\claude); a session at work and the files in use stay. The Windows Temp needs administrator rights and is skipped without them."
+            description_ru: "Очистить Temp пользователя и Temp Windows старше суток и сессии Claude Code, простоявшие сутки (%TEMP%\\claude); рабочая сессия и занятые файлы остаются. Temp Windows требует прав администратора, без них пропускается."
+            service: "system_core.services.devops_tools:cache_cleaner"
+            kind: "dangerous"
+            risk_level: "user_write"
+            parameters:
+              mode: "Clean"
+              Targets: "temp,wintemp,claude"
+          - id: cache_cleaner_adobe
+            title: "Clear Premiere cache"
+            title_ru: "Очистить кэш Premiere"
+            action_group: "Cache cleanup"
+            action_group_ru: "Кэши: замер / очистка / модель Chrome"
+            action_group_tone: "neutral"
+            action_tone: "medium"
+            description: "Clear the media cache of Premiere Pro and the other Adobe video apps: Media Cache Files, Media Cache, Peak Files - in the usual place and where the preferences of Premiere moved it. Skipped while Premiere Pro, After Effects, Media Encoder or Audition runs."
+            description_ru: "Очистить медиакэш Premiere Pro и других видеопрограмм Adobe: Media Cache Files, Media Cache, Peak Files - в обычном месте и там, куда его перенесли в настройках Premiere. Пропускается, пока открыты Premiere Pro, After Effects, Media Encoder или Audition."
+            service: "system_core.services.devops_tools:cache_cleaner"
+            kind: "dangerous"
+            risk_level: "user_write"
+            parameters:
+              mode: "Clean"
+              Targets: "adobe"
           - id: cache_cleaner_chrome_model
             title: "Remove Chrome AI model"
             title_ru: "Убрать ИИ-модель Chrome"
@@ -5937,7 +6004,7 @@ operation_groups:
               mode: "Nuke"
           - id: python_nuke_keep_winget
             title: "Python NUKE, keep winget"
-            title_ru: "Очистка Python без winget uninstall"
+            title_ru: "Очистка Python без удаления через winget"
             action_group: "Python cleanup ladder"
             action_group_ru: "Python: audit / dry-run / nuke"
             action_group_tone: "neutral"
@@ -5953,8 +6020,8 @@ operation_groups:
               KeepWinget: true
 
       - id: cleanup_workspace
-        title: "Clear Workbench workspace"
-        title_ru: "Очистить workspace"
+        title: "Clear workspace"
+        title_ru: "Очистить рабочую папку"
         description: "Delete only files inside the managed workspace folder."
         description_ru: "Удалить только файлы внутри управляемой папки workspace."
         service: "system_core.services.sample_service:cleanup_workspace"
@@ -5963,7 +6030,7 @@ operation_groups:
 
 maintenance_operations:
   - id: cleanup_input_output
-    title: "Clear Workbench I/O"
+    title: "Clear I/O"
     title_ru: "Очистить I/O"
     description: "Delete contents of managed input and output folders."
     description_ru: "Удалить содержимое управляемых папок input и output."

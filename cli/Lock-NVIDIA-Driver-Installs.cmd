@@ -81,7 +81,7 @@ if not defined NO_PAUSE (
 exit /b %EXIT_CODE%
 
 :SELECT_POWERSHELL
-if exist "%CORE_DIR%\powershell\pwsh.exe" set "PS_ENGINE=%CORE_DIR%\powershell\pwsh.exe" & exit /b 0
+if exist "%CORE_DIR%\..\App\AudionPs.exe" set "PS_ENGINE=%CORE_DIR%\..\App\AudionPs.exe" & exit /b 0
 where pwsh.exe >nul 2>nul
 if not errorlevel 1 set "PS_ENGINE=pwsh.exe" & exit /b 0
 where powershell.exe >nul 2>nul

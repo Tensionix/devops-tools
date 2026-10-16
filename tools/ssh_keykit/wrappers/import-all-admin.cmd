@@ -11,7 +11,9 @@ if not "%ERRORLEVEL%"=="0" (
 )
 
 set "PWSH="
-if exist "S:\Audion\Tools\PowerShell\pwsh.exe" (
+if exist "%~dp0..\..\..\App\AudionPs.exe" (
+  set "PWSH=%~dp0..\..\..\App\AudionPs.exe"
+) else if exist "S:\Audion\Tools\PowerShell\pwsh.exe" (
   set "PWSH=S:\Audion\Tools\PowerShell\pwsh.exe"
 ) else if exist "E:\Audion\Tools\PowerShell\pwsh.exe" (
   set "PWSH=E:\Audion\Tools\PowerShell\pwsh.exe"

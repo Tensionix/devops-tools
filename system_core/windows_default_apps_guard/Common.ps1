@@ -62,7 +62,7 @@ function Test-GuardAdministrator {
 
 function Assert-GuardAdministrator {
   if (-not (Test-GuardAdministrator)) {
-    throw 'Administrator rights are required. Start launcher_gui.cmd normally, or rerun this action through the GUI UAC layer.'
+    throw 'Administrator rights are required. Start Start.exe normally, or rerun this action through the UAC layer of the window.'
   }
 }
 

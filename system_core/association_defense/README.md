@@ -112,6 +112,12 @@ packages you removed. `Appx-Rearm.ps1` stores the chosen list and registers a
 scheduled task that re-applies the removal when the build changes or a removed
 package reappears. On Pro/Enterprise, pair it with `AppX-ReinstallBlock.ps1`.
 
+The task runs as SYSTEM, so it never runs a file a user can change: `-Enable` locks
+`%ProgramData%\Audion\AppxGuard` (owner Administrators; SYSTEM and Administrators write, Users read),
+copies `Appx-Rearm.ps1`, `_Common.ps1` and `Microsoft-Apps.ps1` into its `bin` folder and points the
+task at that copy, run by the built-in Windows PowerShell 5.1. `-Status` says when the copy differs from
+the scripts beside it or the task is of an earlier kind; `-Enable` again refreshes it.
+
 | Action | Command | Effect |
 |--------|---------|--------|
 | Status | `.\Appx-Rearm.ps1 -Status` | Task state, stored app list, last check result |
