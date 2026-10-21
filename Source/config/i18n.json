@@ -1,4 +1,5 @@
 {
+  "выбрано всего: {0}; в списке: {1}": { "en": "selected in total: {0}; listed: {1}" },
   "нет файла: {0}": { "en": "no such file: {0}" },
   "нет Python программы ({0}): сначала соберите окружение - builder_main.cmd": { "en": "the Python of the program is not there ({0}): build the environment first - builder_main.cmd" },
   "консольная команда не ответила за {0} с": { "en": "the console command did not answer in {0} s" },

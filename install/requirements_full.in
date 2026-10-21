@@ -4,6 +4,7 @@
 
 # The engine and the build of the environment
 pyyaml
+zstandard
 setuptools
 wheel
 packaging

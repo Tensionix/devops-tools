@@ -9,6 +9,7 @@
 - [Risk and Confirmation](#risk-and-confirmation)
 - [Reading the Window](#reading-the-window)
 - [Where the Working Data Lives](#where-the-working-data-lives)
+- [AI Transfer](#ai-transfer)
 - [The Sections](#the-sections)
 - [The Terminal](#the-terminal)
 - [Checks](#checks)
@@ -141,6 +142,12 @@ during preparation, opened by its own button, and holds what changes are rolled
 back from. It is not a cache or scratch space: network snapshots, registry
 branches, driver store exports, browser bookmarks before and after, certificates,
 SSH material, virtualisation and `hosts` backups.
+
+## AI Transfer
+
+The AI page lists local Claude Code, Codex (including compressed logs) and Grok conversations, Desktop profile availability and data categories. Chats and other data are selected independently. Preview is enabled initially; import reads the selected SOURCE and export uses TARGET. Conflicts are preserved unless explicitly replaced, and imports have recovery journals.
+
+See [AI data transfer](tools/AI_TRANSFER_EN.md) for supported versions and cloud-data limitations.
 
 ## The Sections
 

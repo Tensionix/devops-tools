@@ -249,6 +249,7 @@ public sealed class Field
     public List<Option> Options { get; set; } = new();
     public string OptionsSource { get; set; } = "";
     public List<string> DependsOn { get; set; } = new();
+    public bool PreserveSelection { get; set; }
     /// <summary>"dropdown" - a choice of many is a field that opens its list under itself.</summary>
     public string View { get; set; } = "";
     public bool Searchable { get; set; }

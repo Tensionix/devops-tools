@@ -25,7 +25,9 @@ from system_core.core.manifest import load_manifest  # noqa: E402
 
 RECORD = json.loads((ROOT / "tests" / "former_window_parameters.json").read_text(encoding="utf-8"))
 # Operations the window gained after the former window was recorded: no form, the parameters of the manifest alone.
-ADDED_AFTER_RECORD = {"cache_cleaner_temp", "cache_cleaner_adobe"}
+ADDED_AFTER_RECORD = {"cache_cleaner_temp", "cache_cleaner_adobe", "ai_backup_inventory"}
+WINDOW_AI_V3 = {"ai_backup_export", "ai_backup_import"}
+FORMS_ADDED_AFTER_RECORD = {"ai_backup_rollback"}
 # Operations of the former window that are gone since: the export of the documentation into PDF, which ran the
 # engine of Audion Office OCR AI beside the project (the owner, 15.10.2026: "remove the dependency and the PDF").
 # And the installer of the portable PowerShell: the program has its own, App\AudionPs.exe, since 2.0.0.
@@ -78,7 +80,7 @@ class ModelAgainstRecord(unittest.TestCase):
         return shown(model.build_parameters(node, values, ROOT / "input", ROOT / "output", ROOT))
 
     def test_every_operation_is_recorded(self) -> None:
-        runs = {node.id for node in model.all_nodes(self.manifest) if node.service} - set(model.CARD_OPERATIONS) - ADDED_AFTER_RECORD
+        runs = {node.id for node in model.all_nodes(self.manifest) if node.service} - set(model.CARD_OPERATIONS) - ADDED_AFTER_RECORD - FORMS_ADDED_AFTER_RECORD
         recorded = set(RECORD) - {"__bookmarks__"} - REMOVED_AFTER_RECORD
         self.assertEqual(sorted(runs - recorded), [])
         self.assertEqual(sorted(recorded - runs), [])

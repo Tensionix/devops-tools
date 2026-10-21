@@ -236,11 +236,16 @@ public static class Door
     }
 
     /// <summary>The list of a field, asked of its provider with the values of the form and the working folders; the reason when there is no list.</summary>
-    public static async Task<(List<Option> Options, string Trouble)> Options(string node, string field, string valuesJson, string source = "", string target = "")
+    public static async Task<(List<Option> Options, string Trouble)> Options(string node, string field, string valuesJson, string source = "", string target = "", bool refresh = false)
     {
         string file = "";
         try
         {
+            if (refresh && System.Text.Json.Nodes.JsonNode.Parse(valuesJson) is System.Text.Json.Nodes.JsonObject fresh)
+            {
+                fresh["_refresh_options"] = true;
+                valuesJson = fresh.ToJsonString();
+            }
             file = ValuesFile("options", valuesJson);
             var reply = await Call(new[] { "options", "--operation", node, "--field", field }.Concat(Folders(source, target)).Concat(new[] { "--params", file }));
             var json = LastJson(reply.Out);

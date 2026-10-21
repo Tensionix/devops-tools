@@ -10,6 +10,7 @@ import sys
 # What the engine imports. The window is App\, built with its own runtime: it needs no package here.
 REQUIRED_MODULES = [
     ("yaml", "pyyaml"),
+    ("zstandard", "zstandard"),
 ]
 
 def check_module(import_name: str) -> tuple[bool, str]:

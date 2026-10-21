@@ -707,7 +707,7 @@
   },
   {
     "name": "pip",
-    "version": "26.2.1",
+    "version": "26.2.2",
     "license": "MIT",
     "source": "site-packages",
     "license_files": [
@@ -833,7 +833,7 @@
   },
   {
     "name": "setuptools",
-    "version": "84.0.0",
+    "version": "84.2.1",
     "license": "MIT",
     "source": "site-packages",
     "license_files": [
@@ -1343,6 +1343,19 @@
     "license_fingerprint": "158ca80492f41945773bcf092c53fe21aa3a353ae603ab0379985f124b63de1e",
     "legal_document_hashes": [
       "30c23618679108f3e8ea1d2a658c7ca417bdfc891c98ef1a89fa4ff0c9828654"
+    ]
+  },
+  {
+    "name": "zstandard",
+    "version": "0.25.0",
+    "license": "BSD-3-Clause",
+    "source": "site-packages",
+    "license_files": [
+      "licenses/THIRD_PARTY_NOTICES.txt"
+    ],
+    "license_fingerprint": "9b104e534a9517de3318bf1962e7455e8c6af661a63cf7b94d39dd5dfe8e20c7",
+    "legal_document_hashes": [
+      "788fe85e53724a40b299051c4abc9cf74d42b27e7968325b80891c25f79adb4b"
     ]
   }
 ]

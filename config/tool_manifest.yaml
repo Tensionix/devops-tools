@@ -4971,13 +4971,23 @@ operation_groups:
           mode: "open_tool_folder"
 
   - id: ai_backup
-    title: "AI CLI Backup"
-    title_ru: "Бэкап AI CLI"
-    description: "Create and verify portable Claude Code and Codex backup bundles with atomic export, SHA-256 manifests and explicit auth handling."
-    description_ru: "Создание и проверка переносимых бэкапов Claude Code и Codex: атомарный экспорт, manifest с SHA-256 и отдельное управление авторизацией."
+    title: "AI data backup"
+    title_ru: "Бэкап данных AI"
+    description: "Discover local Claude, Codex and Grok chats and data; verify selective portable backups and Desktop profile availability."
+    description_ru: "Обнаружение локальных чатов и данных Claude, Codex и Grok; проверяемый выборочный перенос и состояние Desktop-профилей."
     surface: "os_settings"
     section: "os_personal"
     children:
+      - id: ai_backup_inventory
+        title: "Inventory AI data"
+        title_ru: "Обнаружить данные AI"
+        description: "Read local AI profile availability, chats and data categories without changing profiles."
+        description_ru: "Показать локальные AI-профили, чаты и категории данных без изменения профилей."
+        service: "system_core.services.ai_transfer:run"
+        kind: "safe"
+        risk_level: "readonly"
+        parameters:
+          mode: "inventory"
       - id: ai_backup_export
         title: "Backup (export)"
         title_ru: "Бэкап (экспорт)"
@@ -5090,8 +5100,8 @@ operation_groups:
         parameters:
           mode: "import"
       - id: ai_backup_merge
-        title: "Merge memory"
-        title_ru: "Объединение памяти"
+        title: "Merge Claude memory"
+        title_ru: "Объединить память Claude"
         action_group: "AI CLI backup / restore"
         action_group_ru: "AI CLI: бэкап / восстановление"
         action_group_tone: "neutral"
@@ -5120,6 +5130,35 @@ operation_groups:
             advanced: true
         parameters:
           mode: "merge"
+      - id: ai_backup_rollback
+        title: "Roll back an import"
+        title_ru: "Откатить импорт по журналу"
+        description: "Verify recovery copies and preview restoring the state before an AI import. Conflicting later changes are preserved by default."
+        description_ru: "Проверить резервные копии и показать откат состояния до импорта AI. Последующие изменения по умолчанию сохраняются."
+        service: "system_core.services.ai_transfer:run"
+        kind: "dangerous"
+        risk_level: "user_write"
+        fields:
+          - id: journal_path
+            type: "file"
+            workbench_route: false
+            label: "Import journal"
+            label_ru: "Журнал импорта"
+            default: ""
+            hint: "Select backup/ai_import_.../journal.json from this copy of the program."
+            hint_ru: "Выберите backup/ai_import_.../journal.json этой копии программы."
+          - id: rollback_dry_run
+            type: "checkbox"
+            label: "Preview only"
+            label_ru: "Только показать план"
+            default: true
+          - id: rollback_overwrite
+            type: "checkbox"
+            label: "Replace changes made after import"
+            label_ru: "Заменять изменения, сделанные после импорта"
+            default: false
+        parameters:
+          mode: "rollback"
       - id: ai_backup_open
         title: "Open tool folder"
         title_ru: "Открыть папку инструмента"

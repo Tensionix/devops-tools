@@ -20,7 +20,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from . import bookmarks_form, confirm_notes, smb_logins
+from . import ai_form, bookmarks_form, confirm_notes, smb_logins
 from .manifest import CommandNode, Operation, ToolManifest, operation_requires_confirmation
 
 CHECKBOX_GROUP_KINDS = {"checkboxes", "multi_checkbox", "multicheckbox", "multi-select", "multiselect"}
@@ -186,6 +186,8 @@ def form_fields(node: CommandNode | Operation) -> list[dict[str, Any]]:
     """The fields of the form of an operation: what the manifest gives it, and for the bookmarks those of the window."""
     if node.id in bookmarks_form.OPERATIONS:
         return bookmarks_form.fields_for(node.id, node.fields)
+    if node.id in ai_form.OPERATIONS:
+        return ai_form.fields_for(node.id, node.fields)
     return [dict(field) for field in node.fields]
 
 
@@ -218,6 +220,11 @@ def build_parameters(node: CommandNode | Operation, values: dict[str, Any], sour
     """
     source_path, target_path = Path(source), Path(target)
 
+    if node.id in ai_form.OPERATIONS and "transfer_version" in values:
+        if type(values["transfer_version"]) is not int or values["transfer_version"] != 3:
+            raise RuntimeError("Unsupported AI transfer version; expected integer 3")
+        return ai_form.parameters(node, values, source_path, target_path)
+
     def route_value(field: dict[str, Any]) -> str:
         return str(target_path if route_role(field) == "target" else source_path)
 
@@ -242,6 +249,9 @@ def build_parameters(node: CommandNode | Operation, values: dict[str, Any], sour
             parameters[key] = route_value(field)
         else:
             parameters[key] = values.get(key, field_default(field, root))
+    if node.id == "ai_backup_rollback":
+        parameters["dry_run"] = parameters.pop("rollback_dry_run", True)
+        parameters["overwrite_conflicts"] = parameters.pop("rollback_overwrite", False)
     return parameters
 
 

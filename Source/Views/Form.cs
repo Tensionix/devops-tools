@@ -40,6 +40,7 @@ public sealed class Form
     /// <summary>The lists the door has given, each with its term: by operation, field, the values the list depends on and the source of the page.</summary>
     readonly ListMemory _lists = new();
     readonly HashSet<string> _asking = new();
+    readonly HashSet<string> _freshLists = new();
     /// <summary>Lists are asked two at a time: each is a process of its own, and a page may want a dozen.</summary>
     readonly SemaphoreSlim _lane = new(2);
 
@@ -80,6 +81,7 @@ public sealed class Form
 
     /// <summary>What a list was searched for, by the id of its field: a page built again keeps the search.</summary>
     readonly Dictionary<string, string> _queries = new();
+    readonly Dictionary<string, string> _aiSources = new();
     /// <summary>What shows and hides the cards of each list of the build in hand.</summary>
     readonly List<Action> _sifters = new();
     string _pageQuery = "";
@@ -968,6 +970,7 @@ public sealed class Form
         if (field.Name.Length > 0) head.Children.Add(title);
         column.Children.Add(head);
         var block = new Border { Classes = { "block", "ticks" }, Child = column };
+        if (field.Dynamic) head.Children.Add(Refresh(node, field));
         if (note is not null) { column.Children.Add(note); return block; }
         var real = Real(options);
         if (real.Count == 0)
@@ -1223,7 +1226,13 @@ public sealed class Form
         }
         _sifters.Add(Sift);
         if (_pageQuery.Length > 0 || _queries.GetValueOrDefault(field.Id, "").Length > 0) Sift();
-        void Take() => _values.Set(field, string.Join(Values.ListSeparator, ticks.Where(item => item.Tick.IsChecked == true).Select(item => item.Key)));
+        void Take()
+        {
+            var picked = field.PreserveSelection ? _values.Picked(field) : new HashSet<string>();
+            picked.ExceptWith(ticks.Select(item => item.Key));
+            picked.UnionWith(ticks.Where(item => item.Tick.IsChecked == true).Select(item => item.Key));
+            _values.Set(field, string.Join(Values.ListSeparator, picked));
+        }
         foreach (var (tick, _) in ticks) tick.Click += (_, _) => Take();
         Watch(field, () =>
         {
@@ -1232,9 +1241,11 @@ public sealed class Form
         });
 
         var count = new TextBlock { Classes = { "count" } };
-        Watch(field, () => count.Text = Lang.F("{0} из {1}", _values.Picked(field).Count(key => ticks.Any(item => item.Key == key)), ticks.Count));
+        Watch(field, () => count.Text = field.PreserveSelection
+            ? Lang.F("выбрано всего: {0}; в списке: {1}", _values.Picked(field).Count, ticks.Count)
+            : Lang.F("{0} из {1}", _values.Picked(field).Count(key => ticks.Any(item => item.Key == key)), ticks.Count));
         head.Children.Add(count);
-        if (ticks.Count > 3)
+        if (ticks.Count > 3 || field.Display == "ai_chats")
         {
             Button Mini(string word, string tip, bool on)
             {
@@ -1248,7 +1259,7 @@ public sealed class Form
                     var picked = _values.Picked(field);
                     if (on) picked.UnionWith(seen);
                     else picked.ExceptWith(seen);
-                    _values.Set(field, string.Join(Values.ListSeparator, ticks.Select(item => item.Key).Where(picked.Contains)));
+                    _values.Set(field, string.Join(Values.ListSeparator, field.PreserveSelection ? picked : ticks.Select(item => item.Key).Where(picked.Contains)));
                 };
                 return mini;
             }
@@ -1256,7 +1267,6 @@ public sealed class Form
             head.Children.Add(Mini("СНЯТЬ", "Снять отметки со всего, что в списке на виду.", false));
         }
         // A list the door gave is kept for its term; this asks for it anew now.
-        if (field.Dynamic) head.Children.Add(Refresh(node, field));
         if (field.Filter || field.Kind == "multiselect" || real.Count > 24)
         {
             var search = new TextBox
@@ -1341,6 +1351,7 @@ public sealed class Form
         Avalonia.Automation.AutomationProperties.SetAutomationId(refresh, "refresh_" + field.Id);
         refresh.Click += (_, _) =>
         {
+            _freshLists.Add(ListKey(node, field));
             _lists.Remove(ListKey(node, field));
             _rebuild();
         };
@@ -1619,6 +1630,7 @@ public sealed class Form
     {
         var (options, note) = OptionsOf(node, field);
         var row = new WrapPanel { Orientation = Orientation.Horizontal };
+        if (field.Dynamic) row.Children.Add(Refresh(node, field));
         if (note is not null) { row.Children.Add(note); return row; }
         if (!field.Dynamic) options = field.Options;
         foreach (var option in options.Where(option => !option.Header))
@@ -1631,7 +1643,6 @@ public sealed class Form
             if (option.Tip.Length > 0) ToolTip.SetTip(badge, option.Tip);
             row.Children.Add(badge);
         }
-        if (field.Dynamic) row.Children.Add(Refresh(node, field));
         return row;
     }
 
@@ -1664,6 +1675,16 @@ public sealed class Form
     (List<Option> Options, Control? Note) OptionsOf(Node node, Field field)
     {
         if (!field.Dynamic) return (field.GroupBlocks ? Headed(field.Options) : field.Options, null);
+        if (node.Id == "ai_backup_import" && field.Display == "ai_chats")
+        {
+            var source = Folders?.Invoke().Source ?? "";
+            if (_aiSources.TryGetValue(field.Id, out var previous) && previous != source)
+            {
+                _values.Choose(field, "");
+                _values.Fix("ai_import__ai_plan_token", "");
+            }
+            _aiSources[field.Id] = source;
+        }
         var key = ListKey(node, field);
         if (_lists.TryGet(key, out var known))
         {
@@ -1716,7 +1737,7 @@ public sealed class Form
         Asked++;
         await _lane.WaitAsync();
         (List<Option> Options, string Trouble) answer;
-        try { answer = await Door.Options(node.Id, field.Id, values, source, target); }
+        try { answer = await Door.Options(node.Id, field.Id, values, source, target, _freshLists.Remove(key)); }
         finally { _lane.Release(); }
         await Dispatcher.UIThread.InvokeAsync(() =>
         {

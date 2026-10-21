@@ -4496,6 +4496,9 @@ def ai_backup(context: JobContext) -> dict[str, object]:
     so the GUI does not stall on the script's confirmation prompt.
     """
     params = context.operation.parameters
+    if params.get("transfer_version") == 3:
+        from system_core.services.ai_transfer import run
+        return run(context)
     mode = str(params.get("mode") or "export").strip().lower()
     if mode not in {"export", "import", "merge", "open_tool_folder"}:
         raise RuntimeError(f"Unknown AI Backup mode: {mode}")

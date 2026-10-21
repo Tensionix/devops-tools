@@ -168,6 +168,7 @@ public sealed class Values
         if (_dependents.TryGetValue(id, out var dependents))
             foreach (var dependent in dependents)
             {
+                if (dependent.PreserveSelection) continue;
                 var home = Home(dependent.Id);
                 bool held = home._held.Remove(dependent.Id), touched = home._touched.Remove(dependent.Id);
                 if (!held && !touched) continue;

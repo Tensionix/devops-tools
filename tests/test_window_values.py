@@ -26,7 +26,7 @@ if str(ROOT) not in sys.path:
 
 from system_core.core import bookmarks_form, operation_model as model, smb_logins, window_layout  # noqa: E402
 from system_core.core.manifest import load_manifest  # noqa: E402
-from tests.test_model_record import ADDED_AFTER_RECORD, PROBE_OPTIONS, RECORD, recorded_defaults, shown  # noqa: E402
+from tests.test_model_record import ADDED_AFTER_RECORD, FORMS_ADDED_AFTER_RECORD, PROBE_OPTIONS, RECORD, WINDOW_AI_V3, recorded_defaults, shown  # noqa: E402
 
 WINDOWS = [
     ROOT / "App" / "AudionDevOpsTools.exe",
@@ -123,6 +123,11 @@ class WindowAgainstRecord(unittest.TestCase):
             # one of the model, itself compared with those states in tests/test_model_record.py. An operation
             # the former window ran directly took the parameters of the manifest alone.
             expected = self.built(node, {}) if node_id in bookmarks_form.OPERATIONS else recorded_defaults(node_id) if node_id in RECORD else None
+            if node_id in WINDOW_AI_V3:
+                from system_core.core.ai_form import parameters
+                expected = shown(parameters(node, {field["id"]: field.get("default") for field in model.form_fields(node) if "default" in field}, ROOT / "input", ROOT / "output"))
+            if node_id in FORMS_ADDED_AFTER_RECORD:
+                expected = self.built(node, {})
             if node_id in model.DIRECT_OPERATIONS or node_id in ADDED_AFTER_RECORD:
                 expected = shown(dict(node.parameters))
             if got != expected:

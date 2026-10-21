@@ -605,14 +605,21 @@ sections:
               - {op: browser_bookmarks_open_local_backup, icon: folder-open}
 
       - id: ai
-        title: "AI CLI"
-        title_ru: "AI CLI"
-        about: "Claude Code and Codex: a backup, a restore, chat by chat; the memory merged"
-        about_ru: "Claude Code и Codex: бэкап и восстановление, чаты поштучно; объединение памяти"
+        title: "AI"
+        title_ru: "AI"
+        about: "Claude, Codex, Grok: local chats and data, selective backup and restore; Desktop profile status"
+        about_ru: "Claude, Codex, Grok: локальные чаты и данные, выборочный перенос; состояние Desktop-профилей"
         icon: bot
         cards:
-          - {op: ai_backup_export, block: "Backup", block_ru: "Бэкап", icon: upload, tone: run}
+          - op: ai_backup_export
+            block: "Backup"
+            block_ru: "Бэкап"
+            icon: upload
+            tone: run
+            guests:
+              - {op: ai_backup_inventory, icon: scan}
           - {op: ai_backup_import, block: "Restore", block_ru: "Восстановление", icon: download, tone: run}
+          - {op: ai_backup_rollback, block: "Import recovery", block_ru: "Откат импорта", icon: undo-2}
           - op: ai_backup_merge
             block: "Memory"
             block_ru: "Память"
