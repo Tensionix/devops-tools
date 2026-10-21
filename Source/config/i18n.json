@@ -254,5 +254,12 @@
   "Забыть выбранную пару.": { "en": "Forget the chosen pair." },
   "ОЧИСТИТЬ": { "en": "CLEAR" },
   "Забыть все сохранённые пары.": { "en": "Forget every saved pair." },
-  "Устройство": { "en": "Device" }
+  "Устройство": { "en": "Device" },
+  "Локальные источники": { "en": "Local sources" },
+  "Содержимое бэкапа": { "en": "Backup contents" },
+  "Фильтры чатов": { "en": "Chat filters" },
+  "Остальные данные": { "en": "Other data" },
+  "Поиск чатов: название, проект или ID": { "en": "Find chats: title, project or ID" },
+  "СБРОСИТЬ ПОИСК": { "en": "CLEAR SEARCH" },
+  "По запросу ничего не найдено. Измените или сбросьте поиск.": { "en": "No chats match. Change or clear the search." }
 }

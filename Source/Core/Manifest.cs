@@ -145,6 +145,8 @@ public sealed class Card
 {
     public string Kind { get; set; } = "op";
     public string Id { get; set; } = "";
+    public string View { get; set; } = "";
+    public string WhenPicked { get; set; } = "";
     /// <summary>What the state of the switch is read as (the key of `state --page`).</summary>
     public string State { get; set; } = "";
     public string Block { get; set; } = "";
@@ -223,6 +225,8 @@ public sealed class Field
     public JsonElement Default { get; set; }
     /// <summary>The block of the form the field stands in: `group` of the manifest.</summary>
     public string Group { get; set; } = "";
+    public int GroupOrder { get; set; }
+    public bool FullWidth { get; set; }
     public bool Advanced { get; set; }
     /// <summary>A list of ticks laid out by the groups of its options, a block under each name (`group_blocks`): the apps of Microsoft by what they take.</summary>
     public bool GroupBlocks { get; set; }

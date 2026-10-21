@@ -611,21 +611,23 @@ sections:
         about_ru: "Claude, Codex, Grok: локальные чаты и данные, выборочный перенос; состояние Desktop-профилей"
         icon: bot
         cards:
-          - op: ai_backup_export
-            block: "Backup"
-            block_ru: "Бэкап"
-            icon: upload
+          - pick: ai_transfer
+            view: tabs
+            block: "AI transfer"
+            block_ru: "Перенос AI"
             tone: run
+            options:
+              - {op: ai_backup_export, title: "EXPORT", title_ru: "ЭКСПОРТ", icon: upload}
+              - {op: ai_backup_import, title: "IMPORT", title_ru: "ИМПОРТ", icon: download}
             guests:
               - {op: ai_backup_inventory, icon: scan}
-          - {op: ai_backup_import, block: "Restore", block_ru: "Восстановление", icon: download, tone: run}
-          - {op: ai_backup_rollback, block: "Import recovery", block_ru: "Откат импорта", icon: undo-2}
+              - {op: ai_backup_open, icon: folder-open}
+          - {op: ai_backup_rollback, when_picked: ai_backup_import, block: "Import recovery", block_ru: "Откат импорта", icon: undo-2}
           - op: ai_backup_merge
+            when_picked: ai_backup_import
             block: "Memory"
             block_ru: "Память"
             icon: merge
-            guests:
-              - {op: ai_backup_open, icon: folder-open}
 
   - id: system
     title: "SYSTEM"

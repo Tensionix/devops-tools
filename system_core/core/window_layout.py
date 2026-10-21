@@ -24,6 +24,9 @@ Each card may name its `block` (the frame it stands in, with its neighbours of t
 
 An operation of the manifest that stands nowhere here must be named in `service`, `folders`,
 `pending` or `retired` - tests/test_window_layout.py checks it.
+
+A pick with `view: tabs` keeps its mode switches and selected action above the scrolling page.
+Other cards may name `when_picked: OPERATION` to belong only to that mode of the same page.
 """
 from __future__ import annotations
 
@@ -107,6 +110,8 @@ def _card(manifest: ToolManifest, card: dict[str, Any]) -> dict[str, Any]:
         "kind": kind,
         "id": str(card.get("switch") or card.get("pick") or card.get("op") or ""),
         "state": str(card.get("state") or card.get("switch") or "") if kind == "switch" else "",
+        "view": str(card.get("view") or ""),
+        "when_picked": str(card.get("when_picked") or ""),
         "operations": [row for row in (_operation(manifest, entry) for entry in main) if row is not None],
         "guests": [row for row in (_operation(manifest, entry) for entry in guests) if row is not None],
     }
@@ -191,8 +196,16 @@ def problems(layout: dict[str, Any], manifest: ToolManifest) -> list[str]:
                 if str(name) not in shared(layout):
                     found.append(f"the page {where} puts away {name!r}, which is not a field of the whole window (`shared`)")
             has_switch = False
+            tabbed = [card for card in page.get("cards") or [] if card.get("view") == "tabs"]
+            if len(tabbed) > 1:
+                found.append(f"the page {where} has more than one tabbed pick")
+            tab_operations = {str(entry.get("op") or "") for card in tabbed for entry in card.get("options") or []}
             for card in page.get("cards") or []:
                 kind = card_kind(card)
+                if card.get("view") == "tabs" and kind != "pick":
+                    found.append(f"the tabbed card of {where} is not a pick")
+                if card.get("when_picked") and str(card["when_picked"]) not in tab_operations:
+                    found.append(f"a card of {where} depends on an unknown tab: {card['when_picked']!r}")
                 if kind == "switch":
                     has_switch = True
                     values = [str(entry.get("is") or "") for entry in card.get("options") or []]

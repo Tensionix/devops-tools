@@ -1,7 +1,7 @@
 # Audion Build Licenses Scan Report
 
 - Project: **Audion DevOps Tools** (`audion-devops-tools`)
-- Run: `20261021T103812Z_audion-devops-tools_ee41c115`
+- Run: `20261021T115628Z_audion-devops-tools_8f983dde`
 - Scan root (from the project root): `.`
 - Output (from the project root): `licenses`
 - Status: **PASS**
@@ -71,7 +71,7 @@ No issues detected.
 | Microsoft.WSMan.Runtime | `UNCHANGED` | 7.6.6 | 7.6.6 |
 | Newtonsoft.Json | `UNCHANGED` | 13.0.4 | 13.0.4 |
 | packaging | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 26.3 | 26.3 |
-| pip | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 26.2.1 | 26.2.2 |
+| pip | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 26.2.2 | 26.2.2 |
 | pluggy | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.7.0 | 1.7.0 |
 | Pygments | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.21.0 | 2.21.0 |
 | pytest | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 9.1.1 | 9.1.1 |
@@ -79,7 +79,7 @@ No issues detected.
 | PyYAML | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 6.0.3 | 6.0.3 |
 | runtime.native.System.Data.SqlClient.sni | `UNCHANGED` | 4.4.0 | 4.4.0 |
 | runtime.win-x64.runtime.native.System.Data.SqlClient.sni | `UNCHANGED` | 4.4.0 | 4.4.0 |
-| setuptools | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 84.0.0 | 84.2.1 |
+| setuptools | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 84.2.1 | 84.2.1 |
 | SkiaSharp | `UNCHANGED` | 3.119.4 | 3.119.4 |
 | SkiaSharp.NativeAssets.Win32 | `UNCHANGED` | 3.119.4 | 3.119.4 |
 | System.CodeDom | `UNCHANGED` | 10.0.5 | 10.0.5 |
@@ -117,7 +117,7 @@ No issues detected.
 | System.Windows.Extensions | `UNCHANGED` | 10.0.5 | 10.0.5 |
 | Tmds.DBus.Protocol | `UNCHANGED` | 0.94.1 | 0.94.1 |
 | wheel | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.48.0 | 0.48.0 |
-| zstandard | `NEW_COMPONENT_APPROVED_PROFILE` | - | 0.25.0 |
+| zstandard | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.25.0 | 0.25.0 |
 
 ## Licence rules
 

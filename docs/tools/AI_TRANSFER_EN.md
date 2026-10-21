@@ -1,5 +1,16 @@
 # AI data transfer
 
+## Window 2.1.1
+
+The **EXPORT | IMPORT** switches and the selected action button stay above the scrolling page.
+Switching opens the beginning of the selected section; each mode keeps its own selections and filters.
+Sources, filters, chats, other data and run options have separate nested blocks.
+Application, project and history occupy three rows without an unrelated column divider.
+
+Chats have a dedicated wide search row for title, project or ID, a clear button and their own scrolling area.
+The list stays expanded; searching preserves hidden selections and explicitly reports no matches.
+Import recovery and Claude memory merge are shown only in **IMPORT**.
+
 The **EXPORT & IMPORT / AI** page in 2.1.0 discovers local Claude Code, Claude Desktop, Codex and Grok CLI sessions, plus settings, memory, instructions, rules, skills, plugins and automation.
 
 Claude Code is discovered independently of Desktop. Desktop chat-list entries are linked to their Code transcripts instead of duplicated. Codex includes archived sessions and compressed `.jsonl.zst` logs. Grok sessions without their replay stream are marked incomplete and can be archived, but cannot be restored through the verified adapter. ChatGPT Desktop detection is shown separately; cloud chat history is not extracted from browser caches.

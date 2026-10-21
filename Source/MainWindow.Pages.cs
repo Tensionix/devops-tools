@@ -175,11 +175,11 @@ public partial class MainWindow
     /// The fields two cards of a page share: they stand once, over all the blocks - the adapters of a
     /// page of the network, the distribution of a page of WSL. A row of badges stays with its card.
     /// </summary>
-    static List<Field> Common(Page page)
+    static List<Field> Common(Page page, IReadOnlyList<Card> cards)
     {
-        if (page.Cards.Count < 2) return new List<Field>();
+        if (cards.Count < 2) return new List<Field>();
         var counts = new Dictionary<string, (Field Field, int Cards)>();
-        foreach (var card in page.Cards)
+        foreach (var card in cards)
             foreach (var field in FieldsOf(card, page))
             {
                 if (field.Badges) continue;
@@ -192,6 +192,7 @@ public partial class MainWindow
     {
         var clock = System.Diagnostics.Stopwatch.StartNew();
         var page = view.Page;
+        var visibleCards = page.Cards.Where(card => card.WhenPicked.Length == 0 || page.Cards.Any(choice => choice.Kind == "pick" && choice.Chosen == card.WhenPicked)).ToList();
         view.Form.Forget();
         view.Form.Lazy = !whole;
         view.Cards.Children.Clear();
@@ -204,12 +205,12 @@ public partial class MainWindow
         view.BarTitle = "";
         view.Bands = null;
 
-        var common = Common(page);
+        var common = Common(page, visibleCards);
         var shared = common.Select(field => field.Id).ToHashSet();
         if (common.Count > 0)
         {
             // The form over all the blocks: drawn for the first operation that has these fields.
-            var owner = page.Operations().First(node => node.Fields.Any(field => shared.Contains(field.Id)));
+            var owner = visibleCards.SelectMany(card => card.Operations).First(node => node.Fields.Any(field => shared.Contains(field.Id)));
             var fields = owner.Fields.Where(field => shared.Contains(field.Id)).ToList();
             foreach (var other in page.Operations())
                 foreach (var field in other.Fields.Where(field => shared.Contains(field.Id) && fields.All(known => known.Id != field.Id)))
@@ -240,7 +241,7 @@ public partial class MainWindow
 
         // Cards of one block stand together, in one frame under the name of the block.
         var blocks = new List<(string Name, List<Card> Cards)>();
-        foreach (var card in page.Cards)
+        foreach (var card in visibleCards)
         {
             var name = card.BlockName.Length > 0 ? card.BlockName : page.Name;
             if (blocks.Count > 0 && blocks[^1].Name == name) blocks[^1].Cards.Add(card);
@@ -410,13 +411,23 @@ public partial class MainWindow
     Control Pick(PageView view, Card card, List<Field> own, Grid? top = null)
     {
         var part = new StackPanel { Spacing = 8 };
-        var band = new WrapPanel { Orientation = Orientation.Horizontal };
+        bool tabbed = card.View == "tabs";
+        Panel band = tabbed ? new Grid() : new WrapPanel { Orientation = Orientation.Horizontal };
         foreach (var node in card.Operations)
         {
             var face = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 7 };
             if (Icons.Glyph(node.Sign) is not null) face.Children.Add(Icons.Sign(node.Sign));
             face.Children.Add(new TextBlock { Text = Upper(node.Name), VerticalAlignment = VerticalAlignment.Center });
             var button = new ToggleButton { Classes = { "switch" }, Content = face, Margin = new Thickness(0, 0, 6, 4), IsChecked = node.Id == card.Chosen };
+            if (tabbed)
+            {
+                button.Classes.Add("section");
+                button.HorizontalAlignment = HorizontalAlignment.Stretch;
+                button.HorizontalContentAlignment = HorizontalAlignment.Center;
+                button.Margin = new Thickness(band.Children.Count == 0 ? 0 : 3, 0, band.Children.Count == card.Operations.Count - 1 ? 0 : 3, 0);
+                ((Grid)band).ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+                Grid.SetColumn(button, band.Children.Count);
+            }
             Avalonia.Automation.AutomationProperties.SetAutomationId(button, "pick_" + node.Id);
             ToolTip.SetTip(button, TipOf(node));
             var id = node.Id;
@@ -424,15 +435,27 @@ public partial class MainWindow
             {
                 if (card.Chosen == id) { button.IsChecked = true; return; }
                 card.Chosen = id;
+                if (tabbed) view.Root.Offset = default;
                 Outdated(view);
             };
             band.Children.Add(button);
         }
-        part.Children.Add(band);
+        if (tabbed) view.Bands = band;
+        else part.Children.Add(band);
         if (card.FormOf is { } chosen)
         {
             var drawn = chosen.Fields.Where(field => own.Any(mine => mine.Id == field.Id)).ToList();
             if (drawn.Count > 0) part.Children.Add(view.Form.Build(chosen, drawn, out _));
+            if (tabbed)
+            {
+                view.HasBar = true;
+                view.BarTitle = Upper(chosen.OwnName);
+                view.ResetFields.AddRange(drawn);
+                WatchLabel(view, chosen);
+                view.BarButtons.AddRange(card.Guests.Select(node => RunButton(view, node)));
+                view.BarButtons.Add(RunButton(view, chosen, card.Tone.Length > 0 ? card.Tone : null));
+                return part;
+            }
             // First in its block, the run button stands at the right of the name of the block, over the choice.
             if (Head(view, "", card.Guests, buttons =>
             {

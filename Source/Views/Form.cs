@@ -194,9 +194,10 @@ public sealed class Form
         foreach (var field in pages) ((StackPanel)bands!).Children.Add(Band(node, field));
         // The rows of sets come first, the rarely needed fields last - always in sight, under their rule.
         static int Rank(Field field) => field.Kind == "profile_buttons" || field.Badges ? 0 : GroupOf(field) == "advanced" ? 2 : 1;
-        foreach (var group in seen.Where(field => field.Kind != "tabs").OrderBy(Rank).GroupBy(GroupOf))
+        foreach (var group in seen.Where(field => field.Kind != "tabs").OrderBy(field => field.GroupOrder).ThenBy(Rank).GroupBy(GroupOf))
         {
             var body = new StackPanel();
+            if (group.All(field => field.FullWidth)) Grid.SetIsSharedSizeScope(body, true);
             var name = GroupName(group.Key);
             // One field named as its block - the list "Приложения" under "ПРИЛОЖЕНИЯ" - names it alone (the review of 16.10.2026).
             if (group.Count() == 1 && string.Equals(NameOf(group.First()), name, StringComparison.OrdinalIgnoreCase)) name = "";
@@ -234,7 +235,7 @@ public sealed class Form
                 flags = null;
                 // A text of many lines, the SMB login, a row of badges and a path take the whole width; the other fields of one
                 // line share it by two. A path in half a row was cut: "profiles\default_apps\AppAsso" (the review of 16.10.2026).
-                if (field.Kind is "textarea" or "markdown_editor" or "smb_login_cache" or "file" or "folder" or "path" || field.Badges) { Lines(); body.Children.Add(Cell(node, field)); }
+                if (field.FullWidth || field.Kind is "textarea" or "markdown_editor" or "smb_login_cache" or "file" or "folder" or "path" || field.Badges) { Lines(); body.Children.Add(Cell(node, field)); }
                 else lines.Add(field);
             }
             Lists();
@@ -450,6 +451,10 @@ public sealed class Form
         "target" => Lang.T("Назначение"),
         "browsers" => Lang.T("Браузеры"),
         "versions" => Lang.T("Версии"),
+        "ai_sources" => Lang.T("Локальные источники"),
+        "ai_bundle" => Lang.T("Содержимое бэкапа"),
+        "ai_filters" => Lang.T("Фильтры чатов"),
+        "ai_data" => Lang.T("Остальные данные"),
         // A block with no name of its own in the manifest needs no heading: its fields say what they are.
         // "now" - what the machine holds now, over the choice of what to do (the badges of Edge).
         "parameters" or "now" or "" => "",
@@ -962,6 +967,7 @@ public sealed class Form
     Control Ticks(Node node, Field field, List<Option> options, Control? note, int perRow)
     {
         var column = new StackPanel();
+        bool chats = field.Display == "ai_chats";
         // A long name wraps, and the count with ALL and NONE goes under it: on one line it pushed them past the rim.
         var title = new TextBlock { Classes = { "blockname" }, Text = field.Name, TextWrapping = TextWrapping.Wrap };
         if (field.Tip.Length > 0) ToolTip.SetTip(title, field.Tip);
@@ -1111,7 +1117,9 @@ public sealed class Form
         var ticks = new List<(ToggleButton Tick, string Key)>();
         // A heading opens a block of its own - the drivers of one kind, the builds of one generation
         // (the owner: "the kinds of devices are set apart as blocks"); cards before any heading stand in the list itself.
-        Panel into = column;
+        var items = chats ? new StackPanel() : column;
+        if (chats) column.Children.Add(new ScrollViewer { Content = items, MaxHeight = 420, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled, VerticalScrollBarVisibility = ScrollBarVisibility.Auto });
+        Panel into = items;
         Grid? grid = null;
         Border? under = null;
         foreach (var option in options)
@@ -1122,21 +1130,21 @@ public sealed class Form
                 var said = new TextBlock { Classes = { "note" }, Text = option.Name, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(1, 0, 8, 7) };
                 if (Standing(option) is not { } badge)
                 {
-                    column.Children.Add(said);
+                    items.Children.Add(said);
                     continue;
                 }
                 var over = new Grid { ColumnDefinitions = new ColumnDefinitions("*,Auto") };
                 Grid.SetColumn(badge, 1);
                 over.Children.Add(said);
                 over.Children.Add(badge);
-                column.Children.Add(over);
+                items.Children.Add(over);
                 continue;
             }
             if (option.Header)
             {
                 var body = new StackPanel();
                 body.Children.Add(new TextBlock { Classes = { "grp" }, Text = Upper(option.Name) });
-                if (blocks.Count == 0) column.Children.Add(stacks);
+                if (blocks.Count == 0) items.Children.Add(stacks);
                 blocks.Add(under = new Border { Classes = { "grp", "inner" }, Child = body });
                 into = body;
                 grid = null;
@@ -1205,6 +1213,12 @@ public sealed class Form
         // The search: of this list, when its field asks for one, and of the whole page. A card is
         // in sight when it holds every word of both; a heading - while a card under it is. Nothing
         // is built again, and no tick changes: the value is every tick, in sight or not.
+        var noMatches = new TextBlock { Classes = { "note" }, Text = Lang.T("По запросу ничего не найдено. Измените или сбросьте поиск."), TextWrapping = TextWrapping.Wrap, IsVisible = false };
+        if (chats)
+        {
+            Avalonia.Automation.AutomationProperties.SetAutomationId(noMatches, "empty_" + field.Id);
+            items.Children.Add(noMatches);
+        }
         void Sift()
         {
             var (own, whole) = (Search.Words(_queries.GetValueOrDefault(field.Id, "")), Search.Words(_pageQuery));
@@ -1219,6 +1233,7 @@ public sealed class Form
                 if (heading is not null) alive.Add(heading);
             }
             foreach (var one in blocks) one.IsVisible = alive.Contains(one);
+            noMatches.IsVisible = chats && !any;
             stacked = null;
             Dress();
             // While the page is searched, a list with nothing to show steps aside; its own search never hides it - the box is in its head.
@@ -1274,6 +1289,13 @@ public sealed class Form
                 Classes = { "masks" }, Width = 190, Height = 22, MinHeight = 22, Padding = new Thickness(7, 0), VerticalContentAlignment = VerticalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center, PlaceholderText = Lang.T("поиск по списку"), Text = _queries.GetValueOrDefault(field.Id, ""),
             };
+            if (chats)
+            {
+                search.Width = double.NaN;
+                search.Height = search.MinHeight = 30;
+                search.HorizontalAlignment = HorizontalAlignment.Stretch;
+                search.PlaceholderText = Lang.T("Поиск чатов: название, проект или ID");
+            }
             PixelGrid.Field(search);
             Avalonia.Automation.AutomationProperties.SetAutomationId(search, "search_" + field.Id);
             ToolTip.SetTip(search, Lang.T("Показать карточки, в названии которых есть каждое набранное слово. Отметки спрятанных карточек остаются."));
@@ -1282,7 +1304,16 @@ public sealed class Form
                 _queries[field.Id] = search.Text ?? "";
                 Sift();
             };
-            head.Children.Add(search);
+            if (chats)
+            {
+                var clear = new Button { Classes = { "small" }, Content = Lang.T("СБРОСИТЬ ПОИСК"), Margin = new Thickness(8, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
+                Avalonia.Automation.AutomationProperties.SetAutomationId(clear, "clear_search_" + field.Id);
+                clear.Click += (_, _) => search.Text = "";
+                var searchRow = new Grid { ColumnDefinitions = new ColumnDefinitions("*,Auto"), Margin = new Thickness(0, 0, 0, 8), Children = { search, clear } };
+                Grid.SetColumn(clear, 1);
+                column.Children.Insert(1, searchRow);
+            }
+            else head.Children.Add(search);
         }
         return block;
     }
@@ -1630,7 +1661,7 @@ public sealed class Form
     {
         var (options, note) = OptionsOf(node, field);
         var row = new WrapPanel { Orientation = Orientation.Horizontal };
-        if (field.Dynamic) row.Children.Add(Refresh(node, field));
+        if (field.Dynamic && field.View != "summary") row.Children.Add(Refresh(node, field));
         if (note is not null) { row.Children.Add(note); return row; }
         if (!field.Dynamic) options = field.Options;
         foreach (var option in options.Where(option => !option.Header))

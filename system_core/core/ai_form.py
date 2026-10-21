@@ -42,8 +42,22 @@ def fields_for(operation: str, original: list[dict]) -> list[dict]:
         {"id": "ai_selection", "type": "info_badges", "options_source": SOURCE + ("bundle_selection_options" if importing else "selection_options"),
          "depends_on": ["selected_chats", "data_categories", "include_auth"], "cache_seconds": 0},
     ]
+    groups = {
+        "ai_summary": ("ai_bundle" if importing else "ai_sources", 1),
+        "chat_provider": ("ai_filters", 2), "chat_project": ("ai_filters", 2), "chat_archive": ("ai_filters", 2),
+        "selected_chats": ("parameters", 3),
+        "ai_presets": ("ai_data", 4), "data_categories": ("ai_data", 4),
+    }
     prefix = "ai_import__" if importing else "ai_export__"
     for field in modern:
+        name = field["id"]
+        field["group"], field["group_order"] = groups.get(name, ("run", 5))
+        if name in {"chat_provider", "chat_project", "chat_archive", "ai_presets"}:
+            field["full_width"] = True
+        if name in {"ai_summary", "data_categories"}:
+            field["label"] = field["label_ru"] = ""
+        if name == "ai_selection":
+            field["view"] = "summary"
         if field["id"] != "transfer_version":
             field["id"] = prefix + field["id"]
         if "depends_on" in field:
