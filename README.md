@@ -8,15 +8,15 @@
   <a href="https://github.com/Tensionix/devops-tools/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/Tensionix/devops-tools?style=flat-square&color=5fd08a&logo=apache&logoColor=white&cacheSeconds=3600"></a>
 </p>
 
-**Version 2.1.0** · 2026-10-21 · 115.2 MB
+**Version 2.1.0** · 2026-10-21 · 82.9 MB
 
-- [Direct download](https://dl.audion.dev/devops-tools/2.1.0/Audion_DevOps_Tools_v2.1.0_Full.zip) — unmetered, no rate limits
+- [Direct download](https://dl.audion.dev/devops-tools/2.1.0/Audion_DevOps_Tools_v2.1.0.zip) — unmetered, no rate limits
 - [Project page](https://audion.dev/downloads/devops-tools) — every version and how to install
 - [GitHub release](https://github.com/Tensionix/devops-tools/releases/tag/v2.1.0)
 
 <p align="center"><img src="docs/screenshot.png" alt="The program window" width="560"></p>
 
-`SHA-256: 0c42a50461bc90c4a3205db5dd3d61593542b2853fb7bd8d68e18805839a1b66`
+`SHA-256: 2f7ba84fbe0527d59e2859af874d67ac7db04726ec214a06f61a449936e074ed`
 
 ---
 
