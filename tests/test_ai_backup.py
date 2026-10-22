@@ -78,6 +78,8 @@ def make_profile(root: Path) -> dict[str, Path]:
     (codex / "config.toml").write_text('model = "test"\n', encoding="utf-8")
     (codex / "auth.json").write_text('{"secret":"codex"}\n', encoding="utf-8")
     (codex / "installation_id").write_text("machine-specific\n", encoding="utf-8")
+    (codex / "plugins" / "cache").mkdir(parents=True)
+    (codex / "plugins" / "cache" / "plugin.json").write_text('{"name":"bundled"}\n', encoding="utf-8")
     (codex / "sessions").mkdir()
     (codex / "sessions" / "old.jsonl").write_text("session\n", encoding="utf-8")
 
@@ -165,6 +167,9 @@ def test_essential_export_is_fresh_verified_and_excludes_auth(tmp_path: Path) ->
     assert "claude/sessions/old.jsonl" not in files
     assert "codex/sessions/old.jsonl" not in files
     assert "codex/installation_id" not in files
+    # Essential is what a reinstall needs: no state of the app, no plugins Codex installs itself.
+    assert "claude.json" not in files
+    assert "codex/plugins/cache/plugin.json" not in files
     # Without a chat list Essential carries no chats, as before.
     assert not any(relative.startswith("claude_app/") for relative in files)
     assert f"claude/projects/sample/{KEEP_CLI}.jsonl" not in files
@@ -256,6 +261,8 @@ def test_export_carries_only_the_ticked_chats_in_either_mode(tmp_path: Path) -> 
     assert not any(relative in files for relative in skip)
     assert terminal in files
     assert "claude/sessions/old.jsonl" in files
+    assert "claude.json" in files
+    assert "codex/plugins/cache/plugin.json" in files
 
 
 def test_import_restores_only_the_ticked_chats(tmp_path: Path) -> None:

@@ -19,7 +19,7 @@ Missing data, partial access and unsupported formats have explicit states. Refre
 
 ## Export
 
-Select chats independently of other data. No chat is selected initially. Application, project, archive and text filters preserve hidden selections; ALL and NONE affect visible rows only. Essential and All supported data presets change categories without changing chat or authentication selections.
+Select chats independently of other data. No chat is selected initially. Application, project, archive and text filters preserve hidden selections; ALL and NONE affect visible rows only. Essential and All supported data presets change categories without changing chat or authentication selections. Essential leaves out the plugins of Codex: Codex installs them itself, and they come to hundreds of megabytes.
 
 Authentication is off by default. Installation identifiers, process locks and shared conversation databases are excluded. Cache transfer is restricted to supported files without conversation data, such as the Codex model catalog.
 

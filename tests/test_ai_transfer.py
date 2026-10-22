@@ -466,3 +466,9 @@ raise SystemExit(2)
     monkeypatch.setattr(ai_transfer, "processes_stopped", lambda apps: None)
     ai_transfer.rollback_import(active, {"journal_path": str(journal), "dry_run": False})
     assert tree_hash(target) == before
+
+
+def test_essential_preset_leaves_out_only_what_codex_installs_itself():
+    assert "codex:plugins" not in ai_catalog.ESSENTIAL
+    assert {"claude:plugins", "claude:memory", "codex:memory", "codex:skills", "codex:automations"} <= set(ai_catalog.ESSENTIAL)
+    assert "codex:plugins" in ai_catalog.ALL_CATEGORIES

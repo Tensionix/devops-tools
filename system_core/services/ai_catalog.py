@@ -27,7 +27,9 @@ CATEGORIES = {
     "automations": ("Automation", "Автоматизации"), "extras": ("Additional profile data", "Дополнительные данные профиля"),
     "cache": ("Non-conversation cache", "Кэш без переписок"),
 }
-ESSENTIAL = [f"{app}:{category}" for app in ("claude", "codex", "grok") for category in CATEGORIES if category not in {"extras", "cache"}]
+# The plugins of Codex stay out of Essential: Codex installs them itself, hundreds of megabytes a transfer does not need.
+ESSENTIAL = [f"{app}:{category}" for app in ("claude", "codex", "grok") for category in CATEGORIES
+             if category not in {"extras", "cache"} and f"{app}:{category}" != "codex:plugins"]
 ALL_CATEGORIES = [f"{app}:{category}" for app in ("claude", "codex", "grok") for category in CATEGORIES]
 PROFILE_ITEMS = {
     "claude": {"memory": ["projects/*/memory"], "settings": ["settings.json", "settings.local.json"],

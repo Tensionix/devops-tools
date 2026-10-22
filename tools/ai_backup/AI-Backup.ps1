@@ -317,12 +317,13 @@ function Resolve-ChatFolder([string]$Relative) {
 function Get-FileCategory([string]$Relative, [int]$Schema = $script:BundleSchemaVersion) {
     $path = $Relative.Replace('\', '/').ToLowerInvariant()
     if ($path -in @('claude/.credentials.json', 'codex/auth.json')) { return 'auth' }
-    if ($path -eq 'claude.json') { return 'essential' }
+    # The state of the app (.claude.json) and the plugins of Codex are Full only: the first is set up again by
+    # signing in, the second Codex installs itself - hundreds of megabytes no essential transfer needs.
     if ($path -match '^claude/(settings\.json|settings\.local\.json|claude\.md)$') { return 'essential' }
     if ($path -match '^claude/(skills|plugins)/') { return 'essential' }
     if ($path -match '^claude/projects/[^/]+/memory/') { return 'essential' }
     if ($path -match '^codex/(config\.toml|agents\.md)$') { return 'essential' }
-    if ($path -match '^codex/(memories|rules|automations|skills|plugins)/') { return 'essential' }
+    if ($path -match '^codex/(memories|rules|automations|skills)/') { return 'essential' }
     if ($path -match '^codex(_sqlite)?/(memories_1|goals_1)\.sqlite$') { return 'essential' }
     # A chat is its chat-list entry plus its transcript; they travel by choice.
     if ($Schema -ge 2) {
@@ -690,9 +691,9 @@ if ($Mode -eq 'Export') {
             $copied = Copy-SelectedChats $temporary $chats
             if ($chats.Count) { Write-Host ("Claude: чатов в бэкапе {0} из {1}" -f $copied, $chats.Count) }
             Write-Host 'Codex: essential'
-            Copy-SelectedItems $script:CodexHome (Join-Path $temporary 'codex') @('config.toml', 'AGENTS.md', 'memories', 'rules', 'automations', 'skills', 'plugins')
+            Copy-SelectedItems $script:CodexHome (Join-Path $temporary 'codex') @('config.toml', 'AGENTS.md', 'memories', 'rules', 'automations', 'skills')
         }
-        if (Test-Path -LiteralPath $script:ClaudeStateFile -PathType Leaf) { [void](Copy-OneFile $script:ClaudeStateFile (Join-Path $temporary 'claude.json')) }
+        if ($Full -and (Test-Path -LiteralPath $script:ClaudeStateFile -PathType Leaf)) { [void](Copy-OneFile $script:ClaudeStateFile (Join-Path $temporary 'claude.json')) }
         if ($IncludeAuth) {
             Write-Host 'Авторизация: включена' -ForegroundColor Yellow
             [void](Copy-OneFile (Join-Path $script:ClaudeHome '.credentials.json') (Join-Path $temporary 'claude\.credentials.json'))
