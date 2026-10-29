@@ -1,7 +1,7 @@
 # Audion Build Licenses Scan Report
 
 - Project: **Audion DevOps Tools** (`audion-devops-tools`)
-- Run: `20261022T185052Z_audion-devops-tools_5664a01d`
+- Run: `20261029T012227Z_audion-devops-tools_3b4181b5`
 - Scan root (from the project root): `.`
 - Output (from the project root): `licenses`
 - Status: **PASS**
@@ -31,12 +31,12 @@ No issues detected.
 | Avalonia.Themes.Fluent | `UNCHANGED` | 12.1.3 | 12.1.3 |
 | Avalonia.Win32 | `UNCHANGED` | 12.1.3 | 12.1.3 |
 | Avalonia.X11 | `UNCHANGED` | 12.1.3 | 12.1.3 |
-| colorama | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.4.6 | 0.4.6 |
+| colorama | `UNCHANGED` | 0.4.6 | 0.4.6 |
 | fzf | `UNCHANGED` | bundled | bundled |
 | HarfBuzzSharp | `UNCHANGED` | 8.3.1.3 | 8.3.1.3 |
 | HarfBuzzSharp.NativeAssets.Win32 | `UNCHANGED` | 8.3.1.3 | 8.3.1.3 |
 | Humanizer.Core | `UNCHANGED` | 2.14.1 | 2.14.1 |
-| iniconfig | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.3.1 | 2.3.1 |
+| iniconfig | `UNCHANGED` | 2.3.1 | 2.3.1 |
 | Inter | `UNCHANGED` | 3.019 | 3.019 |
 | JetBrains Mono | `UNCHANGED` | 2.211 | 2.211 |
 | Json.More.Net | `UNCHANGED` | 2.1.1 | 2.1.1 |
@@ -53,7 +53,7 @@ No issues detected.
 | Microsoft.Management.Infrastructure | `UNCHANGED` | 3.0.0 | 3.0.0 |
 | Microsoft.Management.Infrastructure.CimCmdlets | `UNCHANGED` | 7.6.6 | 7.6.6 |
 | Microsoft.Management.Infrastructure.Runtime.Win | `UNCHANGED` | 3.0.0 | 3.0.0 |
-| Microsoft.NETCore.App.Runtime.win-x64 | `UNCHANGED` | 10.0.13 | 10.0.13 |
+| Microsoft.NETCore.App.Runtime.win-x64 | `UNCHANGED` | 10.0.14 | 10.0.14 |
 | Microsoft.PowerShell.Commands.Diagnostics | `UNCHANGED` | 7.6.6 | 7.6.6 |
 | Microsoft.PowerShell.Commands.Management | `UNCHANGED` | 7.6.6 | 7.6.6 |
 | Microsoft.PowerShell.Commands.Utility | `UNCHANGED` | 7.6.6 | 7.6.6 |
@@ -70,16 +70,16 @@ No issues detected.
 | Microsoft.WSMan.Management | `UNCHANGED` | 7.6.6 | 7.6.6 |
 | Microsoft.WSMan.Runtime | `UNCHANGED` | 7.6.6 | 7.6.6 |
 | Newtonsoft.Json | `UNCHANGED` | 13.0.4 | 13.0.4 |
-| packaging | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 26.3 | 26.3 |
-| pip | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 26.2.2 | 26.2.2 |
-| pluggy | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.7.0 | 1.7.0 |
-| Pygments | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.21.0 | 2.21.0 |
-| pytest | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 9.1.1 | 9.1.1 |
-| Python Embedded | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.12.x | 3.12.x |
-| PyYAML | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 6.0.3 | 6.0.3 |
+| packaging | `UNCHANGED` | 26.3 | 26.3 |
+| pip | `UNCHANGED` | 26.2.2 | 26.2.2 |
+| pluggy | `UNCHANGED` | 1.7.0 | 1.7.0 |
+| Pygments | `UNCHANGED` | 2.21.0 | 2.21.0 |
+| pytest | `UNCHANGED` | 9.2.0 | 9.2.0 |
+| Python Embedded | `UNCHANGED` | 3.12.x | 3.12.x |
+| PyYAML | `UNCHANGED` | 6.0.3 | 6.0.3 |
 | runtime.native.System.Data.SqlClient.sni | `UNCHANGED` | 4.4.0 | 4.4.0 |
 | runtime.win-x64.runtime.native.System.Data.SqlClient.sni | `UNCHANGED` | 4.4.0 | 4.4.0 |
-| setuptools | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 84.2.1 | 84.2.1 |
+| setuptools | `UNCHANGED` | 84.2.1 | 84.2.1 |
 | SkiaSharp | `UNCHANGED` | 3.119.4 | 3.119.4 |
 | SkiaSharp.NativeAssets.Win32 | `UNCHANGED` | 3.119.4 | 3.119.4 |
 | System.CodeDom | `UNCHANGED` | 10.0.5 | 10.0.5 |
@@ -116,8 +116,8 @@ No issues detected.
 | System.Web.Services.Description | `UNCHANGED` | 8.1.2 | 8.1.2 |
 | System.Windows.Extensions | `UNCHANGED` | 10.0.5 | 10.0.5 |
 | Tmds.DBus.Protocol | `UNCHANGED` | 0.94.1 | 0.94.1 |
-| wheel | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.48.0 | 0.48.0 |
-| zstandard | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.25.0 | 0.25.0 |
+| wheel | `UNCHANGED` | 0.48.0 | 0.48.0 |
+| zstandard | `UNCHANGED` | 0.25.0 | 0.25.0 |
 
 ## Licence rules
 

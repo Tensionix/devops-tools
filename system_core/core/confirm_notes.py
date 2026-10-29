@@ -94,10 +94,18 @@ def dangerous_operation_notes(operation: Operation, language: str) -> list[str]:
             "Может изменить разметку диска, WinRE или состояние накопителя; ошибка выбора диска может привести к потере данных.",
             "May change disk layout, WinRE, or drive state; choosing the wrong disk can cause data loss.",
         )
-        add(
-            "Интерактивные storage-wizard действия продолжают требовать собственные текстовые подтверждения.",
-            "Interactive storage wizard actions still require their own typed confirmations.",
-        )
+        if "ssd" in op_id:
+            add(
+                "Интерактивные storage-wizard действия продолжают требовать собственные текстовые подтверждения.",
+                "Interactive storage wizard actions still require their own typed confirmations.",
+            )
+    if op_id == "storage_removable_prepare":
+        number, _, size = str(operation.parameters.get("removable_disk") or "").partition(":")
+        if number:
+            add(
+                f"Будет обнулён диск {number}, {size.replace('.', ',')} ГБ: все его разделы и данные исчезнут, останется один раздел exFAT с меткой AUDION.",
+                f"Disk {number}, {size} GB, will be wiped: all its partitions and data go, one exFAT partition labelled AUDION is left.",
+            )
 
     if "network_nuclear" in op_id or "nuclear" in text or "тоталь" in text:
         add(

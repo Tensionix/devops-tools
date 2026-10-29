@@ -30,6 +30,10 @@
     Разметка: MBR (по умолчанию) или GPT. MBR читается везде, включая старые
     магнитолы и телевизоры; GPT нужен дискам больше двух терабайт.
 
+.PARAMETER NoSystem
+    Системный и загрузочный диск не трогать вовсе. Так зовёт окно DevOps Tools:
+    оно предлагает только несистемные диски и передаёт номер с объёмом.
+
 .EXAMPLE
     .\Prepare-Removable.ps1
     Спросит всё по порядку.
@@ -45,6 +49,7 @@ param(
     [ValidateSet('exFAT', 'NTFS', 'FAT32')][string]$FileSystem = 'exFAT',
     [string]$Label = 'AUDION',
     [ValidateSet('MBR', 'GPT')][string]$Style = 'MBR',
+    [switch]$NoSystem,
     # Враппер держит паузу сам; ключ принимается, чтобы вызов из него не падал.
     [switch]$NoPause
 )
@@ -99,7 +104,10 @@ Write-Line ('выбран диск {0}: {1}, {2}, {3:N2} ГБ' -f $target.Number
 $onIt = @(Get-Partition -DiskNumber $Disk -ErrorAction SilentlyContinue | Where-Object { $_.DriveLetter } |
     ForEach-Object { [string]$_.DriveLetter + ':' })
 if ($onIt.Count) { Write-Line ('на нём тома: ' + ($onIt -join ' ')) Yellow }
-if ($target.IsBoot -or $target.IsSystem) { Write-Line 'ЭТО СИСТЕМНЫЙ ДИСК' Red }
+if ($target.IsBoot -or $target.IsSystem) {
+    Write-Line 'ЭТО СИСТЕМНЫЙ ДИСК' Red
+    if ($NoSystem) { Write-Line 'системный диск здесь не обнуляется - ничего не тронуто' Yellow; Write-Host ''; exit 1 }
+}
 
 # --- Сверка объёмом ---------------------------------------------------------
 # Номер диска меняется от подключения к подключению; объём - примета самого

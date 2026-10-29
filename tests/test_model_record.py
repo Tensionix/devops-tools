@@ -32,6 +32,10 @@ FORMS_ADDED_AFTER_RECORD = {"ai_backup_rollback"}
 # engine of Audion Office OCR AI beside the project (the owner, 15.10.2026: "remove the dependency and the PDF").
 # And the installer of the portable PowerShell: the program has its own, App\AudionPs.exe, since 2.0.0.
 REMOVED_AFTER_RECORD = {"docs_pdf_plan", "docs_pdf_render", "docs_pdf_open", "install_portable_powershell"}
+# Forms changed after the record, checked by test_forms_changed_after_record instead (the owner, 28.10.2026):
+# the WinRE wizard lost its typed YES - the question before the run is the confirmation; the removable wipe
+# gained the Disk field and runs in the terminal of the program instead of asking the disk again in a console.
+FORMS_CHANGED_AFTER_RECORD = {"storage_winre_wizard", "storage_removable_prepare"}
 # Defaults changed on purpose after the record, field by field: the untouched form gives these instead.
 # Everything that takes the pictures, the music and the videos is ticked (the owner, 15.10.2026: "everything
 # that takes them over must be ticked ... the rest left unticked, but left as a way to remove it").
@@ -88,7 +92,8 @@ class ModelAgainstRecord(unittest.TestCase):
     def test_parameters_match_the_former_window(self) -> None:
         mismatched = []
         for node_id, entry in RECORD.items():
-            if node_id == "__bookmarks__" or node_id in bookmarks_form.OPERATIONS or node_id in model.DIRECT_OPERATIONS or node_id in REMOVED_AFTER_RECORD:
+            if (node_id == "__bookmarks__" or node_id in bookmarks_form.OPERATIONS or node_id in model.DIRECT_OPERATIONS
+                    or node_id in REMOVED_AFTER_RECORD or node_id in FORMS_CHANGED_AFTER_RECORD):
                 continue
             for language in ("en", "ru"):
                 told = entry[language]
@@ -97,6 +102,11 @@ class ModelAgainstRecord(unittest.TestCase):
                 if self.build(node_id, told["values"]) != told["changed"]:
                     mismatched.append(f"{node_id} {language} changed")
         self.assertEqual(mismatched, [])
+
+    def test_forms_changed_after_record(self) -> None:
+        self.assertEqual(self.build("storage_winre_wizard", {}), {})
+        self.assertEqual(self.build("storage_removable_prepare", {}), {"removable_disk": ""})
+        self.assertEqual(self.build("storage_removable_prepare", {"removable_disk": "1:953.87"}), {"removable_disk": "1:953.87"})
 
     def test_direct_operations_take_the_manifest_alone(self) -> None:
         for node_id in sorted(model.DIRECT_OPERATIONS | ADDED_AFTER_RECORD):

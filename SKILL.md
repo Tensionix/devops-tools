@@ -77,7 +77,9 @@ and the log shows it replaced.
 - **A backup before a change**: the boot configuration, associations, `hosts`, the network state, the Driver Store
   go to `backup\` first. Hosts depatch restores the pre-patch backup byte for byte, never line by line.
 - **Interactive destructive wizards stay interactive**: the SSD/NVMe Reset Wizard opens in an external console;
-  typed confirmations of `tools\...\Nuke.cmd` stay.
+  typed confirmations of `tools\...\Nuke.cmd` stay. The removable wipe and the WinRE wizard are not wizards: the
+  disk is chosen in the window (`removable_disk`, `NUMBER:SIZE_GB`, never the system disk) and the question before
+  the run is their only confirmation; both run in the terminal of the program.
 - **Secrets**: exports of SSH keys, PFX with private keys and Wi-Fi keys are secrets; never print their contents.
 - **Nothing from neighbour folders**: runtime logic lives in `system_core\` and `tools\`; historical folders beside
   the project are read only for comparison and only when asked.

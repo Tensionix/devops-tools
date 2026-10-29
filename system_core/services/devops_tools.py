@@ -992,6 +992,43 @@ def disk_options(root: Path | str | None = None) -> list[dict[str, str]]:
     return options or [_option("", "No disks returned by Get-Disk", "Get-Disk не вернул диски")]
 
 
+def removable_disk_options(root: Path | str | None = None) -> list[dict[str, str]]:
+    """Disks the removable wipe may take: every one but the system and boot disk.
+
+    The value is NUMBER:SIZE_GB - the number changes from one plug-in to the next, the size belongs to the
+    device, and Audion-Disk-Removable.ps1 touches nothing when the two no longer agree.
+    """
+    project_root = Path(root).resolve() if root else Path(__file__).resolve().parents[2]
+    data = _json_capture(
+        project_root,
+        (
+            "$rows = Get-Disk | Where-Object { -not $_.IsSystem -and -not $_.IsBoot } | Sort-Object Number | ForEach-Object { "
+            "$letters = @(Get-Partition -DiskNumber $_.Number -ErrorAction SilentlyContinue | Where-Object { $_.DriveLetter } | "
+            "ForEach-Object { [string]$_.DriveLetter + ':' }) -join ' '; "
+            "[pscustomobject]@{Number=$_.Number; FriendlyName=$_.FriendlyName; BusType=[string]$_.BusType; "
+            "SizeGB=[math]::Round($_.Size/1GB,2); PartitionStyle=[string]$_.PartitionStyle; Letters=$letters} }; "
+            "ConvertTo-Json -InputObject @($rows) -Compress"
+        ),
+    )
+    if data is None:
+        return [_option("", "Get-Disk failed or PowerShell is unavailable", "Get-Disk не выполнен")]
+    rows = data if isinstance(data, list) else [data]
+    options: list[dict[str, str]] = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        number, size = row.get("Number", ""), row.get("SizeGB", "")
+        letters = f" | {row['Letters']}" if row.get("Letters") else ""
+        head = f"{number}: {row.get('FriendlyName', '')} | {row.get('BusType', '')}"
+        tail = f"{row.get('PartitionStyle', '')}{letters}"
+        options.append(_option(
+            f"{number}:{size}",
+            f"Disk {head} | {size} GB | {tail}",
+            f"Диск {head} | {str(size).replace('.', ',')} ГБ | {tail}",
+        ))
+    return options or [_option("", "No disk but the system one", "Кроме системного, дисков нет")]
+
+
 _ADAPTER_STATUS_RU = {"Up": "подключён", "Disconnected": "отключён", "Disabled": "выключен", "Not Present": "нет в системе", "Down": "не работает"}
 
 
@@ -6963,10 +7000,9 @@ if ($osPartition) {
 
 
 def run_winre_wizard(context: JobContext) -> dict[str, object]:
-    confirm = str(context.operation.parameters.get("winre_typed_confirm") or "").strip()
-    if confirm != "YES":
-        raise RuntimeError("WinRE extend is destructive. Type YES in the confirmation field to run it.")
-    script = project_tool_dir(context, "winre_extend") / "Remove-WinRE-And-Extend-System.ps1"
+    # The question before a dangerous run is the confirmation; a typed YES in a field of the window was a second
+    # one, and nothing in the window said it was wanted (the owner, 28.10.2026).
+    script =project_tool_dir(context, "winre_extend") / "Remove-WinRE-And-Extend-System.ps1"
     run_ps1(
         context,
         script,
@@ -6993,9 +7029,30 @@ def run_ssd_reset_wizard(context: JobContext) -> dict[str, object]:
 
 
 def run_removable_prepare(context: JobContext) -> dict[str, object]:
-    script = project_tool_dir(context, "disk-removable") / "Run-Audion-Disk-Removable.cmd"
-    launch_external_cmd(context, script)
-    return {"script": str(script)}
+    """Wipe the disk of the Disk field in the terminal of the program, not in a console of its own.
+
+    The disk is chosen once, in the window, and named twice - by number and by size, as the field hands it
+    over (NUMBER:SIZE_GB); the script stops before touching anything when they disagree, and refuses the
+    system disk.
+    """
+    chosen = str(context.operation.parameters.get("removable_disk") or "").strip()
+    number, _, size = chosen.partition(":")
+    if not number.isdigit() or not size:
+        raise RuntimeError("Choose the disk in the Disk field; from the console command: --set removable_disk=NUMBER:SIZE_GB.")
+    try:
+        size_gb = float(size.replace(",", "."))
+    except ValueError as exc:
+        raise RuntimeError(f"The size of the disk is not a number: {size}") from exc
+    script = project_tool_dir(context, "disk-removable") / "Audion-Disk-Removable.ps1"
+    run_ps1(
+        context,
+        script,
+        {"Disk": int(number), "SizeGb": size_gb, "NoSystem": True, "NoPause": True},
+        cwd=script.parent,
+        progress_seconds=900.0,
+        elevated=True,
+    )
+    return {"disk": int(number), "size_gb": size_gb, "script": str(script)}
 
 
 def run_startup_kit(context: JobContext) -> dict[str, object]:

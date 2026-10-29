@@ -1468,9 +1468,10 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 ### Hardware > Removable drives > Wipe removable and lay one partition
 
 - Operation id: `storage_removable_prepare`
-- Description: Open the removable-drive tool in an external console: it lists disks, asks for the number and that disk's size as confirmation, then wipes and formats.
+- Description: Wipe the disk chosen in the Disk field and lay one exFAT partition labelled AUDION (MBR) across it. The disk goes by number and size: if the number now names a disk of another size, nothing is touched. The system disk is not offered.
 - Risk: kind=`dangerous`, risk_level=`destructive`
-- Parameters: none.
+- Parameters:
+  - `removable_disk` — **Disk** (type=`select`). A live list of every disk but the system one; the value is `NUMBER:SIZE_GB`, from the console command `--set removable_disk=1:953.87`.
 
 ### Hardware > Removable drives > Open removable-drive folder
 
@@ -1511,10 +1512,9 @@ This reference is generated from `config\tool_manifest.yaml`. It includes every 
 ### Hardware > Storage / Disk procedures > Run WinRE extend wizard
 
 - Operation id: `storage_winre_wizard`
-- Description: Disable WinRE, delete the recovery partition to the right of C:, and extend C: after project confirmation.
+- Description: Disable WinRE, delete the recovery partition to the right of C:, and extend C:. The question before the run is the confirmation.
 - Risk: kind=`dangerous`, risk_level=`destructive`
-- Parameters:
-  - `winre_typed_confirm` — **Typed confirmation** (type=`text`).
+- Parameters: none.
 
 ### OpenSSH KeyKit > Check access links
 

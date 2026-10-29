@@ -43,6 +43,14 @@ Run-Audion-Disk-Removable.cmd -Disk 2 -SizeGb 28.48 -Label ARCHIVE -FileSystem N
 | `-FileSystem` | `exFAT` (default), `NTFS`, `FAT32` |
 | `-Label` | volume label, `AUDION` by default |
 | `-Style` | `MBR` (default) or `GPT`; GPT for drives above two terabytes |
+| `-NoSystem` | refuse the system and boot disk outright |
+
+## From the window
+
+СИСТЕМА → ДИСКИ → Съёмные: the disk is chosen in the Disk field, a list of every disk but the system one, and
+the question before the run names it. The window hands the script the number and the size of that moment with
+`-NoSystem`, and the script runs as administrator in the terminal of the program - no console, no second
+question. A disk plugged in under the same number since then has another size, and nothing is touched.
 
 ## What it does not do
 

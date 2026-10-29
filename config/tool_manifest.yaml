@@ -4743,14 +4743,23 @@ operation_groups:
           - id: storage_removable_prepare
             title: "Wipe removable and lay one partition"
             title_ru: "Обнулить съёмный и сделать один раздел"
-            description: "Open the removable-drive tool in an external console: it lists disks, asks for the number and that disk's size as confirmation, then wipes and formats."
-            description_ru: "Открыть инструмент во внешней консоли: покажет диски, спросит номер и объём выбранного как подтверждение, затем обнулит и отформатирует."
+            description: "Wipe the disk chosen in the Disk field and lay one exFAT partition labelled AUDION (MBR) across it. The disk goes by number and size: if the number now names a disk of another size, nothing is touched. The system disk is not offered."
+            description_ru: "Обнулить диск из поля «Диск» и сделать на нём один раздел exFAT с меткой AUDION (MBR). Диск передаётся номером и объёмом: если под номером уже диск другого объёма, ничего не трогается. Системный диск в списке не предлагается."
             service: "system_core.services.devops_tools:run_removable_prepare"
             kind: "dangerous"
             risk_level: "destructive"
             action_group: "Removable drives"
             action_group_ru: "Съёмные носители"
             action_group_tone: "neutral"
+            fields:
+              - id: removable_disk
+                type: "select"
+                label: "Disk"
+                label_ru: "Диск"
+                options_source: "system_core.services.devops_tools:removable_disk_options"
+                cache_seconds: 15
+                hint: "Every disk except the system one: number, model, bus, size, partition style, letters."
+                hint_ru: "Все диски, кроме системного: номер, модель, шина, объём, разметка, буквы."
           - id: storage_removable_open_folder
             title: "Open removable-drive folder"
             title_ru: "Открыть папку съёмных носителей"
@@ -4799,22 +4808,14 @@ operation_groups:
           - id: storage_winre_wizard
             title: "Run WinRE extend wizard"
             title_ru: "Запустить мастер WinRE"
-            description: "Disable WinRE, delete the recovery partition to the right of C:, and extend C: after project confirmation."
-            description_ru: "Отключает WinRE, удаляет раздел восстановления справа от C: и расширяет C: после подтверждения в проекте."
+            description: "Disable WinRE, delete the recovery partition to the right of C:, and extend C:. The question before the run is the confirmation."
+            description_ru: "Отключает WinRE, удаляет раздел восстановления справа от C: и расширяет C:. Подтверждение — вопрос перед запуском."
             service: "system_core.services.devops_tools:run_winre_wizard"
             kind: "dangerous"
             risk_level: "destructive"
             action_group: "WinRE partition"
             action_group_ru: "Раздел WinRE"
             action_group_tone: "neutral"
-            fields:
-              - id: "winre_typed_confirm"
-                type: "text"
-                label: "Typed confirmation"
-                label_ru: "Подтверждение"
-                placeholder: "YES"
-                hint: "Type YES to confirm the destructive WinRE operation."
-                hint_ru: "Введите YES для подтверждения разрушительной операции WinRE."
 
   - id: ssh_keykit
     title: "OpenSSH KeyKit"
